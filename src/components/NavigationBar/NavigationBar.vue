@@ -1,12 +1,14 @@
 <template>
-  <div>
-
-  </div>
+  <DownloadButton/>
 </template>
 
 <script>
+import DownloadButton from '@/components/NavigationBar/DownloadButton'
 export default {
-  name: "NavigationBar"
+  name: "NavigationBar",
+  components: {
+    DownloadButton
+  }
 }
 </script>
 
