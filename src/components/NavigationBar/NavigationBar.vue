@@ -1,5 +1,5 @@
 <template>
-  <DownloadButton/>
+    <DownloadButton class="block"/>
 </template>
 
 <script>
