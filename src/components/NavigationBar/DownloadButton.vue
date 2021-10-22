@@ -1,5 +1,5 @@
 <template>
-    <button type="button" class="rounded-lg">Download</button>
+    <button type="button" class=" bg-blue-400 rounded-lg py-2 mx-2 font-bold uppercase align-bottom text-xl">Download</button>
 </template>
 
 <script>
