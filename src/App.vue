@@ -1,6 +1,5 @@
 <template>
-  <h1> jsMLA </h1>
-  <NavigationBar/>
+    <NavigationBar/>
 </template>
 
 <script>
