@@ -1,5 +1,8 @@
 <template>
-    <button type="button" class="flex flex-row bg-blue-400 hover:bg-blue-500 rounded-lg px-4 py-2 mx-2 my-2 font-bold">
+    <button
+        type="button"
+        class="flex flex-row bg-blue-400 hover:bg-blue-500 rounded-lg px-4 py-2 mx-2 my-2 font-bold"
+        @click="this.$parent.$refs.moodle_file.click()">
         <svg-icon
             type="mdi" :path="open_folder_icon"></svg-icon>
         <span class="ml-3">Browse Files</span>
