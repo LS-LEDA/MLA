@@ -1,5 +1,5 @@
 <template>
-    <div class="fixed left-2 top-2 bottom-2 w-2/12 flex flex-col bg-white rounded-xl">
+    <div class="fixed left-2 top-2 bottom-2 sm:w-max xl:w-2/12 flex flex-col bg-white rounded-xl ">
         <NavigationButton v-for="(page, index) in pages" :page="page" :key="index"/>
         <DownloadButton class="block"/>
     </div>
