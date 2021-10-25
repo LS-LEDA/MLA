@@ -11,7 +11,7 @@
             type="mdi" :path="upload_file_icon"></svg-icon>
         <span class="font-bold text-center text-5xl"> Drag & Drop file here </span>
         <span class="text-center text-4xl"> or </span>
-        <BrowseFilesButton class="w-max"/>
+        <BrowseFilesButton class="w-max" :class="{'bg-white transition-all duration-300' :active }"/>
         <div class="flex flex-row w-full h-1/5 justify-end content-end">
             <div class="flex items-end">
                 <svg-icon type="mdi" :path="information_icon" @click="informationPopUp"></svg-icon>
