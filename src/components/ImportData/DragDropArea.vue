@@ -1,6 +1,11 @@
 <template>
     <div class="flex flex-col border-black border-2 rounded-3xl border-dashed p-10 m-20 w-full justify-center items-center
-                space-y-6">
+                space-y-6"
+                @dragenter.prevent="toggleActive"
+                @dragleave.prevent="toggleActive"
+                @dragover.prevent
+                @drop.prevent="toggleActive"
+                :class=" {'bg-blue-200 transition-all duration-300' :active }">
         <input type="file" ref="moodle_file" class="hidden">
         <svg-icon class="w-1/4 h-1/4 justify-center"
             type="mdi" :path="upload_file_icon"></svg-icon>
@@ -19,6 +24,7 @@
 import BrowseFilesButton from "@/components/ImportData/BrowseFilesButton";
 import SvgIcon from '@jamescoyle/vue-icon'
 import { mdiFileUpload, mdiHelpCircleOutline  } from "@mdi/js"
+import { ref } from 'vue'
 
 export default {
     name: "DragDropArea",
@@ -31,6 +37,14 @@ export default {
             upload_file_icon: mdiFileUpload,
             information_icon: mdiHelpCircleOutline,
         }
+    },
+    setup() {
+       const active = ref(false)
+       const toggleActive = () => {
+            active.value = !active.value
+        }
+
+        return { active, toggleActive }
     },
     methods: {
         informationPopUp: function () {
