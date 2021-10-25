@@ -1,13 +1,17 @@
 <template>
-    <div class="flex flex-col border-black border-2 rounded-3xl border-dashed p-10 m-20 w-full justify-center items-center">
+    <div class="flex flex-col border-black border-2 rounded-3xl border-dashed p-10 m-20 w-full justify-center items-center
+                space-y-6">
         <input type="file" ref="moodle_file" class="hidden">
-        <svg-icon class="w-1/4 h-1/4 justify-center my-2"
+        <svg-icon class="w-1/4 h-1/4 justify-center"
             type="mdi" :path="upload_file_icon"></svg-icon>
-        <span class="font-bold text-center text-4xl my-2"> Drag & Drop file here </span>
-        <span class="text-center text-3xl my-2"> or </span>
+        <span class="font-bold text-center text-5xl"> Drag & Drop file here </span>
+        <span class="text-center text-4xl"> or </span>
         <BrowseFilesButton class="w-max"/>
-        <svg-icon class="mx-0 justify-items-end right-0 bottom-0"
-            type="mdi" :path="information_icon" @click="informationPopUp"></svg-icon>
+        <div class="flex flex-row w-full h-1/5 justify-end content-end">
+            <div class="flex items-end">
+                <svg-icon type="mdi" :path="information_icon" @click="informationPopUp"></svg-icon>
+            </div>
+        </div>
     </div>
 </template>
 
