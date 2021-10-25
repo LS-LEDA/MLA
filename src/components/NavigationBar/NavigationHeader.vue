@@ -29,15 +29,15 @@ import SvgIcon from '@jamescoyle/vue-icon'
 import {mdiChevronDoubleLeft} from "@mdi/js";
 
 export default {
-  name: "NavigationHeader.vue",
-  components: {
-    SvgIcon
-  },
-  data() {
-    return {
-      path: mdiChevronDoubleLeft
+    name: "NavigationHeader",
+    components: {
+        SvgIcon,
+    },
+    data() {
+        return {
+            path: mdiChevronDoubleLeft
+        }
     }
-  }
 }
 </script>
 
