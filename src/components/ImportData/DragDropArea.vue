@@ -56,11 +56,18 @@ export default {
          * for the user to confirm the upload
          * @param e: data transfer with files
          */
-        drop: function (e) {
-            this.toggleActive()
-            let droped_file = e.dataTransfer.files[0]
-            if ( !droped_file ) return
-            this.data_file = droped_file
+        select_file: function (e) {
+            let uploaded_file
+            if (e.type === "drop") {
+                this.toggleActive()
+                uploaded_file = e.dataTransfer.files[0]
+                if ( !uploaded_file ) return
+                this.data_file = uploaded_file
+                return
+            }
+            uploaded_file = e.target.files[0]
+            if ( !uploaded_file ) return
+            this.data_file = uploaded_file
         }
     }
 }
