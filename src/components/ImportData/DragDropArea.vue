@@ -52,9 +52,10 @@ export default {
             console.log("Open information PopUp")
         },
         /**
-         * Called on drop event, enables a popup
-         * for the user to confirm the upload
-         * @param e: data transfer with files
+         * Checks whether is a drop or a input change event
+         * Stores the selected file and enables a popup
+         * for the user to confirm the upload to the backend
+         * @param e: drop or change event
          */
         select_file: function (e) {
             let uploaded_file
