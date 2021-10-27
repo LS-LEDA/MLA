@@ -39,8 +39,8 @@ export default {
         }
     },
     setup() {
-       const active = ref(false)
-       const toggleActive = () => {
+        const active = ref(false)
+        const toggleActive = () => {
             active.value = !active.value
         }
 
