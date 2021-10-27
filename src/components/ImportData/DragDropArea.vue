@@ -4,7 +4,7 @@
                 @dragenter.prevent="toggleActive"
                 @dragleave.prevent="toggleActive"
                 @dragover.prevent
-                @drop.prevent="toggleActive"
+                @drop.prevent="drop"
                 :class=" {'bg-blue-200 transition-all duration-300' :active }">
         <input type="file" ref="moodle_file" class="hidden">
         <svg-icon class="w-1/4 h-1/4 justify-center"
@@ -50,6 +50,17 @@ export default {
     methods: {
         informationPopUp: function () {
             console.log("Open information PopUp")
+        },
+        /**
+         * Called on drop event, enables a popup
+         * for the user to confirm the upload
+         * @param e: data transfer with files
+         */
+        drop: function (e) {
+            this.toggleActive()
+            let droped_file = e.dataTransfer.files[0]
+            if ( !droped_file ) return
+            this.data_file = droped_file
         }
     }
 }
