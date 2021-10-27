@@ -4,9 +4,9 @@
                 @dragenter.prevent="toggleActive"
                 @dragleave.prevent="toggleActive"
                 @dragover.prevent
-                @drop.prevent="drop"
+                @drop.prevent="select_file"
                 :class=" {'bg-blue-200 transition-all duration-300' :active }">
-        <input type="file" ref="moodle_file" class="hidden">
+        <input type="file" ref="moodle_file" class="hidden" @change="select_file">
         <svg-icon class="w-1/4 h-1/4 justify-center"
             type="mdi" :path="upload_file_icon"></svg-icon>
         <span class="font-bold text-center text-5xl"> Drag & Drop file here </span>
