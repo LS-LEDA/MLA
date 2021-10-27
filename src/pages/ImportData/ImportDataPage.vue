@@ -10,7 +10,7 @@
 import DragDropArea from "@/components/ImportData/DragDropArea";
 
 export default {
-    name: "ImportDataPage.vue",
+    name: "ImportDataPage",
     components: {
         DragDropArea
     }
