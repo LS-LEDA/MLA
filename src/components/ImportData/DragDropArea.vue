@@ -36,6 +36,7 @@ export default {
         return {
             upload_file_icon: mdiFileUpload,
             information_icon: mdiHelpCircleOutline,
+            data_file: null,
         }
     },
     setup() {
