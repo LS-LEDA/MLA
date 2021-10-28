@@ -3,7 +3,7 @@
         <div class="flex bg-white rounded-3xl w-full m-24 content-center justify-center">
             <DragDropArea @onUpload="toggle_pop_up"/>
         </div>
-        <UploadConfirmation v-if="file_selected" @buttonClick="confirm_upload"/>
+        <UploadConfirmation v-if="file_selected" @buttonClick="confirm_upload" :selected_file_name="selected_file_name"/>
     </section>
 </template>
 
@@ -15,7 +15,8 @@ export default {
     name: "ImportDataPage",
     data() {
         return {
-            file_selected: false
+            file_selected: false,
+            selected_file_name: ""
         }
     },
     components: {
@@ -27,8 +28,9 @@ export default {
          * Toggles the Upload Confirmation
          * PopUp visibility
          */
-        toggle_pop_up: function () {
+        toggle_pop_up: function (selected_file_name) {
             this.file_selected = !this.file_selected
+            this.selected_file_name = selected_file_name
         },
         /**
          * Emitted when a file has been selected

@@ -5,7 +5,7 @@
             <!-- Uploaded file section -->
             <div class="flex flex-row rounded-2xl m-5 px-5 py-4 border border-black">
                 <svg-icon type="mdi" :path="file_icon"/>
-                <span class="ml-5">data_file.json</span>
+                <span class="ml-5"> {{ selected_file_name }} </span>
             </div>
             <!-- Backend connection status-->
             <div class="flex flex-row self-center">
@@ -33,6 +33,7 @@ export default {
         SvgIcon
     },
     emits: ['buttonClick'],
+    props: ['selected_file_name'],
     //TODO: Ping backend on render
     data() {
         return {
