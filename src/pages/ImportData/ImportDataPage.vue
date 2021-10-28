@@ -3,7 +3,7 @@
         <div class="flex bg-white rounded-3xl w-full m-24 content-center justify-center">
             <DragDropArea/>
         </div>
-        <UploadConfirmation v-if="file_selected"/>
+        <UploadConfirmation v-if="file_selected" @buttonClick="confirm_upload"/>
     </section>
 </template>
 

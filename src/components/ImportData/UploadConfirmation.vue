@@ -14,8 +14,8 @@
             </div>
             <!-- Upload Confirmation Buttons -->
             <div class="flex flex-row justify-center">
-                <IconButton :icon="cancel_icon" type="Cancel"/>
-                <IconButton :icon="upload_icon" type="Upload"/>
+                <IconButton :icon="cancel_icon" type="Cancel" @click="$emit('buttonClick', false)"/>
+                <IconButton :icon="upload_icon" type="Upload" @click="$emit('buttonClick', true)"/>
             </div>
         </div>
     </div>
