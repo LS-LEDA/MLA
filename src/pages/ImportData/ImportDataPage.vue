@@ -21,6 +21,28 @@ export default {
     components: {
         UploadConfirmation,
         DragDropArea
+    },
+    methods: {
+        /**
+         * Toggles the Upload Confirmation
+         * PopUp visibility
+         */
+        toggle_pop_up: function () {
+            this.file_selected = !this.file_selected
+        },
+        /**
+         * Emitted when a file has been selected
+         * or dropped in the Import File Area
+         */
+        confirm_upload: function (whichButton) {
+            // Check whether to upload or cancel
+            if ( whichButton ) {
+                //TODO: Upload
+            }
+
+            // Final Close the PopUp
+            this.toggle_pop_up()
+        }
     }
 }
 </script>
