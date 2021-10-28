@@ -32,6 +32,8 @@ export default {
         IconButton,
         SvgIcon
     },
+    emits: ['buttonClick'],
+    //TODO: Ping backend on render
     data() {
         return {
             file_icon: mdiFile,
