@@ -1,7 +1,7 @@
 <template>
     <section id="import_data_area" class="h-full w-full flex justify-center content-center">
         <div class="flex bg-white rounded-3xl w-full m-24 content-center justify-center">
-            <DragDropArea/>
+            <DragDropArea @onUpload="toggle_pop_up"/>
         </div>
         <UploadConfirmation v-if="file_selected" @buttonClick="confirm_upload"/>
     </section>
