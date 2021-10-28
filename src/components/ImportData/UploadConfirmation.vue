@@ -8,9 +8,15 @@
                 <span class="ml-5"> {{ selected_file_name }} </span>
             </div>
             <!-- Backend connection status-->
-            <div class="flex flex-row self-center">
+            <div class="flex flex-row self-center" v-if="alive">
+                <div class="flex self-center w-4 h-4 bg-green-300 rounded-md border-2 border-green-600"></div>
+                <span class="ml-2"> Connected to: Local <strong>coreMLA</strong></span>
+            </div>
+            <div class="flex flex-row self-center" v-else>
                 <div class="flex self-center w-4 h-4 bg-red-300 rounded-md border-2 border-red-600"></div>
-                <span class="ml-2"> Please install <strong>coreMLA</strong> or choose <strong>LServer</strong> in the Settings</span>
+                <span class="ml-2">
+                    Please install <strong>coreMLA</strong> or choose <strong>LServer</strong> in the Settings
+                </span>
             </div>
             <!-- Upload Confirmation Buttons -->
             <div class="flex flex-row justify-center">
@@ -40,6 +46,7 @@ export default {
             file_icon: mdiFile,
             cancel_icon: mdiClose,
             upload_icon: mdiUpload,
+            alive: false,
         }
     }
 }
