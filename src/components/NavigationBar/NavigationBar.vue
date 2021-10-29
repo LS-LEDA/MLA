@@ -29,7 +29,6 @@ export default {
     data() {
         return {
             pages: [
-
                 {
                     button_name: 'Import data',
                     button_icon: mdiDatabaseImportOutline
@@ -46,8 +45,13 @@ export default {
                     button_name: 'Configuration',
                     button_icon: mdiCogOutline
                 }
-
-            ]
+            ],
+            /**
+             * Navigation bar state:
+             * true: expanded
+             * false: shrank
+             */
+            nav_state: true
         }
     }
 }
