@@ -1,6 +1,6 @@
 <template>
   <div class="grid grid-cols-1 grid-rows-1" >
-    <InformationPopUp v-if="show_popUp"/>
+    <InformationPopUp v-if="show_popUp" @hidePopUp= "hidePopUp"/>
     <section id="import_data_area" class="h-full w-full flex justify-center content-center row-start-1 row-end-1 col-start-1 col-end-1" v-bind:class="{ blur: show_popUp }" >
         <div class="flex flex-col bg-white rounded-3xl w-full m-24 content-center justify-center">
             <UploadProgressBar/>
@@ -36,6 +36,9 @@ export default {
         informationPopUp: function () {
           console.log("v-bind:class=\"{ blur: show_popUp }\"")
           this.show_popUp = true;
+        },
+        hidePopUp: function () {
+          this.show_popUp = false;
         },
         /**
          * Toggles the Upload Confirmation
