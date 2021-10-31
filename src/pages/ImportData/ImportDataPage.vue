@@ -1,38 +1,49 @@
 <template>
-    <section id="import_data_area" class="h-full w-full flex justify-center content-center">
+  <div class="grid grid-cols-1 grid-rows-1" v-bind:class="{ blur: show_popUp }">
+    <section id="import_data_area" class="h-full w-full flex justify-center content-center row-start-1 row-end-1 col-start-1 col-end-1">
         <div class="flex flex-col bg-white rounded-3xl w-full m-24 content-center justify-center">
             <UploadProgressBar/>
-            <DragDropArea @onUpload="toggle_pop_up"/>
+            <DragDropArea @onUpload="toggle_pop_up" @popUp="informationPopUp"/>
         </div>
         <UploadConfirmation v-if="file_selected" @buttonClick="confirm_upload" :selected_file_name="selected_file_name"/>
     </section>
+    <InformationPopUp v-if="show_popUp"/>
+  </div>
 </template>
 
 <script>
 import DragDropArea from "@/components/ImportData/DragDropArea";
 import UploadConfirmation from "@/components/ImportData/UploadConfirmation";
 import UploadProgressBar from "@/components/ImportData/UploadProgressBar";
+import InformationPopUp from "@/components/ImportData/InformationPopUp";
 
 export default {
     name: "ImportDataPage",
     data() {
         return {
             file_selected: false,
-            selected_file_name: ""
+            selected_file_name: "",
+            show_popUp : false
         }
     },
     components: {
         UploadProgressBar,
         UploadConfirmation,
-        DragDropArea
+        DragDropArea,
+        InformationPopUp
     },
     methods: {
+        informationPopUp: function () {
+          console.log("AQUI")
+          this.show_popUp = true;
+        },
         /**
          * Toggles the Upload Confirmation
          * PopUp visibility
          */
         toggle_pop_up: function (selected_file_name) {
-            this.file_selected = !this.file_selected
+          console.log("HOILA")
+          this.file_selected = !this.file_selected
             this.selected_file_name = selected_file_name
         },
         /**

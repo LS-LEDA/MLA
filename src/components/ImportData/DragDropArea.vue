@@ -1,8 +1,6 @@
 <template>
-  <div class="grid grid-cols-1 grid-rows-1">
-
     <div class="flex flex-col border-black border-2 rounded-3xl border-dashed p-10 m-20 justify-center items-center
-                space-y-6 row-start-1 row-end-1 col-start-1 col-end-1"
+                space-y-6"
          @dragenter.prevent="toggleActive"
          @dragleave.prevent="toggleActive"
          @dragover.prevent
@@ -16,14 +14,10 @@
       <BrowseFilesButton class="w-max" :class="{'bg-white transition-all duration-300' :active }"/>
       <div class="flex flex-row w-full h-1/5 justify-end content-end">
         <div class="flex items-end">
-          <svg-icon type="mdi" :path="information_icon" @click="informationPopUp"></svg-icon>
+          <svg-icon type="mdi" :path="information_icon" @click="informationPopUp" ></svg-icon>
         </div>
       </div>
     </div>
-    <InformationPopUp v-if="information_clicked" ></InformationPopUp>
-  </div>
-
-
 </template>
 
 <script>
@@ -31,22 +25,19 @@ import BrowseFilesButton from "@/components/ImportData/BrowseFilesButton";
 import SvgIcon from '@jamescoyle/vue-icon'
 import { mdiFileUpload, mdiHelpCircleOutline  } from "@mdi/js"
 import { ref } from 'vue'
-import InformationPopUp from "./InformationPopUp";
 
 export default {
     name: "DragDropArea",
     components: {
-      InformationPopUp,
         BrowseFilesButton,
         SvgIcon
     },
-    emits: ['onUpload'],
+    emits: ['onUpload', 'popUp'],
     data() {
       return {
             upload_file_icon: mdiFileUpload,
             information_icon: mdiHelpCircleOutline,
-            data_file: null,
-            information_clicked : false,
+            data_file: null
         }
     },
     setup() {
@@ -59,8 +50,8 @@ export default {
     },
     methods: {
         informationPopUp: function () {
-            console.log("Open information PopUp")
-            this.information_clicked = true
+          console.log("Open information PopUp")
+          this.$emit('popUp')
         },
         /**
          * Checks whether is a drop or a input change event
