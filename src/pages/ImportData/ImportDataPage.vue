@@ -42,7 +42,6 @@ export default {
          * PopUp visibility
          */
         toggle_pop_up: function (selected_file_name) {
-          console.log("HOILA")
           this.file_selected = !this.file_selected
             this.selected_file_name = selected_file_name
         },
