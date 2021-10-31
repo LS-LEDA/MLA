@@ -1,5 +1,5 @@
 <template>
-  <div class=" filter block row-start-1 row-end-1 bg-opacity-50 bg-black blur-xl w-screen h-screen">
+  <div class=" filter block row-start-1 row-end-1 col-start-1 col-end-1 bg-red-500 opacity-25 w-screen h-screen">
   </div>
 
 </template>
