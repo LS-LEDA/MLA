@@ -1,14 +1,14 @@
 <template>
-    <NavigationBar/>
+    <ImportDataPage/>
 </template>
 
 <script>
-import NavigationBar from '@/components/NavigationBar/NavigationBar'
+import ImportDataPage from '@/pages/ImportData/ImportDataPage'
 
 export default {
   name: 'App',
   components: {
-    NavigationBar
+    ImportDataPage
   }
 }
 </script>
