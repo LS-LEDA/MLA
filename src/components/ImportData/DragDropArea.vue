@@ -13,8 +13,8 @@
       <span class="text-center text-4xl"> or </span>
       <BrowseFilesButton class="w-max" :class="{'bg-white transition-all duration-300' :active }"/>
       <div class="flex flex-row w-full h-1/5 justify-end content-end">
-        <div class="flex items-end">
-          <svg-icon type="mdi" :path="information_icon" @click="informationPopUp" ></svg-icon>
+        <div class="flex items-end cursor-pointer">
+          <svg-icon type="mdi" :path="information_icon" @click="informationPopUp"></svg-icon>
         </div>
       </div>
     </div>
