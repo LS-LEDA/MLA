@@ -31,19 +31,23 @@ export default {
             pages: [
                 {
                     button_name: 'Import data',
-                    button_icon: mdiDatabaseImportOutline
+                    button_icon: mdiDatabaseImportOutline,
+                    page_link: 'import-data'
                 },
                 {
                     button_name: 'Dashboard',
-                    button_icon: mdiViewDashboardOutline
+                    button_icon: mdiViewDashboardOutline,
+                    page_link: 'dashboard'
                 },
                 {
                     button_name: 'Plugins',
-                    button_icon: mdiToyBrickPlusOutline
+                    button_icon: mdiToyBrickPlusOutline,
+                    page_link: 'plugins'
                 },
                 {
                     button_name: 'Configuration',
-                    button_icon: mdiCogOutline
+                    button_icon: mdiCogOutline,
+                    page_link: 'settings'
                 }
             ],
             /**
