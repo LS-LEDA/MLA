@@ -18,10 +18,10 @@
 export default {
   name: "InformationPopUp",
   components: {},
-  emits: ['hidePopUp'],
+  emits: ['infoPopUp'],
   methods: {
     hidePopUp: function () {
-      this.$emit('hidePopUp')
+      this.$emit('infoPopUp')
     }
   }
 }

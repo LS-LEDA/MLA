@@ -1,6 +1,6 @@
 <template>
   <div class="grid grid-cols-1 grid-rows-1" >
-    <InformationPopUp v-if="show_popUp" @hidePopUp= "hidePopUp"/>
+    <InformationPopUp v-if="show_popUp" @infoPopUp= "toggle_information_pop_up"/>
     <section id="import_data_area" class="h-full w-full flex justify-center content-center row-start-1 row-end-1 col-start-1 col-end-1" v-bind:class="{ blur: show_popUp }" >
         <div class="flex flex-col bg-white rounded-3xl w-full m-24 content-center justify-center">
             <UploadProgressBar/>
