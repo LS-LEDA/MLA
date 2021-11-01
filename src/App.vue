@@ -1,5 +1,8 @@
 <template>
+    <!-- Left navigation bar -->
     <NavigationBar/>
+    <!-- Page rendered by router -->
+    <router-view/>
 </template>
 
 <script>

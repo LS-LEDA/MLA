@@ -1,7 +1,9 @@
 <template>
     <div class="fixed left-2 top-2 bottom-2 sm:w-max xl:w-2/12 flex flex-col bg-white rounded-xl ">
         <NavigationHeader/>
-        <NavigationButton v-for="(page, index) in pages" :page="page" :key="index"/>
+        <router-link :to="page.page_link" v-for="(page, index) in pages" :key="index" class="mx-2">
+            <NavigationButton :page="page"/>
+        </router-link>
         <div class="flex flex-col flex-1 justify-end">
             <DownloadButton :nav_state="nav_state"/>
         </div>
@@ -31,19 +33,23 @@ export default {
             pages: [
                 {
                     button_name: 'Import data',
-                    button_icon: mdiDatabaseImportOutline
+                    button_icon: mdiDatabaseImportOutline,
+                    page_link: 'import-data'
                 },
                 {
                     button_name: 'Dashboard',
-                    button_icon: mdiViewDashboardOutline
+                    button_icon: mdiViewDashboardOutline,
+                    page_link: 'dashboard'
                 },
                 {
                     button_name: 'Plugins',
-                    button_icon: mdiToyBrickPlusOutline
+                    button_icon: mdiToyBrickPlusOutline,
+                    page_link: 'plugins'
                 },
                 {
                     button_name: 'Configuration',
-                    button_icon: mdiCogOutline
+                    button_icon: mdiCogOutline,
+                    page_link: 'settings'
                 }
             ],
             /**
