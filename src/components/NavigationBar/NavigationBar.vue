@@ -1,7 +1,9 @@
 <template>
     <div class="fixed left-2 top-2 bottom-2 sm:w-max xl:w-2/12 flex flex-col bg-white rounded-xl ">
         <NavigationHeader/>
-        <NavigationButton v-for="(page, index) in pages" :page="page" :key="index"/>
+        <router-link :to="page.page_link" v-for="(page, index) in pages" :key="index" class="mx-2">
+            <NavigationButton :page="page"/>
+        </router-link>
         <div class="flex flex-col flex-1 justify-end">
             <DownloadButton :nav_state="nav_state"/>
         </div>
