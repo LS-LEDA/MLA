@@ -33,12 +33,11 @@ export default {
         InformationPopUp
     },
     methods: {
-        informationPopUp: function () {
-          console.log("v-bind:class=\"{ blur: show_popUp }\"")
-          this.show_popUp = true;
-        },
-        hidePopUp: function () {
-          this.show_popUp = false;
+        /**
+         * Toggles the Information PopUp visibility
+         */
+        toggle_information_pop_up: function () {
+            this.show_popUp = !this.show_popUp;
         },
         /**
          * Toggles the Upload Confirmation
