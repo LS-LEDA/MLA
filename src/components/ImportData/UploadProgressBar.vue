@@ -1,6 +1,6 @@
 <template>
-    <div class=" h-1/2 mt-12 ml-24 mr-24">
-        <div class="mx-auto">
+    <div class="flex h-1/4 items-center">
+        <div class="w-full">
             <div class="flex pb-3">
                 <div class="flex-1"></div>
 

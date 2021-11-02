@@ -1,12 +1,14 @@
 <template>
-    <!-- Left navigation bar -->
-    <NavigationBar/>
-    <!-- Page rendered by router -->
-    <router-view/>
+    <div class="flex flex-row h-screen w-screen">
+        <!-- Left navigation bar -->
+        <NavigationBar/>
+        <!-- Page rendered by router -->
+        <router-view/>
+    </div>
 </template>
 
 <script>
-import ImportDataPage from '@/pages/ImportData/ImportDataPage'
+import NavigationBar from "@/components/NavigationBar/NavigationBar";
 
 export default {
     name: 'App',

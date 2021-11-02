@@ -1,5 +1,5 @@
 <template>
-    <div class="fixed left-2 top-2 bottom-2 sm:w-max xl:w-2/12 flex flex-col bg-white rounded-xl ">
+    <div class="ml-2 my-2 sm:w-max xl:w-2/12 flex flex-col bg-white rounded-xl ">
         <NavigationHeader/>
         <router-link :to="page.page_link" v-for="(page, index) in pages" :key="index" class="mx-2">
             <NavigationButton :page="page"/>
