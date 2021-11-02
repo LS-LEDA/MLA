@@ -50,7 +50,6 @@ export default {
     },
     methods: {
         informationPopUp: function () {
-          console.log("Open information PopUp")
           this.$emit('popUp')
         },
         /**
