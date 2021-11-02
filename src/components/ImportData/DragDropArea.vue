@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col border-black border-2 rounded-3xl border-dashed p-10 m-20 justify-center items-center
+    <div class="flex flex-col border-black border-2 rounded-3xl border-dashed mx-12 mb-12 p-5 justify-center items-center
                 space-y-6"
          @dragenter.prevent="toggleActive"
          @dragleave.prevent="toggleActive"
