@@ -6,12 +6,17 @@
                 <button class="bg-blue-100 hover:bg-blue-200 rounded-lg text-2xl font-bold py-3 px-10"> {{ tab.tab_name }}</button>
             </div>
         </div>
+        <!-- TODO: router view -->
+        <Summary/>
     </section>
 </template>
 
 <script>
+import Summary from "@/pages/Dashboard/Summary/Summary";
+
 export default {
     name: "DashboardPage",
+    components: {Summary},
     data() {
         return {
             tabs: [
