@@ -1,14 +1,20 @@
 <template>
-  <h1> jsMLA </h1>
+    <div class="flex flex-row h-screen w-screen">
+        <!-- Left navigation bar -->
+        <NavigationBar/>
+        <!-- Page rendered by router -->
+        <router-view/>
+    </div>
 </template>
 
 <script>
+import NavigationBar from "@/components/NavigationBar/NavigationBar";
 
 export default {
-  name: 'App',
-  components: {
-
-  }
+    name: 'App',
+    components: {
+        NavigationBar
+    }
 }
 </script>
 
