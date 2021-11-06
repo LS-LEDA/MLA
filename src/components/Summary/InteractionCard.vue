@@ -48,8 +48,8 @@ export default {
         this.totalInteractionChart('total_interactions_chart', this.totalInteractionChartData)
     },
     unmounted() {
-        // Destroy chart once the component is unmounted
-        this.interactions_chart.destroy();
+        // Clear chart once the component is unmounted
+        this.interactions_chart.clear();
     }
 }
 </script>
