@@ -8,16 +8,48 @@
             <span class="text-6xl font-bold"> {{ interactions_count.toLocaleString() }} </span>
         </div>
         <!-- Card graphics -->
+        <div class="w-full w-full text-center mx-6 font-bold text-4xl rounded-3xl">
+            <canvas class="max-h-full" id="total_interactions_chart"></canvas>
+        </div>
     </div>
 </template>
 
 <script>
+import { Chart, registerables } from 'chart.js';
+import totalInteractionChartData from "@/assets/totalInteractionChartData";
+
 export default {
     name: "InteractionCard",
     data() {
         return {
-            interactions_count: 10394
+            interactions_count: 10394,
+            totalInteractionChartData: totalInteractionChartData,
+            interactions_chart: null,
         }
+    },
+    methods: {
+        /**
+         * Renders a chart in total interaction card
+         * @param chartId: canvas chart ID
+         * @param chartData chart data
+         */
+        totalInteractionChart (chartId, chartData) {
+            let ctx = document.getElementById(chartId);
+            Chart.register(...registerables);
+            this.interactions_chart = new Chart(ctx, {
+                type: chartData.type,
+                data: chartData.data,
+                options: chartData.options,
+            });
+        }
+    },
+    mounted() {
+        // Create Total Interactions chart once component is mounted
+        this.totalInteractionChart('total_interactions_chart', this.totalInteractionChartData)
+    },
+    unmounted() {
+        // Destroy chart once the component is unmounted
+        this.interactions_chart.destroy();
     }
 }
 </script>
