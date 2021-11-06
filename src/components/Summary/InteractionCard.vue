@@ -1,6 +1,7 @@
 <template>
     <!-- Interactions Card  -->
-    <div class="flex w-full h-72 bg-white rounded-3xl p-10 mt-5">
+    <div class="flex w-full h-72 bg-white rounded-3xl p-10 mt-5 hover:cursor-pointer filter drop-shadow-lg
+        transform transition duration-500 hover:scale-[101%]">
         <!-- Card Information -->
         <div class="flex flex-col w-5/12 justify-self-center self-center space-y-3">
             <span class="text-5xl"> Total of Interactions </span>
