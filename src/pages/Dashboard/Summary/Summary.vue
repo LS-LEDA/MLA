@@ -27,37 +27,37 @@ export default {
               statistic_name: "Tasks",
               number: 0,
               icon: mdiFileDocumentOutline,
-              id: 0
+              info:"The total number of interactions with all deliveries of a subject. "
             },
             {
               statistic_name: "Files",
               number: 0,
               icon: mdiFileDocumentOutline,
-              id: 1
+              info:" The total number of interactions with all files of a subject."
             },
             {
               statistic_name: "Pages",
               number:0,
               icon: mdiFileDocumentOutline,
-              id: 2
+              info:"The total number of interactions with the pages of a subject."
             },
             {
               statistic_name: "URL",
               number:0,
               icon: mdiFileDocumentOutline,
-              id: 3
+              info: "The total number of interactions with the URL resource of a subject."
             },
             {
               statistic_name: "Learning Tools Interoperability",
               number:0,
               icon: mdiFileDocumentOutline,
-              id: 4
+              info:"The total number of interactions with the learning tools interoperability resources of a subject."
             },
             {
               statistic_name: "Wiki",
               number:0,
               icon: mdiFileDocumentOutline,
-              id: 5
+              info:"The total number of interactions with the wikis of a subject."
             }
           ]
         }
