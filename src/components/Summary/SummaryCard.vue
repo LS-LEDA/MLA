@@ -1,16 +1,35 @@
 <template>
-  <div class="flex flex-row bg-blue-100 rounded-3xl w-full relative">
-    hola
+  <div class="grid grid-cols-2 grid-rows-3 bg-white rounded-3xl w-full ">
+    <span class="ml-3 text-xl text-gray-500 row-start-1 row-end-1 col-start-1 col-end-1">{{ page.statistic_name }}</span>
+    <span class="ml-3 text-6xl font-bold row-start-2 row-end-2 col-start-1 col-end-1">{{ page.number }}</span>
+    <svg-icon class ="row-start-2 row-end-2 col-start-2 col-end-2 justify-self-start mr-10" height="90" width="90"
+        type="mdi" :path="page.icon"></svg-icon>
+    <svg-icon class= "row-start-3 row-end-3 col-start-2 col-end-2 place-self-end mr-3 mb-3" type="mdi" :path=path @click="informationPopUp"></svg-icon>
+
+
   </div>
 </template>
 
 <script>
+import SvgIcon from '@jamescoyle/vue-icon'
+import {mdiHelpCircleOutline} from "@mdi/js"
 
 export default {
   name: "SummaryCard",
   props: ['page'],
   components: {
+    SvgIcon
+  },
+  data() {
+    return {
+      path: mdiHelpCircleOutline
+    }
+  },
+  methods: {
 
+    informationPopUp() {
+      console.log("HOLA")
+    }
   }
 }
 </script>
