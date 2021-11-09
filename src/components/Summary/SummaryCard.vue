@@ -19,25 +19,24 @@ import SvgIcon from '@jamescoyle/vue-icon'
 import {mdiHelpCircleOutline} from "@mdi/js"
 
 export default {
-  name: "SummaryCard",
-  props: ['statistic'],
-  components: {
-    SvgIcon
-  },
-  data() {
-    return {
-      path: mdiHelpCircleOutline,
-      back: false,
-      front: true
+    name: "SummaryCard",
+    props: ['statistic'],
+    components: {
+        SvgIcon
+    },
+    data() {
+        return {
+            path: mdiHelpCircleOutline,
+            back: false,
+            front: true
+        }
+    },
+    methods: {
+        changeView: function () {
+            this.back = !this.back
+            this.front = !this.front
+        }
     }
-  },
-  methods: {
-
-    changeView: function () {
-      this.back = !this.back
-      this.front = !this.front
-    }
-  }
 }
 </script>
 
