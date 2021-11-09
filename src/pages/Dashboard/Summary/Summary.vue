@@ -2,7 +2,7 @@
     <h1 class="text-4xl font-extrabold"> Summary of all course interactions </h1>
     <span class="font-bold text-2xl text-gray-500"> Information on the number of interactions </span>
     <InteractionCard/>
-    <div class="grid grid-rows-2 grid-cols-3 gap-x-20 gap-y-10 bg-transparent w-full h-full bg-white rounded-3xl mt-5 ">
+    <div class="grid grid-rows-2 grid-cols-3 gap-x-5 gap-y-5 w-full h-full mt-5 ">
       <SummaryCard v-for="(statistic, index) in statistics" :statistic="statistic" :key="index"/>
     </div>
 </template>
