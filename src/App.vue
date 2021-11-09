@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-row h-screen w-screen">
+    <div class="flex flex-row h-screen w-screen select-none">
         <!-- Left navigation bar -->
         <NavigationBar/>
         <!-- Page rendered by router -->
