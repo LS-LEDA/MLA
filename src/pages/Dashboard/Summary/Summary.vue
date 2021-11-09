@@ -1,8 +1,10 @@
 <template>
     <h1 class="text-4xl font-extrabold"> Summary of all course interactions </h1>
     <span class="font-bold text-2xl text-gray-500"> Information on the number of interactions </span>
+    <!-- Dashboard Summary Total Interactions card-->
     <InteractionCard/>
-    <div class="grid grid-rows-2 grid-cols-3 gap-x-5 gap-y-5 w-full h-full mt-5 ">
+    <!-- Dashboard Summary cards-->
+    <div class="grid grid-rows-2 grid-cols-3 gap-x-5 gap-y-5 w-full h-full mt-5">
       <SummaryCard v-for="(statistic, index) in statistics" :statistic="statistic" :key="index"/>
     </div>
 </template>
