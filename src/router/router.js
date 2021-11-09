@@ -4,6 +4,9 @@ import DashboardPage from "@/pages/Dashboard/DashboardPage";
 import Plugins from "@/pages/Plugins";
 import Settings from "@/pages/Settings";
 import Summary from "@/pages/Dashboard/Summary/Summary";
+import Students from "@/pages/Dashboard/Students/Students";
+import Resources from "@/pages/Dashboard/Resources/Resources";
+import Sentimental from "@/pages/Dashboard/Sentimental/Sentimental";
 
 const routes = [
     { path: '/', component: ImportDataPage },
@@ -15,6 +18,18 @@ const routes = [
             {
                 path: '/dashboard/summary',
                 component: Summary
+            },
+            {
+                path: '/dashboard/students',
+                component: Students
+            },
+            {
+                path: '/dashboard/resources',
+                component: Resources
+            },
+            {
+                path: '/dashboard/sentimental-analysis',
+                component: Sentimental
             }
         ]
     },
