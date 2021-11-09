@@ -14,6 +14,7 @@ const routes = [
     {
         path: '/dashboard',
         component: DashboardPage,
+        redirect: "/dashboard/summary",
         children:[
             {
                 path: '/dashboard/summary',
