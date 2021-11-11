@@ -1,22 +1,25 @@
 <template>
-    <div class="flex flex-row py-2 mx-2 my-5 h-20">
+    <div class="flex flex-row py-2 mx-2 my-5 h-20" :class="nav_state ? null : 'justify-center items-center'">
         <!-- Navigation bar App logo routed -->
         <router-link :to="imported_data ? '/dashboard' : '/import-data'">
-            <img class="h-full w-full rounded-lg" src="/assets/jsmla_logo.png" alt="jsMLA Logo">
+                <img class="max-h-16 rounded-lg origin-center z-50"
+                     :class="'z-50'"
+                     src="/assets/jsmla_logo.png" alt="jsMLA Logo">
         </router-link>
         <!-- Application name -->
-        <div class="flex-initial mx-4 font-bold text-2xl self-center hover:cursor-pointer" v-if="nav_state">
+        <!--<transition name="fade">-->
+        <div class="flex-1 mx-4 font-bold text-2xl self-center hover:cursor-pointer" v-if="nav_state">
             <router-link :to="imported_data ? '/dashboard' : '/import-data'">
-                <h1>jsMLA</h1>
+                    <h1>jsMLA</h1>
             </router-link>
         </div>
+        <!--</transition>-->
         <!-- Navigation shrink button -->
-        <div class="flex flex-1 w-max justify-end" :class="nav_state ? null : 'absolute'">
-            <button type="button" class="self-center flex flex-row justify-self-end" @click="changeNavigationBarStatus"
-                    :class="nav_state ? null : 'transform transition duration-500 rotate-180'">
-                <svg-icon size="36" type="mdi" :path="path" class="hover:drop-shadow shrink_icon"/>
-            </button>
-        </div>
+        <button type="button" class="flex self-center center w-auto place-items-center z-0"
+                :class="nav_state ? null : 'absolute transform transition duration-700 rotate-180'"
+                @click="changeNavigationBarStatus">
+            <svg-icon size="36" type="mdi" :path="path" class="hover:drop-shadow shrink_icon place-self-center"/>
+        </button>
     </div>
 </template>
 
@@ -55,5 +58,12 @@ export default {
 <style scoped>
     .shrink_icon {
         color: gray;
+    }
+
+    .fade-enter-active, .fade-leave-active {
+        transition: opacity .5s;
+    }
+    .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+        opacity: 0;
     }
 </style>
