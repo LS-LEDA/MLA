@@ -23,3 +23,6 @@ pnpm-debug.log*
 *.sw?
 
 ./package-lock.json
+
+#Electron-builder output
+/dist_electron
