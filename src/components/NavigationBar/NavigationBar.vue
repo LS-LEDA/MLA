@@ -5,7 +5,7 @@
             <NavigationButton :page="page"/>
         </router-link>
         <div class="flex flex-col flex-1 justify-end">
-            <DownloadButton :nav_state="nav_state"/>
+            <DownloadButton/>
         </div>
     </div>
 </template>
