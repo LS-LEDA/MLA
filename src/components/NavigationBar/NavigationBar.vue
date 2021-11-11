@@ -28,6 +28,17 @@ export default {
         NavigationButton,
         DownloadButton
     },
+    computed: {
+        /**
+         * Navigation bar state:
+         * true: expanded
+         * false: shrank
+         */
+        nav_state() {
+            console.log(this.$store.state.navigation_bar_status)
+            return this.$store.state.navigation_bar_status
+        }
+    },
     data() {
         return {
             pages: [
@@ -52,12 +63,6 @@ export default {
                     page_link: '/settings'
                 }
             ],
-            /**
-             * Navigation bar state:
-             * true: expanded
-             * false: shrank
-             */
-            nav_state: true
         }
     }
 }
