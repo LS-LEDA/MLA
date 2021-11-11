@@ -25,6 +25,11 @@ export default {
     components: {
         SvgIcon,
     },
+    computed: {
+        nav_state() {
+            return this.$store.state.navigation_bar_status
+        }
+    },
     data() {
         return {
             path: mdiChevronDoubleLeft
