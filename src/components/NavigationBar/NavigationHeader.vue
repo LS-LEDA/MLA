@@ -1,12 +1,12 @@
 <template>
     <div class="flex flex-row py-2 mx-2 my-5 h-20">
         <!-- Navigation bar App logo routed -->
-        <router-link to="/import-data" :class="nav_state ? null : 'relative'">
+        <router-link :to="imported_data ? '/dashboard' : '/import-data'">
             <img class="h-full w-full rounded-lg" src="/assets/jsmla_logo.png" alt="jsMLA Logo">
         </router-link>
         <!-- Application name -->
         <div class="flex-initial mx-4 font-bold text-2xl self-center hover:cursor-pointer" v-if="nav_state">
-            <router-link to="/import-data">
+            <router-link :to="imported_data ? '/dashboard' : '/import-data'">
                 <h1>jsMLA</h1>
             </router-link>
         </div>
@@ -33,6 +33,9 @@ export default {
     computed: {
         nav_state() {
             return this.$store.state.navigation_bar_status
+        },
+        imported_data() {
+            return this.$store.state.imported_data
         }
     },
     data() {
