@@ -1,7 +1,7 @@
 <template>
     <div class="flex flex-row py-2 mx-2 my-5 h-20" :class="nav_state ? null : 'justify-center items-center'">
         <!-- Navigation bar App logo routed -->
-        <div :class="logo_hovered ? 'z-0' : 'z-50'">
+        <div class="self-center" :class="logo_hovered ? 'z-0' : 'z-50'">
             <router-link :to="imported_data ? '/dashboard' : '/import-data'"
                          :class="logo_hovered ? 'invisible' : null"
                          @mouseover="logo_hover"
