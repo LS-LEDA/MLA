@@ -35,7 +35,6 @@ export default {
          * false: shrank
          */
         nav_state() {
-            console.log(this.$store.state.navigation_bar_status)
             return this.$store.state.navigation_bar_status
         }
     },
