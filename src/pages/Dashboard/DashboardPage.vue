@@ -1,5 +1,5 @@
 <template>
-    <section id="dashbboard" class="flex flex-col w-full h-full p-10">
+    <section id="dashboard" class="flex flex-col w-screen h-screen p-10">
         <!-- Tabs buttons -->
         <div class="flex flex-row pb-5 space-x-5">
             <router-link :to="tab.tab_path" v-for="(tab, index) in tabs" :key="index" class="">
