@@ -4,7 +4,10 @@
     <!-- Dashboard Summary Total Interactions card-->
     <InteractionCard/>
     <!-- Dashboard Summary cards-->
-    <div class="grid grid-rows-2 grid-cols-3 gap-x-5 gap-y-5 w-full h-full mt-5">
+    <div class="grid  gap-x-5 gap-y-5 w-full max-h-full mt-5
+                sm:auto-rows-auto sm:grid-cols-1
+                md:auto-rows-auto md:grid-cols-2
+                xl:auto-rows-auto xl:grid-cols-3">
       <SummaryCard v-for="(statistic, index) in statistics" :statistic="statistic" :key="index"/>
     </div>
 </template>
