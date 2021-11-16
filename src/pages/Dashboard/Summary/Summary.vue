@@ -16,12 +16,12 @@
 import InteractionCard from "@/components/Summary/InteractionCard";
 import SummaryCard from "@/components/Summary/SummaryCard";
 import {
-  mdiFileDocumentOutline,
-  mdiTextBoxCheck,
-  mdiHammerScrewdriver,
-  mdiWikipedia,
-  mdiLinkVariant,
-  mdiViewDashboardOutline
+    mdiFileDocumentOutline,
+    mdiTextBoxCheck,
+    mdiHammerScrewdriver,
+    mdiWikipedia,
+    mdiLinkVariant,
+    mdiNewspaperVariantOutline,
 } from "@mdi/js";
 
 export default {
@@ -37,7 +37,7 @@ export default {
               statistic_name: "Tasks",
               number: 7342,
               icon: mdiTextBoxCheck ,
-              info:"The total number of interactions with all deliveries of a subject. "
+              info:"The total number of interactions with all deliveries of a subject."
             },
             {
               statistic_name: "Files",
@@ -48,19 +48,19 @@ export default {
             {
               statistic_name: "Pages",
               number:75,
-              icon: mdiViewDashboardOutline,
+              icon: mdiNewspaperVariantOutline,
               info:"The total number of interactions with the pages of a subject."
             },
             {
               statistic_name: "URL",
               number:34,
-              icon: mdiLinkVariant ,
+              icon: mdiLinkVariant,
               info: "The total number of interactions with the URL resource of a subject."
             },
             {
               statistic_name: "Learning Tools Interoperability",
               number:0,
-              icon: mdiHammerScrewdriver ,
+              icon: mdiHammerScrewdriver,
               info:"The total number of interactions with the learning tools interoperability resources of a subject."
             },
             {
