@@ -15,7 +15,16 @@ export default {
     components: {
         SvgIcon
     },
-    props: ['nav_state'],
+    computed: {
+        /**
+         * Navigation bar state:
+         * true: expanded
+         * false: shrank
+         */
+        nav_state() {
+            return this.$store.state.navigation_bar_status
+        }
+    },
     data() {
         return {
             download_icon: mdiCloudDownload,
