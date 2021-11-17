@@ -4,7 +4,10 @@
     <!-- Dashboard Summary Total Interactions card-->
     <InteractionCard/>
     <!-- Dashboard Summary cards-->
-    <div class="grid grid-rows-2 grid-cols-3 gap-x-5 gap-y-5 w-full h-full mt-5">
+    <div class="grid  gap-x-5 gap-y-5 w-full max-h-full mt-5
+                sm:auto-rows-auto sm:grid-cols-1
+                md:auto-rows-auto md:grid-cols-2
+                xl:auto-rows-auto xl:grid-cols-3">
       <SummaryCard v-for="(statistic, index) in statistics" :statistic="statistic" :key="index"/>
     </div>
 </template>
@@ -13,12 +16,12 @@
 import InteractionCard from "@/components/Summary/InteractionCard";
 import SummaryCard from "@/components/Summary/SummaryCard";
 import {
-  mdiFileDocumentOutline,
-  mdiTextBoxCheck,
-  mdiHammerScrewdriver,
-  mdiWikipedia,
-  mdiLinkVariant,
-  mdiViewDashboardOutline
+    mdiFileDocumentOutline,
+    mdiTextBoxCheck,
+    mdiHammerScrewdriver,
+    mdiWikipedia,
+    mdiLinkVariant,
+    mdiNewspaperVariantOutline,
 } from "@mdi/js";
 
 export default {
@@ -34,7 +37,7 @@ export default {
               statistic_name: "Tasks",
               number: 7342,
               icon: mdiTextBoxCheck ,
-              info:"The total number of interactions with all deliveries of a subject. "
+              info:"The total number of interactions with all deliveries of a subject."
             },
             {
               statistic_name: "Files",
@@ -45,19 +48,19 @@ export default {
             {
               statistic_name: "Pages",
               number:75,
-              icon: mdiViewDashboardOutline,
+              icon: mdiNewspaperVariantOutline,
               info:"The total number of interactions with the pages of a subject."
             },
             {
               statistic_name: "URL",
               number:34,
-              icon: mdiLinkVariant ,
+              icon: mdiLinkVariant,
               info: "The total number of interactions with the URL resource of a subject."
             },
             {
               statistic_name: "Learning Tools Interoperability",
               number:0,
-              icon: mdiHammerScrewdriver ,
+              icon: mdiHammerScrewdriver,
               info:"The total number of interactions with the learning tools interoperability resources of a subject."
             },
             {

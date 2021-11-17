@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col w-full bg-white rounded-3xl w-full filter drop-shadow-lg
+    <div class="flex flex-col w-full bg-white rounded-3xl filter drop-shadow-lg
     transform transition duration-500 hover:scale-[101%] p-10 pb-5" :class="card_status ? 'pb-10': null">
         <!-- Card information -->
         <template v-if="card_status">

@@ -1,11 +1,11 @@
 <template>
-    <div class="ml-2 my-2 sm:w-max xl:w-2/12 flex flex-col bg-white rounded-xl ">
+    <div :class="nav_state ? 'w-80' : 'w-20'" class="ml-2 my-2 flex flex-col bg-white rounded-xl transform transition-all duration-700">
         <NavigationHeader/>
         <router-link :to="page.page_link" v-for="(page, index) in pages" :key="index" class="mx-2">
             <NavigationButton :page="page"/>
         </router-link>
         <div class="flex flex-col flex-1 justify-end">
-            <DownloadButton :nav_state="nav_state"/>
+            <DownloadButton/>
         </div>
     </div>
 </template>
@@ -27,6 +27,16 @@ export default {
         NavigationHeader,
         NavigationButton,
         DownloadButton
+    },
+    computed: {
+        /**
+         * Navigation bar state:
+         * true: expanded
+         * false: shrank
+         */
+        nav_state() {
+            return this.$store.state.navigation_bar_status
+        }
     },
     data() {
         return {
@@ -52,12 +62,6 @@ export default {
                     page_link: '/settings'
                 }
             ],
-            /**
-             * Navigation bar state:
-             * true: expanded
-             * false: shrank
-             */
-            nav_state: true
         }
     }
 }
