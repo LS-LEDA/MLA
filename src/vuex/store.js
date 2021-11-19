@@ -15,7 +15,8 @@ const store = createStore({
              * If there's uploaded data Dashboard page is
              * rendered, otherwise Import Data page
              */
-            imported_data: false
+            imported_data: false,
+            forum_messages: [],
         }
     },
     mutations: {
@@ -26,6 +27,10 @@ const store = createStore({
         // Call this method if data has been uploaded
         setImportedData() {
             this.state.imported_data = true
+        },
+        // Store the imported chat log
+        storeForumMessages(state, forum_messages) {
+            this.state.forum_messages = forum_messages
         }
     }
 });
