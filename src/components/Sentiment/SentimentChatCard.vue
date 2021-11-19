@@ -1,5 +1,5 @@
 <template>
-    <div class="flex w-full h-full gap-x-3">
+    <div class="flex w-full h-auto gap-x-3">
         <!-- Profile Logo -->
         <div class="flex rounded-xl bg-blue-300 h-16 w-1/12">
             <svg-icon class="w-full h-full" type="mdi" :path="profile_icon"/>
