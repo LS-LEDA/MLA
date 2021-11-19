@@ -14,6 +14,7 @@ import DragDropArea from "@/components/ImportData/DragDropArea";
 import UploadConfirmation from "@/components/ImportData/UploadConfirmation";
 import UploadProgressBar from "@/components/ImportData/UploadProgressBar";
 import InformationPopUp from "@/components/ImportData/InformationPopUp";
+import {local_processing} from "@/services/local-processing";
 
 export default {
     name: "ImportDataPage",
@@ -55,8 +56,11 @@ export default {
          */
         confirm_upload: function (whichButton) {
             // Check whether to upload or cancel
+            // TODO: Upload to server back-end
             if ( whichButton ) {
-                //TODO: Upload
+                // Native Processing
+                // 1. Detect the log type: General logs or Forum chat logs
+                local_processing(this.selected_file)
             }
 
             // Final Close the PopUp
