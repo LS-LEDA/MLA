@@ -75,7 +75,7 @@ export default {
             this.confirm_upload()
         },
         confirm_upload: function () {
-            this.$emit('onUpload', this.data_file.name)
+            this.$emit('onUpload', this.data_file)
         }
     }
 }

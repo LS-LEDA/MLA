@@ -21,6 +21,7 @@ export default {
         return {
             file_selected: false,
             selected_file_name: "",
+            selected_file: null,
             show_popUp : false
         }
     },
@@ -41,9 +42,12 @@ export default {
          * Toggles the Upload Confirmation
          * PopUp visibility
          */
-        toggle_pop_up: function (selected_file_name) {
-          this.file_selected = !this.file_selected
-            this.selected_file_name = selected_file_name
+        toggle_pop_up: function (selected_file) {
+            this.file_selected = !this.file_selected
+            // Store file name
+            this.selected_file_name = selected_file.name
+            // Store file
+            this.selected_file = selected_file
         },
         /**
          * Emitted when a file has been selected
@@ -56,7 +60,7 @@ export default {
             }
 
             // Final Close the PopUp
-            this.toggle_pop_up()
+            this.toggle_pop_up(this.selected_file_name)
         }
     }
 }
