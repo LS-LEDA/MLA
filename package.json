@@ -15,6 +15,13 @@
   "dependencies": {
     "@jamescoyle/vue-icon": "^0.1.2",
     "@mdi/js": "^6.3.95",
+    "@nlpjs/core": "^4.22.0",
+    "@nlpjs/lang-ca": "^4.22.0",
+    "@nlpjs/lang-es": "^4.22.0",
+    "@nlpjs/lang-en": "^4.22.0",
+    "@nlpjs/language": "^4.21.1",
+    "@nlpjs/nlp": "^4.22.0",
+    "@nlpjs/sentiment": "^4.22.0",
     "chart.js": "^3.6.0",
     "core-js": "^3.6.5",
     "node-nlp": "^4.22.1",
