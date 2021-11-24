@@ -1,5 +1,6 @@
 // Local Processing Service
 import store from "@/vuex/store";
+import Message from "@/services/model/Message";
 
 const UNSUPPORTED_FILE_TYPE = -2
 const SUPPORTED_FILE_TYPE   = 2
@@ -11,7 +12,7 @@ const { Container } = require('@nlpjs/core');
 const { SentimentAnalyzer } = require('@nlpjs/sentiment');
 const { LangCa } = require('@nlpjs/lang-ca');
 const { LangEs } = require('@nlpjs/lang-es');
-const {Language} = require('@nlpjs/language/src/language');
+const { Language } = require('@nlpjs/language/');
 
 // NLP
 const lng_guesser = new Language();
@@ -29,10 +30,10 @@ function local_processing(file) {
 
         let messages = data[0]
 
-        analyze_sentiment(messages).then()
-
-        // Store message in vuex
-        store.commit('storeForumMessages', messages)
+        analyze_sentiment(messages).then( (processed_msg) => {
+            // Store message in vuex
+            store.commit('storeForumMessages', processed_msg)
+        })
     }
 
     file_reader.readAsText(file)
@@ -47,11 +48,12 @@ function check_file_type(filetype) {
 }
 
 async function analyze_sentiment(messages) {
+    let computed_msg = [];
+
     // Compute sentiment
     messages.map( async (msg) => {
         // Guess the language of the message
         let lng_guess = lng_guesser.guess(msg.message)
-        console.log(lng_guess)
 
         const container = new Container();
 
@@ -66,8 +68,15 @@ async function analyze_sentiment(messages) {
 
         const sentiment = new SentimentAnalyzer({ container });
 
+        // Analyze message sentiment
         const result = await sentiment.process({ locale: lng_guess[0].alpha2, text: msg.message });
-        console.log(result)
-    })
+
+        // Store the computed message
+        computed_msg.push(
+            new Message(msg.userfullname, msg.subject, msg.created, msg.message, result.sentiment.vote)
+        )
+    });
+
+    return computed_msg
 }
 export { local_processing }
