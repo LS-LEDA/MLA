@@ -27,12 +27,19 @@ function local_processing(file) {
     // Messages log file
     file_reader.onload = (event) => {
         let data = JSON.parse(event.target.result)
-
         let messages = data[0]
+        let forum = {};
 
         analyze_sentiment(messages).then( (processed_msg) => {
-            // Store message in vuex
-            store.commit('storeForumMessages', processed_msg)
+
+            // Save processed messages to forum
+            forum.forum_messages = processed_msg;
+
+            // Count users & store it to forum
+            forum.total_users = count_users(processed_msg);
+
+            // Store forum in vuex
+            store.commit('storeForumMessages', forum)
         })
     }
 
@@ -40,7 +47,6 @@ function local_processing(file) {
 }
 
 function check_file_type(filetype) {
-    console.log(filetype)
     if (filetype !== "application/json") {
         return UNSUPPORTED_FILE_TYPE
     }
@@ -79,4 +85,15 @@ async function analyze_sentiment(messages) {
 
     return computed_msg
 }
+
+function count_users(messages) {
+    let users_counter = {};
+
+    messages.forEach( (msg) => {
+        users_counter[msg.username] = (users_counter[msg.username] + 1) || 1;
+    });
+
+    return users_counter.length
+}
+
 export { local_processing }
