@@ -3,7 +3,10 @@
     <span class="font-bold text-2xl text-gray-500"> Forum messages sentiments </span>
 
     <div class="grid grid-rows-4 grid-cols-2 w-full h-full gap-5 mt-5">
-        <SentimentFileCard class="row-span-1"/>
+        <SentimentFileCard class="row-span-1"
+                           :file_name="'discussion_forum_moodle.json'"
+                           :messages="forum_messages.forum_messages.length"
+                           :users="forum_messages.total_users"/>
         <SentimentOverallCard/>
         <div class="flex flex-col h-full bg-white rounded-xl row-span-3 p-10 overflow-y-scroll overflow-x-hidden gap-y-5
                     backdrop-filter">

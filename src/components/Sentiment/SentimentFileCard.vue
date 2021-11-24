@@ -5,17 +5,17 @@
             <!-- Forum message file name -->
             <div class="flex justify-between">
                 <div class="font-bold"> File name </div>
-                <div class="flex"> discussion_forum_moodle.json </div>
+                <div class="flex"> {{ file_name }} </div>
             </div>
             <!-- Forum total messages -->
             <div class="flex justify-between">
                 <div class="font-bold"> Messages </div>
-                <div> 4 </div>
+                <div> {{ messages }} </div>
             </div>
             <!-- Forum total users -->
             <div class="flex justify-between">
                 <div class="font-bold"> Users </div>
-                <div> 4 </div>
+                <div> {{ users }} </div>
             </div>
         </div>
     </div>
@@ -23,7 +23,8 @@
 
 <script>
 export default {
-    name: "SentimentFileCard"
+    name: "SentimentFileCard",
+    props: ['file_name', 'messages', 'users']
 }
 </script>
 
