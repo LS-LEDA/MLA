@@ -8,8 +8,8 @@
         <!-- Message Box -->
         <div class="flex flex-col w-full bg-blue-200 rounded-xl p-10 text-justify">
             <div class="flex justify-between">
-                <div class="text-gray-500 font-bold"> @{{ messages.userfullname }} </div>
-                <div class="text-gray-400"> {{ messages.timestamp }} </div>
+                <div class="text-gray-500 font-bold"> @{{ messages.username }} </div>
+                <div class="text-gray-400"> {{ messages.created }} </div>
             </div>
             <div> {{ messages.message }} </div>
         </div>
