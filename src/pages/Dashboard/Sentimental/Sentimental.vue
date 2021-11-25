@@ -36,17 +36,27 @@ export default {
         return {
             selected_msg_score: "",
             selected_id: 0,
+            total_users: 0
         }
     },
     computed: {
         forum_messages() {
-            return this.$store.state.forum
+            this.count_users(this.$store.state.forum_messages)
+            return this.$store.state.forum_messages
         }
     },
     methods: {
         select_msg: function(msg_id) {
             this.selected_msg_score = this.$store.state.forum_messages[msg_id].sentiment;
             this.selected_id = msg_id;
+        },
+        count_users: function (messages) {
+            let dict = {};
+            let count = 0;
+            messages.forEach( (msg) => {
+                dict[msg.username] = (dict[msg.username] + 1) || count++;
+            })
+            this.total_users = count
         }
     }
 }

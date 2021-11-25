@@ -78,14 +78,4 @@ async function analyze_sentiment(messages) {
     return computed_msg
 }
 
-function count_users(messages) {
-    let users_counter = {};
-
-    messages.forEach( (msg) => {
-        users_counter[msg.username] = (users_counter[msg.username] + 1) || 1;
-    });
-
-    return users_counter.length
-}
-
 export { local_processing }
