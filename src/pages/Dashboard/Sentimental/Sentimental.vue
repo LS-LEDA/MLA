@@ -39,6 +39,9 @@ export default {
             total_users: 0
         }
     },
+    mounted() {
+        this.selected_msg_score = this.$store.state.forum_messages[0].sentiment
+    },
     computed: {
         forum_messages() {
             this.count_users(this.$store.state.forum_messages)
