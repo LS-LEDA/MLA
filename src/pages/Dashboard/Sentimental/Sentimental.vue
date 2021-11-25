@@ -37,7 +37,8 @@ export default {
             selected_msg_score: "",
             selected_id: 0,
             selected_file_name: "",
-            total_users: 0
+            total_users: 0,
+            sentiments_count: {}
         }
     },
     mounted() {
@@ -48,6 +49,7 @@ export default {
     computed: {
         forum_messages() {
             this.count_users(this.$store.state.forum_messages);
+            this.count_sentiments(this.$store.state.forum_messages);
             return this.$store.state.forum_messages;
         }
     },
@@ -63,6 +65,11 @@ export default {
                 dict[msg.username] = (dict[msg.username] + 1) || count++;
             })
             this.total_users = count;
+        },
+        count_sentiments: function (messages) {
+            messages.forEach( (msg) => {
+                this.sentiments_count[msg.sentiment] = (this.sentiments_count[msg.sentiment] + 1) || 1;
+            });
         }
     }
 }
