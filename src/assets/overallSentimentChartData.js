@@ -8,7 +8,7 @@ export const overallSentimentChartData = {
         ],
         datasets: [{
             label: '',
-            data: [3, 2, 1],
+            data: [],
             backgroundColor: [
                 'rgba(66, 196, 158, 0.6)',
                 'rgba(233, 196, 106, 0.6)',

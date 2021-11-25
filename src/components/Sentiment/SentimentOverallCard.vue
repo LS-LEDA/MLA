@@ -60,6 +60,12 @@ export default {
         }
     },
     mounted() {
+        // Dynamically load computed sentiments
+        this.overall_sentiment_data.data.datasets[0].data = [
+            this.$parent.sentiments_count.positive,
+            this.$parent.sentiments_count.neutral,
+            this.$parent.sentiments_count.negative
+        ]
         // Create Total Interactions chart once component is mounted
         this.overallSentimentChart('overall_sentiment_chart', this.overall_sentiment_data)
     },
