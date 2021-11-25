@@ -1,5 +1,6 @@
 // Local Processing Service
 import store from "@/vuex/store";
+import router from "@/router/router";
 import Message from "@/services/model/Message";
 
 const UNSUPPORTED_FILE_TYPE = -2
@@ -33,6 +34,9 @@ function local_processing(file) {
             // Store processed messages in vuex
             store.commit('storeForumMessages', processed_msg);
         })
+
+        // Push to Dashboard > Sentiment
+        router.push('/dashboard/sentimental-analysis')
     }
 
     file_reader.readAsText(file)
