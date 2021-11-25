@@ -5,12 +5,12 @@
     <div class="grid grid-rows-4 grid-cols-2 w-full h-full gap-5 mt-5">
         <SentimentFileCard class="row-span-1"
                            :file_name="'discussion_forum_moodle.json'"
-                           :messages="forum_messages.forum_messages.length"
-                           :users="forum_messages.total_users"/>
+                           :messages="forum_messages.length"
+                           :users="total_users"/>
         <SentimentOverallCard/>
         <div class="flex flex-col h-full bg-white rounded-xl row-span-3 p-10 overflow-y-scroll overflow-x-hidden gap-y-5
                     backdrop-filter">
-            <SentimentChatCard v-for="(message, index) in forum_messages.forum_messages" :messages="message" :key="index"
+            <SentimentChatCard v-for="(message, index) in forum_messages" :messages="message" :key="index"
                                :class="selected_id === index ? 'brightness-100' : 'brightness-75'"
                                @click="select_msg(index)"/>
         </div>
@@ -45,7 +45,7 @@ export default {
     },
     methods: {
         select_msg: function(msg_id) {
-            this.selected_msg_score = this.$store.state.forum.forum_messages[msg_id].sentiment;
+            this.selected_msg_score = this.$store.state.forum_messages[msg_id].sentiment;
             this.selected_id = msg_id;
         }
     }

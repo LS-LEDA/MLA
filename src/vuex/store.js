@@ -16,12 +16,7 @@ const store = createStore({
              * rendered, otherwise Import Data page
              */
             imported_data: false,
-            /**
-             * Forum properties:
-             * - forum_messages: List of processed messages
-             * - total_users: Number of users
-             */
-            forum: null,
+            forum_messages: []
         }
     },
     mutations: {
@@ -34,8 +29,8 @@ const store = createStore({
             this.state.imported_data = true
         },
         // Store the imported chat log
-        storeForumMessages(state, forum) {
-            this.state.forum = forum
+        storeForumMessages(state, forum_messages) {
+            this.state.forum_messages = forum_messages
         }
     }
 });

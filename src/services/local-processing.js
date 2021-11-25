@@ -26,20 +26,12 @@ function local_processing(file) {
 
     // Messages log file
     file_reader.onload = (event) => {
-        let data = JSON.parse(event.target.result)
-        let messages = data[0]
-        let forum = {};
+        let data = JSON.parse(event.target.result);
+        let messages = data[0];
 
         analyze_sentiment(messages).then( (processed_msg) => {
-
-            // Save processed messages to forum
-            forum.forum_messages = processed_msg;
-
-            // Count users & store it to forum
-            forum.total_users = count_users(processed_msg);
-
-            // Store forum in vuex
-            store.commit('storeForumMessages', forum)
+            // Store processed messages in vuex
+            store.commit('storeForumMessages', processed_msg)
         })
     }
 
