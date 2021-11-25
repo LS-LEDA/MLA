@@ -21,7 +21,7 @@ function local_processing(file) {
 
     // Check if it's a JSON log file
     if ( check_file_type(file.type) === UNSUPPORTED_FILE_TYPE ) {
-        return UNSUPPORTED_FILE_TYPE
+        return UNSUPPORTED_FILE_TYPE;
     }
 
     // Messages log file
@@ -31,7 +31,7 @@ function local_processing(file) {
 
         analyze_sentiment(messages).then( (processed_msg) => {
             // Store processed messages in vuex
-            store.commit('storeForumMessages', processed_msg)
+            store.commit('storeForumMessages', processed_msg);
         })
     }
 
@@ -40,9 +40,9 @@ function local_processing(file) {
 
 function check_file_type(filetype) {
     if (filetype !== "application/json") {
-        return UNSUPPORTED_FILE_TYPE
+        return UNSUPPORTED_FILE_TYPE;
     }
-    return SUPPORTED_FILE_TYPE
+    return SUPPORTED_FILE_TYPE;
 }
 
 async function analyze_sentiment(messages) {
@@ -51,7 +51,7 @@ async function analyze_sentiment(messages) {
     // Compute sentiment
     messages.map( async (msg) => {
         // Guess the language of the message
-        let lng_guess = lng_guesser.guess(msg.message)
+        let lng_guess = lng_guesser.guess(msg.message);
 
         const container = new Container();
 
@@ -72,10 +72,10 @@ async function analyze_sentiment(messages) {
         // Store the computed message
         computed_msg.push(
             new Message(msg.userfullname, msg.subject, msg.created, msg.message, result.sentiment.vote)
-        )
+        );
     });
 
-    return computed_msg
+    return computed_msg;
 }
 
 export { local_processing }

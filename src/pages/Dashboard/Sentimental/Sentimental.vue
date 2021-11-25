@@ -43,7 +43,6 @@ export default {
     },
     mounted() {
         this.selected_msg_score = this.$store.state.forum_messages[0].sentiment;
-        console.log(this.$store.state.forum_file_name)
         this.selected_file_name = this.$store.state.forum_file_name;
     },
     computed: {

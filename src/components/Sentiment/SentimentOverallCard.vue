@@ -65,9 +65,9 @@ export default {
             this.$parent.sentiments_count.positive,
             this.$parent.sentiments_count.neutral,
             this.$parent.sentiments_count.negative
-        ]
+        ];
         // Create Total Interactions chart once component is mounted
-        this.overallSentimentChart('overall_sentiment_chart', this.overall_sentiment_data)
+        this.overallSentimentChart('overall_sentiment_chart', this.overall_sentiment_data);
     },
     unmounted() {
         // Clear chart once the component is unmounted

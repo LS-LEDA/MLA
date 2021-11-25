@@ -44,11 +44,11 @@ export default {
          * PopUp visibility
          */
         toggle_pop_up: function (selected_file) {
-            this.file_selected = !this.file_selected
+            this.file_selected = !this.file_selected;
             // Store file name
-            this.selected_file_name = selected_file.name
+            this.selected_file_name = selected_file.name;
             // Store file
-            this.selected_file = selected_file
+            this.selected_file = selected_file;
         },
         /**
          * Emitted when a file has been selected
@@ -60,13 +60,13 @@ export default {
             if ( whichButton ) {
                 // Native Processing
                 // 1. Toggle uploaded file boolean and store file name
-                this.$store.commit('setImportedData', this.selected_file_name)
+                this.$store.commit('setImportedData', this.selected_file_name);
                 // 2. Detect the log type: General logs or Forum chat logs
-                local_processing(this.selected_file)
+                local_processing(this.selected_file);
             }
 
             // Final Close the PopUp
-            this.toggle_pop_up(this.selected_file_name)
+            this.toggle_pop_up(this.selected_file_name);
         }
     }
 }
