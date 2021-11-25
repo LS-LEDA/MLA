@@ -16,6 +16,7 @@ const store = createStore({
              * rendered, otherwise Import Data page
              */
             imported_data: false,
+            forum_file_name: "",
             forum_messages: []
         }
     },
@@ -25,8 +26,9 @@ const store = createStore({
             this.state.navigation_bar_status = !this.state.navigation_bar_status
         },
         // Call this method if data has been uploaded
-        setImportedData() {
+        setImportedData(state, file_name) {
             this.state.imported_data = true
+            this.state.forum_file_name = file_name
         },
         // Store the imported chat log
         storeForumMessages(state, forum_messages) {

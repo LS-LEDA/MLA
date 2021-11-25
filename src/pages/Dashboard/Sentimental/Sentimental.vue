@@ -4,7 +4,7 @@
 
     <div class="grid grid-rows-4 grid-cols-2 w-full h-full gap-5 mt-5">
         <SentimentFileCard class="row-span-1"
-                           :file_name="'discussion_forum_moodle.json'"
+                           :file_name="selected_file_name"
                            :messages="forum_messages.length"
                            :users="total_users"/>
         <SentimentOverallCard/>
@@ -36,16 +36,19 @@ export default {
         return {
             selected_msg_score: "",
             selected_id: 0,
+            selected_file_name: "",
             total_users: 0
         }
     },
     mounted() {
-        this.selected_msg_score = this.$store.state.forum_messages[0].sentiment
+        this.selected_msg_score = this.$store.state.forum_messages[0].sentiment;
+        console.log(this.$store.state.forum_file_name)
+        this.selected_file_name = this.$store.state.forum_file_name;
     },
     computed: {
         forum_messages() {
-            this.count_users(this.$store.state.forum_messages)
-            return this.$store.state.forum_messages
+            this.count_users(this.$store.state.forum_messages);
+            return this.$store.state.forum_messages;
         }
     },
     methods: {
@@ -59,7 +62,7 @@ export default {
             messages.forEach( (msg) => {
                 dict[msg.username] = (dict[msg.username] + 1) || count++;
             })
-            this.total_users = count
+            this.total_users = count;
         }
     }
 }
