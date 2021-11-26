@@ -35,6 +35,9 @@ function local_processing(file) {
             store.commit('storeForumMessages', processed_msg);
         })
 
+        // Time format conversion
+        convert_time();
+
         // Push to Dashboard > Sentiment
         router.push('/dashboard/sentimental-analysis')
     }
@@ -80,6 +83,22 @@ async function analyze_sentiment(messages) {
     });
 
     return computed_msg;
+}
+
+function convert_time(){
+    store.state.forum_messages.map( (msg, index) =>{
+        // Calculate time
+        let a = new Date(msg.created * 1000);
+        let months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+        let year = a.getFullYear();
+        let month = months[a.getMonth()];
+        let date = a.getDate();
+        let hour = a.getHours();
+        let min = a.getMinutes();
+        let sec = a.getSeconds();
+        let time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
+        store.commit('setMessageDate', {'index': index, 'time': time})
+    })
 }
 
 export { local_processing }

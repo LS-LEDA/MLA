@@ -33,6 +33,10 @@ const store = createStore({
         // Store the imported chat log
         storeForumMessages(state, forum_messages) {
             this.state.forum_messages = forum_messages
+        },
+        // Set the date of the forum message
+        setMessageDate(state, data) {
+            this.state.forum_messages[data.index].created = data.time
         }
     }
 });
