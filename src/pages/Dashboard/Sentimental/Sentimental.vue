@@ -7,7 +7,7 @@
                            :file_name="selected_file_name"
                            :messages="forum.messages"
                            :users="forum.users"/>
-        <SentimentOverallCard/>
+        <SentimentOverallCard :sentiments="forum.sentiments"/>
         <div class="flex flex-col h-full bg-white rounded-xl row-span-3 p-10 overflow-y-scroll overflow-x-hidden gap-y-5
                     backdrop-filter">
             <SentimentChatCard v-for="(message, index) in forum.forum_messages" :messages="message" :key="index"
