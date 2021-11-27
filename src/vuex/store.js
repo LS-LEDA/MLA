@@ -23,6 +23,17 @@ const store = createStore({
                 messages: 0,
                 users: 0,
                 sentiments: {},
+            },
+            /**
+             * Alert popup information
+             * @param status: toggles alert
+             * @param message: message for the alert
+             * @param timeout: timer id for manual dismiss
+             */
+            alert: {
+                status: false,
+                message: "Error: Something went wrong",
+                timeout: 0,
             }
         }
     },
@@ -40,6 +51,11 @@ const store = createStore({
         storeForumMessages(state, forum) {
             this.state.forum = forum
         },
+        toggleAlert(state, message) {
+            // Toggle alert
+            this.state.alert.status = !this.state.alert.status;
+            this.state.alert.message = message;
+        }
     }
 });
 
