@@ -31,15 +31,15 @@ function local_processing(file) {
         let messages = data[0];
 
         analyze_sentiment(messages).then( (processed_msg) => {
+            // Time format conversion
+            processed_msg.map( (msg) => {
+                convert_time(msg);
+            })
             // Store processed messages in vuex
             store.commit('storeForumMessages', processed_msg);
+            // Push to Dashboard > Sentiment
+            router.push('/dashboard/sentimental-analysis')
         })
-
-        // Time format conversion
-        convert_time();
-
-        // Push to Dashboard > Sentiment
-        router.push('/dashboard/sentimental-analysis')
     }
 
     file_reader.readAsText(file)
@@ -56,7 +56,7 @@ async function analyze_sentiment(messages) {
     let computed_msg = [];
 
     // Compute sentiment
-    messages.map( async (msg) => {
+    for (const msg of messages) {
         // Guess the language of the message
         let lng_guess = lng_guesser.guess(msg.message);
 
@@ -80,25 +80,25 @@ async function analyze_sentiment(messages) {
         computed_msg.push(
             new Message(msg.userfullname, msg.subject, msg.created, msg.message, result.sentiment.vote)
         );
-    });
+    }
 
     return computed_msg;
 }
 
-function convert_time(){
-    store.state.forum_messages.map( (msg, index) =>{
-        // Calculate time
-        let a = new Date(msg.created * 1000);
-        let months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-        let year = a.getFullYear();
-        let month = months[a.getMonth()];
-        let date = a.getDate();
-        let hour = a.getHours();
-        let min = a.getMinutes();
-        let sec = a.getSeconds();
-        let time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
-        store.commit('setMessageDate', {'index': index, 'time': time})
-    })
+function convert_time(msg){
+    // Calculate time
+    let a = new Date(msg.created * 1000);
+    let months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    let year = a.getFullYear();
+    let month = months[a.getMonth()];
+    let date = a.getDate();
+    let hour = a.getHours();
+    let min = a.getMinutes();
+    let sec = a.getSeconds();
+
+    msg.created = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec;
+
+    return msg;
 }
 
 export { local_processing }
