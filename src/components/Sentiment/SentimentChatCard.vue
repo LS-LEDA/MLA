@@ -6,7 +6,8 @@
         </div>
 
         <!-- Message Box -->
-        <div class="flex flex-col w-full bg-blue-200 rounded-xl p-10 text-justify">
+        <div class="flex flex-col w-full bg-blue-200 rounded-xl p-10 text-justify border-r-8"
+             :class="border_color()">
             <div class="flex justify-between">
                 <div class="text-gray-500 font-bold"> @{{ messages.username }} </div>
                 <div class="text-gray-400"> {{ messages.created }} </div>
@@ -29,6 +30,18 @@ export default {
     data() {
         return {
             profile_icon: mdiAccount,
+        }
+    },
+    methods: {
+        border_color: function () {
+            switch (this.messages.sentiment){
+                case "positive":
+                    return 'border-green-500';
+                case "negative":
+                    return 'border-red-500';
+                default:
+                    return 'border-yellow-500';
+            }
         }
     }
 }
