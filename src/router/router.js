@@ -1,4 +1,6 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import store from '@/vuex/store';
+
+import { createRouter, createWebHistory } from 'vue-router';
 import ImportDataPage from "@/pages/ImportData/ImportDataPage";
 import DashboardPage from "@/pages/Dashboard/DashboardPage";
 import Plugins from "@/pages/Plugins";
