@@ -34,16 +34,7 @@ const routes = [
                 path: '/dashboard/sentimental-analysis',
                 component: Sentimental,
                 beforeEnter: () => {
-                    if ( store.state.imported_data !== true ) {
-                        // Show alert
-                        store.commit('toggleAlert', "Import forum log")
-                        // Delayed alert hiding & store timer ID for user manual dismiss
-                        store.state.alert.timeout = setTimeout( () => {
-                            // Automatically hide alert after 5s
-                            store.commit('toggleAlert', "Import forum log")
-                        }, 5000);
-                        return '/import-data';
-                    }
+                    return check_imported_data();
                 }
             }
         ]
@@ -51,6 +42,19 @@ const routes = [
     { path: '/plugins', component: Plugins },
     { path: '/settings', component: Settings },
 ]
+
+function check_imported_data(){
+    if ( store.state.imported_data !== true ) {
+        // Show alert
+        store.commit('toggleAlert', "Import forum log")
+        // Delayed alert hiding & store timer ID for user manual dismiss
+        store.state.alert.timeout = setTimeout( () => {
+            // Automatically hide alert after 5s
+            store.commit('toggleAlert', "Import forum log")
+        }, 5000);
+        return '/import-data';
+    }
+}
 
 const router = createRouter({
     history: createWebHistory(),
