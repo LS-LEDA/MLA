@@ -18,7 +18,7 @@ export default {
          * false: shrank
          */
         nav_state() {
-            return this.$store.state.navigation_bar_status
+            return this.$store.state.navigation_bar_status;
         }
     },
     props: ['page'],

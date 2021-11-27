@@ -19,7 +19,7 @@ export default {
     emits: ['infoPopUp'],
     methods: {
         hidePopUp: function () {
-              this.$emit('infoPopUp')
+            this.$emit('infoPopUp');
         }
     }
 }
