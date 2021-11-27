@@ -29,14 +29,27 @@ function local_processing(file) {
     file_reader.onload = (event) => {
         let data = JSON.parse(event.target.result);
         let messages = data[0];
+        let forum = {
+            "forum_messages": [],
+            "messages": 0,
+            "users": 0,
+            "sentiments": {},
+        }
 
         analyze_sentiment(messages).then( (processed_msg) => {
+            forum.forum_messages = processed_msg;
             // Time format conversion
             processed_msg.map( (msg) => {
                 convert_time(msg);
             })
+            // Count messages
+            forum.messages = processed_msg.length;
+            // Count users
+            forum.users = count_users(processed_msg);
+            // Count sentiment ocurrences
+            forum.sentiments = count_sentiments(processed_msg);
             // Store processed messages in vuex
-            store.commit('storeForumMessages', processed_msg);
+            store.commit('storeForumMessages', forum);
             // Push to Dashboard > Sentiment
             router.push('/dashboard/sentimental-analysis')
         })
@@ -99,6 +112,23 @@ function convert_time(msg){
     msg.created = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec;
 
     return msg;
+}
+
+function count_users(messages) {
+    let dict = {};
+    let count = 0;
+    messages.forEach( (msg) => {
+        dict[msg.username] = (dict[msg.username] + 1) || count++;
+    })
+    return count;
+}
+
+function count_sentiments(messages) {
+    let sentiments_count = {};
+    messages.forEach( (msg) => {
+        sentiments_count[msg.sentiment] = (sentiments_count[msg.sentiment] + 1) || 1;
+    });
+    return sentiments_count;
 }
 
 export { local_processing }

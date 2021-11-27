@@ -17,7 +17,13 @@ const store = createStore({
              */
             imported_data: false,
             forum_file_name: "",
-            forum_messages: []
+            forum_messages: [],
+            forum: {
+                forum_messages: [],
+                messages: 0,
+                users: 0,
+                sentiments: {},
+            }
         }
     },
     mutations: {
@@ -30,9 +36,9 @@ const store = createStore({
             this.state.imported_data = true
             this.state.forum_file_name = file_name
         },
-        // Store the imported chat log
-        storeForumMessages(state, forum_messages) {
-            this.state.forum_messages = forum_messages
+        // Store the imported forum log
+        storeForumMessages(state, forum) {
+            this.state.forum = forum
         },
     }
 });
