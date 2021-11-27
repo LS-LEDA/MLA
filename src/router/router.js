@@ -32,7 +32,10 @@ const routes = [
             },
             {
                 path: '/dashboard/sentimental-analysis',
-                component: Sentimental
+                component: Sentimental,
+                beforeEnter: () => {
+                    if ( store.state.imported_data !== true ) return '/import-data';
+                }
             }
         ]
     },
