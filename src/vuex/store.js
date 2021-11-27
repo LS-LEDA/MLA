@@ -15,7 +15,26 @@ const store = createStore({
              * If there's uploaded data Dashboard page is
              * rendered, otherwise Import Data page
              */
-            imported_data: false
+            imported_data: false,
+            forum_file_name: "",
+            forum_messages: [],
+            forum: {
+                forum_messages: [],
+                messages: 0,
+                users: 0,
+                sentiments: {},
+            },
+            /**
+             * Alert popup information
+             * @param status: toggles alert
+             * @param message: message for the alert
+             * @param timeout: timer id for manual dismiss
+             */
+            alert: {
+                status: false,
+                message: "Error: Something went wrong",
+                timeout: 0,
+            }
         }
     },
     mutations: {
@@ -24,8 +43,18 @@ const store = createStore({
             this.state.navigation_bar_status = !this.state.navigation_bar_status
         },
         // Call this method if data has been uploaded
-        setImportedData() {
+        setImportedData(state, file_name) {
             this.state.imported_data = true
+            this.state.forum_file_name = file_name
+        },
+        // Store the imported forum log
+        storeForumMessages(state, forum) {
+            this.state.forum = forum
+        },
+        toggleAlert(state, message) {
+            // Toggle alert
+            this.state.alert.status = !this.state.alert.status;
+            this.state.alert.message = message;
         }
     }
 });

@@ -1,4 +1,6 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import store from '@/vuex/store';
+
+import { createRouter, createWebHistory } from 'vue-router';
 import ImportDataPage from "@/pages/ImportData/ImportDataPage";
 import DashboardPage from "@/pages/Dashboard/DashboardPage";
 import Plugins from "@/pages/Plugins";
@@ -30,13 +32,29 @@ const routes = [
             },
             {
                 path: '/dashboard/sentimental-analysis',
-                component: Sentimental
+                component: Sentimental,
+                beforeEnter: () => {
+                    return check_imported_data();
+                }
             }
         ]
     },
     { path: '/plugins', component: Plugins },
     { path: '/settings', component: Settings },
 ]
+
+function check_imported_data(){
+    if ( store.state.imported_data !== true ) {
+        // Show alert
+        store.commit('toggleAlert', "Import forum log")
+        // Delayed alert hiding & store timer ID for user manual dismiss
+        store.state.alert.timeout = setTimeout( () => {
+            // Automatically hide alert after 5s
+            store.commit('toggleAlert', "Import forum log")
+        }, 5000);
+        return '/import-data';
+    }
+}
 
 const router = createRouter({
     history: createWebHistory(),

@@ -50,7 +50,7 @@ export default {
     },
     methods: {
         changeView: function () {
-            this.card_status = !this.card_status
+            this.card_status = !this.card_status;
         }
     }
 }

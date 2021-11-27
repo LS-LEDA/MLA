@@ -47,7 +47,7 @@ export default {
             file_icon: mdiFile,
             cancel_icon: mdiClose,
             upload_icon: mdiUpload,
-            alive: false,
+            alive: true,
         }
     }
 }

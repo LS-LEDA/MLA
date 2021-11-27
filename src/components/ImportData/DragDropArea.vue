@@ -43,14 +43,14 @@ export default {
     setup() {
         const active = ref(false)
         const toggleActive = () => {
-            active.value = !active.value
+            active.value = !active.value;
         }
 
         return { active, toggleActive }
     },
     methods: {
         informationPopUp: function () {
-          this.$emit('popUp')
+          this.$emit('popUp');
         },
         /**
          * Checks whether is a drop or a input change event
@@ -59,23 +59,23 @@ export default {
          * @param e: drop or change event
          */
         select_file: function (e) {
-            let uploaded_file
+            let uploaded_file;
             if (e.type === "drop") {
-                this.toggleActive()
-                uploaded_file = e.dataTransfer.files[0]
-                if ( !uploaded_file ) return
-                this.data_file = uploaded_file
-                this.confirm_upload()
-                return
+                this.toggleActive();
+                uploaded_file = e.dataTransfer.files[0];
+                if ( !uploaded_file ) return;
+                this.data_file = uploaded_file;
+                this.confirm_upload();
+                return;
             }
-            uploaded_file = e.target.files[0]
-            if ( !uploaded_file ) return
-            this.data_file = uploaded_file
-            this.$refs.moodle_file.value = null
-            this.confirm_upload()
+            uploaded_file = e.target.files[0];
+            if ( !uploaded_file ) return;
+            this.data_file = uploaded_file;
+            this.$refs.moodle_file.value = null;
+            this.confirm_upload();
         },
         confirm_upload: function () {
-            this.$emit('onUpload', this.data_file.name)
+            this.$emit('onUpload', this.data_file);
         }
     }
 }

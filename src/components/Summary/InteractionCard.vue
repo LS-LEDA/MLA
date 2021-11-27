@@ -45,7 +45,7 @@ export default {
     },
     mounted() {
         // Create Total Interactions chart once component is mounted
-        this.totalInteractionChart('total_interactions_chart', this.totalInteractionChartData)
+        this.totalInteractionChart('total_interactions_chart', this.totalInteractionChartData);
     },
     unmounted() {
         // Clear chart once the component is unmounted

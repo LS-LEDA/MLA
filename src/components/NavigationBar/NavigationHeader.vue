@@ -24,7 +24,7 @@
                 @click="changeNavigationBarStatus"
                 @mouseover="logo_hover"
                 @mouseleave="logo_not_hover">
-            <svg-icon size="36" type="mdi" :path="path" class="hover:drop-shadow shrink_icon place-self-center"/>
+            <svg-icon size="36" type="mdi" :path="path" class="hover:drop-shadow text-gray-500 place-self-center"/>
         </button>
     </div>
 </template>
@@ -41,10 +41,10 @@ export default {
     },
     computed: {
         nav_state() {
-            return this.$store.state.navigation_bar_status
+            return this.$store.state.navigation_bar_status;
         },
         imported_data() {
-            return this.$store.state.imported_data
+            return this.$store.state.imported_data;
         }
     },
     data() {
@@ -56,29 +56,20 @@ export default {
     methods: {
         // Expand or shrink navigation bar
         changeNavigationBarStatus() {
-            this.$store.commit('changeNavigationBarStatus')
+            this.$store.commit('changeNavigationBarStatus');
         },
         logo_hover() {
             if(!this.nav_state) {
-                this.logo_hovered = true
+                this.logo_hovered = true;
             }
         },
         logo_not_hover() {
-            this.logo_hovered = false
+            this.logo_hovered = false;
         }
     }
 }
 </script>
 
 <style scoped>
-    .shrink_icon {
-        color: gray;
-    }
 
-    .fade-enter-active, .fade-leave-active {
-        transition: opacity .5s;
-    }
-    .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-        opacity: 0;
-    }
 </style>
