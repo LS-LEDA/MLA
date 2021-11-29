@@ -1,4 +1,5 @@
 import { createStore } from 'vuex'
+import Summary from "@/services/model/Summary";
 
 const store = createStore({
     state() {
@@ -34,7 +35,8 @@ const store = createStore({
                 status: false,
                 message: "Error: Something went wrong",
                 timeout: 0,
-            }
+            },
+            summary: new Summary(),
         }
     },
     mutations: {
