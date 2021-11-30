@@ -2,13 +2,13 @@
     <h1 class="text-4xl font-extrabold"> Summary of all course interactions </h1>
     <span class="font-bold text-2xl text-gray-500"> Information on the number of interactions </span>
     <!-- Dashboard Summary Total Interactions card-->
-    <InteractionCard/>
+    <InteractionCard :interactions_count="summary.total_interactions"/>
     <!-- Dashboard Summary cards-->
     <div class="grid  gap-x-5 gap-y-5 w-full max-h-full mt-5
                 sm:auto-rows-auto sm:grid-cols-1
                 md:auto-rows-auto md:grid-cols-2
                 xl:auto-rows-auto xl:grid-cols-3">
-      <SummaryCard v-for="(statistic, index) in summary" :statistic="statistic" :key="index"/>
+      <SummaryCard v-for="(statistic, index) in summary.statistics" :statistic="statistic" :key="index"/>
     </div>
 </template>
 
@@ -32,7 +32,8 @@ export default {
     },
     computed: {
         summary() {
-            let summary_types = this.$store.state.summary_types;
+            let summary_types = this.$store.state.summary.summary_types;
+            let total_interactions = this.$store.state.summary.total_interactions;
 
             this.statistics.forEach( (stat) => {
                 switch ( stat.statistic_name ) {
@@ -44,7 +45,7 @@ export default {
                         break;
                 }
             });
-            return this.statistics
+            return { total_interactions: total_interactions, statistics: this.statistics }
         }
     },
     data(){
@@ -86,7 +87,8 @@ export default {
                     icon: mdiWikipedia ,
                     info:"The total number of interactions with the wikis of a subject."
                 }
-            ]
+            ],
+            total_interactions: 0
         }
     }
 }

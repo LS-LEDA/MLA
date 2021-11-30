@@ -20,9 +20,9 @@ import totalInteractionChartData from "@/assets/totalInteractionChartData";
 
 export default {
     name: "InteractionCard",
+    props: ['interactions_count'],
     data() {
         return {
-            interactions_count: 10394,
             totalInteractionChartData: totalInteractionChartData,
             interactions_chart: null,
         }
