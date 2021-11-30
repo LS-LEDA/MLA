@@ -13,7 +13,11 @@ function forum_processing(data){
 
     let summary_types = summary_processing(logs);
 
-    store.commit('saveSummaryTypes', summary_types)
+    store.commit('saveSummaryTypes', {
+        total_interactions: logs.length,
+        summary_types: summary_types
+        }
+    );
 }
 
 export { forum_processing };

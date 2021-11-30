@@ -60,8 +60,10 @@ const store = createStore({
             this.state.alert.status = !this.state.alert.status;
             this.state.alert.message = message;
         },
-        saveSummaryTypes(state, summary_types) {
-            this.state.summary_types = summary_types;
+        // Store computed summary data
+        saveSummaryTypes(state, summary) {
+            this.state.summary.total_interactions = summary.total_interactions;
+            this.state.summary.summary_types = summary.summary_types;
         }
     }
 });
