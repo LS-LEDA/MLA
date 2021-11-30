@@ -2,7 +2,6 @@
 import store from "@/vuex/store";
 import router from "@/router/router";
 import Message from "@/services/model/Message";
-import {forum_processing} from "@/services/forum-processing";
 
 const UNSUPPORTED_FILE_TYPE = -2
 const SUPPORTED_FILE_TYPE   = 2
@@ -29,36 +28,31 @@ function local_processing(file) {
     // Messages log file
     file_reader.onload = (event) => {
         let data = JSON.parse(event.target.result);
-        // Check whether it's a Moodle Logs or Moodle Forum message Logs file
-        if ( Array.isArray(data[0][0])) {
-            forum_processing(data);
-        } else {
-            let messages = data[0];
-            let forum = {
-                "forum_messages": [],
-                "messages": 0,
-                "users": 0,
-                "sentiments": {},
-            }
-
-            analyze_sentiment(messages).then( (processed_msg) => {
-                forum.forum_messages = processed_msg;
-                // Time format conversion
-                processed_msg.map( (msg) => {
-                    convert_time(msg);
-                })
-                // Count messages
-                forum.messages = processed_msg.length;
-                // Count users
-                forum.users = count_users(processed_msg);
-                // Count sentiment ocurrences
-                forum.sentiments = count_sentiments(processed_msg);
-                // Store processed messages in vuex
-                store.commit('storeForumMessages', forum);
-                // Push to Dashboard > Sentiment
-                router.push('/dashboard/sentimental-analysis')
-            })
+        let messages = data[0];
+        let forum = {
+            "forum_messages": [],
+            "messages": 0,
+            "users": 0,
+            "sentiments": {},
         }
+
+        analyze_sentiment(messages).then( (processed_msg) => {
+            forum.forum_messages = processed_msg;
+            // Time format conversion
+            processed_msg.map( (msg) => {
+                convert_time(msg);
+            })
+            // Count messages
+            forum.messages = processed_msg.length;
+            // Count users
+            forum.users = count_users(processed_msg);
+            // Count sentiment ocurrences
+            forum.sentiments = count_sentiments(processed_msg);
+            // Store processed messages in vuex
+            store.commit('storeForumMessages', forum);
+            // Push to Dashboard > Sentiment
+            router.push('/dashboard/sentimental-analysis')
+        })
     }
 
     file_reader.readAsText(file)
