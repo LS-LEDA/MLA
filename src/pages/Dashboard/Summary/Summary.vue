@@ -8,7 +8,7 @@
                 sm:auto-rows-auto sm:grid-cols-1
                 md:auto-rows-auto md:grid-cols-2
                 xl:auto-rows-auto xl:grid-cols-3">
-      <SummaryCard v-for="(statistic, index) in statistics" :statistic="statistic" :key="index"/>
+      <SummaryCard v-for="(statistic, index) in summary" :statistic="statistic" :key="index"/>
     </div>
 </template>
 
@@ -29,6 +29,23 @@ export default {
     components: {
         InteractionCard,
         SummaryCard
+    },
+    computed: {
+        summary() {
+            let summary_types = this.$store.state.summary_types;
+
+            this.statistics.forEach( (stat) => {
+                switch ( stat.statistic_name ) {
+                    case 'Tasks':
+                        stat.number = summary_types['Tarea'].count;
+                        break;
+                    case 'URL':
+                        stat.number = summary_types['URL'].count;
+                        break;
+                }
+            });
+            return this.statistics
+        }
     },
     data(){
         return{
