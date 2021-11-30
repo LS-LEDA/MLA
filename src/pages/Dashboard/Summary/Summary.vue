@@ -8,7 +8,7 @@
                 sm:auto-rows-auto sm:grid-cols-1
                 md:auto-rows-auto md:grid-cols-2
                 xl:auto-rows-auto xl:grid-cols-3">
-      <SummaryCard v-for="(statistic, index) in summary" :statistic="statistic" :key="index"/>
+      <SummaryCard v-for="(statistic, index) in statistics" :statistic="statistic" :key="index"/>
     </div>
 </template>
 
@@ -30,59 +30,42 @@ export default {
         InteractionCard,
         SummaryCard
     },
-    computed: {
-        summary() {
-            let summary_types = this.$store.state.summary_types;
-
-            this.statistics.forEach( (stat) => {
-                switch ( stat.statistic_name ) {
-                    case 'Tasks':
-                        stat.number = summary_types['Tarea'].count;
-                        break;
-                    case 'URL':
-                        stat.number = summary_types['URL'].count;
-                        break;
-                }
-            });
-            return this.statistics
-        }
-    },
     data(){
         return{
             statistics:[
                 {
                     statistic_name: "Tasks",
-                    number: 0,
+                    number: 7342,
                     icon: mdiTextBoxCheck ,
                     info:"The total number of interactions with all deliveries of a subject."
                 },
                 {
                     statistic_name: "Files",
-                    number: 0,
+                    number: 1913,
                     icon: mdiFileDocumentOutline,
                     info:" The total number of interactions with all files of a subject."
                 },
                 {
                     statistic_name: "Pages",
-                    number: 0,
+                    number:75,
                     icon: mdiNewspaperVariantOutline,
                     info:"The total number of interactions with the pages of a subject."
                 },
                 {
                     statistic_name: "URL",
-                    number: 0,
+                    number:34,
                     icon: mdiLinkVariant,
                     info: "The total number of interactions with the URL resource of a subject."
                 },
                 {
                     statistic_name: "Learning Tools Interoperability",
-                    number: 0,
+                    number:0,
                     icon: mdiHammerScrewdriver,
                     info:"The total number of interactions with the learning tools interoperability resources of a subject."
                 },
                 {
                     statistic_name: "Wiki",
-                    number: 0,
+                    number:1,
                     icon: mdiWikipedia ,
                     info:"The total number of interactions with the wikis of a subject."
                 }

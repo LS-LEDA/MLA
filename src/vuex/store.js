@@ -34,8 +34,7 @@ const store = createStore({
                 status: false,
                 message: "Error: Something went wrong",
                 timeout: 0,
-            },
-            summary_types: null,
+            }
         }
     },
     mutations: {
@@ -56,9 +55,6 @@ const store = createStore({
             // Toggle alert
             this.state.alert.status = !this.state.alert.status;
             this.state.alert.message = message;
-        },
-        saveSummaryTypes(state, summary_types) {
-            this.state.summary_types = summary_types;
         }
     }
 });
