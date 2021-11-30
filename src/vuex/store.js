@@ -1,5 +1,4 @@
 import { createStore } from 'vuex'
-import Summary from "@/services/model/Summary";
 
 const store = createStore({
     state() {
@@ -36,7 +35,7 @@ const store = createStore({
                 message: "Error: Something went wrong",
                 timeout: 0,
             },
-            summary: new Summary(),
+            summary_types: null,
         }
     },
     mutations: {
@@ -57,6 +56,9 @@ const store = createStore({
             // Toggle alert
             this.state.alert.status = !this.state.alert.status;
             this.state.alert.message = message;
+        },
+        saveSummaryTypes(state, summary_types) {
+            this.state.summary_types = summary_types;
         }
     }
 });

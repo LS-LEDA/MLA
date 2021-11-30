@@ -1,5 +1,6 @@
 import {summary_processing} from "@/services/Summary/summary-processing";
 import Log from "@/services/model/Log";
+import store from "@/vuex/store";
 
 function forum_processing(data){
     let logs = [];
@@ -10,7 +11,9 @@ function forum_processing(data){
         )
     })
 
-    summary_processing(logs);
+    let summary_types = summary_processing(logs);
+
+    store.commit('saveSummaryTypes', summary_types)
 }
 
 export { forum_processing };
