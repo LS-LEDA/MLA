@@ -35,7 +35,10 @@ const store = createStore({
                 message: "Error: Something went wrong",
                 timeout: 0,
             },
-            summary_types: null,
+            summary: {
+                total_interactions: 0,
+                summary_types: null,
+            },
         }
     },
     mutations: {
