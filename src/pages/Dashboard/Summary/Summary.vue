@@ -2,7 +2,7 @@
     <h1 class="text-4xl font-extrabold"> Summary of all course interactions </h1>
     <span class="font-bold text-2xl text-gray-500"> Information on the number of interactions </span>
     <!-- Dashboard Summary Total Interactions card-->
-    <InteractionCard :interactions_count="summary.total_interactions"/>
+    <InteractionCard :summary="summary" :logs="logs"/>
     <!-- Dashboard Summary cards-->
     <div class="grid  gap-x-5 gap-y-5 w-full max-h-full mt-5
                 sm:auto-rows-auto sm:grid-cols-1
@@ -46,6 +46,9 @@ export default {
                 }
             });
             return { total_interactions: total_interactions, statistics: this.statistics }
+        },
+        logs() {
+            return this.$store.state.logs;
         }
     },
     data(){
