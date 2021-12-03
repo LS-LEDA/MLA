@@ -10,6 +10,7 @@ function forum_processing(data){
             new Log(lg[0], lg[1], lg[2], lg[3], lg[4], lg[5], lg[6], lg[7], lg[8])
         )
     })
+    store.commit('saveLogs', logs);
 
     let summary_types = summary_processing(logs);
 

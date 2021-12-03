@@ -35,6 +35,7 @@ const store = createStore({
                 message: "Error: Something went wrong",
                 timeout: 0,
             },
+            logs: [],
             summary: {
                 total_interactions: 0,
                 summary_types: null,
@@ -64,6 +65,10 @@ const store = createStore({
         saveSummaryTypes(state, summary) {
             this.state.summary.total_interactions = summary.total_interactions;
             this.state.summary.summary_types = summary.summary_types;
+        },
+        // Store computed logs
+        saveLogs(state, logs) {
+            this.state.logs = logs;
         }
     }
 });
