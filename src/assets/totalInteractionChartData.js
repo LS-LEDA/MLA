@@ -20,6 +20,13 @@ export const totalInteractionChartData = {
                 display: false
             },
         },
+        elements: {
+            point: {
+                radius: 1,
+                hitRadius: 2,
+                hoverRadius: 3,
+            }
+        },
         interaction: {
             mode: 'x',
             intersect: false
