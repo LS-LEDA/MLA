@@ -34,9 +34,9 @@
                         <td></td>
                         <td></td>
                     </tr>
-                    <tr class="" v-for="index in 100" :key="index">
-                        <td></td>
-                        <td></td>
+                    <tr class="" v-for="(interaction, index) in summary_interactions" :key="index">
+                        <td> {{ interaction[0] }} </td>
+                        <td> {{ interaction[1] }} </td>
                     </tr>
                     </tbody>
                 </table>
@@ -61,9 +61,20 @@ export default {
             this.$emit('popUp')
         }
     },
+    mounted() {
+        let unsorted_interactions = Object.entries(this.$store.state.summary_cards[this.summaryID]);
+        // Sort by interaction value - TimSort
+        // Each object ['Interaction Name', 'Interaction Value']
+        this.summary_interactions = unsorted_interactions.sort(
+            (a, b) => {
+                return b[1] - a[1]
+            }
+        );
+    },
     data(){
         return {
-            close_icon: mdiClose
+            close_icon: mdiClose,
+            summary_interactions: {}
         }
     }
 }
