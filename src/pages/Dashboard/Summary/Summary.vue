@@ -8,7 +8,9 @@
                 sm:auto-rows-auto sm:grid-cols-1
                 md:auto-rows-auto md:grid-cols-2
                 xl:auto-rows-auto xl:grid-cols-3">
-      <SummaryCard v-for="(statistic, index) in summary.statistics" :statistic="statistic" :key="index"/>
+        <SummaryCard v-for="(statistic, index) in summary.statistics"
+                   :statistic="statistic" :key="index"
+                    @popUp="detailed_information_pop_up(index)"/>
     </div>
 </template>
 
@@ -49,6 +51,11 @@ export default {
         },
         logs() {
             return this.$store.state.logs;
+        },
+    },
+    methods: {
+        detailed_information_pop_up: function (summaryID){
+            this.$emit('popUp', summaryID);
         }
     },
     data(){

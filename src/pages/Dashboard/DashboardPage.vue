@@ -8,7 +8,7 @@
                 </router-link>
             </div>
             <!-- Dashboard deeply nested component view -->
-            <router-view @popUp="toggle_popup()"></router-view>
+            <router-view @popUp="toggle_popup"></router-view>
         </div>
         <SummaryPopUp v-if="popup" @popUp="toggle_popup" class="absolute"/>
     </section>
@@ -16,8 +16,19 @@
 
 <script>
 
+import SummaryPopUp from "@/components/Summary/SummaryPopUp";
+
 export default {
     name: "DashboardPage",
+    components: {
+        SummaryPopUp
+    },
+    methods: {
+        toggle_popup: function (summaryID) {
+            console.log(summaryID)
+            this.popup = !this.popup;
+        }
+    },
     data() {
         return {
             tabs: [
@@ -37,7 +48,8 @@ export default {
                     tab_name: "Sentimental",
                     tab_path: "/dashboard/sentimental-analysis"
                 },
-            ]
+            ],
+            popup: false
         }
     }
 }
