@@ -10,7 +10,7 @@
             <!-- Dashboard deeply nested component view -->
             <router-view @popUp="toggle_popup"></router-view>
         </div>
-        <SummaryPopUp v-if="popup" @popUp="toggle_popup" :summary="summaryID" class="absolute"/>
+        <SummaryPopUp v-if="popup" @popUp="toggle_popup" :summaryID="summaryID" class="absolute"/>
     </section>
 </template>
 

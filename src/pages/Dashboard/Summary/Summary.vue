@@ -38,13 +38,16 @@ export default {
             let summary_types = this.$store.state.summary.summary_types;
             let total_interactions = this.$store.state.summary.total_interactions;
 
-            this.statistics.forEach( (stat) => {
+            // TODO: Fix this hardcoded part for future releases. Specially when re-ordering is enabled
+            this.statistics.forEach( (stat, index) => {
                 switch ( stat.statistic_name ) {
                     case 'Tasks':
                         stat.number = summary_types['Tarea'].count;
+                        this.$store.commit('saveSummaryCard', {summaryID: index, summary: summary_types['Tarea'].interactions});
                         break;
                     case 'URL':
                         stat.number = summary_types['URL'].count;
+                        this.$store.commit('saveSummaryCard', {summaryID: index, summary: summary_types['URL'].interactions});
                         break;
                 }
             });
