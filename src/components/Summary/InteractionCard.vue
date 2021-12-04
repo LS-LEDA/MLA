@@ -1,6 +1,6 @@
 <template>
     <!-- Interactions Card  -->
-    <div class="flex w-full h-96 bg-white rounded-3xl p-10 mt-5 hover:cursor-pointer filter drop-shadow-lg
+    <div class="flex w-full h-full bg-white rounded-3xl p-10 mt-5 hover:cursor-pointer filter drop-shadow-lg
         transform transition duration-500">
         <!-- Card Information -->
         <div class="flex flex-col w-5/12 justify-self-center self-center space-y-3">
