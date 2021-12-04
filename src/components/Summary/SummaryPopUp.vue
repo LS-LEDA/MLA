@@ -21,7 +21,8 @@
             <div class="flex w-full h-3/6">
             </div>
             <!-- Summary card table -->
-            <div class="flex w-full h-full justify-center overflow-y-scroll">
+            <div v-if="!withData" class="self-center"> No data </div>
+            <div v-else class="flex w-full h-full justify-center overflow-y-scroll">
                 <table class="border border-4">
                     <thead class="">
                         <tr>
@@ -62,19 +63,25 @@ export default {
         }
     },
     mounted() {
-        let unsorted_interactions = Object.entries(this.$store.state.summary_cards[this.summaryID]);
-        // Sort by interaction value - TimSort
-        // Each object ['Interaction Name', 'Interaction Value']
-        this.summary_interactions = unsorted_interactions.sort(
-            (a, b) => {
-                return b[1] - a[1]
-            }
-        );
+        try {
+            let unsorted_interactions = Object.entries(this.$store.state.summary_cards[this.summaryID]);
+            // Sort by interaction value - TimSort
+            // Each object ['Interaction Name', 'Interaction Value']
+            this.summary_interactions = unsorted_interactions.sort(
+                (a, b) => {
+                    return b[1] - a[1]
+                }
+            );
+        } catch (error) {
+            // No interactions for the selected summary card
+            this.withData = false;
+        }
     },
     data(){
         return {
             close_icon: mdiClose,
-            summary_interactions: {}
+            summary_interactions: {},
+            withData: true,
         }
     }
 }
