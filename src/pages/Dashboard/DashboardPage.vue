@@ -10,7 +10,7 @@
             <!-- Dashboard deeply nested component view -->
             <router-view @popUp="toggle_popup"></router-view>
         </div>
-        <SummaryPopUp v-if="popup" @popUp="toggle_popup" class="absolute"/>
+        <SummaryPopUp v-if="popup" @popUp="toggle_popup" :summary="summaryID" class="absolute"/>
     </section>
 </template>
 
@@ -25,7 +25,7 @@ export default {
     },
     methods: {
         toggle_popup: function (summaryID) {
-            console.log(summaryID)
+            this.summaryID = summaryID;
             this.popup = !this.popup;
         }
     },
@@ -49,7 +49,8 @@ export default {
                     tab_path: "/dashboard/sentimental-analysis"
                 },
             ],
-            popup: false
+            popup: false,
+            summaryID: 0
         }
     }
 }

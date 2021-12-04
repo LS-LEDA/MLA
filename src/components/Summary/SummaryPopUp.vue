@@ -55,6 +55,7 @@ export default {
     components: {
         SvgIcon
     },
+    props: ['summary'],
     methods: {
         close_pop_up: function () {
             this.$emit('popUp')
