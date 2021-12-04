@@ -35,6 +35,7 @@ import {mdiClose, mdiHelpCircleOutline} from "@mdi/js"
 export default {
     name: "SummaryCard",
     props: ['statistic'],
+    emits: ['popUp'],
     components: {
         SvgIcon
     },

@@ -28,6 +28,7 @@ import {
 
 export default {
     name: "Summary",
+    emits: ['popUp'],
     components: {
         InteractionCard,
         SummaryCard
