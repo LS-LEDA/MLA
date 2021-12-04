@@ -22,22 +22,18 @@
             </div>
             <!-- Summary card table -->
             <div v-if="!withData" class="self-center"> No data </div>
-            <div v-else class="flex w-full h-full justify-center overflow-y-scroll">
-                <table class="border border-4">
-                    <thead class="">
-                        <tr>
-                            <th> Interactions type </th>
-                            <th> Number of interactions </th>
+            <div v-else class="flex w-full max-h-full justify-center overflow-y-scroll">
+                <table class="table-auto">
+                    <thead class="bg-blue-300">
+                        <tr class="text-left uppercase">
+                            <th class="p-3"> Interactions type </th>
+                            <th class="p-3"> Number of interactions </th>
                         </tr>
                     </thead>
                     <tbody>
-                    <tr class="">
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr class="" v-for="(interaction, index) in summary_interactions" :key="index">
-                        <td> {{ interaction[0] }} </td>
-                        <td> {{ interaction[1] }} </td>
+                    <tr class="bg-blue-100 hover:bg-blue-400" v-for="(interaction, index) in summary_interactions" :key="index">
+                        <td class="font-bold p-3"> {{ interaction[0] }} </td>
+                        <td class="p-3"> {{ interaction[1] }} </td>
                     </tr>
                     </tbody>
                 </table>
