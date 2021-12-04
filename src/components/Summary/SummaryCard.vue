@@ -1,6 +1,8 @@
 <template>
     <div class="flex flex-col w-full bg-white rounded-3xl filter drop-shadow-lg
-    transform transition duration-500 hover:scale-[101%] p-10 pb-5" :class="card_status ? 'pb-10': null">
+    transform transition duration-500 hover:scale-[101%] p-10 pb-5 cursor-pointer"
+         @click="show_details"
+         :class="card_status ? 'pb-10': null">
         <!-- Card information -->
         <template v-if="card_status">
             <svg-icon class="items-end place-self-end hover:cursor-pointer text-gray-400" type="mdi" :path=close_icon @click="changeView()"></svg-icon>
@@ -51,6 +53,12 @@ export default {
     methods: {
         changeView: function () {
             this.card_status = !this.card_status;
+        },
+        /**
+         * Renders a popup with in the parent component
+         */
+        show_details: function () {
+            this.$emit('popUp');
         }
     }
 }
