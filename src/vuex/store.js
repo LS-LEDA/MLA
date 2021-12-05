@@ -15,7 +15,11 @@ const store = createStore({
              * If there's uploaded data Dashboard page is
              * rendered, otherwise Import Data page
              */
-            imported_data: false,
+            // TODO: Change description
+            imported_data: {
+                moodle_logs: false,
+                forum_logs: false,
+            },
             forum_file_name: "",
             forum_messages: [],
             forum: {
@@ -49,9 +53,15 @@ const store = createStore({
             this.state.navigation_bar_status = !this.state.navigation_bar_status
         },
         // Call this method if data has been uploaded
-        setImportedData(state, file_name) {
-            this.state.imported_data = true
-            this.state.forum_file_name = file_name
+        setImportedData(state, {which, file_name}) {
+            // Determine the type of imported file: Moodle logs or Forum logs
+            if ( !which ) {
+                this.state.imported_data.moodle_logs = true;
+                // TODO: Moodle logs file name
+            } else {
+                this.state.imported_data.forum_logs = true;
+                this.state.forum_file_name = file_name
+            }
         },
         // Store the imported forum log
         storeForumMessages(state, forum) {
