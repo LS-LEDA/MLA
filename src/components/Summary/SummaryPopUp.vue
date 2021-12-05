@@ -19,6 +19,9 @@
 
             <!-- Summary card chart -->
             <div class="flex w-full h-3/6">
+                <div class="flex relative w-full w-full text-center mx-6 font-bold text-4xl rounded-3xl">
+                    <canvas class="max-h-full max-w-full" id="summary_chart"></canvas>
+                </div>
             </div>
             <!-- Summary card table -->
             <div v-if="!withData" class="self-center"> No data </div>
@@ -46,6 +49,8 @@
 <script>
 import SvgIcon from "@jamescoyle/vue-icon";
 import {mdiClose} from "@mdi/js";
+import {Chart, registerables} from "chart.js";
+import summaryCardChartData from "@/assets/summaryCardChartData";
 
 export default {
     name: "SummaryPopUp",
@@ -56,6 +61,15 @@ export default {
     methods: {
         close_pop_up: function ({card_name, summaryID}) {
             this.$emit('popUp', {card_name, summaryID});
+        },
+        summary_chart: function (chartId, chartData) {
+            let ctx = document.getElementById(chartId);
+            Chart.register(...registerables);
+            this.interactions_chart = new Chart(ctx, {
+                type: chartData.type,
+                data: chartData.data,
+                options: chartData.options,
+            });
         }
     },
     mounted() {
@@ -68,6 +82,17 @@ export default {
                     return b[1] - a[1]
                 }
             );
+
+            let labels = [];
+            let data = [];
+            this.summary_interactions.forEach( interaction => {
+                labels.push(interaction[0]);
+                data.push(interaction[1])
+            })
+            this.summaryCardChartData.options.scales.x.labels = labels;
+            this.summaryCardChartData.data.datasets[0].data = data;
+            // Create Summary PopUp chart once the component is mounted
+            this.summary_chart('summary_chart', this.summaryCardChartData);
         } catch (error) {
             // No interactions for the selected summary card
             this.withData = false;
@@ -78,6 +103,7 @@ export default {
             close_icon: mdiClose,
             summary_interactions: {},
             withData: true,
+            summaryCardChartData: summaryCardChartData
         }
     }
 }
