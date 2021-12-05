@@ -3,7 +3,7 @@
          role="dialog" aria-modal="true">
 
         <!-- PopUp white background -->
-        <div class="flex flex-col bg-white w-11/12 h-5/6 rounded-xl z-50 p-5">
+        <div class="flex flex-col bg-white w-11/12 h-5/6 rounded-xl z-50 p-5 gap-y-5">
             <div class="flex w-full justify-between">
                 <!-- PopUp Title -->
                 <div class="w-auto bg-blue-300 rounded-xl py-2 px-5 font-bold">
