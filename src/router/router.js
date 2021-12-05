@@ -69,7 +69,11 @@ function check_imported_data(to, from) {
         return '/dashboard/sentimental-analysis';
     }
     // Redirect to Summary tab if moodle log has been imported
-    if ( store.state.imported_data.moodle_logs || !store.state.imported_data.forum_logs) {
+    if ( store.state.imported_data.moodle_logs && !store.state.imported_data.forum_logs) {
+        return true;
+    }
+    // Redirect to Summary tab if both files have been imported
+    if ( store.state.imported_data.moodle_logs && store.state.imported_data.forum_logs ) {
         return true;
     }
     // Redirect to import data page because there's no data
