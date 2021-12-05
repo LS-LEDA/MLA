@@ -31,7 +31,7 @@ function local_processing(file) {
         let data = JSON.parse(event.target.result);
         // Check whether it's a Moodle Logs or Moodle Forum message Logs file
         if ( Array.isArray(data[0][0])) {
-            forum_processing(data);
+            forum_processing(data, file.name);
         } else {
             let messages = data[0];
             let forum = {
@@ -55,6 +55,8 @@ function local_processing(file) {
                 forum.sentiments = count_sentiments(processed_msg);
                 // Store processed messages in vuex
                 store.commit('storeForumMessages', forum);
+                // Toggle uploaded file boolean and store file name
+                store.commit('setImportedData', {which: true, file_name: file.name});
                 // Push to Dashboard > Sentiment
                 router.push('/dashboard/sentimental-analysis')
             })

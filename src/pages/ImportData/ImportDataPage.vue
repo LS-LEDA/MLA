@@ -59,12 +59,9 @@ export default {
             // TODO: Upload to server back-end
             if ( whichButton ) {
                 // Native Processing
-                // 1. Toggle uploaded file boolean and store file name
-                this.$store.commit('setImportedData', this.selected_file_name);
-                // 2. Detect the log type: General logs or Forum chat logs
+                // Detect the log type: General logs or Forum chat logs
                 local_processing(this.selected_file);
             }
-
             // Final Close the PopUp
             this.toggle_pop_up(this.selected_file_name);
         }
