@@ -62,8 +62,8 @@ function check_imported_forum_data(){
 function check_imported_data(to, from) {
     // Redirect to Sentiment tab if forum log has been imported
     if ( !store.state.imported_data.moodle_logs && store.state.imported_data.forum_logs) {
-        // Redirect to import data page if "Summary" button is pressed from the Dashboard page
-        if ( to.name === 'summary' && from.fullPath.includes('/dashboard/')) {
+        // Redirect to import data page if "Summary" button is pressed from the Dashboard's Sentiment page
+        if ( to.name === 'summary' && from.name === 'sentiment') {
             redirectionAlert("Import Forum log");
             return '/import-data';
         }
