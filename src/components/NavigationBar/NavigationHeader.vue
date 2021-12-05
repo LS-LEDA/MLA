@@ -2,10 +2,11 @@
     <div class="flex flex-row py-2 mx-2 my-5 h-20" :class="nav_state ? null : 'justify-center items-center'">
         <!-- Navigation bar App logo routed -->
         <div class="self-center" :class="logo_hovered ? 'z-0' : 'z-50'">
-            <router-link :to="imported_data ? '/dashboard' : '/import-data'"
+            <router-link :to="imported_data"
                          :class="logo_hovered ? 'invisible' : null"
                          @mouseover="logo_hover"
-                         @mouseleave="logo_not_hover">
+                         @mouseleave="logo_not_hover"
+                         @click="redirectionAlert('Import Moodle and/or Forum logs')">
                 <img class="max-h-16 rounded-lg origin-center transform transition duration-500"
                      src="/assets/jsmla_logo.png" alt="jsMLA Logo">
             </router-link>
@@ -13,8 +14,8 @@
         <!-- Application name -->
         <!--<transition name="fade">-->
         <div class="flex-1 mx-4 font-bold text-2xl self-center hover:cursor-pointer" v-if="nav_state">
-            <!-- TODO: Summary or Sentiment-->
-            <router-link :to="imported_data ? '/dashboard' : '/import-data'">
+            <router-link :to="imported_data"
+                         @click="redirectionAlert('Import Moodle and/or Forum logs')">
                 <h1>jsMLA</h1>
             </router-link>
         </div>
@@ -34,6 +35,7 @@
 
 import SvgIcon from '@jamescoyle/vue-icon'
 import {mdiChevronDoubleLeft} from "@mdi/js";
+import {redirectionAlert} from "@/services/utils/utils";
 
 export default {
     name: "NavigationHeader",
@@ -45,7 +47,18 @@ export default {
             return this.$store.state.navigation_bar_status;
         },
         imported_data() {
-            return this.$store.state.imported_data.moodle_logs || this.$store.state.imported_data.moodle_logs;
+            if ( this.$store.state.imported_data.moodle_logs && this.$store.state.imported_data.forum_logs ) {
+                return '/dashboard/summary';
+            }
+            // Redirect to Summary tab
+            if ( this.$store.state.imported_data.moodle_logs && !this.$store.state.imported_data.forum_logs ) {
+                return '/dashboard/summary';
+            }
+            // Redirect to Sentiment tab
+            if ( !this.$store.state.imported_data.moodle_logs && this.$store.state.imported_data.forum_logs ) {
+                return '/dashboard/sentimental-analysis';
+            }
+            return '/import-data';
         }
     },
     data() {
@@ -66,6 +79,9 @@ export default {
         },
         logo_not_hover() {
             this.logo_hovered = false;
+        },
+        redirectionAlert: function (message) {
+            redirectionAlert(message)
         }
     }
 }
