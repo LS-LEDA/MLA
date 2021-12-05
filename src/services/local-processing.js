@@ -1,6 +1,6 @@
 // Local Processing Service
 import store from "@/vuex/store";
-import router from "@/router/router";
+//import router from "@/router/router";
 import Message from "@/services/model/Message";
 import {forum_processing} from "@/services/forum-processing";
 
@@ -18,6 +18,12 @@ const { Language } = require('@nlpjs/language/');
 
 // NLP
 const lng_guesser = new Language();
+
+// Progress Status
+/*const FILE_UPLOAD = 0;
+const DATA_PROCESSING = 1;
+const OVERVIEW_GENERATION = 2;
+const FINISH = 3;*/
 
 function local_processing(file) {
 
@@ -58,10 +64,26 @@ function local_processing(file) {
                 // Toggle uploaded file boolean and store file name
                 store.commit('setImportedData', {which: true, file_name: file.name});
                 // Push to Dashboard > Sentiment
-                router.push('/dashboard/sentimental-analysis')
+                //router.push('/dashboard/sentimental-analysis')
             })
         }
     }
+
+    // Start fake upload progress counting on load file.
+    // Start fake data processing
+    file_reader.onloadstart = () => {
+        store.dispatch('loadProgress', {time: [3000, 5000, 1000]});
+    }
+
+    // Upload file progress
+    // This function will be called only once~twice for small - medium sized files
+    /*file_reader.onprogress = (event) => {
+        if ( event.lengthComputable ) {
+            let progress = parseInt( ((event.loaded / event.total) * 100), 10 );
+            console.log( progress );
+            console.log(event)
+        }
+    }*/
 
     file_reader.readAsText(file)
 }

@@ -44,8 +44,18 @@ const store = createStore({
                 total_interactions: 0,
                 summary_types: null,
             },
-            summary_cards: []
+            summary_cards: [],
+            upload_status: {
+                status: 0,
+                progress: 0
+            }
         }
+    },
+    actions: {
+        loadProgress(state, time) {
+            this.commit('resetProgress');
+            this.commit('count', time);
+        },
     },
     mutations: {
         // Expand or shrink navigation bar
@@ -83,6 +93,43 @@ const store = createStore({
         },
         saveSummaryCard(state, { summaryID, summary }) {
             this.state.summary_cards[summaryID] = summary;
+        },
+        incrementLoadProgress() {
+            // Reset progress
+            this.state.upload_status.progress++;
+        },
+        incrementLoadProgressStatus(){
+            this.state.upload_status.progress = 0;
+            this.state.upload_status.status++;
+        },
+        resetProgress() {
+            // Store the upload status
+            this.state.upload_status.status = 0;
+            // Reset progress
+            this.state.upload_status.progress = 0;
+        },
+        count(state, time) {
+            let counter = 0;
+            let step = time[this.state.upload_status.status] / 100;
+            let count = () => {
+                counter++;
+                // Stop after 100
+                if ( counter <= 100) {
+                    this.commit('incrementLoadProgress');
+                    setTimeout(count, step);
+                } else {
+                    // Base case, 3 steps completed, stop progress bar
+                    if (this.state.upload_status.status >= 3) {
+                        // Reset all progress bar status
+                        this.commit('resetProgress');
+                        return
+                    }
+                    this.commit('count', time);
+                    // Once finished advanced to next step
+                    this.commit('incrementLoadProgressStatus')
+                }
+            }
+            count();
         }
     }
 });
