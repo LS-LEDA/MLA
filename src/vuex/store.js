@@ -34,7 +34,13 @@ const store = createStore({
                 status: false,
                 message: "Error: Something went wrong",
                 timeout: 0,
-            }
+            },
+            logs: [],
+            summary: {
+                total_interactions: 0,
+                summary_types: null,
+            },
+            summary_cards: []
         }
     },
     mutations: {
@@ -55,6 +61,18 @@ const store = createStore({
             // Toggle alert
             this.state.alert.status = !this.state.alert.status;
             this.state.alert.message = message;
+        },
+        // Store computed summary data
+        saveSummaryTypes(state, summary) {
+            this.state.summary.total_interactions = summary.total_interactions;
+            this.state.summary.summary_types = summary.summary_types;
+        },
+        // Store computed logs
+        saveLogs(state, logs) {
+            this.state.logs = logs;
+        },
+        saveSummaryCard(state, { summaryID, summary }) {
+            this.state.summary_cards[summaryID] = summary;
         }
     }
 });

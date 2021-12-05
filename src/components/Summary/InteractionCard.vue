@@ -1,11 +1,11 @@
 <template>
     <!-- Interactions Card  -->
-    <div class="flex w-full h-96 bg-white rounded-3xl p-10 mt-5 hover:cursor-pointer filter drop-shadow-lg
-        transform transition duration-500 hover:scale-[101%]">
+    <div class="flex w-full h-full bg-white rounded-3xl p-10 mt-5 hover:cursor-pointer filter drop-shadow-lg
+        transform transition duration-500">
         <!-- Card Information -->
         <div class="flex flex-col w-5/12 justify-self-center self-center space-y-3">
             <span class="text-5xl"> Total of Interactions </span>
-            <span class="text-6xl font-bold"> {{ interactions_count.toLocaleString() }} </span>
+            <span class="text-6xl font-bold"> {{ summary.total_interactions.toLocaleString() }} </span>
         </div>
         <!-- Card graphics -->
         <div class="flex relative w-full w-full text-center mx-6 font-bold text-4xl rounded-3xl">
@@ -20,9 +20,9 @@ import totalInteractionChartData from "@/assets/totalInteractionChartData";
 
 export default {
     name: "InteractionCard",
+    props: ['summary', 'logs'],
     data() {
         return {
-            interactions_count: 10394,
             totalInteractionChartData: totalInteractionChartData,
             interactions_chart: null,
         }
@@ -44,6 +44,15 @@ export default {
         }
     },
     mounted() {
+        let types = {};
+        this.logs.forEach( (log) => {
+            types[log.yearMonthDate] = (types[log.yearMonthDate] + 1 ) || 1;
+        });
+        let dates = Object.keys(types);
+        let interactions = Object.values(types);
+        this.totalInteractionChartData.options.scales.x.labels = dates;
+        this.totalInteractionChartData.data.datasets[0].data = interactions;
+
         // Create Total Interactions chart once component is mounted
         this.totalInteractionChart('total_interactions_chart', this.totalInteractionChartData);
     },

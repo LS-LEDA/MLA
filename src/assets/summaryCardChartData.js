@@ -1,5 +1,5 @@
-export const totalInteractionChartData = {
-    type: 'line',
+export const summaryCardChartData = {
+    type: 'bar',
     data: {
         labels: [],
         datasets: [{
@@ -20,13 +20,6 @@ export const totalInteractionChartData = {
                 display: false
             },
         },
-        elements: {
-            point: {
-                radius: 1,
-                hitRadius: 2,
-                hoverRadius: 3,
-            }
-        },
         interaction: {
             mode: 'x',
             intersect: false
@@ -34,6 +27,9 @@ export const totalInteractionChartData = {
         scales: {
             x: {
                 type: 'category',
+                ticks: {
+                    display: false
+                }
             },
             y: {
             }
@@ -41,4 +37,4 @@ export const totalInteractionChartData = {
     }
 }
 
-export default totalInteractionChartData;
+export default summaryCardChartData;
