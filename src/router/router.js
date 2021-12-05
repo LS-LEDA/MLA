@@ -27,15 +27,18 @@ const routes = [
             },
             {
                 path: '/dashboard/students',
+                name: "students",
                 component: Students
             },
             {
                 path: '/dashboard/resources',
+                name: "resources",
                 component: Resources
             },
             {
                 path: '/dashboard/sentimental-analysis',
                 component: Sentimental,
+                name: "sentiment",
                 beforeEnter: () => {
                     return check_imported_forum_data();
                 }
