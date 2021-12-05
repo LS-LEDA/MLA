@@ -40,6 +40,7 @@ const store = createStore({
                 total_interactions: 0,
                 summary_types: null,
             },
+            summary_cards: []
         }
     },
     mutations: {
@@ -69,6 +70,9 @@ const store = createStore({
         // Store computed logs
         saveLogs(state, logs) {
             this.state.logs = logs;
+        },
+        saveSummaryCard(state, { summaryID, summary }) {
+            this.state.summary_cards[summaryID] = summary;
         }
     }
 });

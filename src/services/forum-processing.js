@@ -1,6 +1,7 @@
 import {summary_processing} from "@/services/Summary/summary-processing";
 import Log from "@/services/model/Log";
 import store from "@/vuex/store";
+import router from "@/router/router";
 
 function forum_processing(data){
     let logs = [];
@@ -19,6 +20,9 @@ function forum_processing(data){
         summary_types: summary_types
         }
     );
+
+    // Push to Dashboard > Summary
+    router.push('/dashboard/summary');
 }
 
 export { forum_processing };

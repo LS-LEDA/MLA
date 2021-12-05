@@ -8,7 +8,9 @@
                 sm:auto-rows-auto sm:grid-cols-1
                 md:auto-rows-auto md:grid-cols-2
                 xl:auto-rows-auto xl:grid-cols-3">
-      <SummaryCard v-for="(statistic, index) in summary.statistics" :statistic="statistic" :key="index"/>
+        <SummaryCard v-for="(statistic, index) in summary.statistics"
+                   :statistic="statistic" :key="index"
+                    @popUp="detailed_information_pop_up({card_name: statistic.statistic_name, summaryID: index})"/>
     </div>
 </template>
 
@@ -26,6 +28,7 @@ import {
 
 export default {
     name: "Summary",
+    emits: ['popUp'],
     components: {
         InteractionCard,
         SummaryCard
@@ -35,13 +38,16 @@ export default {
             let summary_types = this.$store.state.summary.summary_types;
             let total_interactions = this.$store.state.summary.total_interactions;
 
-            this.statistics.forEach( (stat) => {
+            // TODO: Fix this hardcoded part for future releases. Specially when re-ordering is enabled
+            this.statistics.forEach( (stat, index) => {
                 switch ( stat.statistic_name ) {
                     case 'Tasks':
                         stat.number = summary_types['Tarea'].count;
+                        this.$store.commit('saveSummaryCard', {summaryID: index, summary: summary_types['Tarea'].interactions});
                         break;
                     case 'URL':
                         stat.number = summary_types['URL'].count;
+                        this.$store.commit('saveSummaryCard', {summaryID: index, summary: summary_types['URL'].interactions});
                         break;
                 }
             });
@@ -49,6 +55,11 @@ export default {
         },
         logs() {
             return this.$store.state.logs;
+        },
+    },
+    methods: {
+        detailed_information_pop_up: function ({card_name, summaryID}){
+            this.$emit('popUp', {card_name, summaryID});
         }
     },
     data(){

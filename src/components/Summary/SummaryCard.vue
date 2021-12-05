@@ -1,9 +1,11 @@
 <template>
     <div class="flex flex-col w-full bg-white rounded-3xl filter drop-shadow-lg
-    transform transition duration-500 hover:scale-[101%] p-10 pb-5" :class="card_status ? 'pb-10': null">
+    transform transition duration-500 hover:scale-[101%] p-10 pb-5 cursor-pointer"
+         @click="show_details"
+         :class="card_status ? 'pb-10': null">
         <!-- Card information -->
         <template v-if="card_status">
-            <svg-icon class="items-end place-self-end hover:cursor-pointer text-gray-400" type="mdi" :path=close_icon @click="changeView()"></svg-icon>
+            <svg-icon class="items-end place-self-end hover:cursor-pointer text-gray-400" type="mdi" :path=close_icon @click.stop="changeView()"></svg-icon>
             <span class="flex h-full mx-3 text-xl font-bold text-center self-center place-self-center items-center">
                 {{ statistic.info }}
             </span>
@@ -21,7 +23,7 @@
                 <svg-icon class ="justify-self-end" height="100" width="100" type="mdi" :path="statistic.icon"></svg-icon>
             </div>
             <!-- Card Information Icon -->
-            <svg-icon class="items-end place-self-end hover:cursor-pointer" type="mdi" :path=help_icon @click="changeView()"></svg-icon>
+            <svg-icon class="items-end place-self-end hover:cursor-pointer z-50" type="mdi" :path=help_icon @click.stop="changeView()"></svg-icon>
         </template>
     </div>
 </template>
@@ -33,6 +35,7 @@ import {mdiClose, mdiHelpCircleOutline} from "@mdi/js"
 export default {
     name: "SummaryCard",
     props: ['statistic'],
+    emits: ['popUp'],
     components: {
         SvgIcon
     },
@@ -51,6 +54,12 @@ export default {
     methods: {
         changeView: function () {
             this.card_status = !this.card_status;
+        },
+        /**
+         * Renders a popup with in the parent component
+         */
+        show_details: function () {
+            this.$emit('popUp');
         }
     }
 }
