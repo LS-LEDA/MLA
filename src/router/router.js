@@ -53,12 +53,7 @@ const routes = [
 function check_imported_forum_data(){
     if ( !store.state.imported_data.forum_logs ) {
         // Show alert
-        store.commit('toggleAlert', "Import forum log")
-        // Delayed alert hiding & store timer ID for user manual dismiss
-        store.state.alert.timeout = setTimeout( () => {
-            // Automatically hide alert after 5s
-            store.commit('toggleAlert', "Import forum log")
-        }, 5000);
+        redirectionAlert("Import Forum log");
         return '/import-data';
     }
 }
@@ -68,6 +63,7 @@ function check_imported_data(to, from) {
     if ( !store.state.imported_data.moodle_logs && store.state.imported_data.forum_logs) {
         // Redirect to import data page if "Summary" button is pressed from the Dashboard page
         if ( to.name === 'summary' && from.fullPath.includes('/dashboard/')) {
+            redirectionAlert("Import Forum log");
             return '/import-data';
         }
         return '/dashboard/sentimental-analysis';
@@ -76,9 +72,18 @@ function check_imported_data(to, from) {
     if ( store.state.imported_data.moodle_logs || !store.state.imported_data.forum_logs) {
         return true;
     }
-
-    // TODO: Warning - Import moodle and/or forum logs
+    // Redirect to import data page because there's no data
+    redirectionAlert("Import Moodle and/or Forum logs");
     return '/import-data';
+}
+
+function redirectionAlert(alert_message) {
+    store.commit('toggleAlert', alert_message)
+    // Delayed alert hiding & store timer ID for user manual dismiss
+    store.state.alert.timeout = setTimeout( () => {
+        // Automatically hide alert after 5s
+        store.commit('toggleAlert', alert_message)
+    }, 5000);
 }
 
 const router = createRouter({
