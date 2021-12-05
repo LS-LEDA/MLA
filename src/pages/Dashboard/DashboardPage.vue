@@ -10,7 +10,7 @@
             <!-- Dashboard deeply nested component view -->
             <router-view @popUp="toggle_popup"></router-view>
         </div>
-        <SummaryPopUp v-if="popup" @popUp="toggle_popup" :summaryID="summaryID" class="absolute"/>
+        <SummaryPopUp v-if="popup" @popUp="toggle_popup" :summaryID="summaryID" :card_name="card_name" class="absolute"/>
     </section>
 </template>
 
@@ -24,8 +24,9 @@ export default {
         SummaryPopUp
     },
     methods: {
-        toggle_popup: function (summaryID) {
+        toggle_popup: function ({card_name, summaryID}) {
             this.summaryID = summaryID;
+            this.card_name = card_name;
             this.popup = !this.popup;
         }
     },
@@ -50,7 +51,8 @@ export default {
                 },
             ],
             popup: false,
-            summaryID: 0
+            summaryID: 0,
+            card_name: ""
         }
     }
 }

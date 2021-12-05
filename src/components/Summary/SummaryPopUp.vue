@@ -4,15 +4,15 @@
 
         <!-- PopUp white background -->
         <div class="flex flex-col bg-white w-11/12 h-5/6 rounded-xl z-50 p-5">
-            <!-- Close button -->
-            <div class="flex w-full">
+            <div class="flex w-full justify-between">
                 <!-- PopUp Title -->
-                <div class="w-full">
-
+                <div class="w-auto bg-blue-300 rounded-xl py-2 px-5 font-bold">
+                    {{ card_name }}
                 </div>
+                <!-- Close button -->
                 <button type="button" class=" justify-self-end bg-gray-100 text-gray-400 rounded-lg focus:ring-2 focus:ring-gray-200
                 hover:bg-gray-200 inline-flex hover:bg-blue-500 rounded-xl w-10 h-10 place-content-center items-center"
-                        @click="close_pop_up">
+                        @click="close_pop_up({card_name, summaryID})">
                     <SvgIcon class="hover:cursor-pointer" type="mdi" :path="close_icon"/>
                 </button>
             </div>
@@ -52,10 +52,10 @@ export default {
     components: {
         SvgIcon
     },
-    props: ['summaryID'],
+    props: ['summaryID', 'card_name'],
     methods: {
-        close_pop_up: function () {
-            this.$emit('popUp')
+        close_pop_up: function ({card_name, summaryID}) {
+            this.$emit('popUp', {card_name, summaryID});
         }
     },
     mounted() {

@@ -10,7 +10,7 @@
                 xl:auto-rows-auto xl:grid-cols-3">
         <SummaryCard v-for="(statistic, index) in summary.statistics"
                    :statistic="statistic" :key="index"
-                    @popUp="detailed_information_pop_up(index)"/>
+                    @popUp="detailed_information_pop_up({card_name: statistic.statistic_name, summaryID: index})"/>
     </div>
 </template>
 
@@ -58,8 +58,8 @@ export default {
         },
     },
     methods: {
-        detailed_information_pop_up: function (summaryID){
-            this.$emit('popUp', summaryID);
+        detailed_information_pop_up: function ({card_name, summaryID}){
+            this.$emit('popUp', {card_name, summaryID});
         }
     },
     data(){
