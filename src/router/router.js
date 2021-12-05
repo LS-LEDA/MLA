@@ -20,7 +20,10 @@ const routes = [
         children:[
             {
                 path: '/dashboard/summary',
-                component: Summary
+                component: Summary,
+                beforeEnter: () => {
+                    return check_imported_moodle_data()
+                }
             },
             {
                 path: '/dashboard/students',
@@ -34,7 +37,7 @@ const routes = [
                 path: '/dashboard/sentimental-analysis',
                 component: Sentimental,
                 beforeEnter: () => {
-                    return check_imported_data();
+                    return check_imported_forum_data();
                 }
             }
         ]
@@ -43,8 +46,8 @@ const routes = [
     { path: '/settings', component: Settings },
 ]
 
-function check_imported_data(){
-    if ( store.state.imported_data !== true ) {
+function check_imported_forum_data(){
+    if ( !store.state.imported_data.forum_logs ) {
         // Show alert
         store.commit('toggleAlert', "Import forum log")
         // Delayed alert hiding & store timer ID for user manual dismiss
@@ -55,6 +58,33 @@ function check_imported_data(){
         return '/import-data';
     }
 }
+
+
+function check_imported_moodle_data(){
+    if ( store.state.imported_data.moodle_logs !== true ) {
+        // Show alert
+        store.commit('toggleAlert', "Import moodle log")
+        // Delayed alert hiding & store timer ID for user manual dismiss
+        store.state.alert.timeout = setTimeout( () => {
+            // Automatically hide alert after 5s
+            store.commit('toggleAlert', "Import moodle log")
+        }, 5000);
+        return '/import-data';
+    }
+}
+
+/*function check_imported_data() {
+    if ( store.state.imported_data !== true ) {
+        // Show alert
+        store.commit('toggleAlert', "Import forum log")
+        // Delayed alert hiding & store timer ID for user manual dismiss
+        store.state.alert.timeout = setTimeout( () => {
+            // Automatically hide alert after 5s
+            store.commit('toggleAlert', "Import forum log")
+        }, 5000);
+        return '/import-data';
+    }
+}*/
 
 const router = createRouter({
     history: createWebHistory(),

@@ -6,15 +6,16 @@
                          :class="logo_hovered ? 'invisible' : null"
                          @mouseover="logo_hover"
                          @mouseleave="logo_not_hover">
-                    <img class="max-h-16 rounded-lg origin-center transform transition duration-500"
-                         src="/assets/jsmla_logo.png" alt="jsMLA Logo">
+                <img class="max-h-16 rounded-lg origin-center transform transition duration-500"
+                     src="/assets/jsmla_logo.png" alt="jsMLA Logo">
             </router-link>
         </div>
         <!-- Application name -->
         <!--<transition name="fade">-->
         <div class="flex-1 mx-4 font-bold text-2xl self-center hover:cursor-pointer" v-if="nav_state">
+            <!-- TODO: Summary or Sentiment-->
             <router-link :to="imported_data ? '/dashboard' : '/import-data'">
-                    <h1>jsMLA</h1>
+                <h1>jsMLA</h1>
             </router-link>
         </div>
         <!--</transition>-->
@@ -44,7 +45,7 @@ export default {
             return this.$store.state.navigation_bar_status;
         },
         imported_data() {
-            return this.$store.state.imported_data;
+            return this.$store.state.imported_data.moodle_logs || this.$store.state.imported_data.moodle_logs;
         }
     },
     data() {
