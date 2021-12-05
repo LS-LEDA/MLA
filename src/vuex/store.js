@@ -54,7 +54,7 @@ const store = createStore({
     actions: {
         loadProgress(state, time) {
             this.commit('resetProgress');
-            this.commit('count', time);
+            this.commit('progressStepCounter', time);
         },
     },
     mutations: {
@@ -108,9 +108,10 @@ const store = createStore({
             // Reset progress
             this.state.upload_status.progress = 0;
         },
-        count(state, time) {
+        progressStepCounter(state, time) {
             let counter = 0;
-            let step = time[this.state.upload_status.status] / 100;
+            console.log(time)
+            let step = time / 100;
             let count = () => {
                 counter++;
                 // Stop after 100
@@ -119,17 +120,17 @@ const store = createStore({
                     setTimeout(count, step);
                 } else {
                     // Base case, 3 steps completed, stop progress bar
-                    if (this.state.upload_status.status >= 3) {
+                    if (this.state.upload_status.status >= 2) {
                         // Reset all progress bar status
                         this.commit('resetProgress');
                         return
                     }
-                    this.commit('count', time);
+                    this.commit('progressStepCounter', 3000);
                     // Once finished advanced to next step
                     this.commit('incrementLoadProgressStatus')
                 }
             }
-            count();
+            count(time);
         }
     }
 });
