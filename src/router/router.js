@@ -1,6 +1,7 @@
 import store from '@/vuex/store';
 
 import { createRouter, createWebHistory } from 'vue-router';
+import {redirectionAlert} from "@/services/utils/utils";
 import ImportDataPage from "@/pages/ImportData/ImportDataPage";
 import DashboardPage from "@/pages/Dashboard/DashboardPage";
 import Plugins from "@/pages/Plugins";
@@ -79,15 +80,6 @@ function check_imported_data(to, from) {
     // Redirect to import data page because there's no data
     redirectionAlert("Import Moodle and/or Forum logs");
     return '/import-data';
-}
-
-function redirectionAlert(alert_message) {
-    store.commit('toggleAlert', alert_message)
-    // Delayed alert hiding & store timer ID for user manual dismiss
-    store.state.alert.timeout = setTimeout( () => {
-        // Automatically hide alert after 5s
-        store.commit('toggleAlert', alert_message)
-    }, 5000);
 }
 
 const router = createRouter({
