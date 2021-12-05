@@ -13,7 +13,7 @@
                 <div class="w-1/6 align-center items-center align-middle content-center flex">
                     <div class="w-full bg-gray-100 rounded items-center align-middle align-center flex-1">
                         <div v-if="progress.status >= 1" class="bg-green-400 text-xs leading-none py-1 text-center text-grey-darkest rounded" style="width: 100%"></div>
-                        <div v-else-if="progress.status === 0" class="bg-green-400 text-xs leading-none py-1 text-center text-grey-darkest rounded" :style="{ 'width': progress.progress + '%' }"></div>
+                        <div class="bg-green-400 text-xs leading-none py-1 text-center text-grey-darkest rounded" :style="{ 'width': progress.progress + '%' }"></div>
                     </div>
                 </div>
                 <div class="flex-1">
@@ -25,7 +25,7 @@
                 <div class="w-1/6 align-center items-center align-middle content-center flex">
                     <div class="w-full bg-gray-100 rounded items-center align-middle align-center flex-1">
                         <div v-if="progress.status >= 2" class="bg-green-400 text-xs leading-none py-1 text-center text-grey-darkest rounded" style="width: 100%"></div>
-                        <div v-else-if="progress.status === 1" class="bg-green-400 text-xs leading-none py-1 text-center text-gray-darkest rounded" :style="{ 'width': progress.progress + '%'}"></div>
+                        <div class="bg-green-400 text-xs leading-none py-1 text-center text-gray-darkest rounded" :style="{ 'width': progress.progress + '%'}"></div>
                     </div>
                 </div>
                 <div class="flex-1">
@@ -37,7 +37,7 @@
                 <div class="w-1/6 align-center items-center align-middle content-center flex">
                     <div class="w-full bg-gray-100 rounded items-center align-middle align-center flex-1">
                         <div v-if="progress.status >= 3" class="bg-green-400 text-xs leading-none py-1 text-center text-grey-darkest rounded" style="width: 100%"></div>
-                        <div v-else-if="progress.status === 2" class="bg-green-400 text-xs leading-none py-1 text-center text-grey-darkest rounded" :style="{ 'width': progress.progress + '%'}"></div>
+                        <div  class="bg-green-400 text-xs leading-none py-1 text-center text-grey-darkest rounded" :style="{ 'width': progress.progress + '%'}"></div>
                     </div>
                 </div>
                 <div class="flex-1">
