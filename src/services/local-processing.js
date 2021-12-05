@@ -1,6 +1,6 @@
 // Local Processing Service
 import store from "@/vuex/store";
-//import router from "@/router/router";
+import router from "@/router/router";
 import Message from "@/services/model/Message";
 import {forum_processing} from "@/services/forum-processing";
 
@@ -72,7 +72,23 @@ function local_processing(file) {
     // Start fake upload progress counting on load file.
     // Start fake data processing
     file_reader.onloadstart = () => {
-        store.dispatch('loadProgress', {time: [3000, 5000, 1000]});
+        store.dispatch('loadProgress', 2000).then(
+            () => {
+                setTimeout( () => {
+                    if ( store.state.imported_data.moodle_logs && store.state.imported_data.forum_logs ) {
+                        router.push('/dashboard/summary');
+                    }
+                    // Redirect to Summary tab
+                    if ( store.state.imported_data.moodle_logs && !store.state.imported_data.forum_logs ) {
+                        router.push('/dashboard/summary');
+                    }
+                    // Redirect to Sentiment tab
+                    if ( !store.state.imported_data.moodle_logs && store.state.imported_data.forum_logs ) {
+                        router.push('/dashboard/sentimental-analysis');
+                    }
+                }, 9000)
+            }
+        );
     }
 
     // Upload file progress
