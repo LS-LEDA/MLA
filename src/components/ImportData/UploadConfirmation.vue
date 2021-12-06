@@ -1,5 +1,5 @@
 <template>
-    <div class="flex absolute inset-0 ml-2 justify-center place-items-center bg-gray-400 bg-opacity-75 transition-opacity"
+    <div class="flex absolute inset-0 justify-center place-items-center bg-gray-400 bg-opacity-75 transition-opacity"
         role="dialog" aria-modal="true">
         <div class="flex flex-col w-2/6 h-auto bg-white rounded-3xl space-y-2 pb-3 drop-shadow-xl z-50">
             <!-- Uploaded file section -->
