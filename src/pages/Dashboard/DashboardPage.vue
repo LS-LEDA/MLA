@@ -1,6 +1,6 @@
 <template>
-    <section id="dashboard" class="relative flex flex-col w-full h-full">
-        <div class="flex flex-col w-full h-full p-10 overflow-y-auto">
+    <section id="dashboard" class="relative flex flex-col w-full h-full overflow-y-auto">
+        <div class="flex flex-col w-full h-full p-10">
             <!-- Tabs buttons -->
             <div class="flex flex-row pb-5 space-x-5">
                 <router-link :to="tab.tab_path" v-for="(tab, index) in tabs" :key="index" class="">
