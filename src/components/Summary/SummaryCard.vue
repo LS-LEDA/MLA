@@ -23,7 +23,10 @@
                 <svg-icon class ="justify-self-end" height="100" width="100" type="mdi" :path="statistic.icon"></svg-icon>
             </div>
             <!-- Card Information Icon -->
-            <svg-icon class="items-end place-self-end hover:cursor-pointer z-50" type="mdi" :path=help_icon @click.stop="changeView()"></svg-icon>
+            <button type="button" class="items-end place-self-end text-gray-500 rounded-lg hover:bg-gray-300"
+                    @click.stop="changeView()">
+                <SvgIcon class="hover:cursor-pointer" type="mdi" :path="help_icon"/>
+            </button>
         </template>
     </div>
 </template>
