@@ -4,7 +4,8 @@
             <!-- Tabs buttons -->
             <div class="flex flex-row pb-5 space-x-5">
                 <router-link :to="tab.tab_path" v-for="(tab, index) in tabs" :key="index" class="">
-                    <button class="bg-blue-100 hover:bg-blue-200 rounded-lg text-2xl font-bold py-3 px-10"> {{ tab.tab_name }}</button>
+                    <button class="bg-blue-100 hover:bg-blue-200 rounded-lg text-2xl font-bold py-3 px-2
+                                   md:px-5 lg:px-10"> {{ tab.tab_name }}</button>
                 </router-link>
             </div>
             <!-- Dashboard deeply nested component view -->
