@@ -19,6 +19,12 @@ const { Language } = require('@nlpjs/language/');
 // NLP
 const lng_guesser = new Language();
 
+// Progress Status
+/*const FILE_UPLOAD = 0;
+const DATA_PROCESSING = 1;
+const OVERVIEW_GENERATION = 2;
+const FINISH = 3;*/
+
 function local_processing(file) {
 
     // Check if it's a JSON log file
@@ -31,7 +37,7 @@ function local_processing(file) {
         let data = JSON.parse(event.target.result);
         // Check whether it's a Moodle Logs or Moodle Forum message Logs file
         if ( Array.isArray(data[0][0])) {
-            forum_processing(data);
+            forum_processing(data, file.name);
         } else {
             let messages = data[0];
             let forum = {
@@ -55,11 +61,45 @@ function local_processing(file) {
                 forum.sentiments = count_sentiments(processed_msg);
                 // Store processed messages in vuex
                 store.commit('storeForumMessages', forum);
+                // Toggle uploaded file boolean and store file name
+                store.commit('setImportedData', {which: true, file_name: file.name});
                 // Push to Dashboard > Sentiment
-                router.push('/dashboard/sentimental-analysis')
+                //router.push('/dashboard/sentimental-analysis')
             })
         }
     }
+
+    // Start fake upload progress counting on load file.
+    // Start fake data processing
+    file_reader.onloadstart = () => {
+        store.dispatch('loadProgress', 2000).then(
+            () => {
+                setTimeout( () => {
+                    if ( store.state.imported_data.moodle_logs && store.state.imported_data.forum_logs ) {
+                        router.push('/dashboard/summary');
+                    }
+                    // Redirect to Summary tab
+                    if ( store.state.imported_data.moodle_logs && !store.state.imported_data.forum_logs ) {
+                        router.push('/dashboard/summary');
+                    }
+                    // Redirect to Sentiment tab
+                    if ( !store.state.imported_data.moodle_logs && store.state.imported_data.forum_logs ) {
+                        router.push('/dashboard/sentimental-analysis');
+                    }
+                }, 9000)
+            }
+        );
+    }
+
+    // Upload file progress
+    // This function will be called only once~twice for small - medium sized files
+    /*file_reader.onprogress = (event) => {
+        if ( event.lengthComputable ) {
+            let progress = parseInt( ((event.loaded / event.total) * 100), 10 );
+            console.log( progress );
+            console.log(event)
+        }
+    }*/
 
     file_reader.readAsText(file)
 }

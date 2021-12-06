@@ -1,6 +1,7 @@
 import store from '@/vuex/store';
 
 import { createRouter, createWebHistory } from 'vue-router';
+import {redirectionAlert} from "@/services/utils/utils";
 import ImportDataPage from "@/pages/ImportData/ImportDataPage";
 import DashboardPage from "@/pages/Dashboard/DashboardPage";
 import Plugins from "@/pages/Plugins";
@@ -20,40 +21,80 @@ const routes = [
         children:[
             {
                 path: '/dashboard/summary',
-                component: Summary
+                component: Summary,
+                name: "summary",
+                beforeEnter: (to, from) => {
+                    return check_imported_data(to, from);
+                }
             },
             {
                 path: '/dashboard/students',
-                component: Students
+                name: "students",
+                component: Students,
+                beforeEnter: () => {
+                    redirectionAlert("To be implemented for the next release")
+                    return false
+                }
             },
             {
                 path: '/dashboard/resources',
-                component: Resources
+                name: "resources",
+                component: Resources,
+                beforeEnter: () => {
+                    redirectionAlert("To be implemented for the next release")
+                    return false
+                }
             },
             {
                 path: '/dashboard/sentimental-analysis',
                 component: Sentimental,
+                name: "sentiment",
                 beforeEnter: () => {
-                    return check_imported_data();
+                    return check_imported_forum_data();
                 }
             }
         ]
     },
-    { path: '/plugins', component: Plugins },
+    {
+        path: '/plugins',
+        component: Plugins,
+        beforeEnter: () => {
+            redirectionAlert("To be implemented for the next release")
+            return false
+        }
+    },
     { path: '/settings', component: Settings },
 ]
 
-function check_imported_data(){
-    if ( store.state.imported_data !== true ) {
+function check_imported_forum_data(){
+    if ( !store.state.imported_data.forum_logs ) {
         // Show alert
-        store.commit('toggleAlert', "Import forum log")
-        // Delayed alert hiding & store timer ID for user manual dismiss
-        store.state.alert.timeout = setTimeout( () => {
-            // Automatically hide alert after 5s
-            store.commit('toggleAlert', "Import forum log")
-        }, 5000);
+        redirectionAlert("Import Forum log");
         return '/import-data';
     }
+}
+
+function check_imported_data(to, from) {
+    // Redirect to Sentiment tab if forum log has been imported
+    if ( !store.state.imported_data.moodle_logs && store.state.imported_data.forum_logs) {
+        // Redirect to import data page if "Summary" button is pressed from the Dashboard's Sentiment page
+        if ( to.name === 'summary' && from.name === 'sentiment') {
+            redirectionAlert("Import Forum log");
+            return '/import-data';
+        }
+        return '/dashboard/sentimental-analysis';
+    }
+    // Redirect to Summary tab if moodle log has been imported
+    if ( store.state.imported_data.moodle_logs && !store.state.imported_data.forum_logs) {
+        return true;
+    }
+    // Redirect to Summary tab if both files have been imported
+    if ( store.state.imported_data.moodle_logs && store.state.imported_data.forum_logs ) {
+        return true;
+    }
+    // Redirect to import data page because there's no data
+    redirectionAlert("Import Moodle and/or Forum logs");
+    return '/import-data';
 }
 
 const router = createRouter({

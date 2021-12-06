@@ -1,9 +1,9 @@
 import {summary_processing} from "@/services/Summary/summary-processing";
 import Log from "@/services/model/Log";
 import store from "@/vuex/store";
-import router from "@/router/router";
+//import router from "@/router/router";
 
-function forum_processing(data){
+function forum_processing(data, name){
     let logs = [];
 
     data[0].forEach( (lg) => {
@@ -20,9 +20,14 @@ function forum_processing(data){
         summary_types: summary_types
         }
     );
-
+    // Set moodle imported data true
+    store.commit('setImportedData', {
+            which: false,
+            file_name: name
+        }
+    );
     // Push to Dashboard > Summary
-    router.push('/dashboard/summary');
+    //router.push('/dashboard/summary');
 }
 
 export { forum_processing };

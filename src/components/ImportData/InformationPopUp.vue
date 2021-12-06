@@ -1,5 +1,5 @@
 <template>
-    <div class="ml-2 flex flex-col absolute inset-0 justify-center place-items-center bg-gray-400 bg-opacity-75 transition-opacity"
+    <div class="flex flex-col absolute inset-0 justify-center place-items-center bg-gray-400 bg-opacity-75 transition-opacity"
          role="dialog" aria-modal="true">
         <div class="flex flex-col bg-blue-200 w-3/6 h-4/6 rounded-3xl z-50">
             <div class ="w-4/5 h-4/5 self-center p-10">

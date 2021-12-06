@@ -11,7 +11,7 @@
                 </div>
                 <!-- Close button -->
                 <button type="button" class=" justify-self-end bg-gray-100 text-gray-400 rounded-lg focus:ring-2 focus:ring-gray-200
-                hover:bg-gray-200 inline-flex hover:bg-blue-500 rounded-xl w-10 h-10 place-content-center items-center"
+                hover:bg-gray-200 inline-flex w-10 h-10 place-content-center items-center"
                         @click="close_pop_up({card_name, summaryID})">
                     <SvgIcon class="hover:cursor-pointer" type="mdi" :path="close_icon"/>
                 </button>

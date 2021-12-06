@@ -5,7 +5,10 @@
          :class="card_status ? 'pb-10': null">
         <!-- Card information -->
         <template v-if="card_status">
-            <svg-icon class="items-end place-self-end hover:cursor-pointer text-gray-400" type="mdi" :path=close_icon @click.stop="changeView()"></svg-icon>
+            <button type="button" class="items-end place-self-end text-gray-500 rounded-lg hover:bg-gray-300"
+                    @click.stop="changeView()">
+                <SvgIcon class="hover:cursor-pointer" type="mdi" :path="close_icon"/>
+            </button>
             <span class="flex h-full mx-3 text-xl font-bold text-center self-center place-self-center items-center">
                 {{ statistic.info }}
             </span>
@@ -23,7 +26,10 @@
                 <svg-icon class ="justify-self-end" height="100" width="100" type="mdi" :path="statistic.icon"></svg-icon>
             </div>
             <!-- Card Information Icon -->
-            <svg-icon class="items-end place-self-end hover:cursor-pointer z-50" type="mdi" :path=help_icon @click.stop="changeView()"></svg-icon>
+            <button type="button" class="items-end place-self-end text-gray-500 rounded-lg hover:bg-gray-300"
+                    @click.stop="changeView()">
+                <SvgIcon class="hover:cursor-pointer" type="mdi" :path="help_icon"/>
+            </button>
         </template>
     </div>
 </template>
