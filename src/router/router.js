@@ -30,12 +30,20 @@ const routes = [
             {
                 path: '/dashboard/students',
                 name: "students",
-                component: Students
+                component: Students,
+                beforeEnter: () => {
+                    redirectionAlert("To be implemented for the next release")
+                    return false
+                }
             },
             {
                 path: '/dashboard/resources',
                 name: "resources",
-                component: Resources
+                component: Resources,
+                beforeEnter: () => {
+                    redirectionAlert("To be implemented for the next release")
+                    return false
+                }
             },
             {
                 path: '/dashboard/sentimental-analysis',
@@ -47,7 +55,14 @@ const routes = [
             }
         ]
     },
-    { path: '/plugins', component: Plugins },
+    {
+        path: '/plugins',
+        component: Plugins,
+        beforeEnter: () => {
+            redirectionAlert("To be implemented for the next release")
+            return false
+        }
+    },
     { path: '/settings', component: Settings },
 ]
 
