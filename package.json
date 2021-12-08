@@ -1,6 +1,7 @@
 {
-  "name": "jsmla-v2",
-  "version": "0.1.0",
+  "name": "mla",
+  "version": "1.0.0",
+  "description": "Moodle Learning Analytics",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
