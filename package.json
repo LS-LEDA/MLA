@@ -11,6 +11,23 @@
     "postinstall": "electron-builder install-app-deps",
     "postuninstall": "electron-builder install-app-deps"
   },
+  "author": {
+    "name": "La Salle URL GRETEL"
+  },
+  "contributors": [
+    {
+      "name": "Daniel Amo Filva",
+      "email": "daniel.amo@salle.url.edu"
+    },
+    {
+      "name": "Jiahui Chen",
+      "email": "jiahui1@hotmail.es"
+    },
+    {
+      "name": "Aleix Olle",
+      "email": "aleix.olle@students.salle.url.edu"
+    }
+  ],
   "license": "GPL-3.0",
   "main": "dist_electron/bundled/background.js",
   "dependencies": {
