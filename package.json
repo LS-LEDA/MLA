@@ -9,7 +9,8 @@
     "electron:build": "vue-cli-service electron:build",
     "electron:serve": "vue-cli-service electron:serve",
     "postinstall": "electron-builder install-app-deps",
-    "postuninstall": "electron-builder install-app-deps"
+    "postuninstall": "electron-builder install-app-deps",
+    "build-win": "electron-builder --win --ia32 --x64"
   },
   "author": {
     "name": "La Salle URL GRETEL"
@@ -83,5 +84,24 @@
     "> 1%",
     "last 2 versions",
     "not dead"
-  ]
+  ],
+  "build": {
+    "productName": "MLA",
+    "appId": "org.gretel.mla",
+    "directories": {
+      "output": "build"
+    },
+    "files": [
+      "dist_electron/**/*"
+    ],
+    "asar": true,
+    "win": {
+      "icon": "resources/installer/icon.ico",
+      "target": [
+        "zip",
+        "nsis",
+        "portable"
+      ]
+    }
+  }
 }
