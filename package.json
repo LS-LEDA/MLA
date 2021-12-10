@@ -11,7 +11,8 @@
     "electron:serve": "vue-cli-service electron:serve",
     "postinstall": "electron-builder install-app-deps",
     "postuninstall": "electron-builder install-app-deps",
-    "build-win": "electron-builder --win --ia32 --x64"
+    "build-win": "electron-builder --win --ia32 --x64",
+    "build-mac": "electron-builder --mac"
   },
   "author": {
     "name": "La Salle URL GRETEL"
@@ -110,6 +111,17 @@
       "allowElevation": true,
       "allowToChangeInstallationDirectory": true,
       "installerIcon": "resources/installer/icon.ico"
+    },
+    "mac": {
+      "category": "public.app-category.education",
+      "icon": "resources/installer/icon.ico",
+      "target": [
+        "zip",
+        "dmg"
+      ]
+    },
+    "dmg": {
+      "icon": "resources/installer/icon.ico"
     }
   }
 }
