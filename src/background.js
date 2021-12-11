@@ -5,6 +5,7 @@ import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS3_DEVTOOLS } from 'electron-devtools-installer'
 const path = require('path')
 const isDevelopment = process.env.NODE_ENV !== 'production'
+require('v8-compile-cache') // via: https://dev.to/xxczaki/how-to-make-your-electron-app-faster-4ifb
 
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([
@@ -25,7 +26,7 @@ async function createWindow() {
         height: height,
         // Don't show the window until it's ready, this prevents any white flickering
         show: false,
-        icon: path.join(__dirname, '/jsmla_logo.png'),
+        icon: path.join(__dirname, '/mla_logo.png'),
         webPreferences: {
 
             // Use pluginOptions.nodeIntegration, leave this alone

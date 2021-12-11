@@ -8,7 +8,7 @@
             <span class="text-6xl font-bold"> {{ summary.total_interactions.toLocaleString() }} </span>
         </div>
         <!-- Card graphics -->
-        <div class="flex relative w-full w-full text-center mx-6 font-bold text-4xl rounded-3xl">
+        <div class="flex relative w-full w-full hidden lg:block">
             <canvas class="max-h-full max-w-full" id="total_interactions_chart"></canvas>
         </div>
     </div>

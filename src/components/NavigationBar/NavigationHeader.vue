@@ -8,7 +8,7 @@
                          @mouseleave="logo_not_hover"
                          @click="redirectionAlert('Import Moodle and/or Forum logs')">
                 <img class="max-h-16 rounded-lg origin-center transform transition duration-500"
-                     src="/assets/jsmla_logo.png" alt="jsMLA Logo">
+                     src="/assets/mla_logo.png" alt="jsMLA Logo">
             </router-link>
         </div>
         <!-- Application name -->
