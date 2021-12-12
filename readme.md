@@ -6,7 +6,7 @@ MLA is a modern open source tool to analyse Moodle logs developed by La Salle UR
   <img src="https://raw.githubusercontent.com/LS-LEDA/MLA/86/feat/release_v1_preparation/public/assets/mla_logo.png" alt="MLA Logo"/>
 </p>
 
-Visit [MLA website]() to learn more.
+Visit [MLA website](https://ls-leda.github.io/Moodle-Learning-Analytics/) to learn more.
 
 ## Installation
 
