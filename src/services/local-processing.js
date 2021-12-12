@@ -19,12 +19,6 @@ const { Language } = require('@nlpjs/language/');
 // NLP
 const lng_guesser = new Language();
 
-// Progress Status
-/*const FILE_UPLOAD = 0;
-const DATA_PROCESSING = 1;
-const OVERVIEW_GENERATION = 2;
-const FINISH = 3;*/
-
 function local_processing(file) {
 
     // Check if it's a JSON log file
