@@ -13,7 +13,8 @@ module.exports = {
                         "zip",
                         "nsis",
                         "portable"
-                    ]
+                    ],
+                    publish: ["github"]
                 },
                 nsis: {
                     oneClick: false,
