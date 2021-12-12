@@ -17,8 +17,10 @@ You can also download `MLA-windows.zip` from the [releases page](https://github.
 There is a [portable](https://github.com/LS-LEDA/MLA/releases/latest) version to run it on the go, no installation is required.
 
 ### macOS
+Download the latest [MLA](https://github.com/LS-LEDA/MLA/releases/latest) release.
 
 ### Linux
+Download the latest [MLA](https://github.com/LS-LEDA/MLA/releases/latest) release.
 
 ## License
 Licensed under the [GPL](https://github.com/LS-LEDA/MLA/blob/main/LICENSE) license.
