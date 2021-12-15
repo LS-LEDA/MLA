@@ -17,4 +17,4 @@ function summary_processing(logs) {
     return type;
 }
 
-export { summary_processing };
+export { summary_processing }

@@ -1,11 +1,11 @@
 import store from '@/vuex/store';
 
-import { createRouter, createWebHistory } from 'vue-router';
+import {createRouter, createWebHashHistory, createWebHistory} from 'vue-router';
 import {redirectionAlert} from "@/services/utils/utils";
 import ImportDataPage from "@/pages/ImportData/ImportDataPage";
 import DashboardPage from "@/pages/Dashboard/DashboardPage";
-import Plugins from "@/pages/Plugins";
-import Settings from "@/pages/Settings";
+import Plugins from "@/pages/Plugins/Plugins";
+import Settings from "@/pages/Settings/Settings";
 import Summary from "@/pages/Dashboard/Summary/Summary";
 import Students from "@/pages/Dashboard/Students/Students";
 import Resources from "@/pages/Dashboard/Resources/Resources";
@@ -98,7 +98,8 @@ function check_imported_data(to, from) {
 }
 
 const router = createRouter({
-    history: createWebHistory(),
+    // https://nklayman.github.io/vue-cli-plugin-electron-builder/guide/commonIssues.html#blank-screen-on-builds-but-works-fine-on-serve
+    history: process.env.IS_ELECTRON ? createWebHashHistory() : createWebHistory(),
     routes,
 });
 
