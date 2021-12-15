@@ -13,15 +13,18 @@
         </div>
         <SummaryPopUp v-if="popup" @popUp="toggle_popup" :summaryID="summaryID" :card_name="card_name" class="absolute"/>
     </section>
+    <InformationPanel/>
 </template>
 
 <script>
 
 import SummaryPopUp from "@/components/Summary/SummaryPopUp";
+import InformationPanel from "@/components/InformationPanel/InformationPanel";
 
 export default {
     name: "DashboardPage",
     components: {
+        InformationPanel,
         SummaryPopUp
     },
     methods: {
