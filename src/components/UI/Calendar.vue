@@ -3,7 +3,7 @@
         <div class="flex w-full items-center justify-between">
             <!-- Calendar Month & Year -->
             <span tabindex="0" class="flex text-xl font-bold">
-                December 2021
+                {{ formatter.format(date) }} {{ date.getFullYear() }}
             </span>
             <!-- Calendar buttons -->
         </div>
@@ -40,7 +40,8 @@ export default {
     name: "Calendar",
     data() {
         return {
-            week_days: [ 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su']
+            week_days: [ 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
+            formatter: new Intl.DateTimeFormat('en', {month: "long"})
         }
     },
     setup() {
@@ -95,7 +96,7 @@ export default {
             chunks++;
         }
 
-        return { formatted_days }
+        return { formatted_days, date }
     },
     methods: {
     }
