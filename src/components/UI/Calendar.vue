@@ -24,10 +24,8 @@
                 <tbody>
                 <tr v-for="(weeks, index) in formatted_days" :key="index">
                     <td v-for="(day, index) in weeks" :key="index">
-                        <div class="px-2 py-2 cursor-pointer flex w-full justify-center">
-                            <p class="text-base text-gray-500 dark:text-gray-100">
-                                {{ day }}
-                            </p>
+                        <div class="px-2 py-2 cursor-pointer flex w-full justify-center"
+                             v-html="day">
                         </div>
                     </td>
                 </tr>
@@ -78,18 +76,17 @@ export default {
 
         // Previous month days
         for( let i = first_day_index; i > 0;  i-- ) {
-            days.push(prev_last_day - i + 1);
+            days.push(`<p class="text-base text-gray-400">${prev_last_day - i + 1}</div>`);
         }
 
         // Current month days
         for( let i = 1; i <= last_day; i++ ) {
-            //days[ Math.trunc(i / 7)].push(i);
-            days.push(i)
+            days.push(`<p class="text-base text-black">${i}</div>`);
         }
 
         // Next month days
         for ( let j = 1; j <= next_days; j++ ) {
-            days.push(j);
+            days.push(`<p class="text-base text-gray-400">${j}</div>`);
         }
 
         let chunks = 0;
