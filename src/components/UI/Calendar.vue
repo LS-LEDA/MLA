@@ -6,6 +6,14 @@
                 {{ formatter.format(date) }} {{ date.getFullYear() }}
             </span>
             <!-- Calendar buttons -->
+            <div class="flex gap-x-2">
+                <button class="bg-blue-200 rounded-md hover:bg-blue-300">
+                    <SvgIcon type="mdi" :path="left_icon"/>
+                </button>
+                <button class="bg-blue-200 rounded-md hover:bg-blue-300">
+                    <SvgIcon type="mdi" :path="right_icon"/>
+                </button>
+            </div>
         </div>
         <!-- Calendar dates -->
         <div class="flex items-center pt-6">
@@ -36,12 +44,20 @@
 </template>
 
 <script>
+import {mdiMenuLeft, mdiMenuRight} from "@mdi/js";
+import SvgIcon from "@jamescoyle/vue-icon";
+
 export default {
     name: "Calendar",
+    components: {
+        SvgIcon
+    },
     data() {
         return {
             week_days: [ 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
-            formatter: new Intl.DateTimeFormat('en', {month: "long"})
+            formatter: new Intl.DateTimeFormat('en', {month: "long"}),
+            left_icon: mdiMenuLeft,
+            right_icon: mdiMenuRight
         }
     },
     setup() {
