@@ -24,7 +24,7 @@
                 <tbody>
                 <tr v-for="(weeks, index) in formatted_days" :key="index">
                     <td v-for="(day, index) in weeks" :key="index">
-                        <div class="px-2 py-2 cursor-pointer flex w-full justify-center"
+                        <div class="px-2 py-2 cursor-pointer flex w-full justify-center hover:bg-blue-200 hover:rounded-full "
                              v-html="day">
                         </div>
                     </td>
