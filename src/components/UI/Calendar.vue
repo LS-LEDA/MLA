@@ -8,10 +8,10 @@
             <!-- Calendar buttons -->
             <div class="flex gap-x-2">
                 <button class="bg-blue-200 rounded-md hover:bg-blue-300">
-                    <SvgIcon type="mdi" :path="left_icon"/>
+                    <SvgIcon type="mdi" :path="left_icon" @click="left_calendar"/>
                 </button>
                 <button class="bg-blue-200 rounded-md hover:bg-blue-300">
-                    <SvgIcon type="mdi" :path="right_icon"/>
+                    <SvgIcon type="mdi" :path="right_icon" @click="right_calendar"/>
                 </button>
             </div>
         </div>
@@ -115,6 +115,12 @@ export default {
         return { formatted_days, date }
     },
     methods: {
+        left_calendar: function () {
+            this.date.setMonth( this.date.getMonth() - 1);
+        },
+        right_calendar: function () {
+            this.date.setMonth( this.date.getMonth() + 1);
+        }
     }
 }
 </script>
