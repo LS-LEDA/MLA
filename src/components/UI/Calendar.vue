@@ -64,53 +64,11 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>
+                <tr v-for="(weeks, index) in formatted_days" :key="index">
+                    <td v-for="(day, index) in weeks" :key="index">
                         <div class="px-2 py-2 cursor-pointer flex w-full justify-center">
                             <p class="text-base text-gray-500 dark:text-gray-100">
-                                1
-                            </p>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="px-2 py-2 cursor-pointer flex w-full justify-center">
-                            <p class="text-base text-gray-500 dark:text-gray-100">
-                                2
-                            </p>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="px-2 py-2 cursor-pointer flex w-full justify-center">
-                            <p class="text-base text-gray-500 dark:text-gray-100">
-                                3
-                            </p>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="px-2 py-2 cursor-pointer flex w-full justify-center">
-                            <p class="text-base text-gray-500 dark:text-gray-100">
-                                4
-                            </p>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="px-2 py-2 cursor-pointer flex w-full justify-center">
-                            <p class="text-base text-gray-500 dark:text-gray-100">
-                                5
-                            </p>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="px-2 py-2 cursor-pointer flex w-full justify-center">
-                            <p class="text-base text-gray-500 dark:text-gray-100">
-                                6
-                            </p>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="px-2 py-2 cursor-pointer flex w-full justify-center">
-                            <p class="text-base text-gray-500 dark:text-gray-100">
-                                7
+                                {{ day }}
                             </p>
                         </div>
                     </td>
