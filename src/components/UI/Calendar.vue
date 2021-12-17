@@ -12,52 +12,10 @@
             <table class="w-full">
                 <thead>
                 <tr>
-                    <th>
+                    <th v-for="(week_day, index) in week_days" :key="index">
                         <div class="w-full flex justify-center">
                             <p class="text-base font-medium text-center text-gray-800">
-                                Mo
-                            </p>
-                        </div>
-                    </th>
-                    <th>
-                        <div class="w-full flex justify-center">
-                            <p class="text-base font-medium text-center text-gray-800">
-                                Tu
-                            </p>
-                        </div>
-                    </th>
-                    <th>
-                        <div class="w-full flex justify-center">
-                            <p class="text-base font-medium text-center text-gray-800">
-                                We
-                            </p>
-                        </div>
-                    </th>
-                    <th>
-                        <div class="w-full flex justify-center">
-                            <p class="text-base font-medium text-center text-gray-800">
-                                Th
-                            </p>
-                        </div>
-                    </th>
-                    <th>
-                        <div class="w-full flex justify-center">
-                            <p class="text-base font-medium text-center text-gray-800">
-                                Fr
-                            </p>
-                        </div>
-                    </th>
-                    <th>
-                        <div class="w-full flex justify-center">
-                            <p class="text-base font-medium text-center text-gray-800">
-                                Sa
-                            </p>
-                        </div>
-                    </th>
-                    <th>
-                        <div class="w-full flex justify-center">
-                            <p class="text-base font-medium text-center text-gray-800">
-                                Su
+                                {{ week_day }}
                             </p>
                         </div>
                     </th>
@@ -84,7 +42,7 @@ export default {
     name: "Calendar",
     data() {
         return {
-
+            week_days: [ 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su']
         }
     },
     setup() {
