@@ -55,71 +55,85 @@ export default {
     data() {
         return {
             week_days: [ 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
+            date: new Date(),
+            formatted_days: [[], [], [], [], [], []],
+            days: [],
+            chunks: 0,
             formatter: new Intl.DateTimeFormat('en', {month: "long"}),
             left_icon: mdiMenuLeft,
             right_icon: mdiMenuRight
         }
     },
-    setup() {
-        const date = new Date();
-        date.setDate(1);
-        let formatted_days =  [[], [], [], [], [], []];
-        let days = [];
-
-        const last_day = new Date(
-            date.getFullYear(),
-            date.getMonth() + 1,
-            0
-        ).getDate();
-
-        const prev_last_day = new Date(
-            date.getFullYear(),
-            date.getMonth(),
-            0
-        ).getDate();
-
-        // Position of the month's first day
-        // [M,T,W,T,F,S,S]
-        // [1,2,3,4,5,6,7]
-        const first_day_index = date.getDay() - 1;
-
-        const last_day_index = new Date(
-            date.getFullYear(),
-            date.getMonth() + 1,
-            0
-        ).getDay();
-
-        const next_days = 7 - last_day_index;
-
-        // Previous month days
-        for( let i = first_day_index; i > 0;  i-- ) {
-            days.push(`<p class="text-base text-gray-400">${prev_last_day - i + 1}</div>`);
-        }
-
-        // Current month days
-        for( let i = 1; i <= last_day; i++ ) {
-            days.push(`<p class="text-base text-black">${i}</div>`);
-        }
-
-        // Next month days
-        for ( let j = 1; j <= next_days; j++ ) {
-            days.push(`<p class="text-base text-gray-400">${j}</div>`);
-        }
-
-        let chunks = 0;
-        for ( let i = 0; i < days.length; i += 7) {
-            formatted_days[chunks] = days.slice(i, i + 7);
-            chunks++;
-        }
-
-        return { formatted_days, date }
+    mounted() {
+        this.render_calendar();
     },
     methods: {
+        render_calendar: function () {
+            this.date.setDate(1);
+
+            const last_day = new Date(
+                this.date.getFullYear(),
+                this.date.getMonth() + 1,
+                0
+            ).getDate();
+
+            const prev_last_day = new Date(
+                this.date.getFullYear(),
+                this.date.getMonth(),
+                0
+            ).getDate();
+
+            // Position of the month's first day
+            // [M,T,W,T,F,S,S]
+            // [1,2,3,4,5,6,7]
+            const first_day_index = this.date.getDay() - 1;
+
+            const last_day_index = new Date(
+                this.date.getFullYear(),
+                this.date.getMonth() + 1,
+                0
+            ).getDay();
+
+            const next_days = 7 - last_day_index;
+
+            // Previous month days
+            for( let i = first_day_index; i > 0;  i-- ) {
+                this.days.push(`<p class="text-base text-gray-400">${prev_last_day - i + 1}</div>`);
+            }
+
+            // Current month days
+            for( let i = 1; i <= last_day; i++ ) {
+                this.days.push(`<p class="text-base text-black">${i}</div>`);
+            }
+
+            // Next month days
+            for ( let j = 1; j <= next_days; j++ ) {
+                this.days.push(`<p class="text-base text-gray-400">${j}</div>`);
+            }
+
+            // Clear the 6th formatted day array, sometimes there's only 5 rows
+            if (this.chunks === 6)
+                this.formatted_days[5].length = 0;
+
+            let chunks = 0;
+            for ( let i = 0; i < this.days.length; i += 7) {
+                this.formatted_days[chunks] = this.days.slice(i, i + 7);
+                chunks++;
+            }
+
+            // Clear the array for a possible update
+            this.days.length = 0;
+
+            // Clear the 6th formatted day array, sometimes there's only 5 rows
+            this.chunks = chunks;
+        },
         left_calendar: function () {
             this.date.setMonth( this.date.getMonth() - 1);
+            this.render_calendar();
         },
         right_calendar: function () {
             this.date.setMonth( this.date.getMonth() + 1);
+            this.render_calendar();
         }
     }
 }
