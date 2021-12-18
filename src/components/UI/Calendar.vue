@@ -86,7 +86,7 @@ export default {
             // Position of the month's first day
             // [M,T,W,T,F,S,S]
             // [1,2,3,4,5,6,7]
-            const first_day_index = this.date.getDay() - 1;
+            let first_day_index = this.date.getDay() - 1;
 
             const last_day_index = new Date(
                 this.date.getFullYear(),
@@ -94,7 +94,12 @@ export default {
                 0
             ).getDay();
 
+            // Sometimes fist_day_index is -1, past week's Sunday
             const next_days = 7 - last_day_index;
+
+            if ( first_day_index === -1 ) {
+                first_day_index = 6;
+            }
 
             // Previous month days
             for( let i = first_day_index; i > 0;  i-- ) {
