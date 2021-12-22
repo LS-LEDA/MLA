@@ -32,7 +32,7 @@
                 <tbody>
                 <tr v-for="(weeks, index) in formatted_days" :key="index">
                     <td v-for="(day, index) in weeks" :key="index">
-                        <div class="px-2 py-2 cursor-pointer flex w-full justify-center hover:bg-blue-200 hover:rounded-full "
+                        <div class="p-0.5 lg:p-1 cursor-pointer flex w-full justify-center hover:bg-blue-200 hover:rounded-full "
                              v-html="day">
                         </div>
                     </td>
@@ -118,7 +118,9 @@ export default {
 
             // Clear the 6th formatted day array, sometimes there's only 5 rows
             if (this.chunks === 6)
-                this.formatted_days[5].length = 0;
+                for (let i = 0; i < 7; i++) {
+                    this.formatted_days[5][i] = `<p class="text-base text-black"></div>`;
+                }
 
             let chunks = 0;
             for ( let i = 0; i < this.days.length; i += 7) {
