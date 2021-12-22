@@ -30,10 +30,10 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="(weeks, index) in formatted_days" :key="index">
-                    <td v-for="(day, index) in weeks" :key="index">
+                <tr v-for="(weeks, week_index) in formatted_days" :key="week_index">
+                    <td v-for="(day, day_index) in weeks" :key="day_index">
                         <div class="p-0.5 lg:p-1 cursor-pointer flex w-full justify-center hover:bg-blue-200 hover:rounded-full "
-                             v-html="day">
+                             v-html="day" @click="selectDate(week_index, day_index, $event)">
                         </div>
                     </td>
                 </tr>
@@ -52,6 +52,7 @@ export default {
     components: {
         SvgIcon
     },
+    emits: ['dateSelect'],
     data() {
         return {
             week_days: [ 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
@@ -141,6 +142,22 @@ export default {
         right_calendar: function () {
             this.date.setMonth( this.date.getMonth() + 1);
             this.render_calendar();
+        },
+        selectDate: function (week_index, day_index, selected_day) {
+            // TODO: Change calendar to previous or next month
+
+            // For now, discard previous or next month days - This may cause some bugs
+            if ( (week_index <= 1 && selected_day.target.innerText > 20) ||
+                (week_index >= 4 && selected_day.target.innerText < 10)
+            ) {
+                return
+            }
+
+            this.$emit('dateSelect', {
+                day: selected_day.target.innerText,
+                month: this.date.getMonth(),
+                year: this.date.getFullYear()
+            });
         }
     }
 }
