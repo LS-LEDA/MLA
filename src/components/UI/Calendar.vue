@@ -53,6 +53,7 @@ export default {
         SvgIcon
     },
     emits: ['dateSelect'],
+    props: ['calendarID'],
     data() {
         return {
             week_days: [ 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
@@ -157,7 +158,7 @@ export default {
                 day: selected_day.target.innerText,
                 month: this.date.getMonth(),
                 year: this.date.getFullYear()
-            });
+            }, this.calendarID);
         }
     }
 }
