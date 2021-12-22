@@ -1,6 +1,6 @@
 <template>
-    <div class="flex h-full w-96 overflow-y-hidden pb-4">
-        <div class="bg-white h-full w-full rounded-lg mx-2 my-2">
+    <div class="h-full w-96 overflow-y-hidden pb-4">
+        <div class="flex flex-col bg-white h-full rounded-lg mx-2 my-2">
             <Calendar/>
         </div>
     </div>
