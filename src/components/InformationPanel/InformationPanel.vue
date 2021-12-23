@@ -1,6 +1,7 @@
 <template>
     <div class="h-full w-96 overflow-y-hidden pb-4">
         <div class="flex flex-col bg-white h-full rounded-lg mx-2 my-2">
+            <Item :title="log_name"/>
             <Calendar @dateSelect="selectDate" calendarID="1"/>
             <Calendar @dateSelect="selectDate" calendarID="2"/>
         </div>
@@ -9,13 +10,22 @@
 
 <script>
 import Calendar from "@/components/UI/Calendar";
+import Item from "@/components/UI/Item";
 export default {
     name: "InformationPanel",
-    components: {Calendar},
+    components: {
+        Item,
+        Calendar
+    },
     data() {
         return {
             start_date: new Date(),
             end_date: new Date(),
+        }
+    },
+    computed: {
+        log_name() {
+            return this.$store.state.dashboard.course_name;
         }
     },
     methods: {
