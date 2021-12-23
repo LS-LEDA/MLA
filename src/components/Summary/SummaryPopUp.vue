@@ -19,7 +19,7 @@
 
             <!-- Summary card chart -->
             <div class="flex w-full h-3/6">
-                <div class="flex relative w-full w-full text-center mx-6 font-bold text-4xl rounded-3xl">
+                <div class="flex items-center relative w-full w-full text-center mx-6 font-bold text-4xl rounded-3xl">
                     <canvas class="max-h-full max-w-full" id="summary_chart"></canvas>
                 </div>
             </div>
