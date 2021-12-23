@@ -1,6 +1,6 @@
 <template>
     <section id="dashboard" class="relative flex flex-col w-full h-full overflow-y-auto">
-        <div class="flex flex-col w-full h-full px-5 py-10">
+        <div class="flex flex-col w-full h-full p-10">
             <!-- Tabs buttons -->
             <div class="flex flex-row pb-5 space-x-5">
                 <router-link :to="tab.tab_path" v-for="(tab, index) in tabs" :key="index" class="">
@@ -13,18 +13,15 @@
         </div>
         <SummaryPopUp v-if="popup" @popUp="toggle_popup" :summaryID="summaryID" :card_name="card_name" class="absolute"/>
     </section>
-    <InformationPanel/>
 </template>
 
 <script>
 
 import SummaryPopUp from "@/components/Summary/SummaryPopUp";
-import InformationPanel from "@/components/InformationPanel/InformationPanel";
 
 export default {
     name: "DashboardPage",
     components: {
-        InformationPanel,
         SummaryPopUp
     },
     methods: {
