@@ -22,13 +22,6 @@ const store = createStore({
             },
             forum_file_name: "",
             forum_messages: [],
-            /**
-             * Course logs related information
-             */
-            dashboard: {
-                logs_file_name: "",
-                course_name: "",
-            },
             forum: {
                 forum_messages: [],
                 messages: 0,
@@ -70,12 +63,11 @@ const store = createStore({
             this.state.navigation_bar_status = !this.state.navigation_bar_status
         },
         // Call this method if data has been uploaded
-        setImportedData(state, {which, file_name, course_name}) {
+        setImportedData(state, {which, file_name}) {
             // Determine the type of imported file: Moodle logs or Forum logs
             if ( !which ) {
                 this.state.imported_data.moodle_logs = true;
-                this.state.dashboard.logs_file_name = file_name;
-                this.state.dashboard.course_name = course_name;
+                // TODO: Moodle logs file name
             } else {
                 this.state.imported_data.forum_logs = true;
                 this.state.forum_file_name = file_name

@@ -6,11 +6,6 @@ import store from "@/vuex/store";
 function forum_processing(data, name){
     let logs = [];
 
-    // Get imported logs' course name
-    let course_name = data[0][0][3].substr(
-        data[0][0][3].indexOf(' ') + 1
-    );
-
     data[0].forEach( (lg) => {
         logs.push(
             new Log(lg[0], lg[1], lg[2], lg[3], lg[4], lg[5], lg[6], lg[7], lg[8])
@@ -28,8 +23,7 @@ function forum_processing(data, name){
     // Set moodle imported data true
     store.commit('setImportedData', {
             which: false,
-            file_name: name,
-            course_name: course_name
+            file_name: name
         }
     );
     // Push to Dashboard > Summary
