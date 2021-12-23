@@ -1,5 +1,6 @@
 <template>
-    <section id="dashboard" class="relative flex flex-col w-full h-full overflow-y-auto">
+    <section id="dashboard" class="relative flex flex-col w-full h-full overflow-y-auto"
+             :class="popup ? 'overflow-y-hidden' : 'overflow-y-auto'">
         <div class="flex flex-col w-full h-full px-5 py-10">
             <!-- Tabs buttons -->
             <div class="flex flex-row pb-5 space-x-5">
