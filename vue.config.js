@@ -7,6 +7,7 @@ module.exports = {
                 directories: {
                     "output": "build"
                 },
+                publish: ["github"],
                 win: {
                     icon: "resources/installer/icon.ico",
                     target: [
@@ -14,7 +15,6 @@ module.exports = {
                         "nsis",
                         "portable"
                     ],
-                    publish: ["github"]
                 },
                 nsis: {
                     oneClick: false,
