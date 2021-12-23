@@ -28,7 +28,8 @@ function forum_processing(data, name){
     // Set moodle imported data true
     store.commit('setImportedData', {
             which: false,
-            file_name: name
+            file_name: name,
+            course_name: course_name
         }
     );
     // Push to Dashboard > Summary
