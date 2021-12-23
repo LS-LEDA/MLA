@@ -22,6 +22,13 @@ const store = createStore({
             },
             forum_file_name: "",
             forum_messages: [],
+            /**
+             * Course logs related information
+             */
+            dashboard: {
+                logs_file_name: "",
+                course_name: "",
+            },
             forum: {
                 forum_messages: [],
                 messages: 0,
