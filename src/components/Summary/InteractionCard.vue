@@ -3,8 +3,8 @@
     <div class="flex w-full h-full bg-white rounded-3xl p-10 mt-5 hover:cursor-pointer filter drop-shadow-lg
         transform transition duration-500">
         <!-- Card Information -->
-        <div class="flex flex-col w-5/12 justify-self-center self-center space-y-3">
-            <span class="text-5xl"> Total of Interactions </span>
+        <div class="flex flex-col w-full text-center lg:text-left lg:w-5/12 justify-self-center self-center space-y-3">
+            <span class="text-4xl lg:text-5xl"> Total of Interactions </span>
             <span class="text-6xl font-bold"> {{ summary.total_interactions.toLocaleString() }} </span>
         </div>
         <!-- Card graphics -->
