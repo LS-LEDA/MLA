@@ -1,7 +1,7 @@
 <template>
     <section id="dashboard" class="relative flex flex-col w-full h-full overflow-y-auto"
              :class="popup ? 'overflow-y-hidden' : 'overflow-y-auto'">
-        <div class="flex flex-col w-full h-full px-5 py-10">
+        <div class="flex flex-col flex-auto w-full min-h-min px-5 py-10">
             <!-- Tabs buttons -->
             <div class="grid grid-cols-2 gap-2 lg:flex md:flex-row pb-5 lg:space-x-5">
                 <router-link :to="tab.tab_path" v-for="(tab, index) in tabs" :key="index" class="">
