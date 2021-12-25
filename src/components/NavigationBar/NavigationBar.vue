@@ -1,9 +1,11 @@
 <template>
     <div :class="nav_state ? 'w-80' : 'w-20'" class="mx-2 my-2 flex flex-col bg-white rounded-xl transform transition-all duration-700">
         <NavigationHeader/>
-        <router-link :to="page.page_link" v-for="(page, index) in pages" :key="index" class="mx-2">
-            <NavigationButton :page="page"/>
-        </router-link>
+        <div class="flex flex-col gap-y-3 mx-2">
+            <router-link :to="page.page_link" v-for="(page, index) in pages" :key="index">
+                <NavigationButton :page="page"/>
+            </router-link>
+        </div>
         <div class="flex flex-col flex-1 justify-end">
             <DownloadButton/>
         </div>

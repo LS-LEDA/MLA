@@ -1,5 +1,5 @@
 <template>
-    <button type="button" class="flex flex-row bg-blue-100 hover:bg-blue-300 rounded-lg px-4 py-2 my-2 font-bold w-full"
+    <button type="button" class="flex flex-row bg-blue-100 hover:bg-blue-300 rounded-lg py-3 px-4 font-bold w-full"
             :class="nav_state ? null : 'justify-center'">
         <svg-icon type="mdi" :path="page.button_icon"></svg-icon>
         <span class="ml-3" v-if="nav_state">{{ page.button_name }}</span>
