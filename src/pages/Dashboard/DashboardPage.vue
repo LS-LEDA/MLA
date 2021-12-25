@@ -3,9 +3,9 @@
              :class="popup ? 'overflow-y-hidden' : 'overflow-y-auto'">
         <div class="flex flex-col flex-auto w-full min-h-min px-5 py-10">
             <!-- Tabs buttons -->
-            <div class="grid grid-cols-2 gap-2 lg:flex md:flex-row pb-5 lg:space-x-5">
+            <div class="grid grid-cols-2 gap-2 xl:flex xl:flex-row pb-5 lg:space-x-5">
                 <router-link :to="tab.tab_path" v-for="(tab, index) in tabs" :key="index" class="">
-                    <button class="w-full bg-blue-100 hover:bg-blue-200 rounded-lg text-2xl font-bold py-3 px-0
+                    <button class="w-full bg-blue-100 hover:bg-blue-200 rounded-lg text-2xl font-bold py-3
                                    lg:px-5 lg:px-10"> {{ tab.tab_name }}</button>
                 </router-link>
             </div>
