@@ -118,7 +118,6 @@ const store = createStore({
         },
         progressStepCounter(state, time) {
             let counter = 0;
-            console.log(time)
             let step = time / 100;
             let count = () => {
                 counter++;
