@@ -51,8 +51,8 @@ export default {
                     tab_path: "/dashboard/resources"
                 },
                 {
-                    tab_name: "Sentimental",
-                    tab_path: "/dashboard/sentimental-analysis"
+                    tab_name: "Sentiment",
+                    tab_path: "/dashboard/sentiment"
                 },
             ],
             popup: false,
