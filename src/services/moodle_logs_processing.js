@@ -3,7 +3,7 @@ import Log from "@/services/model/Log";
 import store from "@/vuex/store";
 //import router from "@/router/router";
 
-function forum_processing(data, name){
+function moodle_logs_processing(data, name){
     let logs = [];
 
     // Get imported logs' course name
@@ -36,4 +36,4 @@ function forum_processing(data, name){
     //router.push('/dashboard/summary');
 }
 
-export { forum_processing };
+export { moodle_logs_processing };

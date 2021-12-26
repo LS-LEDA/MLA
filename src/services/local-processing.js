@@ -2,7 +2,7 @@
 import store from "@/vuex/store";
 import router from "@/router/router";
 import Message from "@/services/model/Message";
-import {forum_processing} from "@/services/forum-processing";
+import {moodle_logs_processing} from "@/services/moodle_logs_processing";
 
 const UNSUPPORTED_FILE_TYPE = -2
 const SUPPORTED_FILE_TYPE   = 2
@@ -37,7 +37,7 @@ function local_processing(file) {
         let data = JSON.parse(event.target.result);
         // Check whether it's a Moodle Logs or Moodle Forum message Logs file
         if ( Array.isArray(data[0][0])) {
-            forum_processing(data, file.name);
+            moodle_logs_processing(data, file.name);
         } else {
             let messages = data[0];
             let forum = {
