@@ -5,7 +5,7 @@
             <!-- Tabs buttons -->
             <div class="grid grid-cols-2 gap-2 xl:flex xl:flex-row pb-5">
                 <router-link active-class="bg-blue-300"
-                             class="w-full bg-blue-100 hover:bg-blue-300 rounded-lg text-2xl font-bold py-3 text-center"
+                             class="bg-blue-200 w-full hover:bg-blue-300 rounded-lg text-2xl font-bold py-3 text-center"
                              :to="tab.tab_path"
                              v-for="(tab, index) in tabs"
                              :key="index">

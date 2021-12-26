@@ -4,7 +4,7 @@
         <div class="flex flex-col gap-y-3 mx-2">
             <router-link active-class="bg-blue-300"
                 :class="nav_state ? null : 'justify-center'"
-                class="flex flex-row bg-blue-100 hover:bg-blue-300 rounded-lg py-3 px-4 font-bold w-full"
+                class="flex flex-row bg-blue-200 hover:bg-blue-300 rounded-lg py-3 px-4 font-bold w-full"
                 :to="page.page_link" v-for="(page, index) in pages" :key="index">
                 <SvgIcon type="mdi" :path="page.button_icon"/>
                 <span class="ml-3" v-if="nav_state">{{ page.button_name }}</span>
