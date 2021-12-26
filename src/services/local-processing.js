@@ -48,7 +48,7 @@ function local_processing(file) {
                     }
                     // Redirect to Sentiment tab
                     if ( !store.state.imported_data.moodle_logs && store.state.imported_data.forum_logs ) {
-                        router.push('/dashboard/sentimental-analysis');
+                        router.push('/dashboard/sentiment');
                     }
                 }, 9000)
             }

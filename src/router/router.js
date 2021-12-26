@@ -9,7 +9,7 @@ import Settings from "@/pages/Settings/Settings";
 import Summary from "@/pages/Dashboard/Summary/Summary";
 import Students from "@/pages/Dashboard/Students/Students";
 import Resources from "@/pages/Dashboard/Resources/Resources";
-import Sentimental from "@/pages/Dashboard/Sentimental/Sentimental";
+import Sentimental from "@/pages/Dashboard/Sentiment/Sentiment";
 
 const routes = [
     { path: '/', component: ImportDataPage },
@@ -46,7 +46,7 @@ const routes = [
                 }
             },
             {
-                path: '/dashboard/sentimental-analysis',
+                path: '/dashboard/sentiment',
                 component: Sentimental,
                 name: "sentiment",
                 beforeEnter: () => {
@@ -82,7 +82,7 @@ function check_imported_data(to, from) {
             redirectionAlert("Import Forum log");
             return '/import-data';
         }
-        return '/dashboard/sentimental-analysis';
+        return '/dashboard/sentiment';
     }
     // Redirect to Summary tab if moodle log has been imported
     if ( store.state.imported_data.moodle_logs && !store.state.imported_data.forum_logs) {
