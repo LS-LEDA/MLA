@@ -24,6 +24,8 @@ async function createWindow() {
     const win = new BrowserWindow({
         width: width,
         height: height,
+        minWidth: 700,
+        minHeight: 500,
         // Don't show the window until it's ready, this prevents any white flickering
         show: false,
         icon: path.join(__dirname, '/mla_logo.png'),
