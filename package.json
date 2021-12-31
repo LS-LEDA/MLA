@@ -11,7 +11,8 @@
     "postinstall": "electron-builder install-app-deps",
     "postuninstall": "electron-builder install-app-deps",
     "build-win": "vue-cli-service electron:build --win --ia32 --x64 --publish=onTagOrDraft",
-    "build-mac": "vue-cli-service electron:build --mac --publish=onTagOrDraft"
+    "build-mac": "vue-cli-service electron:build --mac --publish=onTagOrDraft",
+    "build-linux": "vue-cli-service electron:build --linux --publish=onTagOrDraft"
   },
   "author": {
     "name": "La Salle URL GRETEL"
