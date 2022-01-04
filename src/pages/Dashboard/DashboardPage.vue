@@ -1,6 +1,7 @@
 <template>
-    <section id="dashboard" class="relative flex flex-col w-full h-full overflow-y-auto"
-             :class="popup ? 'overflow-y-hidden' : 'overflow-y-auto'">
+    <section id="dashboard" class="relative flex flex-col w-full h-full overflow-y-auto">
+        <!-- TODO: Make popup take full height -->
+             <!--:class="popup ? 'overflow-y-hidden' : 'overflow-y-auto'">-->
         <div class="flex flex-col flex-auto w-full min-h-min px-5 py-10">
             <!-- Tabs buttons -->
             <div class="grid grid-cols-2 gap-2 xl:flex xl:flex-row pb-5">
