@@ -70,7 +70,7 @@ function check_imported_forum_data(){
     if ( !store.state.imported_data.forum_logs ) {
         // Show alert
         redirectionAlert("Import Forum log");
-        return '/import-data';
+        return false;
     }
 }
 
@@ -80,7 +80,7 @@ function check_imported_data(to, from) {
         // Redirect to import data page if "Summary" button is pressed from the Dashboard's Sentiment page
         if ( to.name === 'summary' && from.name === 'sentiment') {
             redirectionAlert("Import Forum log");
-            return '/import-data';
+            return false;
         }
         return '/dashboard/sentiment';
     }
