@@ -32,7 +32,8 @@ import SentimentOverallCard from "@/components/Sentiment/SentimentOverallCard";
 import SentimentFileCard from "@/components/Sentiment/SentimentFileCard";
 
 export default {
-    name: "Sentimental",
+    name: "Sentiment",
+    emits: ['popUp'],
     components: {
 
         SentimentFileCard,
