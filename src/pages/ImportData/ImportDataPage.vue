@@ -6,6 +6,9 @@
             <DragDropArea @onUpload="toggle_pop_up" @popUp="toggle_information_pop_up"/>
         </div>
         <UploadConfirmation v-if="file_selected" @buttonClick="confirm_upload" :selected_file_name="selected_file_name"/>
+        <!-- Alert -->
+        <Alert v-if="alert_status.status" :message="alert_status.message"
+               @closeAlert="close_alert"/>
     </section>
 </template>
 
@@ -15,6 +18,7 @@ import UploadConfirmation from "@/components/ImportData/UploadConfirmation";
 import UploadProgressBar from "@/components/ImportData/UploadProgressBar";
 import InformationPopUp from "@/components/ImportData/InformationPopUp";
 import {local_processing} from "@/services/local-processing";
+import Alert from "@/components/UI/Alert";
 
 export default {
     name: "ImportDataPage",
@@ -30,7 +34,13 @@ export default {
         UploadProgressBar,
         UploadConfirmation,
         DragDropArea,
-        InformationPopUp
+        InformationPopUp,
+        Alert
+    },
+    computed: {
+        alert_status(){
+            return this.$store.state.alert;
+        }
     },
     methods: {
         /**
@@ -64,6 +74,11 @@ export default {
             }
             // Final Close the PopUp
             this.toggle_pop_up(this.selected_file_name);
+        },
+        close_alert: function(){
+            // Clears toggle alert timeout if alert is dismissed by the user
+            clearTimeout(this.$store.state.alert.timeout);
+            this.$store.state.alert.status = false;
         }
     }
 }
