@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col absolute w-full h-full justify-center place-items-center bg-gray-400 bg-opacity-75 transition-opacity"
+    <div class="flex flex-col absolute w-full h-full justify-center place-items-center z-40 bg-gray-400 bg-opacity-75 transition-opacity"
          role="dialog" aria-modal="true">
 
         <!-- PopUp white background -->
