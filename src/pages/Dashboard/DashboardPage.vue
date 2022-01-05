@@ -1,20 +1,20 @@
 <template>
-    <section id="dashboard" class="relative flex flex-col w-full h-full overflow-y-auto">
-        <!-- TODO: Make popup take full height -->
-             <!--:class="popup ? 'overflow-y-hidden' : 'overflow-y-auto'">-->
-        <div class="flex flex-col flex-auto w-full min-h-min px-5 py-10">
-            <!-- Tabs buttons -->
-            <div class="grid grid-cols-2 gap-2 xl:flex xl:flex-row pb-5">
-                <router-link active-class="bg-blue-300"
-                             class="bg-blue-200 w-full hover:bg-blue-300 rounded-lg text-2xl font-bold py-3 text-center"
-                             :to="tab.tab_path"
-                             v-for="(tab, index) in tabs"
-                             :key="index">
-                        {{ tab.tab_name }}
-                </router-link>
+    <section id="dashboard" class="relative flex flex-col w-full h-full">
+        <div class="w-full h-full overflow-y-auto">
+            <div class="flex flex-col flex-auto w-full h-full px-5 py-10">
+                <!-- Tabs buttons -->
+                <div class="grid grid-cols-2 gap-2 xl:flex xl:flex-row pb-5">
+                    <router-link active-class="bg-blue-300"
+                                 class="bg-blue-200 w-full hover:bg-blue-300 rounded-lg text-2xl font-bold py-3 text-center"
+                                 :to="tab.tab_path"
+                                 v-for="(tab, index) in tabs"
+                                 :key="index">
+                            {{ tab.tab_name }}
+                    </router-link>
+                </div>
+                <!-- Dashboard deeply nested component view -->
+                <router-view @popUp="toggle_popup"></router-view>
             </div>
-            <!-- Dashboard deeply nested component view -->
-            <router-view @popUp="toggle_popup"></router-view>
         </div>
         <SummaryPopUp v-if="popup" @popUp="toggle_popup" :summaryID="summaryID" :card_name="card_name" class="absolute"/>
         <!-- Alert -->
