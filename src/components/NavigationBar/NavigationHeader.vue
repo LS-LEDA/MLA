@@ -56,7 +56,7 @@ export default {
             }
             // Redirect to Sentiment tab
             if ( !this.$store.state.imported_data.moodle_logs && this.$store.state.imported_data.forum_logs ) {
-                return '/dashboard/sentimental-analysis';
+                return '/dashboard/sentiment';
             }
             return '/import-data';
         }

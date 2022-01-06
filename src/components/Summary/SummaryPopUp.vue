@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col absolute w-full h-full justify-center place-items-center bg-gray-400 bg-opacity-75 transition-opacity"
+    <div class="flex flex-col absolute w-full h-full justify-center place-items-center z-40 bg-gray-400 bg-opacity-75 transition-opacity"
          role="dialog" aria-modal="true">
 
         <!-- PopUp white background -->
@@ -19,7 +19,7 @@
 
             <!-- Summary card chart -->
             <div class="flex w-full h-3/6">
-                <div class="flex relative w-full w-full text-center mx-6 font-bold text-4xl rounded-3xl">
+                <div class="flex items-center relative w-full w-full text-center mx-6 font-bold text-4xl rounded-3xl">
                     <canvas class="max-h-full max-w-full" id="summary_chart"></canvas>
                 </div>
             </div>

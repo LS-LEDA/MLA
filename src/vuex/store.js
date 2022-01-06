@@ -85,10 +85,13 @@ const store = createStore({
         storeForumMessages(state, forum) {
             this.state.forum = forum
         },
-        toggleAlert(state, message) {
-            // Toggle alert
-            this.state.alert.status = !this.state.alert.status;
+        // Set the alert message
+        setAlertMessage(state, message) {
             this.state.alert.message = message;
+        },
+        // Toggle alert
+        toggleAlert() {
+            this.state.alert.status = !this.state.alert.status;
         },
         // Store computed summary data
         saveSummaryTypes(state, summary) {
@@ -118,7 +121,6 @@ const store = createStore({
         },
         progressStepCounter(state, time) {
             let counter = 0;
-            console.log(time)
             let step = time / 100;
             let count = () => {
                 counter++;
