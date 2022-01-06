@@ -9,7 +9,7 @@ module.exports = {
                 },
                 publish: ["github"],
                 win: {
-                    icon: "resources/installer/icon.ico",
+                    icon: "resources/installer/icon.png",
                     target: [
                         "zip",
                         "nsis",
@@ -25,14 +25,14 @@ module.exports = {
                 },
                 mac: {
                     category: "public.app-category.education",
-                    icon: "resources/installer/icon.ico",
+                    icon: "resources/installer/icon.png",
                     target: [
                         "zip",
                         "dmg"
                     ]
                 },
                 dmg: {
-                    icon: "resources/installer/icon.ico"
+                    icon: "resources/installer/icon.png"
                 }
             }
         }
