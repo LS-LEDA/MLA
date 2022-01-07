@@ -24,9 +24,11 @@ async function createWindow() {
     const win = new BrowserWindow({
         width: width,
         height: height,
+        minWidth: 700,
+        minHeight: 500,
         // Don't show the window until it's ready, this prevents any white flickering
         show: false,
-        icon: path.join(__dirname, '/mla_logo.png'),
+        icon: path.join(__dirname, 'assets/mla_logo.png'),
         webPreferences: {
 
             // Use pluginOptions.nodeIntegration, leave this alone
@@ -50,7 +52,9 @@ async function createWindow() {
     } else {
         createProtocol('app')
         // Load the index.html when not in development
-        win.loadURL('app://./index.html')
+        win.loadURL('app://./index.html').then( () => {
+            win.show()
+        })
     }
 }
 

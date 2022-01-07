@@ -1,9 +1,15 @@
 <template>
     <div :class="nav_state ? 'w-80' : 'w-20'" class="mx-2 my-2 flex flex-col bg-white rounded-xl transform transition-all duration-700">
         <NavigationHeader/>
-        <router-link :to="page.page_link" v-for="(page, index) in pages" :key="index" class="mx-2">
-            <NavigationButton :page="page"/>
-        </router-link>
+        <div class="flex flex-col gap-y-3 mx-2">
+            <router-link active-class="bg-blue-300"
+                :class="nav_state ? null : 'justify-center'"
+                class="flex flex-row bg-blue-200 hover:bg-blue-300 rounded-lg py-3 px-4 font-bold w-full"
+                :to="page.page_link" v-for="(page, index) in pages" :key="index">
+                <SvgIcon type="mdi" :path="page.button_icon"/>
+                <span class="ml-3" v-if="nav_state">{{ page.button_name }}</span>
+            </router-link>
+        </div>
         <div class="flex flex-col flex-1 justify-end">
             <DownloadButton/>
         </div>
@@ -11,8 +17,7 @@
 </template>
 
 <script>
-import DownloadButton from '@/components/NavigationBar/DownloadButton'
-import NavigationButton from '@/components/NavigationBar/NavigationButton'
+import DownloadButton from '@/components/NavigationBar/DownloadButton';
 import NavigationHeader from "@/components/NavigationBar/NavigationHeader";
 import {
   mdiCogOutline,
@@ -20,13 +25,14 @@ import {
   mdiToyBrickPlusOutline,
   mdiViewDashboardOutline
 } from "@mdi/js";
+import SvgIcon from "@jamescoyle/vue-icon";
 
 export default {
     name: "NavigationBar",
     components: {
         NavigationHeader,
-        NavigationButton,
-        DownloadButton
+        DownloadButton,
+        SvgIcon
     },
     computed: {
         /**

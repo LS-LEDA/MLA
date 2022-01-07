@@ -1,5 +1,5 @@
 <template>
-    <div class="fixed bottom-0 left-0 right-0 z-50 flex transition place-content-center">
+    <div class="absolute bottom-0 left-0 right-0 z-50 flex transition place-content-center">
         <div class="flex bg-red-100 rounded-lg p-5 mb-3 text-red-700 items-center" role="alert">
             <SvgIcon type="mdi" :path="help_icon" class="text-red-500"/>
             <div class="font-bold pl-2 pr-5">

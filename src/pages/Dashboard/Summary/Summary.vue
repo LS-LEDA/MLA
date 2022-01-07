@@ -42,10 +42,12 @@ export default {
             this.statistics.forEach( (stat, index) => {
                 switch ( stat.statistic_name ) {
                     case 'Tasks':
+                        if ( !('Tarea' in summary_types) ) return;
                         stat.number = summary_types['Tarea'].count;
                         this.$store.commit('saveSummaryCard', {summaryID: index, summary: summary_types['Tarea'].interactions});
                         break;
                     case 'URL':
+                        if ( !('URL' in summary_types) ) return;
                         stat.number = summary_types['URL'].count;
                         this.$store.commit('saveSummaryCard', {summaryID: index, summary: summary_types['URL'].interactions});
                         break;

@@ -1,5 +1,5 @@
 <template>
-    <h1 class="text-4xl font-extrabold"> Sentimental Analysis </h1>
+    <h1 class="text-4xl font-extrabold"> Sentiment Analysis </h1>
     <span class="font-bold text-2xl text-gray-500"> Forum messages sentiments </span>
 
     <div class="flex flex-col w-full h-full mt-5 gap-y-5">
@@ -32,7 +32,8 @@ import SentimentOverallCard from "@/components/Sentiment/SentimentOverallCard";
 import SentimentFileCard from "@/components/Sentiment/SentimentFileCard";
 
 export default {
-    name: "Sentimental",
+    name: "Sentiment",
+    emits: ['popUp'],
     components: {
 
         SentimentFileCard,
