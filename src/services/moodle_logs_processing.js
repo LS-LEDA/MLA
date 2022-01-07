@@ -21,8 +21,8 @@ function moodle_logs_processing(data, name){
     let summary_types = summary_processing(logs);
 
     store.commit('saveSummaryTypes', {
-        total_interactions: logs.length,
-        summary_types: summary_types
+            total_interactions: logs.length,
+            summary_types: summary_types
         }
     );
     // Set moodle imported data true
