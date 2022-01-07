@@ -1,6 +1,6 @@
 # Moodle Learning Analytics
 
-MLA is a modern open source tool to analyse Moodle logs developed by La Salle URL - GRETEL.
+MLA is a modern open source desktop application that analyses Moodle generated logs and provides insightful information.
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/LS-LEDA/MLA/main/public/assets/mla_logo.png" alt="MLA Logo"/>
