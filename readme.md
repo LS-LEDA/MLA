@@ -15,7 +15,9 @@ MLA is a modern open source desktop application that analyses Moodle generated l
 
 Visit [MLA website](https://ls-leda.github.io/Moodle-Learning-Analytics/) to learn more.
 
-## Installation
+## ⚙ Installation
+
+MLA can be downloaded from [MLA website](https://ls-leda.github.io/Moodle-Learning-Analytics/). Or, from [GitHub](https://github.com/LS-LEDA/MLA/releases/latest) latest release page.
 
 ### Windows
 Download the latest [MLA installer](https://github.com/LS-LEDA/MLA/releases/latest). `MLA Setup.exe` will install the corresponding version for your device's architecture.
@@ -25,8 +27,13 @@ There is a [portable](https://github.com/LS-LEDA/MLA/releases/latest) version to
 
 ### macOS
 Download the latest [MLA](https://github.com/LS-LEDA/MLA/releases/latest) release.
+`MLA.dmg` will install the corresponding version for your device, or use it as a portable app.
 
 ### Linux
+MLA is only available for 64-bit Linux systems.
+
+Built packages `.deb`, `.pacman`, `.freebsd`, `.rpm`, `.snap`, `.AppImage`
+
 Download the latest [MLA](https://github.com/LS-LEDA/MLA/releases/latest) release.
 
 
