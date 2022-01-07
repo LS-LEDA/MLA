@@ -7,6 +7,7 @@ module.exports = {
                 directories: {
                     "output": "build"
                 },
+                publish: ["github"],
                 win: {
                     icon: "resources/installer/icons/icon.png",
                     target: [
@@ -47,6 +48,7 @@ module.exports = {
                         Type: "Application",
                         Categories: "GTK;GNOME;Education;"
                     },
+                    publish: ["github"],
                     target: [
                         {
                             target: "zip",
