@@ -4,6 +4,11 @@ MLA is a modern open source desktop application that analyses Moodle generated l
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/LS-LEDA/MLA/main/public/assets/mla_logo.png" alt="MLA Logo"/>
+</p>
+
+
+## 🌟 User Interface
+<p align="center">
   <img src="https://raw.githubusercontent.com/LS-LEDA/MLA/main/resources/demo/demo_dashboard.png" alt="Dashboard Demo"/>
   <img src="https://raw.githubusercontent.com/LS-LEDA/MLA/main/resources/demo/demo_summary_card.png" alt="Summary Card Demo"/>
 </p>
