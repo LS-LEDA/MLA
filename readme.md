@@ -88,6 +88,8 @@ Finally, run one of the following commands for your target Operating System.
 `npm run build-mac`
 
 ### Linux
+Caveat: make sure to have `libarchive-tools` or `bsdtar` to build for **.pacman**. Or comment it out
+
 `npm run build-linux`
 
 
