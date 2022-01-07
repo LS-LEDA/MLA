@@ -1,11 +1,15 @@
 {
   "name": "mla",
   "version": "1.0.1",
+  "license": "GPL-3.0",
   "description": "Moodle Learning Analytics",
   "homepage": "https://ls-leda.github.io/Moodle-Learning-Analytics/",
   "repository": {
     "type": "git",
     "url": "https://github.com/LS-LEDA/MLA"
+  },
+  "author": {
+    "name": "La Salle URL GRETEL"
   },
   "maintainers": [
     {
@@ -13,21 +17,6 @@
       "email": "jiahui1@hotmail.es"
     }
   ],
-  "private": true,
-  "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "electron:serve": "vue-cli-service electron:serve",
-    "postinstall": "electron-builder install-app-deps",
-    "postuninstall": "electron-builder install-app-deps",
-    "build-win": "vue-cli-service electron:build --win --ia32 --x64 --publish=onTagOrDraft",
-    "build-mac": "vue-cli-service electron:build --mac --publish=onTagOrDraft",
-    "build-linux": "vue-cli-service electron:build --linux --publish=onTagOrDraft"
-  },
-  "author": {
-    "name": "La Salle URL GRETEL"
-  },
   "contributors": [
     {
       "name": "Daniel Amo Filva",
@@ -42,7 +31,18 @@
       "email": "aleix.olle@students.salle.url.edu"
     }
   ],
-  "license": "GPL-3.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "electron:serve": "vue-cli-service electron:serve",
+    "postinstall": "electron-builder install-app-deps",
+    "postuninstall": "electron-builder install-app-deps",
+    "build-win": "vue-cli-service electron:build --win --ia32 --x64 --publish=onTagOrDraft",
+    "build-mac": "vue-cli-service electron:build --mac --publish=onTagOrDraft",
+    "build-linux": "vue-cli-service electron:build --linux --publish=onTagOrDraft"
+  },
   "main": "background.js",
   "dependencies": {
     "@jamescoyle/vue-icon": "^0.1.2",
