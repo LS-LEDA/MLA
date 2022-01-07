@@ -8,6 +8,9 @@
     "type": "git",
     "url": "https://github.com/LS-LEDA/MLA"
   },
+  "bugs": {
+    "url": "https://github.com/LS-LEDA/MLA/issues"
+  },
   "author": {
     "name": "La Salle URL GRETEL"
   },
