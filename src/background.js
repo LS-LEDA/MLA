@@ -28,7 +28,7 @@ async function createWindow() {
         minHeight: 500,
         // Don't show the window until it's ready, this prevents any white flickering
         show: false,
-        icon: path.join(__dirname, '/mla_logo.png'),
+        icon: path.join(__dirname, 'assets/mla_logo.png'),
         webPreferences: {
 
             // Use pluginOptions.nodeIntegration, leave this alone
