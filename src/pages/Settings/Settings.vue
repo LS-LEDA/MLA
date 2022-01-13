@@ -29,7 +29,26 @@
 
 <script>
 export default {
-    name: "Dashboard"
+    name: "Dashboard",
+    components: {ContributorBadge},
+    data() {
+        return {
+            contributors: [
+                {
+                    name: "PhD. Daniel Amo Filvà",
+                    email: "daniel.amo@salle.url.edu"
+                },
+                {
+                    name: "Jiahui Chen",
+                    email: "jiahui1@hotmail.es"
+                },
+                {
+                    name: "Aleix Ollé",
+                    email: "aleix.olle@students.salle.url.edu"
+                }
+            ]
+        }
+    }
 }
 </script>
 
