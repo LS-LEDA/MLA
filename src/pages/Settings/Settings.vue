@@ -28,6 +28,7 @@
 </template>
 
 <script>
+import ContributorBadge from "@/components/UI/ContributorBadge";
 export default {
     name: "Dashboard",
     components: {ContributorBadge},
