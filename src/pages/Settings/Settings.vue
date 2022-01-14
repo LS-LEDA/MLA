@@ -3,24 +3,14 @@
         <div class="flex flex-col w-full h-full p-10">
             <h1 class="text-4xl font-extrabold pb-5"> Settings </h1>
             <div class="w-full h-full bg-white rounded-2xl">
-                <div id="contributors" class="mt-5 ml-5">
-                    <ul>
-                        <li class="">PhD. Daniel Amo Filvà
-                            <a href="mailto:daniel.amo@salle.url.edu" class="pl-10 font-bold text-blue-600">
-                                daniel.amo@salle.url.edu
-                            </a>
-                        </li>
-                        <li class="text-">Jiahui Chen
-                            <a href="mailto:jiahui1@hotmail.es" class="pl-10 font-bold text-blue-600">
-                                jiahui1@hotmail.es
-                            </a>
-                        </li>
-                        <li class="">Aleix Ollé
-                            <a href="mailto:aleix.olle@students.salle.url.edu" class="pl-10 font-bold text-blue-600">
-                                aleix.olle@students.salle.url.edu
-                            </a>
-                        </li>
-                    </ul>
+                <!-- Contributors section -->
+
+                <div class="bg"> Contributors </div>
+                <div class="flex flex-col sm:grid md:grid-cols-2 lg:grid-cols-3 w-full h-full p-5 gap-5">
+                    <ContributorBadge v-for="(contributor, id) in contributors"
+                                      :key="id"
+                                      :contributor="contributor"
+                    />
                 </div>
             </div>
         </div>
@@ -29,6 +19,9 @@
 
 <script>
 import ContributorBadge from "@/components/UI/ContributorBadge";
+import dani_icon from "/public/assets/dani_amo_profile.jpeg";
+import default_icon from "/public/assets/default_profile.png";
+
 export default {
     name: "Dashboard",
     components: {ContributorBadge},
@@ -37,15 +30,17 @@ export default {
             contributors: [
                 {
                     name: "PhD. Daniel Amo Filvà",
-                    email: "daniel.amo@salle.url.edu"
+                    email: "daniel.amo@salle.url.edu",
+                    icon: dani_icon,
                 },
                 {
                     name: "Jiahui Chen",
-                    email: "jiahui1@hotmail.es"
+                    email: "jiahui1@hotmail.es",
                 },
                 {
                     name: "Aleix Ollé",
-                    email: "aleix.olle@students.salle.url.edu"
+                    email: "aleix.olle@students.salle.url.edu",
+                    icon: default_icon,
                 }
             ]
         }
