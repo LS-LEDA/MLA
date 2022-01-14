@@ -20,6 +20,7 @@
 <script>
 import ContributorBadge from "@/components/UI/ContributorBadge";
 import dani_icon from "/public/assets/dani_amo_profile.jpeg";
+import jiahui_icon from "/public/assets/jiahui_profile.png";
 import default_icon from "/public/assets/default_profile.png";
 
 export default {
@@ -36,6 +37,7 @@ export default {
                 {
                     name: "Jiahui Chen",
                     email: "jiahui1@hotmail.es",
+                    icon: jiahui_icon,
                 },
                 {
                     name: "Aleix Ollé",
