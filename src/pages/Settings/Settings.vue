@@ -13,9 +13,10 @@
                         {{ tab.tab_name }}
                     </router-link>
                 </div>
+                <!-- Dashboard deeply nested component view -->
+                <router-view></router-view>
 
                 <!-- Contributors section -->
-
                 <div class="font-bold text-2xl"> Contributors </div>
                 <div class="flex flex-col sm:grid md:grid-cols-2 lg:grid-cols-3 w-full h-full p-5 gap-5">
                     <ContributorBadge v-for="(contributor, id) in contributors"
