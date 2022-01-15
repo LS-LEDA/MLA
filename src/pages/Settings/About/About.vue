@@ -13,8 +13,11 @@
             <!-- External links -->
             <div class="flex flex-col place-items-center">
                 <div v-for="(link, index) in external_links" :key="index">
-                    <a :href="link.link" target="_blank">
+                    <a class="flex place-items-center hover:underline underline-offset-2"
+                       :class="link.special_color ? 'text-red-600' : 'text-blue-600'"
+                        :href="link.link" target="_blank">
                         {{ link.name }}
+                        <SvgIcon class="hover:cursor-pointer ml-2" type="mdi" size="16" :path="link_icon"/>
                     </a>
                 </div>
             </div>
@@ -24,12 +27,18 @@
 
 <script>
 import mla_logo from "/public/assets/mla_logo.png";
+import SvgIcon from "@jamescoyle/vue-icon";
+import {mdiOpenInNew} from "@mdi/js";
 
 export default {
     name: "About",
+    components: {
+        SvgIcon
+    },
     data() {
         return {
             mla_logo: mla_logo,
+            link_icon: mdiOpenInNew,
             information: [
                 "MLA for Desktop",
                 "Version 1.0.1 - Andromeda",
@@ -51,6 +60,7 @@ export default {
                 {
                     name: "Report an Issue",
                     link: "https://github.com/LS-LEDA/MLA/issues",
+                    special_color: true
                 }
             ]
         }
