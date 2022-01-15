@@ -5,7 +5,7 @@
             <div class="w-full h-full bg-white rounded-2xl">
                 <!-- Contributors section -->
 
-                <div class="bg"> Contributors </div>
+                <div class="font-bold text-2xl"> Contributors </div>
                 <div class="flex flex-col sm:grid md:grid-cols-2 lg:grid-cols-3 w-full h-full p-5 gap-5">
                     <ContributorBadge v-for="(contributor, id) in contributors"
                                       :key="id"
