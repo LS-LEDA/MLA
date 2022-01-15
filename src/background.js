@@ -1,6 +1,6 @@
 'use strict'
 
-import { app, protocol, BrowserWindow } from 'electron'
+import { app, protocol, BrowserWindow, webContents, shell } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS3_DEVTOOLS } from 'electron-devtools-installer'
 const path = require('path')
@@ -55,6 +55,12 @@ async function createWindow() {
         win.loadURL('app://./index.html').then( () => {
             win.show()
         })
+
+        // Opens external links in user's default browser
+        webContents.setWindowOpenHandler( ({url}) => {
+            shell.openExternal(url)
+            return { action: "allow"}
+        });
     }
 }
 

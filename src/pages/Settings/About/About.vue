@@ -13,7 +13,9 @@
             <!-- External links -->
             <div class="flex flex-col place-items-center">
                 <div v-for="(link, index) in external_links" :key="index">
-                    {{ link.name }}
+                    <a :href="link.link" target="_blank">
+                        {{ link.name }}
+                    </a>
                 </div>
             </div>
         </div>
