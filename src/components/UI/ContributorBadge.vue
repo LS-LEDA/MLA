@@ -1,6 +1,6 @@
 <template>
     <!-- Contributor badge background -->
-    <div class="flex bg-blue-100 rounded-lg w-full max-h-32 shadow-lg shadow-blue-400/30 p-5 hover:scale-[101%] gap-x-3">
+    <div class="flex bg-blue-100 rounded-lg w-full max-h-32 shadow-lg shadow-blue-400/30 p-5 gap-x-3">
         <!-- Profile Icon -->
         <img class="w-20 h-20 rounded-full" :src="contributor.icon" alt="icon">
 
