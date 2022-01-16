@@ -17,6 +17,11 @@
                     {{ contributor.email }}
                 </a>
             </span>
+
+            <!-- Contributor role in the project -->
+            <div class="text-gray-500 inline">
+                {{ contributor.role }}
+            </div>
         </div>
     </div>
 </template>
