@@ -14,7 +14,7 @@
             <!-- TODO: Fix overflow -->
             <!-- Contributor contact information -->
             <span class="flex max-w-full font-bold text-blue-600 space-x-2">
-                <a href="mailto:jiahui1@hotmail.es">
+                <a :href="`mailto:` + contributor.email">
                     {{ contributor.email }}
                 </a>
                 <SvgIcon class="self-center hover:bg-blue-200"
