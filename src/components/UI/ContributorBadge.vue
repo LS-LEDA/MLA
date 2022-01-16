@@ -16,6 +16,12 @@
                 <a href="mailto:jiahui1@hotmail.es">
                     {{ contributor.email }}
                 </a>
+                <SvgIcon class="self-center hover:bg-blue-200"
+                         type="mdi"
+                         size="16"
+                         :path="copy_icon"
+                         @click="copy_mail"
+                />
             </span>
 
             <!-- Contributor role in the project -->
@@ -27,9 +33,28 @@
 </template>
 
 <script>
+import SvgIcon from "@jamescoyle/vue-icon";
+import {mdiContentCopy} from "@mdi/js";
+
 export default {
     name: "ContributorBadge",
-    props: ['contributor']
+    props: ['contributor'],
+    components: {
+        SvgIcon
+    },
+    data() {
+        return {
+            copy_icon: mdiContentCopy,
+        }
+    },
+    methods: {
+        /**
+         * Copies the selected mail to clipboard
+         */
+        copy_mail: function () {
+            navigator.clipboard.writeText(this.contributor.email)
+        }
+    }
 }
 </script>
 
