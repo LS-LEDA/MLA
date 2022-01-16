@@ -1,6 +1,6 @@
 <template>
     <!-- Contributor badge background -->
-    <div class="flex bg-blue-100 rounded-lg w-full max-h-32 shadow-lg shadow-blue-400/30 p-5 gap-x-3">
+    <div class="flex bg-blue-100 rounded-lg max-w-full max-h-32 shadow-lg shadow-blue-400/30 p-5 gap-x-3 truncate text-ellipsis">
         <!-- Profile Icon -->
         <img class="w-20 h-20 rounded-full" :src="contributor.icon" alt="icon">
 
@@ -11,8 +11,9 @@
                 {{ contributor.name }}
             </div>
 
+            <!-- TODO: Fix overflow -->
             <!-- Contributor contact information -->
-            <span class="font-bold text-blue-600 inline">
+            <span class="flex max-w-full font-bold text-blue-600 space-x-2">
                 <a href="mailto:jiahui1@hotmail.es">
                     {{ contributor.email }}
                 </a>
