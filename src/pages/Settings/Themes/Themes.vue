@@ -16,8 +16,14 @@
             <!-- TODO: Overflow layout -->
             <!-- Application Theme settings -->
             <div class="flex flex-col w-full h-full space-y-2">
-                <div class="font-bold text-2xl">
-                    Application theme
+                <div class="flex w-full justify-between">
+                    <div class="font-bold text-2xl self-center">
+                        Application theme
+                    </div>
+                    <div class="flex">
+                        <IconButton :icon="revert_icon" type="Default theme" :status="true"/>
+                        <IconButton :icon="add_icon" type="Add" :status="true"/>
+                    </div>
                 </div>
 
                 <div class="grid grid-cols-2 auto-rows-max gap-4 h-full overflow-x-hidden overflow-y-scroll">
@@ -39,13 +45,15 @@
 
 <script>
 
-import {mdiMonitor, mdiWeatherNight, mdiWhiteBalanceSunny} from "@mdi/js";
+import {mdiMonitor, mdiPlus, mdiUndo, mdiWeatherNight, mdiWhiteBalanceSunny} from "@mdi/js";
 import ModeSelector from "@/components/Settings/ModeSelector";
 import Theme from "@/components/Settings/Theme";
+import IconButton from "@/components/UI/IconButton";
 
 export default {
     name: "Themes",
     components: {
+        IconButton,
         Theme,
         ModeSelector,
     },
@@ -54,6 +62,8 @@ export default {
             // TODO: Load stored settings
             selected_mode: 0,
             selected_theme: 0,
+            revert_icon: mdiUndo,
+            add_icon: mdiPlus,
             application_modes: [
                 {
                     mode: "dark",
