@@ -7,16 +7,31 @@
                     Application mode
                 </div>
                 <ModeSelector v-for="( mode, index ) in application_modes" :key="index"
-                              :selected="selected"
+                              :selected="selected_mode"
                               :mode="mode"
                               :id="index"
                               @select_mode="select_mode"
                 />
             </div>
+            <!-- TODO: Overflow layout -->
             <!-- Application Theme settings -->
-            <div class="flex w-full h-full">
-                <div class="font-bold text-2xl">
-                    Application theme
+            <div class="flex flex-col w-full h-full space-y-2">
+                <div class="flex w-full justify-between">
+                    <div class="font-bold text-2xl self-center">
+                        Application theme
+                    </div>
+                    <div class="flex">
+                        <IconButton :icon="revert_icon" type="Default theme" :status="true" @click="revert_theme"/>
+                        <IconButton :icon="add_icon" type="Add" :status="true" @click="add_theme"/>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 auto-rows-max gap-4 h-full overflow-x-hidden overflow-y-scroll">
+                    <Theme v-for="( theme, index ) in themes" :key="index"
+                           :theme="theme"
+                           :selected="selected_theme"
+                           :id="index"
+                           @select_theme="select_theme"/>
                 </div>
             </div>
         </div>
@@ -30,17 +45,25 @@
 
 <script>
 
-import {mdiMonitor, mdiWeatherNight, mdiWhiteBalanceSunny} from "@mdi/js";
+import {mdiMonitor, mdiPlus, mdiUndo, mdiWeatherNight, mdiWhiteBalanceSunny} from "@mdi/js";
 import ModeSelector from "@/components/Settings/ModeSelector";
+import Theme from "@/components/Settings/Theme";
+import IconButton from "@/components/UI/IconButton";
 
 export default {
     name: "Themes",
     components: {
+        IconButton,
+        Theme,
         ModeSelector,
     },
     data() {
         return {
-            selected: true,
+            // TODO: Load stored settings
+            selected_mode: 0,
+            selected_theme: 0,
+            revert_icon: mdiUndo,
+            add_icon: mdiPlus,
             application_modes: [
                 {
                     mode: "dark",
@@ -57,6 +80,38 @@ export default {
                     description: "Let the system decide for yous",
                     icon: mdiMonitor
                 }
+            ],
+            themes: [
+                {
+                    name: "Summer Splash",
+                    colours: [
+                        '#264653',
+                        '#2A9D8F',
+                        '#E9C46A',
+                        '#F4A261',
+                        '#E76F51',
+                    ]
+                },
+                {
+                    name: "Pastel Dreams",
+                    colours: [
+                        '#CDB4DB',
+                        '#FFC8DD',
+                        '#FFAFCC',
+                        '#BDE0FE',
+                        '#A2D2FF',
+                    ]
+                },
+                {
+                    name: "Berry Blues",
+                    colours: [
+                        '#EF476F',
+                        '#FFD166',
+                        '#06D6A0',
+                        '#118AB2',
+                        '#073B4C',
+                    ]
+                }
             ]
         }
     },
@@ -65,9 +120,23 @@ export default {
          * Switch between light or dark mode
          * dark: true
          * light: false
+         * @param selected_id: Selected mode ID
          */
         select_mode: function (selected_id) {
-            this.selected = selected_id
+            this.selected_mode = selected_id
+        },
+        /**
+         * Select between available themes
+         * @param selected_id: Selected theme ID
+         */
+        select_theme: function (selected_id) {
+            this.selected_theme = selected_id
+        },
+        add_theme: function () {
+            // TODO: Implement add theme button
+        },
+        revert_theme: function () {
+            // TODO: Implement add theme button
         }
     }
 }
