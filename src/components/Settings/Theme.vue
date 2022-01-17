@@ -10,7 +10,7 @@
         <!-- Theme colours -->
         <div class="flex flex-initial w-full justify-center">
             <div class="flex justify-center palette">
-                <div class="rounded-full border-2 border-white w-12 h-12 circle bg-[#]"
+                <div class="rounded-full border-2 border-white w-12 h-12 circle"
                      :class="`bg-[${colour}]`"
                      v-for="( colour, index ) in theme.colours" :key="index">
                 </div>
