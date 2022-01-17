@@ -20,14 +20,19 @@
 <script>
 export default {
     name: "Theme",
-    props: ['theme'],
+    props: ['theme', 'id', 'selected'],
+    emits: ['select_theme'],
+    methods: {
+        select_theme: function () {
+            this.$emit('select_theme', this.$props.id)
+        }
+    }
 }
 </script>
 
 <style scoped>
 
     .palette {
-
         transform: translateX(20px);
     }
 

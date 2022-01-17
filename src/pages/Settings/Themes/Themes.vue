@@ -21,7 +21,11 @@
                 </div>
 
                 <div class="grid grid-cols-2 auto-rows-max gap-4 h-full overflow-x-hidden overflow-y-scroll">
-                    <Theme v-for="( theme, index ) in themes" :key="index" :theme="theme"/>
+                    <Theme v-for="( theme, index ) in themes" :key="index"
+                           :theme="theme"
+                           :selected="selected_theme"
+                           :id="index"
+                           @select_theme="select_theme"/>
                 </div>
             </div>
         </div>
@@ -48,6 +52,7 @@ export default {
     data() {
         return {
             selected: true,
+            selected_theme: 0,
             application_modes: [
                 {
                     mode: "dark",
@@ -107,6 +112,13 @@ export default {
          */
         select_mode: function (selected_id) {
             this.selected = selected_id
+        },
+        /**
+         * Select between available themes
+         * @param selected_id: Selected theme ID
+         */
+        select_theme: function (selected_id) {
+            this.selected_theme = selected_id
         }
     }
 }
