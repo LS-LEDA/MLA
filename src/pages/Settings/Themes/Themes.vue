@@ -7,7 +7,7 @@
                     Application mode
                 </div>
                 <ModeSelector v-for="( mode, index ) in application_modes" :key="index"
-                              :selected="selected"
+                              :selected="selected_mode"
                               :mode="mode"
                               :id="index"
                               @select_mode="select_mode"
@@ -51,7 +51,8 @@ export default {
     },
     data() {
         return {
-            selected: true,
+            // TODO: Load stored settings
+            selected_mode: 0,
             selected_theme: 0,
             application_modes: [
                 {
@@ -109,9 +110,10 @@ export default {
          * Switch between light or dark mode
          * dark: true
          * light: false
+         * @param selected_id: Selected mode ID
          */
         select_mode: function (selected_id) {
-            this.selected = selected_id
+            this.selected_mode = selected_id
         },
         /**
          * Select between available themes
