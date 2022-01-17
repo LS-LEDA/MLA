@@ -21,8 +21,8 @@
                         Application theme
                     </div>
                     <div class="flex">
-                        <IconButton :icon="revert_icon" type="Default theme" :status="true"/>
-                        <IconButton :icon="add_icon" type="Add" :status="true"/>
+                        <IconButton :icon="revert_icon" type="Default theme" :status="true" @click="revert_theme"/>
+                        <IconButton :icon="add_icon" type="Add" :status="true" @click="add_theme"/>
                     </div>
                 </div>
 
@@ -131,6 +131,12 @@ export default {
          */
         select_theme: function (selected_id) {
             this.selected_theme = selected_id
+        },
+        add_theme: function () {
+            // TODO: Implement add theme button
+        },
+        revert_theme: function () {
+            // TODO: Implement add theme button
         }
     }
 }
