@@ -37,8 +37,8 @@
         </div>
 
         <!-- Application Theme Preview -->
-        <div class="flex w-4/6">
-            Theme preview
+        <div class="flex w-4/6 h-full justify-center items-center">
+                <SummaryPreview/>
         </div>
     </div>
 </template>
@@ -49,10 +49,12 @@ import {mdiMonitor, mdiPlus, mdiUndo, mdiWeatherNight, mdiWhiteBalanceSunny} fro
 import ModeSelector from "@/components/Settings/ModeSelector";
 import Theme from "@/components/Settings/Theme";
 import IconButton from "@/components/UI/IconButton";
+import SummaryPreview from "@/components/Settings/Mockups/SummaryPreview";
 
 export default {
     name: "Themes",
     components: {
+        SummaryPreview,
         IconButton,
         Theme,
         ModeSelector,
