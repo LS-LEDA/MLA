@@ -13,10 +13,15 @@
                               @select_mode="select_mode"
                 />
             </div>
+            <!-- TODO: Overflow layout -->
             <!-- Application Theme settings -->
-            <div class="flex w-full h-full">
+            <div class="flex flex-col w-full h-full space-y-2">
                 <div class="font-bold text-2xl">
                     Application theme
+                </div>
+
+                <div class="grid grid-cols-2 auto-rows-max gap-4 h-full overflow-x-hidden overflow-y-scroll">
+                    <Theme v-for="( theme, index ) in themes" :key="index" :theme="theme"/>
                 </div>
             </div>
         </div>
@@ -32,10 +37,12 @@
 
 import {mdiMonitor, mdiWeatherNight, mdiWhiteBalanceSunny} from "@mdi/js";
 import ModeSelector from "@/components/Settings/ModeSelector";
+import Theme from "@/components/Settings/Theme";
 
 export default {
     name: "Themes",
     components: {
+        Theme,
         ModeSelector,
     },
     data() {
@@ -56,6 +63,38 @@ export default {
                     mode: "system",
                     description: "Let the system decide for yous",
                     icon: mdiMonitor
+                }
+            ],
+            themes: [
+                {
+                    name: "Summer Splash",
+                    colours: [
+                        '#264653',
+                        '#2A9D8F',
+                        '#E9C46A',
+                        '#F4A261',
+                        '#E76F51',
+                    ]
+                },
+                {
+                    name: "Pastel Dreams",
+                    colours: [
+                        '#CDB4DB',
+                        '#FFC8DD',
+                        '#FFAFCC',
+                        '#BDE0FE',
+                        '#A2D2FF',
+                    ]
+                },
+                {
+                    name: "Berry Blues",
+                    colours: [
+                        '#EF476F',
+                        '#FFD166',
+                        '#06D6A0',
+                        '#118AB2',
+                        '#073B4C',
+                    ]
                 }
             ]
         }
