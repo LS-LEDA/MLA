@@ -37,8 +37,8 @@
         </div>
 
         <!-- Application Theme Preview -->
-        <div class="flex w-4/6 h-full justify-center items-center">
-                <SummaryPreview/>
+        <div class="flex w-4/6 h-full justify-center items-center snap-x overflow-x-auto">
+                <component :is="views[view_counter]"></component>
         </div>
     </div>
 </template>
@@ -50,6 +50,8 @@ import ModeSelector from "@/components/Settings/ModeSelector";
 import Theme from "@/components/Settings/Theme";
 import IconButton from "@/components/UI/IconButton";
 import SummaryPreview from "@/components/Settings/Mockups/SummaryPreview";
+import ImportDataPreview from "@/components/Settings/Mockups/ImportDataPreview";
+import {markRaw} from "vue";
 
 export default {
     name: "Themes",
@@ -66,6 +68,12 @@ export default {
             selected_theme: 0,
             revert_icon: mdiUndo,
             add_icon: mdiPlus,
+            view_counter: 0,
+            views: [
+                // Not reactive components
+                markRaw(SummaryPreview),
+                markRaw(ImportDataPreview)
+            ],
             application_modes: [
                 {
                     mode: "dark",
