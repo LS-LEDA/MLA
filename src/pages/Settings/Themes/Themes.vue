@@ -136,12 +136,16 @@ export default {
     methods: {
         /**
          * Switch between light or dark mode
-         * dark: true
-         * light: false
          * @param selected_id: Selected mode ID
          */
         select_mode: function (selected_id) {
             this.selected_mode = selected_id
+            // TODO: Load user saved settings
+            if ( selected_id === 0 ) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
         },
         /**
          * Select between available themes
