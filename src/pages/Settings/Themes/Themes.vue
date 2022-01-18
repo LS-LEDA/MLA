@@ -95,31 +95,31 @@ export default {
                 {
                     name: "Summer Splash",
                     colours: [
-                        '#264653',
-                        '#2A9D8F',
-                        '#E9C46A',
-                        '#F4A261',
-                        '#E76F51',
+                        'bg-[#264653]',
+                        'bg-[#2A9D8F]',
+                        'bg-[#E9C46A]',
+                        'bg-[#F4A261]',
+                        'bg-[#E76F51]',
                     ]
                 },
                 {
                     name: "Pastel Dreams",
                     colours: [
-                        '#CDB4DB',
-                        '#FFC8DD',
-                        '#FFAFCC',
-                        '#BDE0FE',
-                        '#A2D2FF',
+                        'bg-[#CDB4DB]',
+                        'bg-[#FFC8DD]',
+                        'bg-[#FFAFCC]',
+                        'bg-[#BDE0FE]',
+                        'bg-[#A2D2FF]',
                     ]
                 },
                 {
                     name: "Berry Blues",
                     colours: [
-                        '#EF476F',
-                        '#FFD166',
-                        '#06D6A0',
-                        '#118AB2',
-                        '#073B4C',
+                        'bg-[#EF476F]',
+                        'bg-[#FFD166]',
+                        'bg-[#06D6A0]',
+                        'bg-[#118AB2]',
+                        'bg-[#073B4C]',
                     ]
                 }
             ]
