@@ -43,6 +43,7 @@
             <div class="flex w-full justify-center space-x-2">
                 <div class="w-4 h-4 rounded-full hover:cursor-pointer"
                      :class="( index - 1 ) === view_counter ? 'bg-gray-400' : 'bg-gray-200'"
+                     @click="change_preview(index - 1)"
                      v-for="index in views.length" :key="index">
                 </div>
             </div>
@@ -154,6 +155,14 @@ export default {
         },
         revert_theme: function () {
             // TODO: Implement add theme button
+        },
+        /**
+         * On preview dot click change the view counter
+         * This will load the selected preview mockup
+         * @param previewID
+         */
+        change_preview: function (previewID) {
+            this.view_counter = previewID;
         }
     }
 }
