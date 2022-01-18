@@ -1,7 +1,7 @@
 <template>
     <button
         type="button"
-        class="flex flex-row bg-blue-400 hover:bg-blue-500 rounded-lg px-6 py-3 mx-2 my-2 font-bold"
+        class="flex flex-row bg-blue-200 hover:bg-blue-300 rounded-lg px-6 py-3 mx-2 my-2 font-bold"
         @click="this.$parent.$refs.moodle_file.click()">
         <svg-icon
             type="mdi" :path="open_folder_icon"></svg-icon>
