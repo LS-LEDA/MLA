@@ -37,8 +37,15 @@
         </div>
 
         <!-- Application Theme Preview -->
-        <div class="flex w-4/6 h-full justify-center items-center snap-x overflow-x-auto">
-                <component :is="views[view_counter]"></component>
+        <div class="flex flex-col w-4/6 h-full justify-center items-center space-y-5">
+            <component :is="views[view_counter]"></component>
+            <!-- Preview dotted indicator -->
+            <div class="flex w-full justify-center space-x-2">
+                <div class="w-4 h-4 rounded-full hover:cursor-pointer"
+                     :class="( index - 1 ) === view_counter ? 'bg-gray-400' : 'bg-gray-200'"
+                     v-for="index in views.length" :key="index">
+                </div>
+            </div>
         </div>
     </div>
 </template>
