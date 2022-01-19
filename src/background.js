@@ -7,6 +7,16 @@ const path = require('path')
 const isDevelopment = process.env.NODE_ENV !== 'production'
 require('v8-compile-cache') // via: https://dev.to/xxczaki/how-to-make-your-electron-app-faster-4ifb
 
+// MLA application user settings
+import config from "@/config";
+
+
+// Check Hardware Acceleration setting
+if ( config.get('gpu') !== true ) {
+    console.log("GPU disabled")
+    app.disableHardwareAcceleration();
+}
+
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([
     { scheme: 'app', privileges: { secure: true, standard: true } }
