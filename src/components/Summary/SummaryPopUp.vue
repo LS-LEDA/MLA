@@ -34,7 +34,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                    <tr class="bg-blue-100 hover:bg-blue-400" v-for="(interaction, index) in summary_interactions" :key="index">
+                    <tr class="bg-blue-200 hover:bg-blue-300" v-for="(interaction, index) in summary_interactions" :key="index">
                         <td class="font-bold p-3"> {{ interaction[0] }} </td>
                         <td class="p-3"> {{ interaction[1] }} </td>
                     </tr>
