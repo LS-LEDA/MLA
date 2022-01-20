@@ -12,7 +12,7 @@ import config from "@/config";
 
 
 // Check Hardware Acceleration setting
-if ( config.get('gpu') !== true ) {
+if ( config.get('general.gpu') !== true ) {
     console.log("GPU disabled")
     app.disableHardwareAcceleration();
 }
