@@ -15,8 +15,14 @@ contextBridge.exposeInMainWorld(
         on: (channel, func) => {
             if (validChannels.includes(channel)) {
                 // Strip event as it includes `sender` and is a security risk
-                ipcRenderer.on(channel, (event, ...args) => func(...args));
+                const listener = (event, ...args) => func(...args);
+                ipcRenderer.on(channel, listener);
             }
         },
+        removeListeners: (channel) => {
+            if (validChannels.includes(channel)) {
+                ipcRenderer.removeAllListeners(channel)
+            }
+        }
     },
 );
