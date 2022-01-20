@@ -1,6 +1,6 @@
 'use strict'
 
-import { app, protocol, BrowserWindow, webContents, shell } from 'electron'
+import { app, protocol, BrowserWindow, webContents, shell, ipcMain } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS3_DEVTOOLS } from 'electron-devtools-installer'
 const path = require('path')
@@ -44,7 +44,8 @@ async function createWindow() {
             // Use pluginOptions.nodeIntegration, leave this alone
             // See nklayman.github.io/vue-cli-plugin-electron-builder/guide/security.html#node-integration for more info
             nodeIntegration: process.env.ELECTRON_NODE_INTEGRATION,
-            contextIsolation: !process.env.ELECTRON_NODE_INTEGRATION
+            contextIsolation: !process.env.ELECTRON_NODE_INTEGRATION,
+            preload: path.resolve(__static, 'preload.js'),
         }
     })
 

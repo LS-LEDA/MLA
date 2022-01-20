@@ -85,6 +85,9 @@
   },
   "eslintConfig": {
     "root": true,
+    "globals": {
+      "__static": "readonly"
+    },
     "env": {
       "node": true
     },
