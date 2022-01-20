@@ -33,10 +33,12 @@ const schema = {
                         },
                         // TODO: Add default theme
                         default: [],
-                    }
+                    },
+                    default: {}
                 }
             }
-        }
+        },
+        default: {}
     }
 };
 
