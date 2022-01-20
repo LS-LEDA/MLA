@@ -17,6 +17,20 @@ if ( config.get('gpu') !== true ) {
     app.disableHardwareAcceleration();
 }
 
+/**
+ * IPC Read Settings handler.
+ * Returns an object of the user saved settings
+ * @param args: array of settings to retrieve ['general, 'theme']
+ */
+ipcMain.on('read_settings', (event, args) => {
+    let settings = {}
+    args.forEach( (setting) => {
+        settings[setting] = config.get(setting)
+    });
+
+    event.reply('read_settings', settings );
+});
+
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([
     { scheme: 'app', privileges: { secure: true, standard: true } }
@@ -45,6 +59,8 @@ async function createWindow() {
             // See nklayman.github.io/vue-cli-plugin-electron-builder/guide/security.html#node-integration for more info
             nodeIntegration: process.env.ELECTRON_NODE_INTEGRATION,
             contextIsolation: !process.env.ELECTRON_NODE_INTEGRATION,
+            // __static is set by webpack and will point to the public directory
+            //https://medium.com/swlh/how-to-safely-set-up-an-electron-app-with-vue-and-webpack-556fb491b83
             preload: path.resolve(__static, 'preload.js'),
         }
     })
