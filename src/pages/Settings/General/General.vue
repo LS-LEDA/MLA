@@ -41,6 +41,11 @@ export default {
             return null;
         }
     },
+    watch: {
+        // This will trigger computed refresh_settings
+        // on vuex settings changed
+        refresh_settings() {}
+    },
     mounted() {
         this.get_settings();
     },
