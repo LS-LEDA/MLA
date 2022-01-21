@@ -70,6 +70,9 @@ const routes = [
         path: '/settings',
         component: Settings,
         redirect: "/settings/general",
+        beforeEnter:() => {
+            store.dispatch('getUserSettings');
+        },
         children: [
             {
                 path: '/settings/general',
