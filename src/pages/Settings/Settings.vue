@@ -23,13 +23,10 @@
 <script>
 export default {
     name: "Dashboard",
-    mounted() {
-        // Get user stored settings
-        this.$store.dispatch('getUserSettings');
-    },
     unmounted() {
         // Destroy IPC listeners, otherwise it
         // will register a new one if it's mounted again
+        // The registration of the listener is in the routing
         this.$store.commit('removeIPCListener')
     },
     data() {
