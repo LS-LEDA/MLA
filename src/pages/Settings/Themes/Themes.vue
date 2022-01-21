@@ -6,7 +6,7 @@
                 <div class="font-bold text-2xl">
                     Application mode
                 </div>
-                <ModeSelector v-for="( mode, index ) in application_modes" :key="index"
+                <ModeSelector v-for="( mode, index ) in themes_settings['application_modes']" :key="index"
                               :selected="selected_mode"
                               :mode="mode"
                               :id="index"
@@ -27,7 +27,7 @@
                 </div>
 
                 <div class="grid grid-cols-2 auto-rows-max gap-4 h-full overflow-x-hidden overflow-y-scroll">
-                    <Theme v-for="( theme, index ) in themes" :key="index"
+                    <Theme v-for="( theme, index ) in themes_settings['themes']" :key="index"
                            :theme="theme"
                            :selected="selected_theme"
                            :id="index"
@@ -82,55 +82,57 @@ export default {
                 markRaw(SummaryPreview),
                 markRaw(ImportDataPreview)
             ],
-            application_modes: [
-                {
-                    mode: "dark",
-                    description: "Dark mode for night owls",
-                    icon: mdiWeatherNight
-                },
-                {
-                    mode: "light",
-                    description: "Light mode for daydreamers",
-                    icon: mdiWhiteBalanceSunny
-                },
-                {
-                    mode: "system",
-                    description: "Let the system decide for yous",
-                    icon: mdiMonitor
-                }
-            ],
-            themes: [
-                {
-                    name: "Summer Splash",
-                    colours: [
-                        'bg-[#264653]',
-                        'bg-[#2A9D8F]',
-                        'bg-[#E9C46A]',
-                        'bg-[#F4A261]',
-                        'bg-[#E76F51]',
-                    ]
-                },
-                {
-                    name: "Pastel Dreams",
-                    colours: [
-                        'bg-[#CDB4DB]',
-                        'bg-[#FFC8DD]',
-                        'bg-[#FFAFCC]',
-                        'bg-[#BDE0FE]',
-                        'bg-[#A2D2FF]',
-                    ]
-                },
-                {
-                    name: "Berry Blues",
-                    colours: [
-                        'bg-[#EF476F]',
-                        'bg-[#FFD166]',
-                        'bg-[#06D6A0]',
-                        'bg-[#118AB2]',
-                        'bg-[#073B4C]',
-                    ]
-                }
-            ]
+            themes_settings: {
+                application_modes: [
+                    {
+                        mode: "dark",
+                        description: "Dark mode for night owls",
+                        icon: mdiWeatherNight
+                    },
+                    {
+                        mode: "light",
+                        description: "Light mode for daydreamers",
+                        icon: mdiWhiteBalanceSunny
+                    },
+                    {
+                        mode: "system",
+                        description: "Let the system decide for you",
+                        icon: mdiMonitor
+                    }
+                ],
+                themes: [
+                    {
+                        name: "Summer Splash",
+                        colours: [
+                            'bg-[#264653]',
+                            'bg-[#2A9D8F]',
+                            'bg-[#E9C46A]',
+                            'bg-[#F4A261]',
+                            'bg-[#E76F51]',
+                        ]
+                    },
+                    {
+                        name: "Pastel Dreams",
+                        colours: [
+                            'bg-[#CDB4DB]',
+                            'bg-[#FFC8DD]',
+                            'bg-[#FFAFCC]',
+                            'bg-[#BDE0FE]',
+                            'bg-[#A2D2FF]',
+                        ]
+                    },
+                    {
+                        name: "Berry Blues",
+                        colours: [
+                            'bg-[#EF476F]',
+                            'bg-[#FFD166]',
+                            'bg-[#06D6A0]',
+                            'bg-[#118AB2]',
+                            'bg-[#073B4C]',
+                        ]
+                    }
+                ]
+            },
         }
     },
     methods: {

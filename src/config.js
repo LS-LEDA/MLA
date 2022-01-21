@@ -17,7 +17,7 @@ const schema = {
     theme: {
         type: 'object',
         properties: {
-            modes: {
+            mode: {
                 type: 'string',
                 enum: ['dark', 'light', 'system'],
                 default: 'dark',
