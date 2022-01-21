@@ -31,6 +31,20 @@ ipcMain.on('read_settings', (event, args) => {
     event.reply('read_settings', settings );
 });
 
+/**
+ * IPC Write Settings handler
+ * Returns an error if something went wrong
+ * @param args: Object containing the changes of a setting to be made
+ * @example { key: 'general.gpu', value: true }
+ */
+ipcMain.on('write_settings', (event, args) => {
+    try {
+        config.set(args.key, args.value)
+    } catch (err) {
+        event.reply('write_settings', err);
+    }
+});
+
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([
     { scheme: 'app', privileges: { secure: true, standard: true } }
