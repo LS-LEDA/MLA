@@ -5,7 +5,7 @@
                <span class="font-bold">
                    {{ setting.setting }}
                </span>
-                <Checkbox :selected="setting.selected" @click="toggle_setting(index)"/>
+                <Checkbox :selected="setting.selected" @click="toggle_setting(setting.id)"/>
             </div>
             <p class="flex pr-20">
                 {{ setting.description }}
@@ -21,7 +21,11 @@ export default {
     components: {Checkbox},
     methods: {
         toggle_setting: function(settingID) {
-            this.general_settings[settingID].selected = !this.general_settings[settingID].selected
+            // Update vuex store & settings
+            this.$store.commit('setSettings', {
+                key: 'general' + '.' + settingID,
+                value: !this.$store.state.settings['general'][settingID]
+            })
         },
         get_settings: function () {
             // Get settings from vuex
