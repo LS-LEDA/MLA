@@ -71,7 +71,6 @@ export default {
     },
     data() {
         return {
-            // TODO: Load stored settings
             selected_mode: 0,
             selected_theme: 0,
             revert_icon: mdiUndo,
@@ -141,6 +140,11 @@ export default {
             return null;
         }
     },
+    watch: {
+        // This will trigger computed refresh_settings
+        // on vuex settings changed
+        refresh_settings() {}
+    },
     mounted() {
         this.get_settings();
     },
@@ -151,11 +155,25 @@ export default {
          */
         select_mode: function (selected_id) {
             this.selected_mode = selected_id
-            // TODO: Load user saved settings
-            if ( selected_id === 0 ) {
-                document.documentElement.classList.add('dark');
-            } else {
-                document.documentElement.classList.remove('dark');
+            switch ( selected_id ) {
+                case 0:
+                    this.$store.commit('setSettings', {
+                        key: 'theme.mode',
+                        value: 'dark'
+                    })
+                    document.documentElement.classList.add('dark');
+                    break;
+                case 1:
+                    this.$store.commit('setSettings', {
+                        key: 'theme.mode',
+                        value: 'light'
+                    })
+                    document.documentElement.classList.remove('dark');
+                break;
+                case 2:
+                    console.log("System mode")
+                    // TODO: Apply system mode
+                break;
             }
         },
         /**
@@ -164,6 +182,7 @@ export default {
          */
         select_theme: function (selected_id) {
             this.selected_theme = selected_id
+            // TODO: Themes selection
         },
         add_theme: function () {
             // TODO: Implement add theme button
@@ -191,7 +210,6 @@ export default {
                 if ( section === 'application_modes' ) {
                     this.themes_settings[section].forEach( ( mode, index ) => {
                         if ( mode.mode === sett['theme'].mode ) {
-                            console.log( mode.mode +" " + index)
                             this.selected_mode = index
                         }
                     })
