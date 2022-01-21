@@ -135,6 +135,15 @@ export default {
             },
         }
     },
+    computed: {
+        refresh_settings: function () {
+            this.get_settings();
+            return null;
+        }
+    },
+    mounted() {
+        this.get_settings();
+    },
     methods: {
         /**
          * Switch between light or dark mode
@@ -169,6 +178,27 @@ export default {
          */
         change_preview: function (previewID) {
             this.view_counter = previewID;
+        },
+        get_settings: function () {
+            // Get themes settings sections
+            let sections = Object.keys(this.themes_settings)
+
+            // Get settings from vuex
+            let sett = this.$store.state.settings
+
+            // Current sections { 'application_modes', 'themes }
+            sections.forEach( (section) => {
+                if ( section === 'application_modes' ) {
+                    this.themes_settings[section].forEach( ( mode, index ) => {
+                        if ( mode.mode === sett['theme'].mode ) {
+                            console.log( mode.mode +" " + index)
+                            this.selected_mode = index
+                        }
+                    })
+                } else {
+                    // TODO: Load themes from user settings
+                }
+            });
         }
     }
 }
