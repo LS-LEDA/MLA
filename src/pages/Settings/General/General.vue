@@ -22,7 +22,23 @@ export default {
     methods: {
         toggle_setting: function(settingID) {
             this.general_settings[settingID].selected = !this.general_settings[settingID].selected
+        },
+        get_settings: function () {
+            // Get settings from vuex
+            let sett = this.$store.state.settings
+            this.general_settings.forEach( (setting) => {
+                setting.selected = sett['general'][setting.id]
+            })
         }
+    },
+    computed: {
+        refresh_settings: function () {
+            this.get_settings();
+            return null;
+        }
+    },
+    mounted() {
+        this.get_settings();
     },
     data(){
         return {
