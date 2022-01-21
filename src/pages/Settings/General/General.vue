@@ -28,16 +28,19 @@ export default {
         return {
             general_settings: [
                 {
+                    id: 'gpu',
                     setting: "Hardware Acceleration",
                     description: "Turn on Hardware Acceleration, which uses GPU to make MLA smoother. Turn it off if you are experiencing frame drops.",
                     selected: false
                 },
                 {
+                    id: 'openOnStartup',
                     setting: "Open MLA",
                     description: "Save yourself a few clicks and let MLA greet you on computer startup.",
                     selected: false
                 },
                 {
+                    id: 'tray',
                     setting: "Minimize to tray",
                     description: "Hitting X will make MLA sit back and relax in your system tray when you close the app.",
                     selected: false
