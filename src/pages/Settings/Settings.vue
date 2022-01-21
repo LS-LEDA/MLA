@@ -25,20 +25,12 @@ export default {
     name: "Dashboard",
     mounted() {
         // Get user stored settings
-        window.ipc.send('read_settings', [
-            'general',
-            'theme'
-            ]
-        );
-        // On receive settings handler
-        window.ipc.on('read_settings', (args) => {
-            // TODO: Implement settings
-        })
+        this.$store.dispatch('getUserSettings');
     },
     unmounted() {
         // Destroy IPC listeners, otherwise it
         // will register a new one if it's mounted again
-        window.ipc.removeListeners('read_settings');
+        this.$store.commit('removeIPCListener')
     },
     data() {
         return {

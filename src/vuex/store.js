@@ -55,7 +55,11 @@ const store = createStore({
             upload_status: {
                 status: 0,
                 progress: 0
-            }
+            },
+            /**
+             * Stores MLA user settings
+             */
+            settings: {}
         }
     },
     actions: {
@@ -63,6 +67,10 @@ const store = createStore({
             this.commit('resetProgress');
             this.commit('progressStepCounter', time);
         },
+        // Async method that retrieves user's MLA Settings
+        getUserSettings() {
+            this.commit('getSettings');
+        }
     },
     mutations: {
         // Expand or shrink navigation bar
@@ -141,6 +149,23 @@ const store = createStore({
                 }
             }
             count(time);
+        },
+        // Retrieve MLA user saved settings
+        getSettings() {
+            // Get user stored settings
+            window.ipc.send('read_settings', [
+                    'general',
+                    'theme'
+                ]
+            );
+            // On receive settings handler
+            window.ipc.on('read_settings', (args) => {
+                this.state.settings = args
+            })
+        },
+        // Removes IPC handler, called when Settings page is unmounted
+        removeIPCListener() {
+            window.ipc.removeListeners('read_settings');
         }
     }
 });
