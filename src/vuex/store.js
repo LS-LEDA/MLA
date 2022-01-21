@@ -158,10 +158,6 @@ const store = createStore({
                     'theme'
                 ]
             );
-            // On receive settings handler
-            window.ipc.on('read_settings', (args) => {
-                this.state.settings = args
-            })
         },
         // Removes IPC handler, called when Settings page is unmounted
         removeIPCListener() {
