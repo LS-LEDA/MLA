@@ -23,6 +23,12 @@
 <script>
 export default {
     name: "Dashboard",
+    mounted() {
+        // Handle error if during the storing process crashes
+        window.ipc.on('write_settings', (err) => {
+
+        });
+    },
     unmounted() {
         // Destroy IPC listeners, otherwise it
         // will register a new one if it's mounted again
