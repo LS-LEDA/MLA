@@ -181,9 +181,13 @@ const store = createStore({
                 settings
             );
         },
-        // Removes IPC handler, called when Settings page is unmounted
-        removeIPCListener() {
-            window.ipc.removeListeners('read_settings');
+        /**
+         * Removes IPC handler, called when Settings page is unmounted
+         * @param state
+         * @param channel The channel listener to be removed
+         */
+        removeIPCListener(state, channel) {
+            window.ipc.removeListeners(channel);
         }
     }
 });
