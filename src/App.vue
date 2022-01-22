@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-row h-screen w-screen bg-background select-none">
+    <div class="flex flex-row h-screen w-screen bg-background dark:bg-dark_background select-none">
         <!-- Left navigation bar -->
         <NavigationBar/>
         <!-- Page rendered by router -->

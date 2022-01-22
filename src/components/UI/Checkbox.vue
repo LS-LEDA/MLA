@@ -1,8 +1,8 @@
 <template>
-    <div class="flex items-center border-2 rounded-md border-primary_variant w-8 h-8
+    <div class="flex items-center border-2 rounded-md border-primary_variant dark:border-dark_primary_variant w-8 h-8
                 flex-shrink-0 justify-center items-center
-                bg-secondary hover:cursor-pointer"
-         :class="selected ? 'bg-primary_variant' : null"
+                hover:cursor-pointer"
+         :class="selected ? 'bg-primary_variant dark:bg-dark_primary_variant' : null"
     >
         <input type="checkbox"
                :id="id"

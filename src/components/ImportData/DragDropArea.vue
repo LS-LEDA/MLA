@@ -5,13 +5,13 @@
          @dragleave.prevent="toggleActive"
          @dragover.prevent
          @drop.prevent="select_file"
-         :class=" {'bg-primary transition-all duration-300' :active }">
+         :class=" {'bg-primary dark:bg-dark_primary transition-all duration-300' :active }">
       <input type="file" ref="moodle_file" class="hidden" @change="select_file">
       <svg-icon class="w-1/4 h-1/4 justify-center"
                 type="mdi" :path="upload_file_icon"></svg-icon>
       <span class="font-bold text-center text-5xl"> Drag & Drop file here </span>
       <span class="text-center text-4xl"> or </span>
-      <BrowseFilesButton class="w-max" :class="{'bg-secondary transition-all duration-300' :active }"/>
+      <BrowseFilesButton class="w-max" :class="{'bg-secondary dark:bg-dark_secondary transition-all duration-300' :active }"/>
       <div class="flex flex-row w-full h-1/5 justify-end content-end">
         <div class="flex items-end cursor-pointer">
           <svg-icon type="mdi" :path="information_icon" @click="informationPopUp"></svg-icon>

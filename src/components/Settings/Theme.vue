@@ -1,6 +1,6 @@
 <template>
     <div class="flex flex-col rounded-lg w-full h-32 p-5 space-y-2 hover:cursor-pointer"
-         :class="selected === id ? 'bg-primary_variant' : 'bg-primary'"
+         :class="selected === id ? 'bg-primary_variant dark:bg-dark_primary_variant' : 'bg-primary dark:bg-dark_primary'"
          @click="select_theme">
         <!-- Theme name -->
         <div class="self-center font-bold text-xl">

@@ -1,7 +1,7 @@
 <template>
     <div class="flex absolute inset-0 justify-center place-items-center bg-gray-400 bg-opacity-75 transition-opacity"
         role="dialog" aria-modal="true">
-        <div class="flex flex-col w-2/6 h-auto bg-secondary rounded-3xl space-y-2 pb-3 drop-shadow-xl z-50">
+        <div class="flex flex-col w-2/6 h-auto bg-secondary dark:bg-dark_secondary rounded-3xl space-y-2 pb-3 drop-shadow-xl z-50">
             <!-- Uploaded file section -->
             <div class="flex flex-row rounded-2xl m-5 px-5 py-4 border border-black">
                 <svg-icon type="mdi" :path="file_icon"/>
