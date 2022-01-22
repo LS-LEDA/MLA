@@ -70,11 +70,25 @@ const routes = [
         path: '/settings',
         component: Settings,
         redirect: "/settings/general",
+        beforeEnter:() => {
+            store.dispatch('getUserSettings');
+        },
         children: [
             {
                 path: '/settings/general',
                 name: "general",
                 component: General,
+                beforeEnter: (to, from, next) => {
+                    if (from.name !== 'about' && from.name !== 'themes') {
+                        // On receive settings handler
+                        window.ipc.on('read_settings', (args) => {
+                            store.state.settings = args
+                            next();
+                        })
+                    } else {
+                        next();
+                    }
+                }
             },
             {
                 path: '/settings/themes',

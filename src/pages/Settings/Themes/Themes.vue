@@ -6,7 +6,7 @@
                 <div class="font-bold text-2xl">
                     Application mode
                 </div>
-                <ModeSelector v-for="( mode, index ) in application_modes" :key="index"
+                <ModeSelector v-for="( mode, index ) in themes_settings['application_modes']" :key="index"
                               :selected="selected_mode"
                               :mode="mode"
                               :id="index"
@@ -27,7 +27,7 @@
                 </div>
 
                 <div class="grid grid-cols-2 auto-rows-max gap-4 h-full overflow-x-hidden overflow-y-scroll">
-                    <Theme v-for="( theme, index ) in themes" :key="index"
+                    <Theme v-for="( theme, index ) in themes_settings['themes']" :key="index"
                            :theme="theme"
                            :selected="selected_theme"
                            :id="index"
@@ -71,7 +71,6 @@ export default {
     },
     data() {
         return {
-            // TODO: Load stored settings
             selected_mode: 0,
             selected_theme: 0,
             revert_icon: mdiUndo,
@@ -82,56 +81,72 @@ export default {
                 markRaw(SummaryPreview),
                 markRaw(ImportDataPreview)
             ],
-            application_modes: [
-                {
-                    mode: "dark",
-                    description: "Dark mode for night owls",
-                    icon: mdiWeatherNight
-                },
-                {
-                    mode: "light",
-                    description: "Light mode for daydreamers",
-                    icon: mdiWhiteBalanceSunny
-                },
-                {
-                    mode: "system",
-                    description: "Let the system decide for yous",
-                    icon: mdiMonitor
-                }
-            ],
-            themes: [
-                {
-                    name: "Summer Splash",
-                    colours: [
-                        'bg-[#264653]',
-                        'bg-[#2A9D8F]',
-                        'bg-[#E9C46A]',
-                        'bg-[#F4A261]',
-                        'bg-[#E76F51]',
-                    ]
-                },
-                {
-                    name: "Pastel Dreams",
-                    colours: [
-                        'bg-[#CDB4DB]',
-                        'bg-[#FFC8DD]',
-                        'bg-[#FFAFCC]',
-                        'bg-[#BDE0FE]',
-                        'bg-[#A2D2FF]',
-                    ]
-                },
-                {
-                    name: "Berry Blues",
-                    colours: [
-                        'bg-[#EF476F]',
-                        'bg-[#FFD166]',
-                        'bg-[#06D6A0]',
-                        'bg-[#118AB2]',
-                        'bg-[#073B4C]',
-                    ]
-                }
-            ]
+            themes_settings: {
+                application_modes: [
+                    {
+                        mode: "dark",
+                        description: "Dark mode for night owls",
+                        icon: mdiWeatherNight
+                    },
+                    {
+                        mode: "light",
+                        description: "Light mode for daydreamers",
+                        icon: mdiWhiteBalanceSunny
+                    },
+                    {
+                        mode: "system",
+                        description: "Let the system decide for you",
+                        icon: mdiMonitor
+                    }
+                ],
+                themes: [
+                    {
+                        name: "Summer Splash",
+                        colours: [
+                            'bg-[#264653]',
+                            'bg-[#2A9D8F]',
+                            'bg-[#E9C46A]',
+                            'bg-[#F4A261]',
+                            'bg-[#E76F51]',
+                        ]
+                    },
+                    {
+                        name: "Pastel Dreams",
+                        colours: [
+                            'bg-[#CDB4DB]',
+                            'bg-[#FFC8DD]',
+                            'bg-[#FFAFCC]',
+                            'bg-[#BDE0FE]',
+                            'bg-[#A2D2FF]',
+                        ]
+                    },
+                    {
+                        name: "Berry Blues",
+                        colours: [
+                            'bg-[#EF476F]',
+                            'bg-[#FFD166]',
+                            'bg-[#06D6A0]',
+                            'bg-[#118AB2]',
+                            'bg-[#073B4C]',
+                        ]
+                    }
+                ]
+            },
         }
+    },
+    computed: {
+        refresh_settings: function () {
+            this.get_settings();
+            return null;
+        }
+    },
+    watch: {
+        // This will trigger computed refresh_settings
+        // on vuex settings changed
+        refresh_settings() {}
+    },
+    mounted() {
+        this.get_settings();
     },
     methods: {
         /**
@@ -140,11 +155,25 @@ export default {
          */
         select_mode: function (selected_id) {
             this.selected_mode = selected_id
-            // TODO: Load user saved settings
-            if ( selected_id === 0 ) {
-                document.documentElement.classList.add('dark');
-            } else {
-                document.documentElement.classList.remove('dark');
+            switch ( selected_id ) {
+                case 0:
+                    this.$store.commit('setSettings', {
+                        key: 'theme.mode',
+                        value: 'dark'
+                    })
+                    document.documentElement.classList.add('dark');
+                    break;
+                case 1:
+                    this.$store.commit('setSettings', {
+                        key: 'theme.mode',
+                        value: 'light'
+                    })
+                    document.documentElement.classList.remove('dark');
+                break;
+                case 2:
+                    console.log("System mode")
+                    // TODO: Apply system mode
+                break;
             }
         },
         /**
@@ -153,6 +182,7 @@ export default {
          */
         select_theme: function (selected_id) {
             this.selected_theme = selected_id
+            // TODO: Themes selection
         },
         add_theme: function () {
             // TODO: Implement add theme button
@@ -167,6 +197,26 @@ export default {
          */
         change_preview: function (previewID) {
             this.view_counter = previewID;
+        },
+        get_settings: function () {
+            // Get themes settings sections
+            let sections = Object.keys(this.themes_settings)
+
+            // Get settings from vuex
+            let sett = this.$store.state.settings
+
+            // Current sections { 'application_modes', 'themes }
+            sections.forEach( (section) => {
+                if ( section === 'application_modes' ) {
+                    this.themes_settings[section].forEach( ( mode, index ) => {
+                        if ( mode.mode === sett['theme'].mode ) {
+                            this.selected_mode = index
+                        }
+                    })
+                } else {
+                    // TODO: Load themes from user settings
+                }
+            });
         }
     }
 }
