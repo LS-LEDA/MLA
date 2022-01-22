@@ -33,7 +33,8 @@ export default {
         // Destroy IPC listeners, otherwise it
         // will register a new one if it's mounted again
         // The registration of the listener is in the routing
-        this.$store.commit('removeIPCListener')
+        this.$store.commit('removeIPCListener', 'read_settings')
+        this.$store.commit('removeIPCListener', 'write_settings')
     },
     data() {
         return {
