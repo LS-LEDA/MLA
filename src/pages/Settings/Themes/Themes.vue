@@ -101,6 +101,16 @@ export default {
             ],
             themes: [
                 {
+                    name: "Nabuki Sky",
+                    colours: [
+                        'bg-[#bfdbfe]',
+                        'bg-[#93c5fd]',
+                        'bg-[#ffffff]',
+                        'bg-[#ffffff]',
+                        'bg-[#dbeafe]',
+                    ]
+                },
+                {
                     name: "Summer Splash",
                     colours: [
                         'bg-[#264653]',
