@@ -1,6 +1,6 @@
 <template>
-    <button type="button" class="flex flex-row bg-blue-200  rounded-lg px-4 py-2 mx-2 my-2 font-bold"
-            :class="{ 'disabled:opacity-50' : !status, 'hover:bg-blue-300' : status }" :disabled="!status">
+    <button type="button" class="flex flex-row bg-primary  rounded-lg px-4 py-2 mx-2 my-2 font-bold"
+            :class="{ 'disabled:opacity-50' : !status, 'hover:bg-primary_variant' : status }" :disabled="!status">
         <svg-icon type="mdi" :path="icon"></svg-icon>
         <span class="ml-3"> {{ type }} </span>
     </button>

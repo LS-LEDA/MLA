@@ -1,10 +1,10 @@
 <template>
-    <div :class="nav_state ? 'w-80' : 'w-20'" class="mx-2 my-2 flex flex-col bg-white rounded-xl transform transition-all duration-700">
+    <div :class="nav_state ? 'w-80' : 'w-20'" class="mx-2 my-2 flex flex-col bg-secondary rounded-xl transform transition-all duration-700">
         <NavigationHeader/>
         <div class="flex flex-col gap-y-3 mx-2">
-            <router-link active-class="bg-blue-300"
+            <router-link active-class="bg-primary_variant"
                 :class="nav_state ? null : 'justify-center'"
-                class="flex flex-row bg-blue-200 hover:bg-blue-300 rounded-lg py-3 px-4 font-bold w-full"
+                class="flex flex-row bg-primary hover:bg-primary_variant rounded-lg py-3 px-4 font-bold w-full"
                 :to="page.page_link" v-for="(page, index) in pages" :key="index">
                 <SvgIcon type="mdi" :path="page.button_icon"/>
                 <span class="ml-3" v-if="nav_state">{{ page.button_name }}</span>

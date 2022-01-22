@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col rounded-lg bg-white w-full h-full p-10">
+    <div class="flex flex-col rounded-lg bg-secondary w-full h-full p-10">
         <div class="font-extrabold uppercase"> Forum File Data </div>
         <div class="flex flex-col">
             <!-- Forum message file name -->

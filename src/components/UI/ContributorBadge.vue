@@ -1,6 +1,6 @@
 <template>
     <!-- Contributor badge background -->
-    <div class="flex bg-blue-100 rounded-lg max-w-full max-h-32 shadow-lg shadow-blue-400/30 p-5 gap-x-3 truncate text-ellipsis">
+    <div class="flex bg-primary rounded-lg max-w-full max-h-32 shadow-lg shadow-primary_variant/30 p-5 gap-x-3 truncate text-ellipsis">
         <!-- Profile Icon -->
         <img class="w-20 h-20 rounded-full" :src="contributor.icon" alt="icon">
 
@@ -17,7 +17,7 @@
                 <a :href="`mailto:` + contributor.email">
                     {{ contributor.email }}
                 </a>
-                <SvgIcon class="self-center hover:bg-blue-200"
+                <SvgIcon class="self-center hover:bg-primary"
                          type="mdi"
                          size="16"
                          :path="copy_icon"
