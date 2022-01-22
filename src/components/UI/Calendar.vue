@@ -7,10 +7,10 @@
             </span>
             <!-- Calendar buttons -->
             <div class="flex gap-x-2">
-                <button class="bg-blue-200 rounded-md hover:bg-blue-300">
+                <button class="bg-primary rounded-md hover:bg-primary_variant">
                     <SvgIcon type="mdi" :path="left_icon" @click="left_calendar"/>
                 </button>
-                <button class="bg-blue-200 rounded-md hover:bg-blue-300">
+                <button class="bg-primary rounded-md hover:bg-primary_variant">
                     <SvgIcon type="mdi" :path="right_icon" @click="right_calendar"/>
                 </button>
             </div>
@@ -32,7 +32,7 @@
                 <tbody>
                 <tr v-for="(weeks, week_index) in formatted_days" :key="week_index">
                     <td v-for="(day, day_index) in weeks" :key="day_index">
-                        <div class="p-0.5 lg:p-1 cursor-pointer flex w-full justify-center hover:bg-blue-200 hover:rounded-full "
+                        <div class="p-0.5 lg:p-1 cursor-pointer flex w-full justify-center hover:bg-primary hover:rounded-full "
                              v-html="day" @click="selectDate(week_index, day_index, $event)">
                         </div>
                     </td>

@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col rounded-xl bg-white w-full h-full p-10">
+    <div class="flex flex-col rounded-xl bg-secondary w-full h-full p-10">
         <div class="font-extrabold uppercase"> Overall Sentiment Analysis </div>
 
         <div class="flex w-full h-full">
