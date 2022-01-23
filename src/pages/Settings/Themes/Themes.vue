@@ -275,6 +275,9 @@ export default {
                     // TODO: Load themes from user settings
                 }
             });
+
+            // Load user selected colour theme
+            this.selected_theme = sett['theme']['selectedThemeID']
         }
     }
 }
