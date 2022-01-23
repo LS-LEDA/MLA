@@ -15,8 +15,24 @@ import Themes from "@/pages/Settings/Themes/Themes";
 import About from "@/pages/Settings/About/About";
 
 const routes = [
-    { path: '/', component: ImportDataPage },
-    { path: '/import-data', component: ImportDataPage },
+    {
+        path: '/',
+        component: ImportDataPage,
+        // Called when first loading the app
+        // We need to load user preferences like theming
+        beforeEnter:(to, from, next) => {
+            store.dispatch('getUserSettings');
+            // On receive settings handler
+            window.ipc.on('read_settings', (args) => {
+                store.state.settings = args
+                next();
+            })
+        },
+    },
+    {
+        path: '/import-data',
+        component: ImportDataPage,
+    },
     {
         path: '/dashboard',
         component: DashboardPage,
@@ -70,25 +86,11 @@ const routes = [
         path: '/settings',
         component: Settings,
         redirect: "/settings/general",
-        beforeEnter:() => {
-            store.dispatch('getUserSettings');
-        },
         children: [
             {
                 path: '/settings/general',
                 name: "general",
                 component: General,
-                beforeEnter: (to, from, next) => {
-                    if (from.name !== 'about' && from.name !== 'themes') {
-                        // On receive settings handler
-                        window.ipc.on('read_settings', (args) => {
-                            store.state.settings = args
-                            next();
-                        })
-                    } else {
-                        next();
-                    }
-                }
             },
             {
                 path: '/settings/themes',
