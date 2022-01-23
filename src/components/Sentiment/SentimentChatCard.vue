@@ -1,12 +1,12 @@
 <template>
     <div class="flex w-full h-auto gap-x-3 hover:cursor-pointer">
         <!-- Profile Logo -->
-        <div class="flex rounded-xl bg-primary_variant h-16 w-1/12">
+        <div class="flex rounded-xl bg-primary_variant dark:bg-dark_primary_variant h-16 w-1/12">
             <svg-icon class="w-full h-full" type="mdi" :path="profile_icon"/>
         </div>
 
         <!-- Message Box -->
-        <div class="flex flex-col w-full bg-primary rounded-xl p-10 text-justify border-r-8"
+        <div class="flex flex-col w-full bg-primary dark:bg-dark_primary rounded-xl p-10 text-justify border-r-8"
              :class="border_color()">
             <div class="flex justify-between">
                 <div class="text-gray-500 font-bold"> @{{ messages.username }} </div>

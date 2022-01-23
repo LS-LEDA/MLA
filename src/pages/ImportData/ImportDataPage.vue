@@ -1,7 +1,7 @@
 <template>
     <section id="import_data_area" class="relative h-full w-full flex place-content-center" >
         <InformationPopUp v-if="show_popUp" @infoPopUp= "toggle_information_pop_up"/>
-        <div class="flex flex-col bg-secondary rounded-3xl h-5/6 w-9/12 self-center justify-center">
+        <div class="flex flex-col bg-secondary dark:bg-dark_secondary rounded-3xl h-5/6 w-9/12 self-center justify-center">
             <UploadProgressBar/>
             <DragDropArea @onUpload="toggle_pop_up" @popUp="toggle_information_pop_up"/>
         </div>

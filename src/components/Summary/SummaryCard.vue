@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col w-full bg-secondary rounded-3xl filter drop-shadow-lg
+    <div class="flex flex-col w-full bg-secondary dark:bg-dark_secondary rounded-3xl filter drop-shadow-lg
     transform transition duration-500 hover:scale-[101%] p-10 pb-5 cursor-pointer"
          @click="show_details"
          :class="card_status ? 'pb-10': null">

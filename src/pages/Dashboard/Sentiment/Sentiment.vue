@@ -13,7 +13,7 @@
         </div>
 
         <div class="flex w-full h-full gap-x-5 pb-10">
-            <div class="flex flex-col w-1/2 bg-secondary rounded-xl p-10 overflow-y-scroll overflow-x-hidden gap-y-5
+            <div class="flex flex-col w-1/2 bg-secondary dark:bg-dark_secondary rounded-xl p-10 overflow-y-scroll overflow-x-hidden gap-y-5
                         backdrop-filter">
                 <SentimentChatCard v-for="(message, index) in forum.forum_messages" :messages="message" :key="index"
                                    :class="selected_id === index ? 'brightness-100' : 'brightness-75'"

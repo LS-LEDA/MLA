@@ -108,6 +108,13 @@ export default {
                         'bg-[#ffffff]',
                         'bg-[#ffffff]',
                         'bg-[#dbeafe]',
+                    ],
+                    dark_colours: [
+                        'bg-[#64748b]',
+                        'bg-[#334155]',
+                        'bg-[#1e293b]',
+                        'bg-[#64748b]',
+                        'bg-[#0f172a]',
                     ]
                 },
                 {

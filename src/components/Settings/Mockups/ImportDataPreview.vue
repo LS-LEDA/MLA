@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col w-10/12 h-4/6 bg-background rounded-lg pt-2 p-5">
+    <div class="flex flex-col w-10/12 h-4/6 bg-background dark:bg-dark_background rounded-lg pt-2 p-5">
         <!-- BrowserWindow circles -->
         <div class="flex w-full h-8 justify-end space-x-1 p-2">
             <div class="w-4 h-4 rounded-full bg-green-500"/>
@@ -9,17 +9,17 @@
 
         <div class="flex w-full h-full space-x-3">
             <!-- Navigation bar -->
-            <div class="flex flex-col w-20 h-full bg-secondary rounded-lg space-y-2 p-1">
-                <div class="flex rounded-lg w-full h-14 bg-primary_variant"/>
-                <div class="flex rounded-lg w-full h-14 bg-primary"/>
-                <div class="flex rounded-lg w-full h-14 bg-primary"/>
-                <div class="flex rounded-lg w-full h-14 bg-primary"/>
+            <div class="flex flex-col w-20 h-full bg-secondary dark:bg-dark_secondary rounded-lg space-y-2 p-1">
+                <div class="flex rounded-lg w-full h-14 bg-primary_variant dark:bg-dark_primary_variant"/>
+                <div class="flex rounded-lg w-full h-14 bg-primary dark:bg-dark_primary"/>
+                <div class="flex rounded-lg w-full h-14 bg-primary dark:bg-dark_primary"/>
+                <div class="flex rounded-lg w-full h-14 bg-primary dark:bg-dark_primary"/>
             </div>
 
             <!-- Main content -->
             <div class="flex w-full h-full p-10 rounded-lg items-center justify-center">
                 <!-- Dashboard navigation tabs buttons -->
-                <div class="flex flex-col w-full h-full py-10 px-32 bg-secondary rounded-lg justify-center items-center space-y-2">
+                <div class="flex flex-col w-full h-full py-10 px-32 bg-secondary dark:bg-dark_secondary rounded-lg justify-center items-center space-y-2">
                     <!-- Progress Bar -->
                     <div class="flex w-full h-full bg-gray-100 rounded-lg">
 
