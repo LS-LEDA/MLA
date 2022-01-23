@@ -17,12 +17,58 @@
                 <router-view></router-view>
             </div>
         </div>
+        <!-- Alert -->
+        <Alert v-if="alert_status.status" :message="alert_status.message"
+               @closeAlert="close_alert"/>
     </section>
 </template>
 
 <script>
+import Alert from "@/components/UI/Alert";
+
 export default {
     name: "Dashboard",
+    components: {
+        Alert
+    },
+    mounted() {
+        // Handle error if during the storing process crashes
+        window.ipc.on('write_settings', (err) => {
+            // TODO: Error logging
+            console.log(err)
+            this.$store.commit('setAlertMessage', "Somethings went wrong! Try to restart MLA")
+            if ( this.$store.state.alert.status ) {
+                window.clearTimeout( this.$store.state.alert.timeout );
+            } else {
+                // Show alert
+                this.$store.commit('toggleAlert');
+            }
+            // Delayed alert hiding & store timer ID for user manual dismiss
+            this.$store.state.alert.timeout = setTimeout( () => {
+                // Automatically hide alert after 5s
+                this.$store.commit('toggleAlert')
+            }, 5000);
+        });
+    },
+    unmounted() {
+        // Destroy IPC listeners, otherwise it
+        // will register a new one if it's mounted again
+        // The registration of the listener is in the routing
+        this.$store.commit('removeIPCListener', 'read_settings')
+        this.$store.commit('removeIPCListener', 'write_settings')
+    },
+    computed: {
+        alert_status(){
+            return this.$store.state.alert;
+        }
+    },
+    methods: {
+        close_alert: function(){
+            // Clears toggle alert timeout if alert is dismissed by the user
+            clearTimeout(this.$store.state.alert.timeout);
+            this.$store.state.alert.status = false;
+        }
+    },
     data() {
         return {
             tabs: [

@@ -59,6 +59,7 @@
     "@nlpjs/sentiment": "^4.22.0",
     "chart.js": "^3.6.0",
     "core-js": "^3.6.5",
+    "electron-store": "^8.0.1",
     "node-nlp": "^4.22.1",
     "v8-compile-cache": "^2.3.0",
     "vue": "^3.0.0",
@@ -84,6 +85,9 @@
   },
   "eslintConfig": {
     "root": true,
+    "globals": {
+      "__static": "readonly"
+    },
     "env": {
       "node": true
     },
