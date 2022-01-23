@@ -118,6 +118,26 @@ export default {
                     ]
                 },
                 {
+                    name: "Sakura Pink",
+                    colours: [
+                        'bg-[#fbcfe8]',
+                        'bg-[#f9a8d4]',
+                        'bg-[#ffffff]',
+                        'bg-[#ffffff]',
+                        'bg-[#fce7f3]',
+                    ]
+                },
+                {
+                    name: "La Vie en Rose",
+                    colours: [
+                        'bg-[#fecdd3]',
+                        'bg-[#fda4af]',
+                        'bg-[#ffffff]',
+                        'bg-[#ffffff]',
+                        'bg-[#ffe4e6]',
+                    ]
+                },
+                {
                     name: "Summer Splash",
                     colours: [
                         'bg-[#264653]',
