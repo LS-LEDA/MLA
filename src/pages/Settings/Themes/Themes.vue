@@ -81,6 +81,14 @@ export default {
                 markRaw(SummaryPreview),
                 markRaw(ImportDataPreview)
             ],
+            colour_properties: [
+                '--primary',
+                '--primary_variant',
+                '--secondary',
+                '--secondary_variant',
+                '--background',
+                '--typography'
+            ],
             themes_settings: {
                 application_modes: [
                     {
@@ -219,7 +227,16 @@ export default {
          */
         select_theme: function (selected_id) {
             this.selected_theme = selected_id
-            // TODO: Themes selection
+            // Dynamically apply the selected theme colours
+            // to the root css variables
+            let colour;
+            this.themes_settings.themes[selected_id]['colours'].forEach( (col, index) => {
+                colour = col.substring(
+                    col.indexOf("[") + 1,
+                    col.lastIndexOf("]")
+                );
+                document.documentElement.style.setProperty(this.colour_properties[index], colour);
+            })
         },
         add_theme: function () {
             // TODO: Implement add theme button
