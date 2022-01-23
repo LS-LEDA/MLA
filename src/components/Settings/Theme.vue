@@ -9,10 +9,16 @@
 
         <!-- Theme colours -->
         <div class="flex flex-initial w-full justify-center">
-            <div class="flex justify-center palette">
-                <div class="rounded-full border-2 border-white w-12 h-12 circle"
+            <div v-if="current_mode" class="flex justify-center palette">
+                <div  class="rounded-full border-2 border-white w-12 h-12 circle"
                      :class="colour"
                      v-for="( colour, index ) in theme.colours" :key="index">
+                </div>
+            </div>
+            <div v-else-if="!current_mode" class="flex justify-center palette">
+                <div class="rounded-full border-2 border-white w-12 h-12 circle"
+                     :class="colour"
+                     v-for="( colour, index ) in theme.dark_colours" :key="index">
                 </div>
             </div>
         </div>
@@ -24,6 +30,11 @@ export default {
     name: "Theme",
     props: ['theme', 'id', 'selected'],
     emits: ['select_theme'],
+    computed: {
+        current_mode: function () {
+            return this.$store.state.settings['theme']['mode'] === 'light'
+        }
+    },
     methods: {
         select_theme: function () {
             this.$emit('select_theme', this.$props.id)
