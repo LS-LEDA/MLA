@@ -4,8 +4,8 @@
             <div class="flex flex-col flex-auto w-full h-full px-5 py-10">
                 <!-- Tabs buttons -->
                 <div class="grid grid-cols-2 gap-2 xl:flex xl:flex-row pb-5">
-                    <router-link active-class="bg-blue-300"
-                                 class="bg-blue-200 w-full hover:bg-blue-300 rounded-lg text-2xl font-bold py-3 text-center"
+                    <router-link active-class="bg-primary_variant dark:bg-dark_primary_variant"
+                                 class="bg-primary dark:bg-dark_primary w-full hover:bg-primary_variant dark:hover:bg-dark_primary_variant rounded-lg text-2xl font-bold py-3 text-center"
                                  :to="tab.tab_path"
                                  v-for="(tab, index) in tabs"
                                  :key="index">

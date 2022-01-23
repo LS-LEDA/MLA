@@ -2,7 +2,7 @@
     <div class="flex w-full h-full items-center place-content-between">
         <div class="flex items-center space-x-2">
             <!-- Mode icon -->
-            <div class="flex w-12 h-12 rounded-lg bg-blue-200 justify-center items-center">
+            <div class="flex w-12 h-12 rounded-lg bg-primary dark:bg-dark_primary justify-center items-center">
                 <SvgIcon type="mdi" :path="mode.icon"/>
             </div>
 

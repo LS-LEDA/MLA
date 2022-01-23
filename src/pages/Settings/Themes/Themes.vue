@@ -101,6 +101,43 @@ export default {
                 ],
                 themes: [
                     {
+                        name: "Nabuki Sky",
+                        colours: [
+                            'bg-[#bfdbfe]',
+                            'bg-[#93c5fd]',
+                            'bg-[#ffffff]',
+                            'bg-[#ffffff]',
+                            'bg-[#dbeafe]',
+                        ],
+                        dark_colours: [
+                            'bg-[#64748b]',
+                            'bg-[#334155]',
+                            'bg-[#1e293b]',
+                            'bg-[#64748b]',
+                            'bg-[#0f172a]',
+                        ]
+                    },
+                    {
+                        name: "Sakura Pink",
+                        colours: [
+                            'bg-[#fbcfe8]',
+                            'bg-[#f9a8d4]',
+                            'bg-[#ffffff]',
+                            'bg-[#ffffff]',
+                            'bg-[#fce7f3]',
+                        ]
+                    },
+                    {
+                        name: "La Vie en Rose",
+                        colours: [
+                            'bg-[#fecdd3]',
+                            'bg-[#fda4af]',
+                            'bg-[#ffffff]',
+                            'bg-[#ffffff]',
+                            'bg-[#ffe4e6]',
+                        ]
+                    },
+                    {
                         name: "Summer Splash",
                         colours: [
                             'bg-[#264653]',
