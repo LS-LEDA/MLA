@@ -237,6 +237,10 @@ export default {
                 );
                 document.documentElement.style.setProperty(this.colour_properties[index], colour);
             })
+            this.$store.commit('setSettings', {
+                key: 'theme.selectedThemeID',
+                value: selected_id
+            })
         },
         add_theme: function () {
             // TODO: Implement add theme button
