@@ -81,14 +81,6 @@ export default {
                 markRaw(SummaryPreview),
                 markRaw(ImportDataPreview)
             ],
-            colour_properties: [
-                '--primary',
-                '--primary_variant',
-                '--secondary',
-                '--secondary_variant',
-                '--background',
-                '--typography'
-            ],
             themes_settings: {
                 application_modes: [
                     {
@@ -169,7 +161,7 @@ export default {
                     col.indexOf("[") + 1,
                     col.lastIndexOf("]")
                 );
-                document.documentElement.style.setProperty(this.colour_properties[index], colour);
+                document.documentElement.style.setProperty(this.$store.state.colour_properties[index], colour);
             })
             this.$store.commit('setSettings', {
                 key: 'theme.selectedThemeID',

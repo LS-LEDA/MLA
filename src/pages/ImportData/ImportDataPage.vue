@@ -28,17 +28,6 @@ export default {
             selected_file_name: "",
             selected_file: null,
             show_popUp : false,
-            colour_properties: [
-                '--primary',
-                '--primary_variant',
-                '--secondary',
-                '--secondary_variant',
-                '--background',
-                '--typography'
-            ],
-            themes_settings: {
-
-            }
         }
     },
     components: {
@@ -80,7 +69,7 @@ export default {
                     col.indexOf("[") + 1,
                     col.lastIndexOf("]")
                 );
-                document.documentElement.style.setProperty(this.colour_properties[index], colour);
+                document.documentElement.style.setProperty(this.$store.state.colour_properties[index], colour);
             });
             let app_mode = this.$store.state.settings['theme']['mode']
             switch ( app_mode ) {

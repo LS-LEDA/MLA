@@ -131,7 +131,18 @@ const store = createStore({
                         'bg-[#073B4C]',
                     ]
                 }
-            ]
+            ],
+            /**
+             * MLA theme CSS variables
+             */
+            colour_properties: [
+                '--primary',
+                '--primary_variant',
+                '--secondary',
+                '--secondary_variant',
+                '--background',
+                '--typography'
+            ],
         }
     },
     actions: {
