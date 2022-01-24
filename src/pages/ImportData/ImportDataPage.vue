@@ -27,7 +27,7 @@ export default {
             file_selected: false,
             selected_file_name: "",
             selected_file: null,
-            show_popUp : false
+            show_popUp : false,
         }
     },
     components: {
@@ -37,12 +37,52 @@ export default {
         InformationPopUp,
         Alert
     },
+    mounted() {
+        this.get_settings();
+    },
     computed: {
         alert_status(){
             return this.$store.state.alert;
+        },
+        load_theme: function () {
+            this.get_settings();
+            return null;
         }
     },
+    watch: {
+        load_theme() {}
+    },
     methods: {
+        /**
+         * Get MLA user saved settings and loads
+         * app's mode & theme
+         * This function will be fired on app startup
+         */
+        get_settings: function () {
+            // Load user selected colour theme
+            let colour;
+            let selected_id = this.$store.state.settings['theme']['selectedThemeID']
+            this.$store.state.themes[selected_id]['colours'].forEach( (col, index) => {
+                colour = col.substring(
+                    col.indexOf("[") + 1,
+                    col.lastIndexOf("]")
+                );
+                document.documentElement.style.setProperty(this.$store.state.colour_properties[index], colour);
+            });
+            let app_mode = this.$store.state.settings['theme']['mode']
+            switch ( app_mode ) {
+                case 'dark':
+                    document.documentElement.classList.add('dark');
+                    break;
+                case 'light':
+                    document.documentElement.classList.remove('dark');
+                    break;
+                case 'system':
+                    console.log("System mode")
+                    // TODO: Apply system mode
+                    break;
+            }
+        },
         /**
          * Toggles the Information PopUp visibility
          */

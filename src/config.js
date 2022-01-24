@@ -22,6 +22,10 @@ const schema = {
                 enum: ['dark', 'light', 'system'],
                 default: 'dark',
             },
+            selectedThemeID: {
+                type: 'number',
+                default: 0
+            },
             themes: {
                 type: 'object',
                 properties: {

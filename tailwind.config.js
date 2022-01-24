@@ -1,23 +1,22 @@
-const colors = require("tailwindcss/colors");
-
 module.exports = {
   content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   darkMode: 'class', // or 'media' or 'class'
   theme: {
     extend: {
       colors: {
-        primary: colors.blue['200'],
-        primary_variant: colors.blue['300'],
-        secondary: colors.white,
-        secondary_variant: colors.white,
-        background: colors.blue['100'],
-        typography: colors.black,
-        dark_primary: colors.slate['500'],
-        dark_primary_variant: colors.slate['700'],
-        dark_secondary: colors.slate['800'],
-        dark_secondary_variant: colors.slate['500'],
-        dark_background: colors.slate['900'],
-        dark_typography: colors.white,
+        // These CSS variables are in index.css app stylesheet
+        primary: 'var(--primary)',
+        primary_variant: 'var(--primary_variant)',
+        secondary: 'var(--secondary)',
+        secondary_variant: 'var(--secondary_variant)',
+        background: 'var(--background)',
+        typography: 'var(--typography)',
+        dark_primary: 'var(--dark_primary)',
+        dark_primary_variant: 'var(--dark_primary_variant)',
+        dark_secondary: 'var(--dark_secondary)',
+        dark_secondary_variant: 'var(--dark_secondary_variant)',
+        dark_background: 'var(--dark_background)',
+        dark_typography: 'var(--dark_typography)',
       }
     },
   },
