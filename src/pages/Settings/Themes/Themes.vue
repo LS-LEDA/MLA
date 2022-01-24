@@ -27,7 +27,7 @@
                 </div>
 
                 <div class="grid grid-cols-2 auto-rows-max gap-4 h-full overflow-x-hidden overflow-y-scroll">
-                    <Theme v-for="( theme, index ) in themes_settings['themes']" :key="index"
+                    <Theme v-for="( theme, index ) in app_themes" :key="index"
                            :theme="theme"
                            :selected="selected_theme"
                            :id="index"
@@ -107,75 +107,6 @@ export default {
                         icon: mdiMonitor
                     }
                 ],
-                themes: [
-                    {
-                        name: "Nabuki Sky",
-                        colours: [
-                            'bg-[#bfdbfe]',
-                            'bg-[#93c5fd]',
-                            'bg-[#ffffff]',
-                            'bg-[#ffffff]',
-                            'bg-[#dbeafe]',
-                        ],
-                        dark_colours: [
-                            'bg-[#64748b]',
-                            'bg-[#334155]',
-                            'bg-[#1e293b]',
-                            'bg-[#64748b]',
-                            'bg-[#0f172a]',
-                        ]
-                    },
-                    {
-                        name: "Sakura Pink",
-                        colours: [
-                            'bg-[#fbcfe8]',
-                            'bg-[#f9a8d4]',
-                            'bg-[#ffffff]',
-                            'bg-[#ffffff]',
-                            'bg-[#fce7f3]',
-                        ]
-                    },
-                    {
-                        name: "La Vie en Rose",
-                        colours: [
-                            'bg-[#fecdd3]',
-                            'bg-[#fda4af]',
-                            'bg-[#ffffff]',
-                            'bg-[#ffffff]',
-                            'bg-[#ffe4e6]',
-                        ]
-                    },
-                    {
-                        name: "Summer Splash",
-                        colours: [
-                            'bg-[#264653]',
-                            'bg-[#2A9D8F]',
-                            'bg-[#E9C46A]',
-                            'bg-[#F4A261]',
-                            'bg-[#E76F51]',
-                        ]
-                    },
-                    {
-                        name: "Pastel Dreams",
-                        colours: [
-                            'bg-[#CDB4DB]',
-                            'bg-[#FFC8DD]',
-                            'bg-[#FFAFCC]',
-                            'bg-[#BDE0FE]',
-                            'bg-[#A2D2FF]',
-                        ]
-                    },
-                    {
-                        name: "Berry Blues",
-                        colours: [
-                            'bg-[#EF476F]',
-                            'bg-[#FFD166]',
-                            'bg-[#06D6A0]',
-                            'bg-[#118AB2]',
-                            'bg-[#073B4C]',
-                        ]
-                    }
-                ]
             },
         }
     },
@@ -183,6 +114,9 @@ export default {
         refresh_settings: function () {
             this.get_settings();
             return null;
+        },
+        app_themes: function () {
+            return this.$store.state.themes;
         }
     },
     watch: {
@@ -230,7 +164,7 @@ export default {
             // Dynamically apply the selected theme colours
             // to the root css variables
             let colour;
-            this.themes_settings.themes[selected_id]['colours'].forEach( (col, index) => {
+            this.$store.state.themes[selected_id]['colours'].forEach( (col, index) => {
                 colour = col.substring(
                     col.indexOf("[") + 1,
                     col.lastIndexOf("]")
