@@ -50,9 +50,7 @@ export default {
         }
     },
     watch: {
-        load_theme() {
-            console.log("watched")
-        }
+        load_theme() {}
     },
     methods: {
         /**
