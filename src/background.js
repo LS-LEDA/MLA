@@ -1,6 +1,6 @@
 'use strict'
 
-import { app, protocol, BrowserWindow, webContents, shell, ipcMain } from 'electron'
+import { app, protocol, BrowserWindow, webContents, shell, ipcMain, Tray, Menu } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS3_DEVTOOLS } from 'electron-devtools-installer'
 const path = require('path')
@@ -10,6 +10,8 @@ require('v8-compile-cache') // via: https://dev.to/xxczaki/how-to-make-your-elec
 // MLA application user settings
 import config from "@/config";
 
+// Application variables
+let tray = null;
 
 // Check Hardware Acceleration setting
 if ( config.get('general.gpu') !== true ) {
@@ -66,7 +68,7 @@ async function createWindow() {
         minHeight: 500,
         // Don't show the window until it's ready, this prevents any white flickering
         show: false,
-        icon: path.join(__dirname, 'assets/mla_logo.png'),
+        //icon: path.join(__dirname, 'assets/mla_logo.png'),
         webPreferences: {
 
             // Use pluginOptions.nodeIntegration, leave this alone
@@ -105,6 +107,25 @@ async function createWindow() {
     }
 }
 
+/**
+ * Fired after createWindow
+ * Creates MLA's tray with its icon & menu
+ */
+function createTray() {
+    tray = new Tray(path.join(__dirname, '/bundled/assets/mla_logo.png'))
+    const contextMenu = Menu.buildFromTemplate([
+        { label: 'Import Data' },
+        { label: 'Dashboard' },
+        { label: 'Plugins' },
+        { label: 'Settings' },
+        { label: 'Quit MLA', role: 'quit' }
+    ]);
+
+    // Shown on tray hover
+    tray.setToolTip('MLA')
+    tray.setContextMenu(contextMenu)
+}
+
 // Quit when all windows are closed.
 app.on('window-all-closed', () => {
     // On macOS it is common for applications and their menu bar
@@ -132,7 +153,8 @@ app.on('ready', async () => {
             console.error('Vue Devtools failed to install:', e.toString())
         }
     }
-    createWindow()
+    await createWindow()
+    createTray();
 })
 
 // Exit cleanly on request from parent process in development mode.
