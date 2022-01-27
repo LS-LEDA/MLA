@@ -89,7 +89,14 @@ async function createWindow() {
     // Hide application window
     win.on('close', (e) => {
         e.preventDefault();
-        win.hide()
+        if ( config.get('general.tray') ) {
+            win.hide()
+        } else {
+            win.destroy();
+            win = null;
+            app.quit();
+        }
+
         return false;
     })
 
