@@ -114,14 +114,14 @@ async function createWindow() {
 function createTray() {
     tray = new Tray(path.join(__dirname, '/bundled/assets/mla_logo.png'))
     const contextMenu = Menu.buildFromTemplate([
-        { label: 'MLA webpage'},
-        { type: 'separator'},
-        { label: 'Import Data' },
-        { label: 'Dashboard' },
-        { label: 'Plugins' },
-        { label: 'Settings' },
-        { type: 'separator'},
-        { label: 'Check for updates' },
+        { id: 0, label: 'MLA webpage', click: trayMenuAction },
+        { type: 'separator' },
+        { id: 1, label: 'Import Data', click: trayMenuAction },
+        { id: 2, label: 'Dashboard', click: trayMenuAction },
+        { id: 3, label: 'Plugins', click: trayMenuAction },
+        { id: 4, label: 'Settings', click: trayMenuAction },
+        { type: 'separator' },
+        { id: 5, label: 'Check for updates', click: trayMenuAction },
         { label: 'Quit MLA', role: 'quit' }
     ]);
 
