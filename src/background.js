@@ -84,7 +84,14 @@ async function createWindow() {
 
     // Hide App Menu & maximize the window
     win.setMenu(null);
-    win.maximize()
+    win.maximize();
+
+    // Hide application window
+    win.on('close', (e) => {
+        e.preventDefault();
+        win.hide()
+        return false;
+    })
 
     if (process.env.WEBPACK_DEV_SERVER_URL) {
         // Load the url of the dev server if in development mode
@@ -123,8 +130,13 @@ function createTray() {
         { id: 4, label: 'Settings', click: trayMenuAction },
         { type: 'separator' },
         { id: 5, label: 'Check for updates', click: trayMenuAction },
-        { label: 'Quit MLA', role: 'quit' }
+        { id: 6, label: 'Quit MLA', click: trayMenuAction }
     ]);
+
+    // Show hidden window
+    tray.on('click', () => {
+        win.show();
+    })
 
     // Shown on tray hover
     tray.setToolTip('MLA')
@@ -156,20 +168,22 @@ async function trayMenuAction(menuItem) {
         case 5:
             // TODO: MLA auto-Updater
             break;
+        // Quit MLA destroys the main window & quits from the app
+        case 6:
+            win.destroy()
+            win = null;
+            app.quit();
+            break;
         default:
             console.log("The selected item doesn't exist");
     }
 }
 
 
-// Quit when all windows are closed.
+/*// Quit when all windows are closed.
 app.on('window-all-closed', () => {
-    // On macOS it is common for applications and their menu bar
-    // to stay active until the user quits explicitly with Cmd + Q
-    if (process.platform !== 'darwin') {
-        app.quit()
-    }
-})
+    win.hide();
+})*/
 
 app.on('activate', () => {
     // On macOS it's common to re-create a window in the app when the
