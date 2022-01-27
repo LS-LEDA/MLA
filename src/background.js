@@ -193,6 +193,12 @@ app.on('ready', async () => {
     createTray();
 })
 
+// Fired before quitting the application
+app.on('before-quit', () => {
+    // Remove all IPC listeners
+    win.webContents.removeAllListeners();
+})
+
 // Exit cleanly on request from parent process in development mode.
 if (isDevelopment) {
     if (process.platform === 'win32') {
