@@ -12,6 +12,7 @@ import config from "@/config";
 
 // Application variables
 let tray = null;
+let win = null;
 
 // Check Hardware Acceleration setting
 if ( config.get('general.gpu') !== true ) {
@@ -61,7 +62,7 @@ async function createWindow() {
     const { width, height } = primaryDisplay.workAreaSize
 
     // Create the browser window.
-    const win = new BrowserWindow({
+    win = new BrowserWindow({
         width: width,
         height: height,
         minWidth: 700,
