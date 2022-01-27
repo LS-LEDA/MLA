@@ -31,10 +31,12 @@ const routes = [
     },
     {
         path: '/import-data',
+        name: "import-data",
         component: ImportDataPage,
     },
     {
         path: '/dashboard',
+        name: "dashboard",
         component: DashboardPage,
         redirect: "/dashboard/summary",
         children:[
@@ -76,6 +78,7 @@ const routes = [
     },
     {
         path: '/plugins',
+        name: "plugins",
         component: Plugins,
         beforeEnter: () => {
             redirectionAlert("To be implemented for the next release")
@@ -85,6 +88,7 @@ const routes = [
     {
         path: '/settings',
         component: Settings,
+        name: "settings",
         redirect: "/settings/general",
         children: [
             {
