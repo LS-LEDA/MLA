@@ -15,6 +15,14 @@ export default {
     name: 'App',
     components: {
         NavigationBar
+    },
+    mounted() {
+        // Register tray item event
+        window.ipc.on('read_tray_item', (args) => {
+            this.$router.push({
+                name: args.name
+            });
+        })
     }
 }
 </script>

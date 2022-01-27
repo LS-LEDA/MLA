@@ -12,6 +12,7 @@ import config from "@/config";
 
 // Application variables
 let tray = null;
+let win = null;
 
 // Check Hardware Acceleration setting
 if ( config.get('general.gpu') !== true ) {
@@ -61,7 +62,7 @@ async function createWindow() {
     const { width, height } = primaryDisplay.workAreaSize
 
     // Create the browser window.
-    const win = new BrowserWindow({
+    win = new BrowserWindow({
         width: width,
         height: height,
         minWidth: 700,
@@ -141,12 +142,16 @@ async function trayMenuAction(menuItem) {
             await shell.openExternal('https://ls-leda.github.io/Moodle-Learning-Analytics/')
             break;
         case 1:
+            win.webContents.send('read_tray_item', { name: 'import-data'})
             break;
         case 2:
+            win.webContents.send('read_tray_item', { name: 'dashboard'})
             break;
         case 3:
+            win.webContents.send('read_tray_item', { name: 'plugins'})
             break;
         case 4:
+            win.webContents.send('read_tray_item', { name: 'settings'})
             break;
         case 5:
             // TODO: MLA auto-Updater
@@ -186,6 +191,12 @@ app.on('ready', async () => {
     }
     await createWindow()
     createTray();
+})
+
+// Fired before quitting the application
+app.on('before-quit', () => {
+    // Remove all IPC listeners
+    win.webContents.removeAllListeners();
 })
 
 // Exit cleanly on request from parent process in development mode.

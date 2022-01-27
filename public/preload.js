@@ -1,6 +1,6 @@
 const { contextBridge, ipcRenderer } = require('electron');
 
-const validChannels = ['read_settings', 'write_settings'];
+const validChannels = ['read_settings', 'write_settings', 'read_tray_item'];
 
 // This will expose electron IPC to the renderer process
 // Use window.ipc.send / window.ipc.on to send and receive
