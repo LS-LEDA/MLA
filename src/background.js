@@ -9,7 +9,6 @@ require('v8-compile-cache') // via: https://dev.to/xxczaki/how-to-make-your-elec
 
 // MLA application user settings
 import config from "@/config";
-import {mdiOpenInNew} from "@mdi/js";
 
 // Application variables
 let tray = null;
@@ -130,6 +129,33 @@ function createTray() {
     tray.setToolTip('MLA')
     tray.setContextMenu(contextMenu)
 }
+
+/**
+ * Handles the click events for each menu item in MLA's tray
+ * @param menuItem Contains information related to the selected item
+ * @returns {Promise<void>}
+ */
+async function trayMenuAction(menuItem) {
+    switch (menuItem.id) {
+        case 0:
+            await shell.openExternal('https://ls-leda.github.io/Moodle-Learning-Analytics/')
+            break;
+        case 1:
+            break;
+        case 2:
+            break;
+        case 3:
+            break;
+        case 4:
+            break;
+        case 5:
+            // TODO: MLA auto-Updater
+            break;
+        default:
+            console.log("The selected item doesn't exist");
+    }
+}
+
 
 // Quit when all windows are closed.
 app.on('window-all-closed', () => {
