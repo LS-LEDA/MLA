@@ -9,6 +9,7 @@ require('v8-compile-cache') // via: https://dev.to/xxczaki/how-to-make-your-elec
 
 // MLA application user settings
 import config from "@/config";
+import {mdiOpenInNew} from "@mdi/js";
 
 // Application variables
 let tray = null;
@@ -114,10 +115,14 @@ async function createWindow() {
 function createTray() {
     tray = new Tray(path.join(__dirname, '/bundled/assets/mla_logo.png'))
     const contextMenu = Menu.buildFromTemplate([
+        { label: 'MLA webpage'},
+        { type: 'separator'},
         { label: 'Import Data' },
         { label: 'Dashboard' },
         { label: 'Plugins' },
         { label: 'Settings' },
+        { type: 'separator'},
+        { label: 'Check for updates' },
         { label: 'Quit MLA', role: 'quit' }
     ]);
 
