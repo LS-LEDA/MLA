@@ -142,12 +142,16 @@ async function trayMenuAction(menuItem) {
             await shell.openExternal('https://ls-leda.github.io/Moodle-Learning-Analytics/')
             break;
         case 1:
+            win.webContents.send('read_tray_item', { name: 'import-data'})
             break;
         case 2:
+            win.webContents.send('read_tray_item', { name: 'dashboard'})
             break;
         case 3:
+            win.webContents.send('read_tray_item', { name: 'plugins'})
             break;
         case 4:
+            win.webContents.send('read_tray_item', { name: 'settings'})
             break;
         case 5:
             // TODO: MLA auto-Updater
