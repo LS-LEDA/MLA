@@ -13,6 +13,10 @@ import config from "@/config";
 // Application variables
 let tray = null;
 let win = null;
+let iconPath = isDevelopment ?
+    path.join(__dirname, 'bundled/assets/mla_logo.png')
+    :
+    path.join(__dirname, '/assets/mla_logo.png');
 
 // Check Hardware Acceleration setting
 if ( config.get('general.gpu') !== true ) {
@@ -69,7 +73,7 @@ async function createWindow() {
         minHeight: 500,
         // Don't show the window until it's ready, this prevents any white flickering
         show: false,
-        icon: path.join(__dirname, '/bundled/assets/mla_logo.png'),
+        icon: iconPath,
         webPreferences: {
 
             // Use pluginOptions.nodeIntegration, leave this alone
@@ -127,7 +131,7 @@ async function createWindow() {
  * Creates MLA's tray with its icon & menu
  */
 function createTray() {
-    tray = new Tray(path.join(__dirname, '/bundled/assets/mla_logo.png'))
+    tray = new Tray(iconPath);
     const contextMenu = Menu.buildFromTemplate([
         { id: 0, label: 'MLA webpage', click: trayMenuAction },
         { type: 'separator' },
