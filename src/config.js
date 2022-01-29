@@ -10,7 +10,7 @@ const schema = {
         },
         default: {
             gpu: true,
-            openOnStartup: false,
+            openOnStartup: true,
             tray: true,
         }
     },
@@ -20,7 +20,7 @@ const schema = {
             mode: {
                 type: 'string',
                 enum: ['dark', 'light', 'system'],
-                default: 'dark',
+                default: 'light',
             },
             selectedThemeID: {
                 type: 'number',
