@@ -24,6 +24,32 @@ if ( config.get('general.gpu') !== true ) {
     app.disableHardwareAcceleration();
 }
 
+// Check open MLA on startup
+if ( !isDevelopment ) {
+    app.setLoginItemSettings( {
+        openAtLogin: config.get('general.openOnStartup')
+    });
+}
+
+/**
+ * Applies selected settings
+ * @param setting: setting key
+ * @param setting_value: setting value
+ */
+function applySettings(setting, setting_value) {
+    switch (setting) {
+        case 'general.openOnStartup':
+            if ( !isDevelopment ) {
+                app.setLoginItemSettings( {
+                    openAtLogin: setting_value
+                })
+            }
+            break;
+        default:
+            console.log("Uncontrolled setting")
+    }
+}
+
 /**
  * IPC Read Settings handler.
  * Returns an object of the user saved settings
@@ -47,6 +73,7 @@ ipcMain.on('read_settings', (event, args) => {
 ipcMain.on('write_settings', (event, args) => {
     try {
         config.set(args.key, args.value)
+        applySettings(args.key, args.value);
     } catch (err) {
         event.reply('write_settings', err);
     }
