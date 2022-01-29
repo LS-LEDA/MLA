@@ -24,6 +24,13 @@ if ( config.get('general.gpu') !== true ) {
     app.disableHardwareAcceleration();
 }
 
+// Check open MLA on startup
+if ( !isDevelopment ) {
+    app.setLoginItemSettings( {
+        openAtLogin: config.get('general.openOnStartup')
+    });
+}
+
 /**
  * Applies selected settings
  * @param setting: setting key
