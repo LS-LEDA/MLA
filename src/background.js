@@ -13,11 +13,41 @@ import config from "@/config";
 // Application variables
 let tray = null;
 let win = null;
+let iconPath = isDevelopment ?
+    path.join(__dirname, 'bundled/assets/mla_logo.png')
+    :
+    path.join(__dirname, '/assets/mla_logo.png');
 
 // Check Hardware Acceleration setting
 if ( config.get('general.gpu') !== true ) {
     console.log("GPU disabled")
     app.disableHardwareAcceleration();
+}
+
+// Check open MLA on startup
+if ( !isDevelopment ) {
+    app.setLoginItemSettings( {
+        openAtLogin: config.get('general.openOnStartup')
+    });
+}
+
+/**
+ * Applies selected settings
+ * @param setting: setting key
+ * @param setting_value: setting value
+ */
+function applySettings(setting, setting_value) {
+    switch (setting) {
+        case 'general.openOnStartup':
+            if ( !isDevelopment ) {
+                app.setLoginItemSettings( {
+                    openAtLogin: setting_value
+                })
+            }
+            break;
+        default:
+            console.log("Uncontrolled setting")
+    }
 }
 
 /**
@@ -43,6 +73,7 @@ ipcMain.on('read_settings', (event, args) => {
 ipcMain.on('write_settings', (event, args) => {
     try {
         config.set(args.key, args.value)
+        applySettings(args.key, args.value);
     } catch (err) {
         event.reply('write_settings', err);
     }
@@ -69,7 +100,7 @@ async function createWindow() {
         minHeight: 500,
         // Don't show the window until it's ready, this prevents any white flickering
         show: false,
-        icon: path.join(__dirname, '/bundled/assets/mla_logo.png'),
+        icon: iconPath,
         webPreferences: {
 
             // Use pluginOptions.nodeIntegration, leave this alone
@@ -127,7 +158,7 @@ async function createWindow() {
  * Creates MLA's tray with its icon & menu
  */
 function createTray() {
-    tray = new Tray(path.join(__dirname, '/bundled/assets/mla_logo.png'))
+    tray = new Tray(iconPath);
     const contextMenu = Menu.buildFromTemplate([
         { id: 0, label: 'MLA webpage', click: trayMenuAction },
         { type: 'separator' },
@@ -214,8 +245,8 @@ app.on('ready', async () => {
             console.error('Vue Devtools failed to install:', e.toString())
         }
     }
-    await createWindow()
     createTray();
+    await createWindow();
 })
 
 // Fired before quitting the application
