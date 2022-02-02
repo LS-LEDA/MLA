@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col w-3/6 h-full divide-y">
+    <div class="flex flex-col w-full lg:w-1/2 h-full divide-y">
         <div class="flex flex-col py-5" v-for="( setting, index ) in general_settings" :key="index">
             <div class="flex justify-between">
                <span class="font-bold">

@@ -1,6 +1,6 @@
 <template>
     <div class="flex w-full h-full space-x-5">
-        <div class="flex flex-col w-2/6 space-y-5">
+        <div class="flex flex-col w-full xl:w-2/6 space-y-5">
             <!-- Application Mode settings -->
             <div class="flex flex-col w-full h- space-y-2">
                 <div class="font-bold text-2xl">
@@ -37,7 +37,7 @@
         </div>
 
         <!-- Application Theme Preview -->
-        <div class="flex flex-col w-4/6 h-full justify-center items-center space-y-5">
+        <div class="hidden xl:flex flex-col w-4/6 h-full justify-center items-center space-y-5">
             <component :is="views[view_counter]"></component>
             <!-- Preview dotted indicator -->
             <div class="flex w-full justify-center space-x-2">
