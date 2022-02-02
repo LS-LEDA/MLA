@@ -44,7 +44,8 @@ import {mdiOpenInNew} from "@mdi/js";
 import ContributorBadge from "@/components/UI/ContributorBadge";
 import dani_icon from "/public/assets/dani_amo_profile.jpeg";
 import jiahui_icon from "/public/assets/jiahui_profile.png";
-import default_icon from "/public/assets/default_profile.png";
+import aleix_icon from "/public/assets/aleix_profile.png";
+//import default_icon from "/public/assets/default_profile.png";
 
 export default {
     name: "About",
@@ -96,7 +97,7 @@ export default {
                 {
                     name: "Aleix Ollé",
                     email: "aleix.olle@students.salle.url.edu",
-                    icon: default_icon,
+                    icon: aleix_icon,
                     role: "Developer"
                 }
             ]
