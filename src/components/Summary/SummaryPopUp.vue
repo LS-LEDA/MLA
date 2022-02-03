@@ -58,9 +58,10 @@ export default {
         SvgIcon
     },
     props: ['summaryID', 'card_name'],
+    emits: ['popUp'],
     methods: {
         close_pop_up: function ({card_name, summaryID}) {
-            this.$emit('popUp', {card_name, summaryID});
+            this.$emit('popUp', {id: 1, card_name, summaryID});
         },
         summary_chart: function (chartId, chartData) {
             let ctx = document.getElementById(chartId);
