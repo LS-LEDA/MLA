@@ -16,7 +16,10 @@
                 </button>
             </div>
 
-
+            <!-- Total Interaction Interactive Chart -->
+            <div class="flex relative w-full h-full block">
+                <canvas class="max-h-full max-w-full" id="interactions_chart"></canvas>
+            </div>
         </div>
         <div class="absolute w-full h-full filter backdrop-blur-sm z-10"></div>
     </div>
@@ -25,21 +28,63 @@
 <script>
 import {mdiClose} from "@mdi/js";
 import SvgIcon from "@jamescoyle/vue-icon";
+import {Chart, registerables} from "chart.js";
+import totalInteractionChartData from "@/assets/totalInteractionChartData";
+import zoomPlugin from 'chartjs-plugin-zoom';
 
 export default {
     name: "InteractionPopUp",
     components: {
         SvgIcon
     },
+    props: ['logs'],
     emits: ['popUp'],
+    mounted() {
+        let types = {};
+        this.logs.forEach( (log) => {
+            types[log.yearMonthDate] = (types[log.yearMonthDate] + 1 ) || 1;
+        });
+        let dates = Object.keys(types);
+        let interactions = Object.values(types);
+        this.totalInteractionChartData.options.scales.x.labels = dates;
+        this.totalInteractionChartData.data.datasets[0].data = interactions;
+
+        // Create Total Interactions chart once component is mounted
+        this.totalInteractionChart('interactions_chart', this.totalInteractionChartData);
+    },
+    unmounted() {
+        // Clear chart once the component is unmounted
+        this.interactions_chart.clear();
+    },
     methods: {
         close_pop_up: function () {
             this.$emit('popUp', {id: 0});
         },
+        /**
+         * Renders a chart in total interaction card
+         * @param chartId: canvas chart ID
+         * @param chartData chart data
+         */
+        totalInteractionChart (chartId, chartData) {
+            // Enable zoom & pan for the chart
+            chartData.options.plugins.zoom.zoom.wheel.enabled = true;
+            chartData.options.plugins.zoom.zoom.pinch.enabled = true;
+            chartData.options.plugins.zoom.pan.enabled = true;
+            let ctx = document.getElementById(chartId);
+            Chart.register(...registerables);
+            Chart.register(zoomPlugin);
+            this.interactions_chart = new Chart(ctx, {
+                type: chartData.type,
+                data: chartData.data,
+                options: chartData.options,
+            });
+        }
     },
     data() {
         return {
             close_icon: mdiClose,
+            interactions_chart: null,
+            totalInteractionChartData: totalInteractionChartData,
         }
     }
 }
