@@ -58,6 +58,7 @@
     "@nlpjs/nlp": "^4.22.0",
     "@nlpjs/sentiment": "^4.22.0",
     "chart.js": "^3.6.0",
+    "chartjs-plugin-zoom": "^1.2.0",
     "core-js": "^3.6.5",
     "electron-store": "^8.0.1",
     "node-nlp": "^4.22.1",
