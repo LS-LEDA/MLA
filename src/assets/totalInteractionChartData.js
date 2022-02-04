@@ -19,6 +19,22 @@ export const totalInteractionChartData = {
             legend: {
                 display: false
             },
+            zoom: {
+                zoom: {
+                    wheel: {
+                        enabled: false,
+                    },
+                    pinch: {
+                        enabled: false
+                    },
+                    mode: 'xy',
+                },
+                pan: {
+                    enabled: false,
+                    mode: 'xy',
+                    modifierKey: 'ctrl'
+                }
+            }
         },
         elements: {
             point: {
