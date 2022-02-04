@@ -24,9 +24,9 @@
                 </div>
                 <!-- Chart Controllers -->
                 <div class="flex flex-col">
-                    <IconButton :icon="zoom_in_icon" :status="true"/>
-                    <IconButton :icon="zoom_out_icon" :status="true"/>
-                    <IconButton :icon="zoom_reset_icon" :status="true"/>
+                    <IconButton :icon="zoom_in_icon" :status="true" @click="zoom_event(0)"/>
+                    <IconButton :icon="zoom_out_icon" :status="true" @click="zoom_event(1)"/>
+                    <IconButton :icon="zoom_reset_icon" :status="true" @click="zoom_event(2)"/>
                 </div>
             </div>
         </div>
@@ -94,6 +94,27 @@ export default {
                 data: chartData.data,
                 options: chartData.options,
             });
+        },
+        /**
+         * Chart zooming buttons handlers
+         * 0: Zooms In
+         * 1: Zoom Out
+         * 2: Reset Zoom
+         * @param eventID Zoom Button ID
+         */
+        zoom_event: function (eventID) {
+            switch (eventID) {
+                case 0:
+                    this.interactions_chart.zoom(1.1, 'zoom')
+                    break;
+                case 1:
+                    this.interactions_chart.zoom(0.9, 'zoom')
+                    break;
+                case 2:
+                    this.interactions_chart.resetZoom('show');
+                    break;
+                default: console.log("Unrecognized Zoom Event")
+            }
         }
     },
     data() {
