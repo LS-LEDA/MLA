@@ -19,7 +19,7 @@
         <!-- Summary Card Pop Up -->
         <SummaryPopUp v-if="popup" @popUp="toggle_popup" :summaryID="summaryID" :card_name="card_name" class="absolute"/>
         <!-- Total Interaction Card Pop Up -->
-        <InteractionPopUp v-if="total_popup" @popUp="toggle_popup"/>
+        <InteractionPopUp v-if="total_popup" @popUp="toggle_popup" :logs="logs"/>
         <!-- Alert -->
         <Alert v-if="alert_status.status" :message="alert_status.message"
                @closeAlert="close_alert"/>
@@ -71,6 +71,9 @@ export default {
     computed: {
         alert_status(){
             return this.$store.state.alert;
+        },
+        logs() {
+            return this.$store.state.logs
         }
     },
     data() {
