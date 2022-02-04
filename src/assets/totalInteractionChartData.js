@@ -32,7 +32,6 @@ export const totalInteractionChartData = {
                 pan: {
                     enabled: false,
                     mode: 'xy',
-                    modifierKey: 'ctrl'
                 },
                 limits: {
                     y: { min: 0 }
