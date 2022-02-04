@@ -33,6 +33,9 @@ export const totalInteractionChartData = {
                     enabled: false,
                     mode: 'xy',
                     modifierKey: 'ctrl'
+                },
+                limits: {
+                    y: { min: 0 }
                 }
             }
         },
