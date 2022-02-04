@@ -16,9 +16,18 @@
                 </button>
             </div>
 
-            <!-- Total Interaction Interactive Chart -->
-            <div class="flex relative w-full h-full block">
-                <canvas class="max-h-full max-w-full" id="interactions_chart"></canvas>
+            <!-- Cart Section -->
+            <div class="flex w-full h-1/3">
+                <!-- Total Interaction Interactive Chart -->
+                <div class="flex relative w-full h-full block">
+                    <canvas class="max-h-full max-w-full" id="interactions_chart"></canvas>
+                </div>
+                <!-- Chart Controllers -->
+                <div class="flex flex-col">
+                    <IconButton :icon="zoom_in_icon" :status="true"/>
+                    <IconButton :icon="zoom_out_icon" :status="true"/>
+                    <IconButton :icon="zoom_reset_icon" :status="true"/>
+                </div>
             </div>
         </div>
         <div class="absolute w-full h-full filter backdrop-blur-sm z-10"></div>
@@ -26,15 +35,17 @@
 </template>
 
 <script>
-import {mdiClose} from "@mdi/js";
+import {mdiClose, mdiMagnifyMinusOutline, mdiMagnifyPlusOutline, mdiUndo} from "@mdi/js";
 import SvgIcon from "@jamescoyle/vue-icon";
 import {Chart, registerables} from "chart.js";
 import totalInteractionChartData from "@/assets/totalInteractionChartData";
 import zoomPlugin from 'chartjs-plugin-zoom';
+import IconButton from "@/components/UI/IconButton";
 
 export default {
     name: "InteractionPopUp",
     components: {
+        IconButton,
         SvgIcon
     },
     props: ['logs'],
@@ -90,6 +101,9 @@ export default {
             close_icon: mdiClose,
             interactions_chart: null,
             totalInteractionChartData: totalInteractionChartData,
+            zoom_in_icon: mdiMagnifyPlusOutline,
+            zoom_out_icon: mdiMagnifyMinusOutline,
+            zoom_reset_icon: mdiUndo
         }
     }
 }
