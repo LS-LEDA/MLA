@@ -53,6 +53,11 @@ export default {
         this.totalInteractionChart('interactions_chart', this.totalInteractionChartData);
     },
     unmounted() {
+        // Reset chart data config
+        this.totalInteractionChartData.options.plugins.zoom.zoom.wheel.enabled = true;
+        this.totalInteractionChartData.options.plugins.zoom.zoom.pinch.enabled = true;
+        this.totalInteractionChartData.options.plugins.zoom.pan.enabled = true;
+
         // Clear chart once the component is unmounted
         this.interactions_chart.clear();
     },
