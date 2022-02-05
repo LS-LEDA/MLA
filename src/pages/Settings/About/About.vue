@@ -59,7 +59,7 @@ export default {
             link_icon: mdiOpenInNew,
             information: [
                 "MLA for Desktop",
-                "Version 1.0.1 - Andromeda",
+                "Version 1.1.0 - Antlia",
                 "Linux x86_64"
             ],
             external_links: [
