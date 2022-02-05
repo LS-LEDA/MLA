@@ -26,20 +26,7 @@
             <!-- Summary card table -->
             <div v-if="!withData" class="self-center"> No data </div>
             <div v-else class="flex w-full max-h-full justify-center overflow-y-scroll">
-                <table class="table-auto">
-                    <thead class="bg-primary_variant dark:bg-dark_primary_variant">
-                        <tr class="text-left uppercase">
-                            <th class="p-3"> Interactions type </th>
-                            <th class="p-3"> Number of interactions </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <tr class="bg-primary dark:bg-dark_primary hover:bg-primary_variant dark:hover:bg-dark_primary_variant" v-for="(interaction, index) in summary_interactions" :key="index">
-                        <td class="font-bold p-3"> {{ interaction[0] }} </td>
-                        <td class="p-3"> {{ interaction[1] }} </td>
-                    </tr>
-                    </tbody>
-                </table>
+                <Table :interactions="summary_interactions"/>
             </div>
         </div>
         <div class="absolute w-full h-full filter backdrop-blur-sm z-10"></div>
@@ -51,10 +38,12 @@ import SvgIcon from "@jamescoyle/vue-icon";
 import {mdiClose} from "@mdi/js";
 import {Chart, registerables} from "chart.js";
 import summaryCardChartData from "@/assets/summaryCardChartData";
+import Table from "@/components/UI/Table";
 
 export default {
     name: "SummaryPopUp",
     components: {
+        Table,
         SvgIcon
     },
     props: ['summaryID', 'card_name'],
