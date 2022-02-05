@@ -10,12 +10,33 @@ import Summary from "@/pages/Dashboard/Summary/Summary";
 import Students from "@/pages/Dashboard/Students/Students";
 import Resources from "@/pages/Dashboard/Resources/Resources";
 import Sentimental from "@/pages/Dashboard/Sentiment/Sentiment";
+import General from "@/pages/Settings/General/General";
+import Themes from "@/pages/Settings/Themes/Themes";
+import About from "@/pages/Settings/About/About";
 
 const routes = [
-    { path: '/', component: ImportDataPage },
-    { path: '/import-data', component: ImportDataPage },
+    {
+        path: '/',
+        component: ImportDataPage,
+        // Called when first loading the app
+        // We need to load user preferences like theming
+        beforeEnter:(to, from, next) => {
+            store.dispatch('getUserSettings');
+            // On receive settings handler
+            window.ipc.on('read_settings', (args) => {
+                store.state.settings = args
+                next();
+            })
+        },
+    },
+    {
+        path: '/import-data',
+        name: "import-data",
+        component: ImportDataPage,
+    },
     {
         path: '/dashboard',
+        name: "dashboard",
         component: DashboardPage,
         redirect: "/dashboard/summary",
         children:[
@@ -57,13 +78,36 @@ const routes = [
     },
     {
         path: '/plugins',
+        name: "plugins",
         component: Plugins,
         beforeEnter: () => {
             redirectionAlert("To be implemented for the next release")
             return false
         }
     },
-    { path: '/settings', component: Settings },
+    {
+        path: '/settings',
+        component: Settings,
+        name: "settings",
+        redirect: "/settings/general",
+        children: [
+            {
+                path: '/settings/general',
+                name: "general",
+                component: General,
+            },
+            {
+                path: '/settings/themes',
+                name: "themes",
+                component: Themes,
+            },
+            {
+                path: '/settings/about',
+                name: "about",
+                component: About,
+            }
+        ]
+    },
 ]
 
 function check_imported_forum_data(){

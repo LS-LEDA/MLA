@@ -58,7 +58,9 @@
     "@nlpjs/nlp": "^4.22.0",
     "@nlpjs/sentiment": "^4.22.0",
     "chart.js": "^3.6.0",
+    "chartjs-plugin-zoom": "^1.2.0",
     "core-js": "^3.6.5",
+    "electron-store": "^8.0.1",
     "node-nlp": "^4.22.1",
     "v8-compile-cache": "^2.3.0",
     "vue": "^3.0.0",
@@ -72,18 +74,21 @@
     "@vue/compiler-sfc": "^3.2.20",
     "autoprefixer": "^10.3.7",
     "babel-eslint": "^10.1.0",
-    "electron": "^15.3.1",
+    "electron": "^16.0.8",
     "electron-devtools-installer": "^3.1.0",
     "eslint": "^7.32.0",
     "eslint-plugin-vue": "^7.20.0",
     "post-loader": "^2.0.0",
     "postcss": "^8.3.11",
     "postcss-cli": "^9.0.1",
-    "tailwindcss": "^3.0.7",
+    "tailwindcss": "^3.0.15",
     "vue-cli-plugin-electron-builder": "~2.1.1"
   },
   "eslintConfig": {
     "root": true,
+    "globals": {
+      "__static": "readonly"
+    },
     "env": {
       "node": true
     },

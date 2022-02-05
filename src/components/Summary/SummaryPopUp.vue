@@ -3,10 +3,10 @@
          role="dialog" aria-modal="true">
 
         <!-- PopUp white background -->
-        <div class="flex flex-col bg-white w-11/12 h-5/6 rounded-xl z-50 p-5 gap-y-5">
+        <div class="flex flex-col bg-secondary dark:bg-dark_secondary w-11/12 h-5/6 rounded-xl z-50 p-5 gap-y-5">
             <div class="flex w-full justify-between">
                 <!-- PopUp Title -->
-                <div class="w-auto bg-blue-300 rounded-xl py-2 px-5 font-bold">
+                <div class="w-auto bg-primary_variant dark:bg-dark_primary_variant rounded-xl py-2 px-5 font-bold">
                     {{ card_name }}
                 </div>
                 <!-- Close button -->
@@ -26,20 +26,7 @@
             <!-- Summary card table -->
             <div v-if="!withData" class="self-center"> No data </div>
             <div v-else class="flex w-full max-h-full justify-center overflow-y-scroll">
-                <table class="table-auto">
-                    <thead class="bg-blue-300">
-                        <tr class="text-left uppercase">
-                            <th class="p-3"> Interactions type </th>
-                            <th class="p-3"> Number of interactions </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <tr class="bg-blue-100 hover:bg-blue-400" v-for="(interaction, index) in summary_interactions" :key="index">
-                        <td class="font-bold p-3"> {{ interaction[0] }} </td>
-                        <td class="p-3"> {{ interaction[1] }} </td>
-                    </tr>
-                    </tbody>
-                </table>
+                <Table :interactions="summary_interactions"/>
             </div>
         </div>
         <div class="absolute w-full h-full filter backdrop-blur-sm z-10"></div>
@@ -51,16 +38,19 @@ import SvgIcon from "@jamescoyle/vue-icon";
 import {mdiClose} from "@mdi/js";
 import {Chart, registerables} from "chart.js";
 import summaryCardChartData from "@/assets/summaryCardChartData";
+import Table from "@/components/UI/Table";
 
 export default {
     name: "SummaryPopUp",
     components: {
+        Table,
         SvgIcon
     },
     props: ['summaryID', 'card_name'],
+    emits: ['popUp'],
     methods: {
         close_pop_up: function ({card_name, summaryID}) {
-            this.$emit('popUp', {card_name, summaryID});
+            this.$emit('popUp', {id: 1, card_name, summaryID});
         },
         summary_chart: function (chartId, chartData) {
             let ctx = document.getElementById(chartId);

@@ -8,7 +8,7 @@
                          @mouseleave="logo_not_hover"
                          @click="redirectionAlert('Import Moodle and/or Forum logs')">
                 <img class="max-h-16 rounded-lg origin-center transform transition duration-500"
-                     src="/assets/mla_logo.png" alt="jsMLA Logo">
+                     src="/assets/mla_logo.png" alt="MLA Logo">
             </router-link>
         </div>
         <!-- Application name -->
@@ -16,7 +16,7 @@
         <div class="flex-1 mx-4 font-bold text-2xl self-center hover:cursor-pointer" v-if="nav_state">
             <router-link :to="imported_data"
                          @click="redirectionAlert('Import Moodle and/or Forum logs')">
-                <h1>jsMLA</h1>
+                <h1>MLA</h1>
             </router-link>
         </div>
         <!--</transition>-->

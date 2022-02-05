@@ -3,8 +3,23 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Default Nabuki Sky Theme*/
+:root {
+    --primary: #bfdbfe;
+    --primary_variant: #93c5fd;
+    --secondary: #ffffff;
+    --secondary_variant: #ffffff;
+    --background: #dbeafe;
+    --typography: #000000;
+    --dark_primary: #64748b;
+    --dark_primary_variant: #334155;
+    --dark_secondary: #1e293b;
+    --dark_secondary_variant: #64748b;
+    --dark_background: #0f172a;
+    --dark_typography: #ffffff;
+}
+
 body {
-    background-color: #E0FBFC;
     font-family: "Roboto", sans-serif;
 }
 

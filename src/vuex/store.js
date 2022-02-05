@@ -55,7 +55,94 @@ const store = createStore({
             upload_status: {
                 status: 0,
                 progress: 0
-            }
+            },
+            /**
+             * Stores MLA user settings
+             */
+            settings: {},
+            /**
+             * MLA default themes
+             */
+            themes: [
+                {
+                    name: "Nabuki Sky",
+                    colours: [
+                        'bg-[#bfdbfe]',
+                        'bg-[#93c5fd]',
+                        'bg-[#ffffff]',
+                        'bg-[#ffffff]',
+                        'bg-[#dbeafe]',
+                    ],
+                    dark_colours: [
+                        'bg-[#64748b]',
+                        'bg-[#334155]',
+                        'bg-[#1e293b]',
+                        'bg-[#64748b]',
+                        'bg-[#0f172a]',
+                    ]
+                },
+                {
+                    name: "Sakura Pink",
+                    colours: [
+                        'bg-[#fbcfe8]',
+                        'bg-[#f9a8d4]',
+                        'bg-[#ffffff]',
+                        'bg-[#ffffff]',
+                        'bg-[#fce7f3]',
+                    ]
+                },
+                {
+                    name: "La Vie en Rose",
+                    colours: [
+                        'bg-[#fecdd3]',
+                        'bg-[#fda4af]',
+                        'bg-[#ffffff]',
+                        'bg-[#ffffff]',
+                        'bg-[#ffe4e6]',
+                    ]
+                },
+                {
+                    name: "Summer Splash",
+                    colours: [
+                        'bg-[#264653]',
+                        'bg-[#2A9D8F]',
+                        'bg-[#E9C46A]',
+                        'bg-[#F4A261]',
+                        'bg-[#E76F51]',
+                    ]
+                },
+                {
+                    name: "Pastel Dreams",
+                    colours: [
+                        'bg-[#CDB4DB]',
+                        'bg-[#FFC8DD]',
+                        'bg-[#FFAFCC]',
+                        'bg-[#BDE0FE]',
+                        'bg-[#A2D2FF]',
+                    ]
+                },
+                {
+                    name: "Berry Blues",
+                    colours: [
+                        'bg-[#EF476F]',
+                        'bg-[#FFD166]',
+                        'bg-[#06D6A0]',
+                        'bg-[#118AB2]',
+                        'bg-[#073B4C]',
+                    ]
+                }
+            ],
+            /**
+             * MLA theme CSS variables
+             */
+            colour_properties: [
+                '--primary',
+                '--primary_variant',
+                '--secondary',
+                '--secondary_variant',
+                '--background',
+                '--typography'
+            ],
         }
     },
     actions: {
@@ -63,6 +150,10 @@ const store = createStore({
             this.commit('resetProgress');
             this.commit('progressStepCounter', time);
         },
+        // Async method that retrieves user's MLA Settings
+        getUserSettings() {
+            this.commit('getSettings');
+        }
     },
     mutations: {
         // Expand or shrink navigation bar
@@ -141,6 +232,45 @@ const store = createStore({
                 }
             }
             count(time);
+        },
+        // Retrieve MLA user saved settings
+        getSettings() {
+            // Get user stored settings
+            window.ipc.send('read_settings', [
+                    'general',
+                    'theme'
+                ]
+            );
+        },
+        /**
+         * Called every time a setting param changes
+         * Persists in runtime vuex store & config store
+         * Electron's main process will handle the changes
+         * @param state
+         * @param settings Object containing the changes of a setting to be made
+         * @example { key: 'general.gpu', value: true }
+         */
+        setSettings(state, settings) {
+            // Update vuex settings
+            // key might be a deep nested property
+            // general.mode
+            // TODO: Automate deeply nested properties
+            console.log(settings)
+            let key = settings.key.split('.')
+            this.state.settings[key[0]][key[1]] = settings.value
+
+            // Persist change to mla config
+            window.ipc.send('write_settings',
+                settings
+            );
+        },
+        /**
+         * Removes IPC handler, called when Settings page is unmounted
+         * @param state
+         * @param channel The channel listener to be removed
+         */
+        removeIPCListener(state, channel) {
+            window.ipc.removeListeners(channel);
         }
     }
 });

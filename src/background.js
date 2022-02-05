@@ -1,11 +1,83 @@
 'use strict'
 
-import { app, protocol, BrowserWindow } from 'electron'
+import { app, protocol, BrowserWindow, webContents, shell, ipcMain, Tray, Menu } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS3_DEVTOOLS } from 'electron-devtools-installer'
 const path = require('path')
 const isDevelopment = process.env.NODE_ENV !== 'production'
 require('v8-compile-cache') // via: https://dev.to/xxczaki/how-to-make-your-electron-app-faster-4ifb
+
+// MLA application user settings
+import config from "@/config";
+
+// Application variables
+let tray = null;
+let win = null;
+let iconPath = isDevelopment ?
+    path.join(__dirname, 'bundled/assets/mla_logo.png')
+    :
+    path.join(__dirname, '/assets/mla_logo.png');
+
+// Check Hardware Acceleration setting
+if ( config.get('general.gpu') !== true ) {
+    console.log("GPU disabled")
+    app.disableHardwareAcceleration();
+}
+
+// Check open MLA on startup
+if ( !isDevelopment ) {
+    app.setLoginItemSettings( {
+        openAtLogin: config.get('general.openOnStartup')
+    });
+}
+
+/**
+ * Applies selected settings
+ * @param setting: setting key
+ * @param setting_value: setting value
+ */
+function applySettings(setting, setting_value) {
+    switch (setting) {
+        case 'general.openOnStartup':
+            if ( !isDevelopment ) {
+                app.setLoginItemSettings( {
+                    openAtLogin: setting_value
+                })
+            }
+            break;
+        default:
+            console.log("Uncontrolled setting")
+    }
+}
+
+/**
+ * IPC Read Settings handler.
+ * Returns an object of the user saved settings
+ * @param args: array of settings to retrieve ['general, 'theme']
+ */
+ipcMain.on('read_settings', (event, args) => {
+    let settings = {}
+    args.forEach( (setting) => {
+        settings[setting] = config.get(setting)
+    });
+
+    event.reply('read_settings', settings );
+});
+
+/**
+ * IPC Write Settings handler
+ * Returns an error if something went wrong
+ * @param args: Object containing the changes of a setting to be made
+ * @example { key: 'general.gpu', value: true }
+ */
+ipcMain.on('write_settings', (event, args) => {
+    try {
+        config.set(args.key, args.value)
+        applySettings(args.key, args.value);
+    } catch (err) {
+        event.reply('write_settings', err);
+    }
+});
 
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([
@@ -21,26 +93,43 @@ async function createWindow() {
     const { width, height } = primaryDisplay.workAreaSize
 
     // Create the browser window.
-    const win = new BrowserWindow({
+    win = new BrowserWindow({
         width: width,
         height: height,
         minWidth: 700,
         minHeight: 500,
         // Don't show the window until it's ready, this prevents any white flickering
         show: false,
-        icon: path.join(__dirname, 'assets/mla_logo.png'),
+        icon: iconPath,
         webPreferences: {
 
             // Use pluginOptions.nodeIntegration, leave this alone
             // See nklayman.github.io/vue-cli-plugin-electron-builder/guide/security.html#node-integration for more info
             nodeIntegration: process.env.ELECTRON_NODE_INTEGRATION,
-            contextIsolation: !process.env.ELECTRON_NODE_INTEGRATION
+            contextIsolation: !process.env.ELECTRON_NODE_INTEGRATION,
+            // __static is set by webpack and will point to the public directory
+            //https://medium.com/swlh/how-to-safely-set-up-an-electron-app-with-vue-and-webpack-556fb491b83
+            preload: path.resolve(__static, 'preload.js'),
         }
     })
 
     // Hide App Menu & maximize the window
     win.setMenu(null);
-    win.maximize()
+    win.maximize();
+
+    // Hide application window
+    win.on('close', (e) => {
+        e.preventDefault();
+        if ( config.get('general.tray') ) {
+            win.hide()
+        } else {
+            win.destroy();
+            win = null;
+            app.quit();
+        }
+
+        return false;
+    })
 
     if (process.env.WEBPACK_DEV_SERVER_URL) {
         // Load the url of the dev server if in development mode
@@ -55,17 +144,88 @@ async function createWindow() {
         win.loadURL('app://./index.html').then( () => {
             win.show()
         })
+
+        // Opens external links in user's default browser
+        webContents.setWindowOpenHandler( ({url}) => {
+            shell.openExternal(url)
+            return { action: "allow"}
+        });
     }
 }
 
-// Quit when all windows are closed.
-app.on('window-all-closed', () => {
-    // On macOS it is common for applications and their menu bar
-    // to stay active until the user quits explicitly with Cmd + Q
-    if (process.platform !== 'darwin') {
-        app.quit()
+/**
+ * Fired after createWindow
+ * Creates MLA's tray with its icon & menu
+ */
+function createTray() {
+    tray = new Tray(iconPath);
+    const contextMenu = Menu.buildFromTemplate([
+        { id: 0, label: 'MLA webpage', click: trayMenuAction },
+        { type: 'separator' },
+        { id: 1, label: 'Import Data', click: trayMenuAction },
+        { id: 2, label: 'Dashboard', click: trayMenuAction },
+        { id: 3, label: 'Plugins', click: trayMenuAction },
+        { id: 4, label: 'Settings', click: trayMenuAction },
+        { type: 'separator' },
+        { id: 5, label: 'Check for updates', click: trayMenuAction },
+        { id: 6, label: 'Quit MLA', click: trayMenuAction }
+    ]);
+
+    // Show hidden window
+    tray.on('click', () => {
+        win.show();
+    })
+
+    // Shown on tray hover
+    tray.setToolTip('MLA')
+    tray.setContextMenu(contextMenu)
+}
+
+/**
+ * Handles the click events for each menu item in MLA's tray
+ * @param menuItem Contains information related to the selected item
+ * @returns {Promise<void>}
+ */
+async function trayMenuAction(menuItem) {
+    switch (menuItem.id) {
+        case 0:
+            await shell.openExternal('https://ls-leda.github.io/Moodle-Learning-Analytics/')
+            break;
+        case 1:
+            win.show();
+            win.webContents.send('read_tray_item', { name: 'import-data'})
+            break;
+        case 2:
+            win.show();
+            win.webContents.send('read_tray_item', { name: 'dashboard'})
+            break;
+        case 3:
+            win.show();
+            win.webContents.send('read_tray_item', { name: 'plugins'})
+            break;
+        case 4:
+            win.show();
+            win.webContents.send('read_tray_item', { name: 'settings'})
+            break;
+        case 5:
+            // TODO: MLA auto-Updater
+            break;
+        // Quit MLA destroys the main window & quits from the app
+        case 6:
+            win.destroy()
+            win = null;
+            app.quit();
+            break;
+        default:
+            console.log("The selected item doesn't exist");
     }
-})
+}
+
+
+/*// Quit when all windows are closed.
+app.on('window-all-closed', () => {
+    win.hide();
+})*/
 
 app.on('activate', () => {
     // On macOS it's common to re-create a window in the app when the
@@ -85,7 +245,14 @@ app.on('ready', async () => {
             console.error('Vue Devtools failed to install:', e.toString())
         }
     }
-    createWindow()
+    createTray();
+    await createWindow();
+})
+
+// Fired before quitting the application
+app.on('before-quit', () => {
+    // Remove all IPC listeners
+    win.webContents.removeAllListeners();
 })
 
 // Exit cleanly on request from parent process in development mode.
