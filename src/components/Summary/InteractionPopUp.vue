@@ -23,7 +23,7 @@
                     <canvas class="max-h-full max-w-full" id="interactions_chart"></canvas>
                 </div>
                 <!-- Chart Controllers -->
-                <div class="flex flex-col">
+                <div class="hidden md:flex flex-col">
                     <IconButton :icon="zoom_in_icon" :status="true" @click="zoom_event(0)"/>
                     <IconButton :icon="zoom_out_icon" :status="true" @click="zoom_event(1)"/>
                     <IconButton :icon="zoom_reset_icon" :status="true" @click="zoom_event(2)"/>
@@ -32,7 +32,7 @@
 
             <div class="flex w-full h-2/3">
                 <!-- Interactions table -->
-                <div class="flex w-1/2 h-full overflow-y-scroll">
+                <div class="flex w-full lg:w-1/2 h-full overflow-y-scroll">
                     <Table :interactions="create_interactions_table"/>
                 </div>
             </div>
