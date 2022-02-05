@@ -2,7 +2,7 @@
     <h1 class="text-4xl font-extrabold"> Summary of all course interactions </h1>
     <span class="font-bold text-2xl text-gray-500"> Information on the number of interactions </span>
     <!-- Dashboard Summary Total Interactions card-->
-    <InteractionCard :summary="summary" :logs="logs"/>
+    <InteractionCard :summary="summary" :logs="logs" @popUp="total_interaction_popup"/>
     <!-- Dashboard Summary cards-->
     <div class="grid  gap-x-5 gap-y-5 w-full max-h-full mt-5
                 sm:auto-rows-auto sm:grid-cols-1
@@ -61,7 +61,10 @@ export default {
     },
     methods: {
         detailed_information_pop_up: function ({card_name, summaryID}){
-            this.$emit('popUp', {card_name, summaryID});
+            this.$emit('popUp', {id: 1, card_name, summaryID});
+        },
+        total_interaction_popup: function () {
+            this.$emit('popUp', {id: 0})
         }
     },
     data(){
