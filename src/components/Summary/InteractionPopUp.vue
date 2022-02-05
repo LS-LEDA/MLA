@@ -29,6 +29,14 @@
                     <IconButton :icon="zoom_reset_icon" :status="true" @click="zoom_event(2)"/>
                 </div>
             </div>
+
+            <div class="flex w-full h-2/3">
+                <!-- Interactions table -->
+                <div class="flex w-1/2 h-full overflow-y-scroll">
+                    <Table :interactions="create_interactions_table"/>
+                </div>
+            </div>
+
         </div>
         <div class="absolute w-full h-full filter backdrop-blur-sm z-10"></div>
     </div>
@@ -41,10 +49,12 @@ import {Chart, registerables} from "chart.js";
 import totalInteractionChartData from "@/assets/totalInteractionChartData";
 import zoomPlugin from 'chartjs-plugin-zoom';
 import IconButton from "@/components/UI/IconButton";
+import Table from "@/components/UI/Table";
 
 export default {
     name: "InteractionPopUp",
     components: {
+        Table,
         IconButton,
         SvgIcon
     },
@@ -62,6 +72,25 @@ export default {
 
         // Create Total Interactions chart once component is mounted
         this.totalInteractionChart('interactions_chart', this.totalInteractionChartData);
+    },
+    computed: {
+        /**
+         * Get interactions from vuex and prepares the data
+         * for being displayed in the interactions table
+         * @return {[string, unknown][]}
+         */
+        create_interactions_table: function () {
+            let interactions = {};
+            let summary_types = Object.entries(this.$store.state.summary.summary_types);
+
+            summary_types.forEach( (interaction) => {
+                // interaction[0]: Interaction name e.g - 'Task'
+                // interaction[1]: Interaction object e.g - { count: 100, interactions: {} }
+                interactions[interaction[0]] = interaction[1].count
+            });
+
+            return Object.entries(interactions);
+        }
     },
     unmounted() {
         // Reset chart data config
