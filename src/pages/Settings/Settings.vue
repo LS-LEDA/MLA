@@ -77,6 +77,10 @@ export default {
                     tab_path: "/settings/general"
                 },
                 {
+                    tab_name: "AI",
+                    tab_path: "/settings/ai"
+                },
+                {
                     tab_name: "Themes",
                     tab_path: "/settings/themes"
                 },
