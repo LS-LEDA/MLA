@@ -52,10 +52,6 @@ const routes = [
                 path: '/dashboard/students',
                 name: "students",
                 component: Students,
-                beforeEnter: () => {
-                    redirectionAlert("To be implemented for the next release")
-                    return false
-                }
             },
             {
                 path: '/dashboard/resources',
