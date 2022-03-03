@@ -1,5 +1,5 @@
 <template>
-    <button class="flex h-fit w-fit py-2 px-5 bg-primary hover:bg-primary_variant rounded-lg">
+    <button class="flex h-fit w-fit py-2 px-5 bg-primary hover:bg-primary_variant rounded-lg" @click="click">
         {{ text }}
     </button>
 </template>
@@ -8,7 +8,16 @@
 
 export default {
     name: "Button",
-    props: ['text']
+    props: ['text'],
+    emits: ['btnClick'],
+    methods: {
+        /**
+         * Emits a bntClick event to the parent component
+         */
+        click: function () {
+            this.$emit('btnClick')
+        }
+    }
 }
 </script>
 

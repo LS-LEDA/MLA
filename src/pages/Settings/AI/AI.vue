@@ -22,9 +22,8 @@
                     id="emotions-input"
                     placeholder="Enter emotions here"
                 ></textarea>
-                <Button text="Add"/>
+                <Button text="Add" @btnClick="add_emotions"/>
             </div>
-
         </div>
     </div>
 </template>
