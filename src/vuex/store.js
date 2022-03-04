@@ -143,6 +143,8 @@ const store = createStore({
                 '--background',
                 '--typography'
             ],
+            // Saves students participation
+            students: {},
         }
     },
     actions: {
@@ -188,6 +190,10 @@ const store = createStore({
         saveSummaryTypes(state, summary) {
             this.state.summary.total_interactions = summary.total_interactions;
             this.state.summary.summary_types = summary.summary_types;
+        },
+        // Saves students participation computed data
+        saveStudentParticipation(state, {students}) {
+            this.state.students = students;
         },
         // Store computed logs
         saveLogs(state, logs) {
