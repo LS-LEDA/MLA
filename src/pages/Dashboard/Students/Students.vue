@@ -10,7 +10,11 @@
             <!-- Student participation list -->
             <div class="flex flex-col w-full h-full overflow-y-auto">
                 <div class="flex flex-col w-full h-96 gap-y-5 pr-1">
-                    <ParticipationCard v-for="(el, index) in 50" :key="index"/>
+                    <ParticipationCard v-for="(student, index) in students_participation"
+                                       :key="index"
+                                       :name="index"
+                                       :student="student"
+                    />
                 </div>
             </div>
         </div>
@@ -23,7 +27,12 @@ export default {
     name: "Students",
     components: {
         ParticipationCard
-    }
+    },
+    computed: {
+        students_participation: function () {
+            return this.$store.state.students
+        }
+    },
 }
 </script>
 
