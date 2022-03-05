@@ -15,13 +15,17 @@
             </div>
             <!-- Student participation list -->
             <div class="flex flex-col w-full h-full overflow-y-auto">
-                <div class="flex flex-col w-full h-96 gap-y-5 pr-1">
+                <div v-if="!sp_info" class="flex flex-col w-full h-96 gap-y-5 pr-1">
                     <ParticipationCard v-for="(student, index) in students_participation"
                                        :key="index"
                                        :name="index"
                                        :student="student"
                     />
                 </div>
+                <!-- Information -->
+                <p v-else>
+                    Total number of interactions between each student and the resources of the course (Includes course viewing).
+                </p>
             </div>
         </div>
     </div>
