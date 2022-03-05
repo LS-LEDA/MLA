@@ -4,9 +4,15 @@
     <!-- Student Participation -->
     <div class="flex w-full h-full mt-5">
         <div class="flex flex-col w-2/6 h-full bg-secondary dark:bg-dark_secondary rounded-xl p-3 gap-y-3">
-            <span class="flex font-bold text-xl">
-                Student Participation
-            </span>
+            <div class="flex w-full justify-between">
+                <span class="flex font-bold text-xl">
+                    Student Participation
+                </span>
+                <button type="button" class="items-end place-self-end text-gray-500 rounded-lg hover:bg-gray-300"
+                        @click.stop="this.sp_info = !this.sp_info">
+                    <SvgIcon class="hover:cursor-pointer" type="mdi" :path="sp_info ? close_icon : info_icon"/>
+                </button>
+            </div>
             <!-- Student participation list -->
             <div class="flex flex-col w-full h-full overflow-y-auto">
                 <div class="flex flex-col w-full h-96 gap-y-5 pr-1">
@@ -23,16 +29,26 @@
 
 <script>
 import ParticipationCard from "@/components/Students/ParticipationCard";
+import {mdiClose, mdiHelpCircleOutline} from "@mdi/js";
+import SvgIcon from "@jamescoyle/vue-icon";
 export default {
     name: "Students",
     components: {
-        ParticipationCard
+        ParticipationCard,
+        SvgIcon
     },
     computed: {
         students_participation: function () {
             return this.$store.state.students
         }
     },
+    data() {
+        return {
+            info_icon: mdiHelpCircleOutline,
+            close_icon: mdiClose,
+            sp_info: false
+        }
+    }
 }
 </script>
 
