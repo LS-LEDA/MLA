@@ -16,9 +16,17 @@
             <!-- Student participation list -->
             <div class="flex flex-col w-full h-full overflow-y-auto">
                 <div v-if="!sp_info" class="flex flex-col w-full h-96 gap-y-5 pr-1">
-                    <ParticipationCard v-for="(student, index) in students_participation"
+                    <!-- List header -->
+                    <div class="flex w-full h-auto px-5 font-bold">
+                        <div class="flex w-1/12 justify-center"> ID </div>
+                        <div class="w-8/12"> Student Name </div>
+                        <div class="w-2/12"> # </div>
+                        <div class="w-2/12"> % </div>
+                    </div>
+                    <ParticipationCard v-for="(student, name, index) in students_participation"
                                        :key="index"
-                                       :name="index"
+                                       :id="index"
+                                       :name="name"
                                        :student="student"
                     />
                 </div>
