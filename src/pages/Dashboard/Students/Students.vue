@@ -59,9 +59,21 @@ export default {
     },
     data() {
         return {
-            info_icon: mdiHelpCircleOutline,
-            close_icon: mdiClose,
-            sp_info: false
+            left_icon: mdiMenuLeft,
+            right_icon: mdiMenuRight,
+            current_page: 0,
+            tabs: [
+                {
+                    tab_name: "Overview",
+                    tab_description: "Information on students interactions",
+                    tab_path: "dashboard/students/overview"
+                },
+                {
+                    tab_name: "Students List",
+                    tab_description: "Students list",
+                    tab_path: "dashboard/students/list"
+                }
+            ]
         }
     }
 }
