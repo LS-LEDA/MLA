@@ -28,9 +28,27 @@ export default {
     components: {
         SvgIcon
     },
-    computed: {
-        students_participation: function () {
-            return this.$store.state.students
+    methods: {
+        /**
+         * Change tabs method.
+         * @param side left / right button
+         * -1: left button press
+         * 1: right button press
+         */
+        change_page: function (side) {
+            // Check for tab boundaries
+            if ( this.current_page + side >= 0 && this.current_page + side < this.tabs.length) {
+                this.current_page += side;
+            }
+
+            // Change view
+            switch (this.current_page) {
+                case 1:
+                    this.$router.push('/dashboard/students/list');
+                    break;
+                default:
+                    this.$router.push('/dashboard/students/overview');
+            }
         }
     },
     data() {
