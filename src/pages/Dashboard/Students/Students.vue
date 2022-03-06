@@ -2,7 +2,7 @@
     <h1 class="text-4xl font-extrabold"> Students Data </h1>
     <span class="font-bold text-2xl text-gray-500"> Information on students interactions </span>
     <!-- Student Participation -->
-    <div class="flex w-full h-full mt-5">
+    <div class="flex w-full h-full mt-5 gap-x-5">
         <div class="flex flex-col w-2/6 h-full bg-secondary dark:bg-dark_secondary rounded-xl p-3 gap-y-3">
             <div class="flex w-full justify-between">
                 <span class="flex font-bold text-xl">
@@ -36,6 +36,7 @@
                 </p>
             </div>
         </div>
+        <StudentDedication/>
     </div>
 </template>
 
@@ -43,9 +44,11 @@
 import ParticipationCard from "@/components/Students/ParticipationCard";
 import {mdiClose, mdiHelpCircleOutline} from "@mdi/js";
 import SvgIcon from "@jamescoyle/vue-icon";
+import StudentDedication from "@/components/Students/StudentDedication";
 export default {
     name: "Students",
     components: {
+        StudentDedication,
         ParticipationCard,
         SvgIcon
     },
