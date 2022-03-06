@@ -1,7 +1,7 @@
 import {summary_processing} from "@/services/Summary/summary-processing";
 import Log from "@/services/model/Log";
 import store from "@/vuex/store";
-import {student_participation} from "@/services/Students/students-processing";
+import {student_dedication, student_participation} from "@/services/Students/students-processing";
 //import router from "@/router/router";
 
 function moodle_logs_processing(data, name){
@@ -21,6 +21,8 @@ function moodle_logs_processing(data, name){
 
     let summary_types = summary_processing(logs);
     let students = student_participation(logs);
+    // TODO: Improve processing. Maybe create a Student model
+    student_dedication(logs, students);
 
     store.commit('saveSummaryTypes', {
             total_interactions: logs.length,
