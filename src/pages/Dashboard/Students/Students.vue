@@ -5,12 +5,14 @@
             <button class="flex max-w-full max-h-full bg-primary dark:bg-dark_primary rounded-md hover:bg-primary_variant
             dark:hover:bg-dark_primary_variant aspect-square justify-center items-center"
                     @click="change_page(-1)"
+                    :disabled="this.current_page === 0"
             >
                 <SvgIcon type="mdi" :path="left_icon" size="28"/>
             </button>
             <button class="flex max-w-full max-h-full bg-primary dark:bg-dark_primary rounded-md hover:bg-primary_variant
             dark:hover:bg-dark_primary_variant aspect-square justify-center items-center"
                     @click="change_page(1)"
+                    :disabled="this.current_page === this.tabs.length - 1"
             >
                 <SvgIcon type="mdi" :path="right_icon" size="28" @click="change_page(1)"/>
             </button>
