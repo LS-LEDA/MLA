@@ -3,14 +3,16 @@
         <h1 class="text-4xl font-extrabold"> Students Data </h1>
         <div class="flex w-auto h-auto gap-x-3">
             <button class="flex max-w-full max-h-full bg-primary dark:bg-dark_primary rounded-md hover:bg-primary_variant
-            dark:hover:bg-dark_primary_variant aspect-square justify-center items-center"
+                    dark:hover:bg-dark_primary_variant aspect-square justify-center items-center
+                    disabled:opacity-30 disabled:hover:bg-primary"
                     @click="change_page(-1)"
                     :disabled="this.current_page === 0"
             >
                 <SvgIcon type="mdi" :path="left_icon" size="28"/>
             </button>
             <button class="flex max-w-full max-h-full bg-primary dark:bg-dark_primary rounded-md hover:bg-primary_variant
-            dark:hover:bg-dark_primary_variant aspect-square justify-center items-center"
+                    dark:hover:bg-dark_primary_variant aspect-square justify-center items-center
+                    disabled:opacity-30 disabled:hover:bg-primary"
                     @click="change_page(1)"
                     :disabled="this.current_page === this.tabs.length - 1"
             >
