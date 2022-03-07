@@ -27,10 +27,10 @@
         <!-- Student list -->
         <div class="flex w-full h-full overflow-y-auto">
             <div class="flex flex-col w-full h-96 gap-y-5">
-                <StudentCard v-for="(student, name, index) in students_list"
+                <StudentCard v-for="(student, index) in students_list"
                              :key="index"
-                             :student="student"
-                             :name="name"
+                             :student="student[1]"
+                             :name="student[0]"
                 />
             </div>
         </div>
