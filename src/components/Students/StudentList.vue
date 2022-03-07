@@ -3,7 +3,12 @@
         <div class="flex w-full h-auto justify-between">
             <!-- Search box for student filtering -->
             <div class="flex w-3/12 h-10">
-                <input class="flex w-full h-full rounded-lg bg-primary dark:bg-dark_primary p-2" type="text" placeholder="Search">
+                <input class="flex w-full h-full rounded-lg bg-primary dark:bg-dark_primary p-2"
+                       id="student_search"
+                       type="text"
+                       placeholder="Search"
+                       v-model="student_search"
+                >
             </div>
 
             <!-- Change view -->
