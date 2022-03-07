@@ -48,14 +48,23 @@ export default {
         SvgIcon
     },
     computed: {
+        /**
+         * Gets students list with/out filtering
+         * @returns {[string, unknown][]}
+         */
         students_list: function () {
-            return this.$store.state.students
+            let student_list = Object.entries(this.$store.state.students)
+
+            return [...student_list].filter( student => {
+                return student[0].toLowerCase().includes(this.student_search.toLowerCase())
+            });
         }
     },
     data() {
         return {
             list_icon: mdiViewGrid,
             grid_icon: mdiViewSequential,
+            student_search: '',
         }
     }
 }
