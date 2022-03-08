@@ -12,6 +12,7 @@ function student_participation(logs) {
                 percent: 0.0,
                 total: 1,
                 timestamp: null,
+                last_resource: ''
             }
         }
         students[log.id].count += 1;
@@ -53,7 +54,10 @@ function student_dedication(logs, students) {
             // Add 1 minute for each hit below timeSession
             students[logs[i].id].total++;
         }
+        // Lates interaction timestamp
         students[logs[i].id].timestamp = logs[i].timestamp;
+        // Latest resource interaction
+        students[logs[i].id].last_resource = logs[i].course;
     }
 }
 
