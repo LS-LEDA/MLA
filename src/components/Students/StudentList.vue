@@ -14,11 +14,19 @@
             <!-- Change view -->
             <div class="flex gap-x-3">
                 <button class="flex max-w-full max-h-full bg-primary dark:bg-dark_primary rounded-md hover:bg-primary_variant
-            dark:hover:bg-dark_primary_variant aspect-square justify-center items-center">
+                        dark:hover:bg-dark_primary_variant aspect-square justify-center items-center disabled:opacity-30
+                        disabled:hover:bg-primary"
+                        @click="this.grid = true"
+                        :disabled="this.grid"
+                >
                     <SvgIcon type="mdi" :path="list_icon" size="28"/>
                 </button>
                 <button class="flex max-w-full max-h-full bg-primary dark:bg-dark_primary rounded-md hover:bg-primary_variant
-            dark:hover:bg-dark_primary_variant aspect-square justify-center items-center">
+                        dark:hover:bg-dark_primary_variant aspect-square justify-center items-center disabled:opacity-30
+                        disabled:hover:bg-primary"
+                        @click="this.grid = false"
+                        :disabled="!this.grid"
+                >
                     <SvgIcon type="mdi" :path="grid_icon" size="28"/>
                 </button>
             </div>
@@ -26,11 +34,22 @@
 
         <!-- Student list -->
         <div class="flex w-full h-full overflow-y-auto">
-            <div class="flex flex-col w-full h-96 gap-y-5">
+            <!-- List view -->
+            <div v-if="!this.grid" class="flex flex-col w-full h-full gap-y-5">
                 <StudentCard v-for="(student, index) in students_list"
                              :key="index"
                              :student="student[1]"
                              :name="student[0]"
+                             :grid="false"
+                />
+            </div>
+            <!-- Grid view -->
+            <div v-else class="grid grid-cols-6 auto-rows-auto gap-5 overflow-y-auto">
+                <StudentCard v-for="(student, index) in students_list"
+                             :key="index"
+                             :student="student[1]"
+                             :name="student[0]"
+                             :grid="true"
                 />
             </div>
         </div>
@@ -65,6 +84,7 @@ export default {
             list_icon: mdiViewGrid,
             grid_icon: mdiViewSequential,
             student_search: '',
+            grid: false,
         }
     }
 }
