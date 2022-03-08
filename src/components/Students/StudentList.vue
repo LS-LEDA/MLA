@@ -44,7 +44,7 @@
                 />
             </div>
             <!-- Grid view -->
-            <div v-else class="grid grid-cols-6 auto-rows-auto gap-5 overflow-y-auto">
+            <div v-else class="grid w-full h-fit grid-cols-6 grid-rows-auto gap-5 overflow-y-auto">
                 <StudentCard v-for="(student, index) in students_list"
                              :key="index"
                              :student="student[1]"
@@ -84,7 +84,7 @@ export default {
             list_icon: mdiViewGrid,
             grid_icon: mdiViewSequential,
             student_search: '',
-            grid: false,
+            grid: true,
         }
     }
 }
