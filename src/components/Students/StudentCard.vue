@@ -1,5 +1,5 @@
 <template>
-    <div class="flex w-full rounded-lg h-auto bg-primary dark:bg-dark_primary place-items-center p-5 gap-x-3">
+    <div class="flex w-full rounded-lg h-fit bg-primary dark:bg-dark_primary place-items-center p-5 gap-x-3">
         <!-- List view Student Card  -->
         <div v-if="!grid" class="flex flex-col w-4/12">
             <!-- Student Name -->
@@ -12,8 +12,8 @@
 
         <!-- Grid view Student Card -->
         <div v-if="grid" class="flex flex-col w-full">
+            <span class="truncate text-ellipsis whitespace-nowrap font-bold"> {{ name }} </span>
             <!-- Student Name -->
-            <span class="font-bold"> {{ name }} </span>
             <span class="flex"> {{ time_conversion() }} </span>
         </div>
     </div>
