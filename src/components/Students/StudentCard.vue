@@ -1,13 +1,21 @@
 <template>
     <div class="flex w-full rounded-lg h-auto bg-primary dark:bg-dark_primary place-items-center p-5 gap-x-3">
-        <div class="flex flex-col w-4/12">
+        <!-- List view Student Card  -->
+        <div v-if="!grid" class="flex flex-col w-4/12">
             <!-- Student Name -->
             <span class="font-bold"> {{ name }} </span>
             <span class="text-slate-800"> {{ student.last_resource }} </span>
         </div>
 
         <!-- Last Connection -->
-        <span class="flex w-4/12"> {{ time_conversion() }} </span>
+        <span v-if="!grid" class="flex w-4/12"> {{ time_conversion() }} </span>
+
+        <!-- Grid view Student Card -->
+        <div v-if="grid" class="flex flex-col w-full">
+            <!-- Student Name -->
+            <span class="font-bold"> {{ name }} </span>
+            <span class="flex"> {{ time_conversion() }} </span>
+        </div>
     </div>
 </template>
 
@@ -15,10 +23,12 @@
 /**
  * Student Card is a component for students list section
  * in Dashboard > Students > Students List
+ * The layout changes according to the selected view
+ * List View / Grid view
  */
 export default {
     name: "StudentCard",
-    props: ['student', 'name'],
+    props: ['student', 'name', 'grid'],
     methods: {
         /**
          * Converts UNIX timestamp back to human-readable format
