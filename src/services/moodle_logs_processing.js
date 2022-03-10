@@ -1,4 +1,4 @@
-import {summary_processing} from "@/services/Summary/summary-processing";
+import {summary_processing, weekly_interactions_processing} from "@/services/Summary/summary-processing";
 import Log from "@/services/model/Log";
 import store from "@/vuex/store";
 import {student_dedication, student_participation} from "@/services/Students/students-processing";
@@ -23,6 +23,7 @@ function moodle_logs_processing(data, name){
     let students = student_participation(logs);
     // TODO: Improve processing. Maybe create a Student model
     student_dedication(logs, students);
+    let weekly_interactions = weekly_interactions_processing(logs)
 
     store.commit('saveSummaryTypes', {
             total_interactions: logs.length,
@@ -32,6 +33,11 @@ function moodle_logs_processing(data, name){
 
     store.commit('saveStudentParticipation', {
             students: students,
+        }
+    );
+
+    store.commit('saveWeekInteractions', {
+            week_interactions: weekly_interactions,
         }
     );
 
