@@ -18,12 +18,11 @@ export default {
         this.heatmap.setOption(this.week_data);
     },
     beforeUnmount() {
-        this.heatmap.dispose();
+        this.heatmap && this.heatmap.dispose();
         this.heatmap = null;
     },
     data() {
         return {
-            heatmap: null,
             week_data: weeklyInteractionConfig
         }
     }
