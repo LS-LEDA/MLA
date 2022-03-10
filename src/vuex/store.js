@@ -50,6 +50,7 @@ const store = createStore({
             summary: {
                 total_interactions: 0,
                 summary_types: null,
+                week_interactions: null,
             },
             summary_cards: [],
             upload_status: {
@@ -194,6 +195,10 @@ const store = createStore({
         // Saves students participation computed data
         saveStudentParticipation(state, {students}) {
             this.state.students = students;
+        },
+        // Save number of interactions across a week
+        saveWeekInteractions(state, {week_interactions}) {
+            this.state.summary.week_interactions = week_interactions;
         },
         // Store computed logs
         saveLogs(state, logs) {
