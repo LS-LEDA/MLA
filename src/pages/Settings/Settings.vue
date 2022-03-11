@@ -2,7 +2,7 @@
     <section id="settings" class="relative flex flex-col w-full h-full p-5 py-10">
         <div class="flex flex-col w-full h-full">
             <h1 class="text-4xl font-extrabold pb-5"> Settings </h1>
-            <div class="flex flex-col w-full h-full bg-secondary dark:bg-dark_secondary rounded-2xl p-5">
+            <div class="flex flex-col w-full h-full bg-secondary dark:bg-dark_secondary rounded-2xl p-5 overflow-y-hidden">
                 <!-- Tabs buttons -->
                 <div class="grid grid-cols-2 gap-2 lg:flex lg:flex-row pb-5">
                     <router-link active-class="bg-primary_variant dark:bg-dark_primary_variant"
@@ -14,7 +14,7 @@
                     </router-link>
                 </div>
                 <!-- Dashboard deeply nested component view -->
-                <router-view></router-view>
+                <router-view class="overflow-y-hidden"></router-view>
             </div>
         </div>
         <!-- Alert -->
