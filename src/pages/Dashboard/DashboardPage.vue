@@ -33,6 +33,7 @@ import SummaryPopUp from "@/components/Summary/SummaryPopUp";
 import InformationPanel from "@/components/InformationPanel/InformationPanel";
 import InteractionPopUp from "@/components/Summary/InteractionPopUp";
 import Alert from "@/components/UI/Alert";
+import {provide, ref} from "vue";
 
 export default {
     name: "DashboardPage",
@@ -76,6 +77,22 @@ export default {
             return this.$store.state.logs
         }
     },
+    setup() {
+        let total_popup = ref(false);
+        let popup = ref(false);
+        let summaryID = ref(0);
+        let card_name = ref('Mayuyu');
+        provide('total_popup', total_popup);
+        provide('popup', popup);
+        provide('summaryID', summaryID);
+        provide('card_name', card_name);
+        return {
+            total_popup,
+            popup,
+            summaryID,
+            card_name
+        }
+    },
     data() {
         return {
             tabs: [
@@ -96,10 +113,6 @@ export default {
                     tab_path: "/dashboard/sentiment"
                 },
             ],
-            total_popup: false,
-            popup: false,
-            summaryID: 0,
-            card_name: ""
         }
     }
 }

@@ -22,6 +22,7 @@ import {
     mdiNewspaperVariantOutline,
     mdiTextBoxCheck, mdiWikipedia
 } from "@mdi/js";
+import {inject} from "vue";
 
 export default {
     name: "SummaryOverview",
@@ -55,13 +56,27 @@ export default {
             return this.$store.state.logs;
         },
     },
+    setup() {
+        // Inject provided variables from DashboardPage parent component
+        let total_popup = inject('total_popup');
+        let popup = inject('popup');
+        let summaryID = inject('summaryID');
+        let card_name = inject('card_name');
+        return {
+            total_popup,
+            popup,
+            summaryID,
+            card_name
+        }
+    },
     methods: {
         detailed_information_pop_up: function ({card_name, summaryID}){
-            this.$root.$emit('popUp', {id: 1, card_name, summaryID});
+            this.popup = true;
+            this.summaryID = summaryID;
+            this.card_name = card_name;
         },
         total_interaction_popup: function () {
-            //this.$emit('popUp', {id: 0})
-            this.$root.$emit('popUp', {id: 0});
+            this.total_popup = true;
         },
     },
     data() {
@@ -104,7 +119,6 @@ export default {
                     info:"The total number of interactions with the wikis of a subject."
                 }
             ],
-            total_interactions: 0
         }
     }
 }
