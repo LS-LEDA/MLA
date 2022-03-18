@@ -50,6 +50,7 @@ import totalInteractionChartData from "@/assets/totalInteractionChartData";
 import zoomPlugin from 'chartjs-plugin-zoom';
 import IconButton from "@/components/UI/IconButton";
 import Table from "@/components/UI/Table";
+import {inject} from "vue";
 
 export default {
     name: "InteractionPopUp",
@@ -59,7 +60,12 @@ export default {
         SvgIcon
     },
     props: ['logs'],
-    emits: ['popUp'],
+    setup() {
+        let total_popup = inject('total_popup');
+        return {
+            total_popup
+        }
+    },
     mounted() {
         let types = {};
         this.logs.forEach( (log) => {
@@ -103,7 +109,7 @@ export default {
     },
     methods: {
         close_pop_up: function () {
-            this.$emit('popUp', {id: 0});
+            this.total_popup = !this.total_popup;
         },
         /**
          * Renders a chart in total interaction card

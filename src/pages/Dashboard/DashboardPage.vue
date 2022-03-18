@@ -13,13 +13,13 @@
                     </router-link>
                 </div>
                 <!-- Dashboard deeply nested component view -->
-                <router-view @popUp="toggle_popup"></router-view>
+                <router-view></router-view>
             </div>
         </div>
         <!-- Summary Card Pop Up -->
-        <SummaryPopUp v-if="popup" @popUp="toggle_popup" :summaryID="summaryID" :card_name="card_name" class="absolute"/>
+        <SummaryPopUp v-if="popup" :summaryID="summaryID" :card_name="card_name" class="absolute"/>
         <!-- Total Interaction Card Pop Up -->
-        <InteractionPopUp v-if="total_popup" @popUp="toggle_popup" :logs="logs"/>
+        <InteractionPopUp v-if="total_popup" :logs="logs"/>
         <!-- Alert -->
         <Alert v-if="alert_status.status" :message="alert_status.message"
                @closeAlert="close_alert"/>
@@ -33,6 +33,7 @@ import SummaryPopUp from "@/components/Summary/SummaryPopUp";
 import InformationPanel from "@/components/InformationPanel/InformationPanel";
 import InteractionPopUp from "@/components/Summary/InteractionPopUp";
 import Alert from "@/components/UI/Alert";
+import {provide, ref} from "vue";
 
 export default {
     name: "DashboardPage",
@@ -43,25 +44,6 @@ export default {
         Alert
     },
     methods: {
-        /**
-         * Toggle popup by id
-         * 0: Total Interaction Card
-         * 1: Summary Card
-         * @param id popup identifier
-         * @param card_name
-         * @param summaryID
-         */
-        toggle_popup: function ({id, card_name, summaryID}) {
-            if (id === 0) {
-                // Total information popup
-                this.total_popup = !this.total_popup;
-            } else {
-                // Summary card popup
-                this.summaryID = summaryID;
-                this.card_name = card_name;
-                this.popup = !this.popup;
-            }
-        },
         close_alert: function(){
             // Clears toggle alert timeout if alert is dismissed by the user
             clearTimeout(this.$store.state.alert.timeout);
@@ -74,6 +56,22 @@ export default {
         },
         logs() {
             return this.$store.state.logs
+        }
+    },
+    setup() {
+        let total_popup = ref(false);
+        let popup = ref(false);
+        let summaryID = ref(0);
+        let card_name = ref('Mayuyu');
+        provide('total_popup', total_popup);
+        provide('popup', popup);
+        provide('summaryID', summaryID);
+        provide('card_name', card_name);
+        return {
+            total_popup,
+            popup,
+            summaryID,
+            card_name
         }
     },
     data() {
@@ -96,10 +94,6 @@ export default {
                     tab_path: "/dashboard/sentiment"
                 },
             ],
-            total_popup: false,
-            popup: false,
-            summaryID: 0,
-            card_name: ""
         }
     }
 }

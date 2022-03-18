@@ -15,6 +15,8 @@ import Themes from "@/pages/Settings/Themes/Themes";
 import About from "@/pages/Settings/About/About";
 import Overview from "@/pages/Dashboard/Students/Overview/Overview";
 import List from "@/pages/Dashboard/Students/List/List";
+import SummaryOverview from "@/pages/Dashboard/Summary/SummaryOverview/SummaryOverview";
+import Weekly from "@/pages/Dashboard/Summary/Weekly/Weekly";
 
 const routes = [
     {
@@ -48,7 +50,21 @@ const routes = [
                 name: "summary",
                 beforeEnter: (to, from) => {
                     return check_imported_data(to, from);
-                }
+                },
+                redirect: "/dashboard/summary/overview",
+                children: [
+                    {
+                        name: 'summary overview',
+                        component: SummaryOverview,
+                        path: '/dashboard/summary/overview',
+
+                    },
+                    {
+                        name: 'weekly interaction',
+                        component: Weekly,
+                        path: '/dashboard/summary/weekly',
+                    }
+                ]
             },
             {
                 path: '/dashboard/students',
