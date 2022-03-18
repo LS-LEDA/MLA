@@ -12,7 +12,7 @@
                 <!-- Close button -->
                 <button type="button" class=" justify-self-end bg-gray-100 text-gray-400 rounded-lg focus:ring-2 focus:ring-gray-200
                 hover:bg-gray-200 inline-flex w-10 h-10 place-content-center items-center"
-                        @click="close_pop_up({card_name, summaryID})">
+                        @click="close_pop_up">
                     <SvgIcon class="hover:cursor-pointer" type="mdi" :path="close_icon"/>
                 </button>
             </div>
@@ -39,6 +39,7 @@ import {mdiClose} from "@mdi/js";
 import {Chart, registerables} from "chart.js";
 import summaryCardChartData from "@/assets/summaryCardChartData";
 import Table from "@/components/UI/Table";
+import {inject} from "vue";
 
 export default {
     name: "SummaryPopUp",
@@ -47,10 +48,15 @@ export default {
         SvgIcon
     },
     props: ['summaryID', 'card_name'],
-    emits: ['popUp'],
+    setup() {
+        let popup = inject('popup');
+        return {
+            popup
+        }
+    },
     methods: {
-        close_pop_up: function ({card_name, summaryID}) {
-            this.$emit('popUp', {id: 1, card_name, summaryID});
+        close_pop_up: function () {
+            this.popup = !this.popup;
         },
         summary_chart: function (chartId, chartData) {
             let ctx = document.getElementById(chartId);
