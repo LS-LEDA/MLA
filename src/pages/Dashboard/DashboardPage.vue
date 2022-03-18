@@ -13,13 +13,13 @@
                     </router-link>
                 </div>
                 <!-- Dashboard deeply nested component view -->
-                <router-view @popUp="toggle_popup"></router-view>
+                <router-view></router-view>
             </div>
         </div>
         <!-- Summary Card Pop Up -->
-        <SummaryPopUp v-if="popup" @popUp="toggle_popup" :summaryID="summaryID" :card_name="card_name" class="absolute"/>
+        <SummaryPopUp v-if="popup" :summaryID="summaryID" :card_name="card_name" class="absolute"/>
         <!-- Total Interaction Card Pop Up -->
-        <InteractionPopUp v-if="total_popup" @popUp="toggle_popup" :logs="logs"/>
+        <InteractionPopUp v-if="total_popup" :logs="logs"/>
         <!-- Alert -->
         <Alert v-if="alert_status.status" :message="alert_status.message"
                @closeAlert="close_alert"/>
@@ -44,25 +44,6 @@ export default {
         Alert
     },
     methods: {
-        /**
-         * Toggle popup by id
-         * 0: Total Interaction Card
-         * 1: Summary Card
-         * @param id popup identifier
-         * @param card_name
-         * @param summaryID
-         */
-        toggle_popup: function ({id, card_name, summaryID}) {
-            if (id === 0) {
-                // Total information popup
-                this.total_popup = !this.total_popup;
-            } else {
-                // Summary card popup
-                this.summaryID = summaryID;
-                this.card_name = card_name;
-                this.popup = !this.popup;
-            }
-        },
         close_alert: function(){
             // Clears toggle alert timeout if alert is dismissed by the user
             clearTimeout(this.$store.state.alert.timeout);
