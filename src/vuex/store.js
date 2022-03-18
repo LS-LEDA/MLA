@@ -143,6 +143,7 @@ const store = createStore({
                 '--background',
                 '--typography'
             ],
+            emotions_dataset: null,
         }
     },
     actions: {
@@ -271,6 +272,14 @@ const store = createStore({
          */
         removeIPCListener(state, channel) {
             window.ipc.removeListeners(channel);
+        },
+        /**
+         * Save the emotions list after reading it from the dataset
+         * @param state
+         * @param emotions_list
+         */
+        saveEmotions(state, emotions_list) {
+            state.emotions_dataset = emotions_list
         }
     }
 });
