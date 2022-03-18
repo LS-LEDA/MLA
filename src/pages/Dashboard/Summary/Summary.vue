@@ -21,7 +21,7 @@
         </div>
     </div>
     <span class="font-bold text-2xl text-gray-500"> {{ tabs[current_page].tab_description }} </span>
-    <router-view class="overflow-y-hidden"></router-view>
+    <router-view></router-view>
 </template>
 
 <script>
