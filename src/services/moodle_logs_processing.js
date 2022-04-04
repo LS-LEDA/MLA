@@ -52,4 +52,42 @@ function moodle_logs_processing(data, name){
     //router.push('/dashboard/summary');
 }
 
-export { moodle_logs_processing };
+/**
+ * After a date selection, either start or end date.
+ * It applies a filtering to the logs and updates the
+ * values used in the app
+ * @param start_date UNIX timestamp in ms / 1000
+ * @param end_date UNIX timestamp in ms / 1000
+ */
+function logs_apply_filter(start_date, end_date) {
+    let filtered_logs = store.state.logs.filter((log) => {
+        if (log.timestamp >= start_date && log.timestamp <= end_date) {
+            return true;
+        }
+        return false;
+    })
+
+    // TODO: Solve duplicated code from moodle_logs_processing
+    let summary_types = summary_processing(filtered_logs);
+    let students = student_participation(filtered_logs);
+    student_dedication(filtered_logs, students);
+    let weekly_interactions = weekly_interactions_processing(filtered_logs)
+
+    store.commit('saveSummaryTypes', {
+            total_interactions: filtered_logs.length,
+            summary_types: summary_types
+        }
+    );
+
+    store.commit('saveStudentParticipation', {
+            students: students,
+        }
+    );
+
+    store.commit('saveWeekInteractions', {
+            week_interactions: weekly_interactions,
+        }
+    );
+}
+
+export { moodle_logs_processing, logs_apply_filter };
