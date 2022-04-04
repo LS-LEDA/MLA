@@ -11,6 +11,7 @@
 <script>
 import Calendar from "@/components/UI/Calendar";
 import Item from "@/components/UI/Item";
+import {logs_apply_filter} from "@/services/moodle_logs_processing";
 export default {
     name: "InformationPanel",
     components: {
@@ -44,6 +45,8 @@ export default {
                 this.end_date.setMonth(date.month);
                 this.end_date.setFullYear(date.year);
             }
+            // Apply filter
+            logs_apply_filter(Math.floor(this.start_date / 1000), Math.floor(this.end_date / 1000));
         }
     }
 }
