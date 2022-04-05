@@ -47,6 +47,10 @@ const store = createStore({
                 timeout: 0,
             },
             logs: [],
+            dates:{
+                first_date: 0,
+                last_date: 0,
+            },
             summary: {
                 total_interactions: 0,
                 summary_types: null,
@@ -282,6 +286,17 @@ const store = createStore({
          */
         removeIPCListener(state, channel) {
             window.ipc.removeListeners(channel);
+        },
+        /**
+         * Stores the first and last date with logs data
+         * for the calendar component
+         * @param state
+         * @param first_date
+         * @param last_date
+         */
+        saveDataDates(state, {first_date, last_date}) {
+            this.state.dates.first_date = first_date;
+            this.state.dates.last_date = last_date;
         }
     }
 });
