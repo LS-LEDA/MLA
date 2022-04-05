@@ -27,6 +27,14 @@ export default {
     computed: {
         log_name() {
             return this.$store.state.dashboard.course_name;
+        },
+        // Get the first log date
+        log_first_date() {
+            return this.$store.state.dates.first_date;
+        },
+        // Get the last log date
+        log_last_date() {
+            return this.$store.state.dates.last_date;
         }
     },
     methods: {
