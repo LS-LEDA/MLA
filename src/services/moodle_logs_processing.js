@@ -20,8 +20,8 @@ function moodle_logs_processing(data, name){
     store.commit('saveLogs', logs);
 
     // Save the first/last date with logs data
-    let first_date = logs[0].timestamp;
-    let last_date = logs[logs.length - 1].timestamp;
+    let first_date = logs[logs.length - 1].timestamp;
+    let last_date = logs[0].timestamp;
     store.commit('saveDataDates', {first_date: first_date, last_date: last_date})
 
     let summary_types = summary_processing(logs);
