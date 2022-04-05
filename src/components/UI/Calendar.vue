@@ -53,7 +53,7 @@ export default {
         SvgIcon
     },
     emits: ['dateSelect'],
-    props: ['calendarID'],
+    props: ['calendarID', 'log_date'],
     data() {
         return {
             week_days: [ 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
