@@ -57,7 +57,7 @@ export default {
     data() {
         return {
             week_days: [ 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
-            date: new Date(),
+            date: null,
             formatted_days: [[], [], [], [], [], []],
             days: [],
             chunks: 0,
@@ -71,7 +71,7 @@ export default {
     },
     methods: {
         render_calendar: function () {
-            this.date.setDate(1);
+            this.date = new Date(this.log_date * 1000);
 
             const last_day = new Date(
                 this.date.getFullYear(),
