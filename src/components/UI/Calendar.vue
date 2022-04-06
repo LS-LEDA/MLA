@@ -32,9 +32,7 @@
                 <tbody>
                 <tr v-for="(weeks, week_index) in formatted_days" :key="week_index">
                     <td v-for="(day, day_index) in weeks" :key="day_index">
-                        <div class="p-0.5 lg:p-1 cursor-pointer flex w-full justify-center hover:bg-primary dark:hover:bg-dark_primary hover:rounded-full "
-                             v-html="day" @click="selectDate(week_index, day_index, $event)">
-                        </div>
+                        <div v-html="day" @click="selectDate(week_index, day_index, $event)"/>
                     </td>
                 </tr>
                 </tbody>
@@ -57,7 +55,7 @@ export default {
     data() {
         return {
             week_days: [ 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
-            date: null,
+            date: new Date(),
             formatted_days: [[], [], [], [], [], []],
             days: [],
             chunks: 0,
