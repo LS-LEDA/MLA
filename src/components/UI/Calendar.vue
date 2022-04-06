@@ -103,17 +103,31 @@ export default {
 
             // Previous month days
             for( let i = first_day_index; i > 0;  i-- ) {
-                this.days.push(`<p class="text-base text-gray-400">${prev_last_day - i + 1}</div>`);
+                this.days.push(`<p class="flex justify-center text-base text-gray-400">${prev_last_day - i + 1}</div>`);
             }
 
             // Current month days
             for( let i = 1; i <= last_day; i++ ) {
-                this.days.push(`<p class="text-base text-black">${i}</div>`);
+                if ( i === this.date.getDate() ) {
+                    this.days.push(
+                        `<p class="flex w-full justify-center aspect-square p-0.5 lg:p-1 hover:bg-primary dark:hover:bg-dark_primary
+                        hover:cursor-pointer rounded-full bg-primary_variant">
+                            ${i}
+                        </div>`
+                    );
+                    continue;
+                }
+                this.days.push(
+                    `<p class="flex w-full justify-center aspect-square p-0.5 lg:p-1 hover:bg-primary dark:hover:bg-dark_primary
+                    hover:cursor-pointer rounded-full">
+                        ${i}
+                    </div>`
+                );
             }
 
             // Next month days
             for ( let j = 1; j <= next_days; j++ ) {
-                this.days.push(`<p class="text-base text-gray-400">${j}</div>`);
+                this.days.push(`<p class="flex justify-center text-base text-gray-400">${j}</div>`);
             }
 
             // Clear the 6th formatted day array, sometimes there's only 5 rows
