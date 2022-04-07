@@ -68,12 +68,12 @@ export default {
         }
     },
     mounted() {
+        this.date = new Date(this.log_date * 1000);
+        this.d_date = new Date(this.log_date * 1000);
         this.render_calendar();
     },
     methods: {
         render_calendar: function () {
-            this.date = new Date(this.log_date * 1000);
-
             const last_day = new Date(
                 this.date.getFullYear(),
                 this.date.getMonth() + 1,
