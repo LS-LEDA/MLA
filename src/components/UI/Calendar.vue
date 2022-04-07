@@ -55,7 +55,10 @@ export default {
     data() {
         return {
             week_days: [ 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
+            // Tracks the current calendar view
             date: new Date(),
+            // Log date keeps track of the first or last date with logs
+            d_date: new Date(),
             formatted_days: [[], [], [], [], [], []],
             days: [],
             chunks: 0,
