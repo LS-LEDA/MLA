@@ -111,7 +111,10 @@ export default {
 
             // Current month days
             for( let i = 1; i <= last_day; i++ ) {
-                if ( i === this.d_date.getDate() && this.date.getMonth() === this.d_date.getMonth()) {
+                // If the day corresponds to the first / last date of the logs (Day/Month/Year must all match)
+                if ( i === this.d_date.getDate() &&
+                    this.date.getMonth() === this.d_date.getMonth() &&
+                    this.date.getFullYear() === this.d_date.getFullYear()) {
                     this.days.push(
                         `<p class="flex w-full justify-center aspect-square p-0.5 lg:p-1 hover:bg-primary dark:hover:bg-dark_primary
                         hover:cursor-pointer rounded-full bg-primary_variant">
