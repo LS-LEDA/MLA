@@ -55,7 +55,7 @@ export default {
         SvgIcon
     },
     emits: ['dateSelect'],
-    props: ['calendarID', 'log_date'],
+    props: ['calendarID'],
     data() {
         return {
             week_days: [ 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
@@ -71,9 +71,24 @@ export default {
             right_icon: mdiMenuRight
         }
     },
+    computed: {
+        // Get the first log date
+        log_first_date() {
+            return this.$store.state.dates.first_date;
+        },
+        // Get the last log date
+        log_last_date() {
+            return this.$store.state.dates.last_date;
+        },
+    },
     mounted() {
-        this.date = new Date(this.log_date * 1000);
-        this.d_date = new Date(this.log_date * 1000);
+        if (this.calendarID === 1) {
+            this.d_date = new Date(this.log_first_date * 1000);
+            this.date = new Date(this.log_first_date * 1000);
+        } else {
+            this.d_date = new Date(this.log_last_date * 1000);
+            this.date = new Date(this.log_last_date * 1000);
+        }
         this.render_calendar();
     },
     methods: {

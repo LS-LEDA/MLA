@@ -2,8 +2,8 @@
     <div class="h-full w-96 overflow-y-hidden pb-4">
         <div class="flex flex-col bg-secondary dark:bg-dark_secondary h-full rounded-lg mx-2 my-2">
             <Item :title="log_name"/>
-            <Calendar @dateSelect="selectDate" :calendarID="1" :log_date="log_first_date"/>
-            <Calendar @dateSelect="selectDate" :calendarID="2" :log_date="log_last_date"/>
+            <Calendar @dateSelect="selectDate" :calendarID="1"/>
+            <Calendar @dateSelect="selectDate" :calendarID="2"/>
         </div>
     </div>
 </template>
@@ -27,14 +27,6 @@ export default {
     computed: {
         log_name() {
             return this.$store.state.dashboard.course_name;
-        },
-        // Get the first log date
-        log_first_date() {
-            return this.$store.state.dates.first_date;
-        },
-        // Get the last log date
-        log_last_date() {
-            return this.$store.state.dates.last_date;
         }
     },
     methods: {
