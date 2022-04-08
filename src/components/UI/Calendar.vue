@@ -7,11 +7,15 @@
             </span>
             <!-- Calendar buttons -->
             <div class="flex gap-x-2">
-                <button class="bg-primary dark:bg-dark_primary rounded-md hover:bg-primary_variant dark:hover:bg-dark_primary_variant">
-                    <SvgIcon type="mdi" :path="left_icon" @click="left_calendar"/>
+                <button class="bg-primary dark:bg-dark_primary rounded-md hover:bg-primary_variant dark:hover:bg-dark_primary_variant"
+                        @click.prevent="left_calendar"
+                >
+                    <SvgIcon type="mdi" :path="left_icon"/>
                 </button>
-                <button class="bg-primary dark:bg-dark_primary rounded-md hover:bg-primary_variant dark:hover:bg-dark_primary_variant">
-                    <SvgIcon type="mdi" :path="right_icon" @click="right_calendar"/>
+                <button class="bg-primary dark:bg-dark_primary rounded-md hover:bg-primary_variant dark:hover:bg-dark_primary_variant"
+                        @click.prevent="right_calendar"
+                >
+                    <SvgIcon type="mdi" :path="right_icon"/>
                 </button>
             </div>
         </div>
