@@ -7,12 +7,18 @@
             </span>
             <!-- Calendar buttons -->
             <div class="flex gap-x-2">
-                <button class="bg-primary dark:bg-dark_primary rounded-md hover:bg-primary_variant dark:hover:bg-dark_primary_variant"
+                <button class="bg-primary dark:bg-dark_primary rounded-md hover:bg-primary_variant dark:hover:bg-dark_primary_variant
+                        disabled:opacity-25 disabled:hover:bg-primary"
+                        :disabled="this.date.getMonth() <= this.first_date.getMonth() &&
+                         this.date.getFullYear() <= this.first_date.getFullYear()"
                         @click.prevent="left_calendar"
                 >
                     <SvgIcon type="mdi" :path="left_icon"/>
                 </button>
-                <button class="bg-primary dark:bg-dark_primary rounded-md hover:bg-primary_variant dark:hover:bg-dark_primary_variant"
+                <button class="bg-primary dark:bg-dark_primary rounded-md hover:bg-primary_variant dark:hover:bg-dark_primary_variant
+                        disabled:opacity-25 disabled:hover:bg-primary"
+                        :disabled="this.date.getMonth() >= this.last_date.getMonth() &&
+                         this.date.getFullYear() >= this.last_date.getFullYear()"
                         @click.prevent="right_calendar"
                 >
                     <SvgIcon type="mdi" :path="right_icon"/>
