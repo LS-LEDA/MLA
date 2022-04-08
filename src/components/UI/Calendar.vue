@@ -137,7 +137,7 @@ export default {
 
             // Previous month days
             for( let i = first_day_index; i > 0;  i-- ) {
-                this.days.push(`<p class="flex justify-center text-base text-gray-400">${prev_last_day - i + 1}</div>`);
+                this.days.push(`<div class="flex justify-center text-base text-gray-400">${prev_last_day - i + 1}</div>`);
             }
 
             // Current month days
@@ -169,13 +169,13 @@ export default {
 
             // Next month days
             for ( let j = 1; j <= next_days; j++ ) {
-                this.days.push(`<p class="flex justify-center text-base text-gray-400">${j}</div>`);
+                this.days.push(`<div class="flex justify-center text-base text-gray-400">${j}</div>`);
             }
 
             // Clear the 6th formatted day array, sometimes there's only 5 rows
             if (this.chunks === 6)
                 for (let i = 0; i < 7; i++) {
-                    this.formatted_days[5][i] = `<p class="text-base text-black"></div>`;
+                    this.formatted_days[5][i] = `<div class="text-base text-black"></div>`;
                 }
 
             let chunks = 0;
