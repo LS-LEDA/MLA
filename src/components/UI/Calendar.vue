@@ -213,6 +213,44 @@ export default {
                 month: this.date.getMonth(),
                 year: this.date.getFullYear()
             }, this.calendarID);
+        },
+        /**
+         * Generates a calendar date UI div with the styles
+         * specified by the params
+         * @param highlighted indicates if the slot is highlighted
+         * @param date the date number
+         * @param rounded selection ends rounded borders
+         * @return {string} generated UI component
+         */
+        generate_calendar_date(highlighted, date, rounded) {
+            if (highlighted) {
+                switch (rounded) {
+                    // Highlighted left-rounded
+                    case 0:
+                        return `<div class="flex w-full justify-center aspect-square p-0.5 lg:p-1 bg-primary_variant hover:bg-primary dark:hover:bg-dark_primary
+                                hover:cursor-pointer rounded-l-full">
+                                    ${date}
+                                </div>`
+                    // Highlighted right-rounded
+                    case 1:
+                        return `<div class="flex w-full justify-center aspect-square p-0.5 lg:p-1 bg-primary_variant hover:bg-primary dark:hover:bg-dark_primary
+                                hover:cursor-pointer rounded-r-full">
+                                    ${date}
+                                </div>`
+                    // Highlighted
+                    default:
+                        return `<div class="flex w-full justify-center aspect-square p-0.5 lg:p-1 bg-primary_variant hover:bg-primary dark:hover:bg-dark_primary
+                                hover:cursor-pointer">
+                                    ${date}
+                                </div>`
+                }
+            }
+
+            // No highlight
+            return `<p class="flex w-full justify-center aspect-square p-0.5 lg:p-1 hover:bg-primary dark:hover:bg-dark_primary
+                    hover:cursor-pointer">
+                    ${date}
+                </p>`
         }
     }
 }
