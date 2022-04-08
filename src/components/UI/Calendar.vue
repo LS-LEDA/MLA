@@ -63,6 +63,8 @@ export default {
             date: new Date(),
             // Log date keeps track of the first or last date with logs
             d_date: new Date(),
+            first_date: null,
+            last_date: null,
             formatted_days: [[], [], [], [], [], []],
             days: [],
             chunks: 0,
@@ -80,6 +82,10 @@ export default {
         log_last_date() {
             return this.$store.state.dates.last_date;
         },
+    },
+    beforeMount() {
+        this.first_date = new Date(this.log_first_date * 1000);
+        this.last_date = new Date(this.log_last_date * 1000);
     },
     mounted() {
         if (this.calendarID === 1) {
