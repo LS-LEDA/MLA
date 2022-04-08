@@ -146,24 +146,48 @@ export default {
                 if ( (i === this.first_date.getDate() &&
                     this.date.getMonth() === this.first_date.getMonth() &&
                     this.date.getFullYear() === this.first_date.getFullYear())
-                    ||
-                    (i === this.last_date.getDate() &&
-                        this.date.getMonth() === this.last_date.getMonth() &&
-                        this.date.getFullYear() === this.last_date.getFullYear())
                 ) {
                     this.days.push(
-                        `<p class="flex w-full justify-center aspect-square p-0.5 lg:p-1 hover:bg-primary dark:hover:bg-dark_primary
-                        hover:cursor-pointer rounded-full bg-primary_variant">
-                            ${i}
-                        </div>`
+                        this.generate_calendar_date(true, i, 0)
+                    );
+                    continue;
+                } else if ((i === this.last_date.getDate() &&
+                    this.date.getMonth() === this.last_date.getMonth() &&
+                    this.date.getFullYear() === this.last_date.getFullYear())
+                ) {
+                    this.days.push(
+                        this.generate_calendar_date(true, i, 1)
+                    );
+                }
+
+                // The view is on the same month of the first date
+                if (this.date.getMonth() === this.first_date.getMonth()) {
+                    // The number to render is greater than the
+                    if ( i > this.first_date.getDate() ) {
+                        this.days.push(
+                            this.generate_calendar_date(true, i, -1)
+                        );
+                        continue;
+                    }
+                // The view is on the same month of the last date
+                } else if (this.date.getMonth() === this.last_date.getMonth()) {
+                    if ( i < this.last_date.getDate() ) {
+                        this.days.push(
+                            this.generate_calendar_date(true, i, -1)
+                        );
+                        continue;
+                    }
+                } else {
+                    // Highlight all days from months that do not correspond to neither first nor last log date
+                    this.days.push(
+                        this.generate_calendar_date(true, i, -1)
                     );
                     continue;
                 }
+
+                // Dates with no highlight
                 this.days.push(
-                    `<p class="flex w-full justify-center aspect-square p-0.5 lg:p-1 hover:bg-primary dark:hover:bg-dark_primary
-                    hover:cursor-pointer rounded-full">
-                        ${i}
-                    </div>`
+                    this.generate_calendar_date(false, i, null)
                 );
             }
 
