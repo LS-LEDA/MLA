@@ -66,9 +66,9 @@ export default {
         return {
             week_days: [ 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
             // Tracks the current calendar view
-            date: new Date(),
+            date: null,
             // Log date keeps track of the first or last date with logs
-            d_date: new Date(),
+            d_date: null,
             first_date: null,
             last_date: null,
             formatted_days: [[], [], [], [], [], []],
@@ -92,8 +92,6 @@ export default {
     beforeMount() {
         this.first_date = new Date(this.log_first_date * 1000);
         this.last_date = new Date(this.log_last_date * 1000);
-    },
-    mounted() {
         if (this.calendarID === 1) {
             this.d_date = new Date(this.log_first_date * 1000);
             this.date = new Date(this.log_first_date * 1000);
@@ -101,6 +99,8 @@ export default {
             this.d_date = new Date(this.log_last_date * 1000);
             this.date = new Date(this.log_last_date * 1000);
         }
+    },
+    mounted() {
         this.render_calendar();
     },
     methods: {
