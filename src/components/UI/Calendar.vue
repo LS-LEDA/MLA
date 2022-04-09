@@ -237,6 +237,7 @@ export default {
                 month: this.date.getMonth(),
                 year: this.date.getFullYear()
             }, this.calendarID);
+            this.render_calendar();
         },
         /**
          * Generates a calendar date UI div with the styles
