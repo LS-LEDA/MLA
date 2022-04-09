@@ -263,7 +263,7 @@ export default {
                                 </div>`
                     // Highlighted
                     default:
-                        return `<div class="flex w-full justify-center aspect-square p-0.5 lg:p-1 bg-primary_variant hover:bg-primary dark:hover:bg-dark_primary
+                        return `<div class="flex w-full justify-center aspect-square p-0.5 lg:p-1 bg-primary hover:bg-primary_variant dark:hover:bg-dark_primary
                                 hover:cursor-pointer">
                                     ${date}
                                 </div>`
