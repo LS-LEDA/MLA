@@ -18,15 +18,15 @@ export default {
         Item,
         Calendar
     },
-    data() {
-        return {
-            start_date: new Date(),
-            end_date: new Date(),
-        }
-    },
     computed: {
         log_name() {
             return this.$store.state.dashboard.course_name;
+        },
+        start_date: function () {
+            return this.$store.state.dates.start_date;
+        },
+        end_date: function () {
+            return this.$store.state.dates.end_date;
         }
     },
     methods: {
@@ -36,17 +36,12 @@ export default {
          * @param calendarID Which calendar
          */
         selectDate: function (date, calendarID) {
-            if ( calendarID === 1) {
-                this.start_date.setDate(date.day);
-                this.start_date.setMonth(date.month);
-                this.start_date.setFullYear(date.year);
-            } else {
-                this.end_date.setDate(date.day);
-                this.end_date.setMonth(date.month);
-                this.end_date.setFullYear(date.year);
-            }
+            this.$store.commit('selectDate', {
+                calendarID: calendarID,
+                date: date
+            });
             // Apply filter
-            logs_apply_filter(Math.floor(this.start_date / 1000), Math.floor(this.end_date / 1000));
+            logs_apply_filter(Math.floor(this.$store.state.dates.start_date / 1000), Math.floor(this.$store.state.dates.end_date / 1000));
         }
     }
 }
