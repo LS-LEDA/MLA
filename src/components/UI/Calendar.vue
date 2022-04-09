@@ -271,8 +271,7 @@ export default {
             }
 
             // No highlight
-            return `<p class="flex w-full justify-center aspect-square p-0.5 lg:p-1 hover:bg-primary dark:hover:bg-dark_primary
-                    hover:cursor-pointer">
+            return `<p class="flex w-full justify-center aspect-square p-0.5 lg:p-1 dark:hover:bg-dark_primary">
                     ${date}
                 </p>`
         }
