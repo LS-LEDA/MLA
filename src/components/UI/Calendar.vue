@@ -120,7 +120,7 @@ export default {
             // Position of the month's first day
             // [M,T,W,T,F,S,S]
             // [1,2,3,4,5,6,7]
-            let first_day_index = this.date.getDay() - 1;
+            let first_day_index = this.get_month_first_day(this.date.getFullYear(), this.date.getMonth()).getDay() - 1;
 
             const last_day_index = new Date(
                 this.date.getFullYear(),
@@ -275,6 +275,15 @@ export default {
             return `<p class="flex w-full justify-center aspect-square p-0.5 lg:p-1 dark:hover:bg-dark_primary">
                     ${date}
                 </p>`
+        },
+        /**
+         * Creates and returns a new Date that sets itself to the first day
+         * of the specified month of the year
+         * @param year
+         * @param month
+         */
+        get_month_first_day: function (year, month) {
+           return new Date(year, month, 1);
         }
     }
 }
