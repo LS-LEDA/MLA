@@ -157,7 +157,8 @@ export default {
                 ) {
                     this.days.push(
                         this.generate_calendar_date(true, i, 1)
-                    );
+                    )
+                    continue;
                 }
 
                 // The view is on the same month of the first date
