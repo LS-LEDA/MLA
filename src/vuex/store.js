@@ -50,8 +50,8 @@ const store = createStore({
             dates:{
                 first_date: 0,
                 last_date: 0,
-                start_date: new Date(),
-                end_date: new Date()
+                start_date: null,
+                end_date: null
             },
             summary: {
                 total_interactions: 0,
@@ -299,6 +299,9 @@ const store = createStore({
         saveDataDates(state, {first_date, last_date}) {
             this.state.dates.first_date = first_date;
             this.state.dates.last_date = last_date;
+            // Update start_date and end_date with the logs values
+            this.state.dates.start_date = new Date(first_date * 1000)
+            this.state.dates.end_date = new Date(last_date * 1000)
         },
         /**
          * Stores the selected dates from the calendar
@@ -309,7 +312,7 @@ const store = createStore({
          * @param date Selected calendar date (day/month/year)
          */
         selectDate(state, {calendarID, date}) {
-            if ( calendarID === 1) {
+            if (calendarID === 1) {
                 this.state.dates.start_date.setDate(date.day);
                 this.state.dates.start_date.setMonth(date.month);
                 this.state.dates.start_date.setFullYear(date.year);
