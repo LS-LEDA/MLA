@@ -7,6 +7,7 @@
             </span>
             <!-- Calendar buttons -->
             <div class="flex gap-x-2">
+                <!-- TODO: Change first_date to log first date -->
                 <button class="bg-primary dark:bg-dark_primary rounded-md hover:bg-primary_variant dark:hover:bg-dark_primary_variant
                         disabled:opacity-25 disabled:hover:bg-primary"
                         :disabled="this.date.getMonth() <= this.first_date.getMonth() &&
@@ -55,6 +56,8 @@
 import {mdiMenuLeft, mdiMenuRight} from "@mdi/js";
 import SvgIcon from "@jamescoyle/vue-icon";
 
+// TODO: Fix the calendar selection & filtering
+
 export default {
     name: "Calendar",
     components: {
@@ -88,6 +91,12 @@ export default {
         log_last_date() {
             return this.$store.state.dates.last_date;
         },
+        selected_first_date() {
+            return this.$store.state.dates.start_date;
+        },
+        selected_last_date() {
+            return this.$store.state.dates.end_date;
+        }
     },
     beforeMount() {
         this.first_date = new Date(this.log_first_date * 1000);
@@ -170,7 +179,7 @@ export default {
                         );
                         continue;
                     }
-                // The view is on the same month of the last date
+                    // The view is on the same month of the last date
                 } else if (this.date.getMonth() === this.last_date.getMonth()) {
                     if ( i < this.last_date.getDate() ) {
                         this.days.push(
@@ -233,6 +242,17 @@ export default {
                 return
             }
 
+            // Override both first / last date ends
+            if (this.calendarID === 1) {
+                this.first_date.setDate(selected_day.target.innerText)
+                this.first_date.setMonth(this.date.getMonth())
+                this.first_date.setFullYear(this.date.getFullYear())
+            } else {
+                this.last_date.setDate(selected_day.target.innerText)
+                this.last_date.setMonth(this.date.getMonth())
+                this.last_date.setFullYear(this.date.getFullYear())
+            }
+
             this.$emit('dateSelect', {
                 day: selected_day.target.innerText,
                 month: this.date.getMonth(),
@@ -261,6 +281,11 @@ export default {
                     case 1:
                         return `<div class="flex w-full justify-center aspect-square p-0.5 lg:p-1 bg-primary_variant hover:bg-primary dark:hover:bg-dark_primary
                                 hover:cursor-pointer rounded-r-full">
+                                    ${date}
+                                </div>`
+                    case 3:
+                        return `<div class="flex w-full justify-center aspect-square p-0.5 lg:p-1 bg-rose-300 hover:bg-primary dark:hover:bg-dark_primary
+                                hover:cursor-pointer rounded-full">
                                     ${date}
                                 </div>`
                     // Highlighted
