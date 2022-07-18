@@ -3,7 +3,7 @@
         <div class="flex w-full h-fit">
             {{ emotion }}
         </div>
-        <IconButton :icon="remove_icon" :type="false" :status="true"/>
+        <IconButton :icon="remove_icon" :type="false" :status="true" @click="this.$emit('removeEmotion')"/>
     </div>
 </template>
 
