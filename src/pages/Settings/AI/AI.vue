@@ -10,7 +10,10 @@
                     </div>
                     <div class="w-full h-full overflow-y-scroll">
                         <div class="flex flex-col w-full h-96">
-                            <EmotionCard v-for="( emotion, index) in emotions" :key="index" :emotion="emotion"/>
+                            <EmotionCard v-for="( emotion, index) in emotions"
+                                         :key="index"
+                                         :emotion="emotion"
+                                         @removeEmotion="this.remove_emotion_card(index)"/>
                         </div>
                     </div>
                 </div>
@@ -109,6 +112,13 @@ export default {
             document.getElementById('emotions_input').value = "";
             // TODO: Improve the parsing
             this.emotions = this.emotions.concat(emotions.split(" "));
+        },
+        /**
+         * Removes the selected emotion card from the list
+         * @param emotionCardID: Selected emotion card
+         */
+        remove_emotion_card: function (emotionCardID) {
+            this.emotions.splice(emotionCardID, 1);
         },
         /**
          * File selection callback
