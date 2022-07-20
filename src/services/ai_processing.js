@@ -18,4 +18,25 @@ function load_emotions(file) {
     file_reader.readAsText(file);
 }
 
-export { load_emotions }
+function train_ai() {
+    let bow = {};   // Bag of Words: Dictionary used to
+    let allWords = [];
+    let wordReference = {};
+
+    // Get the list from the store, transform the input and generate the bag of words
+    store.state.emotions_dataset.forEach( data => {
+        let words = data.message.replace(/[^a-z ]/gi, "").toLowerCase().split( " " ).filter( x => !!x );
+        words.forEach( w => {
+            if(!bow[w]) bow[w] = 0;
+            bow[w]++; // Counting occurrence for word frequency
+        });
+    });
+
+    allWords = Object.keys(bow);
+    allWords.forEach((w, i) => {
+        wordReference[w] = i;
+    });
+
+}
+
+export { load_emotions, train_ai }
