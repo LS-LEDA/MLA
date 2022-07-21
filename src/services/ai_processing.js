@@ -23,8 +23,11 @@ function train_ai() {
     let allWords = [];
     let wordReference = {};
 
+    let sentences = store.state.emotions_dataset;
+    let emotions = store.state.emotions;
+
     // Get the list from the store, transform the input and generate the bag of words
-    store.state.emotions_dataset.forEach( data => {
+    sentences.forEach( data => {
         let words = data.message.replace(/[^a-z ]/gi, "").toLowerCase().split( " " ).filter( x => !!x );
         words.forEach( w => {
             if(!bow[w]) bow[w] = 0;
