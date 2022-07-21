@@ -144,6 +144,7 @@ const store = createStore({
                 '--typography'
             ],
             emotions_dataset: null,
+            emotions: [],
         }
     },
     actions: {
@@ -279,7 +280,15 @@ const store = createStore({
          * @param emotions_list
          */
         saveEmotions(state, emotions_list) {
-            state.emotions_dataset = emotions_list
+            state.emotions_dataset = emotions_list;
+        },
+        /**
+         * Save the emotions list
+         * @param state
+         * @param emotions_list
+         */
+        saveEmotionsList(state, emotions_list) {
+            state.emotions = emotions_list;
         }
     }
 });
