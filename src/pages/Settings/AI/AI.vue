@@ -145,7 +145,8 @@ export default {
          * Triggers AI emotion analysis training
          */
         train_ai: function () {
-            // TODO: Calling training method with the imported data
+            // Store the emotions list
+            this.$store.commit('saveEmotionsList', this.emotions);
         }
     },
     data() {
