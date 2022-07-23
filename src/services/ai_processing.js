@@ -40,6 +40,32 @@ function train_ai() {
         wordReference[w] = i;
     });
 
+    // Generate vectors for sentences
+    let vectors = generateVectors(sentences, allWords, wordReference);
+
+}
+
+/**
+ * Loops through the sentences and generates a vector of 0s and 1s
+ * Assign 1 if the word is in the word reference
+ * @param sentences List of sentences
+ * @param allWords Array of existing words
+ * @param wordReference Map of words and its position
+ * @returns Array of vectors
+ */
+function generateVectors(sentences, allWords, wordReference) {
+    return sentences.map( s => {
+        // Generate array of all word's length and fill it with 0s
+        let vector = new Array( allWords.length ).fill( 0 );
+        let words = s.message.replace(/[^a-z ]/gi, "").toLowerCase().split( " " ).filter( x => !!x );
+        // Set the vector's position to 1 if the word is in the word reference
+        words.forEach( w => {
+            if(w in wordReference) {
+                vector[wordReference[w]] = 1;
+            }
+        });
+        return vector;
+    });
 }
 
 export { load_emotions, train_ai }
