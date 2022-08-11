@@ -42,6 +42,7 @@ function train_ai() {
 
     // Generate vectors for sentences
     let vectors = generateVectors(sentences, allWords, wordReference);
+    let outputs = generateOutputs(sentences, emotions);
 
 }
 
@@ -65,6 +66,25 @@ function generateVectors(sentences, allWords, wordReference) {
             }
         });
         return vector;
+    });
+}
+
+/**
+ * Loops through the sentences and matches all the emotions
+ * from these with the provided emotions list
+ * @param sentences List of sentences from the training set
+ * @param emotions List of emotions from the training set
+ * @returns Array of matched emotions arrays
+ */
+function generateOutputs(sentences, emotions) {
+    return sentences.slice( 0, sentences.length ).map( s => {
+        let s_tags = s.tag;
+        let output = [];
+        for( let i = 0; i < emotions.length; i++ ) {
+            // TODO: Change tags to a dictionary to improve performance
+            output.push( s_tags.includes( emotions[i] ) ? 1 : 0 );
+        }
+        return output;
     });
 }
 
