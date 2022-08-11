@@ -1,4 +1,5 @@
 import store from "@/vuex/store";
+import * as tf from '@tensorflow/tfjs';
 
 const file_reader = new FileReader()
 
@@ -44,6 +45,8 @@ function train_ai() {
     let vectors = generateVectors(sentences, allWords, wordReference);
     let outputs = generateOutputs(sentences, emotions);
 
+    // Train model
+    trainModel(sentences, vectors, outputs, emotions, allWords, wordReference);
 }
 
 /**
@@ -86,6 +89,81 @@ function generateOutputs(sentences, emotions) {
         }
         return output;
     });
+}
+
+/**
+ * Creates sequential model with adam optimizer algorithm and CategoricalCrossentropy loss
+ * @param sentences
+ * @param vectors
+ * @param outputs
+ * @param emotions
+ * @param allWords
+ * @param wordReference
+ */
+// eslint-disable-next-line no-unused-vars
+function trainModel(sentences, vectors, outputs, emotions, allWords, wordReference) {
+    // Define our model with several hidden layers
+    const model = tf.sequential();
+    model.add(tf.layers.dense( { units: 100, activation: "relu", inputShape: [ allWords.length ] } ) );
+    model.add(tf.layers.dense( { units: 50, activation: "relu" } ) );
+    model.add(tf.layers.dense( { units: 25, activation: "relu" } ) );
+    model.add(tf.layers.dense( {
+        units: emotions.length,
+        activation: "softmax"
+    } ) );
+
+    // Specify the training configuration
+    // Use Adam algorithm optimizer
+    // Computes the cross-entropy loss between the labels and predictions.
+    // Calculates how often predictions equal labels.
+    model.compile({
+        optimizer: tf.train.adam(),
+        loss: "categoricalCrossentropy",
+        metrics: ["accuracy"]
+    });
+
+    const xs = tf.stack( vectors.map( x => tf.tensor1d( x ) ) );
+    const ys = tf.stack( outputs.map( x => tf.tensor1d( x ) ) );
+
+    // Measure of how well a machine learning model generalizes data similar to that with which it was trained
+    model.fit( xs, ys, {
+        epochs: 50,
+        shuffle: true,
+        callbacks: {
+            onEpochEnd: ( epoch, logs ) => {
+                // TODO: Logging visualizer and progression indicator
+                console.log( "Epoch #", epoch, logs );
+            }
+        }
+    }).then(
+        /*() => {
+            let i = 0;
+            let trainingInterval = setInterval( async () => {
+                let sentence = sentences[i].message;
+                let s_tags = sentences[i].tag;
+
+                // Generate vectors for sentences
+                let vector = new Array( allWords.length ).fill( 0 );
+                let words = sentence.replace(/[^a-z ]/gi, "").toLowerCase().split( " " ).filter( x => !!x );
+                words.forEach( w => {
+                    if( w in wordReference ) {
+                        vector[ wordReference[ w ] ] = 1;
+                    }
+                });
+
+                let prediction = await model.predict( tf.stack( [ tf.tensor1d( vector ) ] ) ).data();
+                // Get the index of the highest value in the prediction
+                let id = prediction.indexOf( Math.max( ...prediction ) );
+                console.log( "Result: " + emotions[id] + ", Expected: " + s_tags[0]);
+
+                i++;
+                if (i === sentences.length) clearInterval(trainingInterval);
+            }, 1000 );
+        }*/
+    );
+
+    // Store the trained model
+
 }
 
 export { load_emotions, train_ai }
