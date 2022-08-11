@@ -78,7 +78,7 @@ import Button from "@/components/UI/Button";
 import {mdiFileUpload, mdiHelpCircleOutline} from "@mdi/js";
 import {ref} from "vue";
 import BrowseFilesButton from "@/components/ImportData/BrowseFilesButton";
-import {load_emotions} from "@/services/ai_processing";
+import {load_emotions, train_ai} from "@/services/ai_processing";
 import Badge from "@/components/UI/Badge";
 
 export default {
@@ -147,6 +147,7 @@ export default {
         train_ai: function () {
             // Store the emotions list
             this.$store.commit('saveEmotionsList', this.emotions);
+            train_ai();
         }
     },
     data() {
