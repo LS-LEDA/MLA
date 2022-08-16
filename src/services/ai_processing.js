@@ -201,4 +201,29 @@ async function load_model(model_file, weight_file) {
     model = await tf.loadLayersModel(tf.io.browserFiles([model_file, weight_file]));
 }
 
-export { load_emotions, train_ai }
+/**
+ * Use pre-trained sequential model and detect the emotion
+ * @param messages Array of Moodle messages
+ * @returns {Promise<void>}
+ */
+async function analyze_emotion(messages) {
+    for (const m of messages) {
+        // Generate vectors for sentences
+        let vector = new Array( allWords.length ).fill( 0 );
+        let words = m.message.replace(/[^a-z ]/gi, "").toLowerCase().split( " " ).filter( x => !!x );
+        words.forEach( w => {
+            if( w in wordReference ) {
+                vector[ wordReference[ w ] ] = 1;
+            }
+        });
+
+        let prediction = await model.predict( tf.stack( [ tf.tensor1d( vector ) ] ) ).data();
+        // Get the index of the highest value in the prediction
+        let id = prediction.indexOf( Math.max( ...prediction ) );
+        console.log( "Result: " + emotions[id]);
+
+        m.emotion = emotions[id];
+    }
+}
+
+export { load_emotions, train_ai, load_model, analyze_emotion }
