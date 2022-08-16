@@ -240,7 +240,8 @@ const store = createStore({
             // Get user stored settings
             window.ipc.send('read_settings', [
                     'general',
-                    'theme'
+                    'theme',
+                    'ai'
                 ]
             );
         },

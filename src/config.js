@@ -43,6 +43,24 @@ const schema = {
             }
         },
         default: {}
+    },
+    ai: {
+        type: 'object',
+        properties: {
+            word_reference: {
+                type: 'object',
+                default: {}
+            },
+            emotions: {
+                type: 'array',
+                default: []
+            },
+            all_words: {
+                type: 'array',
+                default: []
+            }
+        },
+        default: {}
     }
 };
 
