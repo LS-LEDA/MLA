@@ -5,6 +5,7 @@ import {SentimentAnalyzer} from "@nlpjs/sentiment";
 import Message from "@/services/model/Message";
 import store from "@/vuex/store";
 import {Language} from "@nlpjs/language";
+import {analyze_emotion} from "@/services/ai_processing";
 
 // NLP
 const lng_guesser = new Language();
@@ -30,10 +31,13 @@ function forum_logs_processing(data, file_name) {
         forum.users = count_users(processed_msg);
         // Count sentiment ocurrences
         forum.sentiments = count_sentiments(processed_msg);
-        // Store processed messages in vuex
-        store.commit('storeForumMessages', forum);
-        // Toggle uploaded file boolean and store file name
-        store.commit('setImportedData', {which: true, file_name: file_name});
+
+        analyze_emotion(processed_msg).then( () => {
+            // Store processed messages in vuex
+            store.commit('storeForumMessages', forum);
+            // Toggle uploaded file boolean and store file name
+            store.commit('setImportedData', {which: true, file_name: file_name});
+        });
         // Push to Dashboard > Sentiment
         //router.push('/dashboard/sentimental-analysis')
     })
