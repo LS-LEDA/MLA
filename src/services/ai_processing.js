@@ -104,13 +104,13 @@ function generateOutputs(sentences, emotions) {
 function trainModel(sentences, vectors, outputs, emotions, allWords, wordReference) {
     // Define our model with several hidden layers
     const model = tf.sequential();
-    model.add(tf.layers.dense( { units: 100, activation: "relu", inputShape: [ allWords.length ] } ) );
-    model.add(tf.layers.dense( { units: 50, activation: "relu" } ) );
-    model.add(tf.layers.dense( { units: 25, activation: "relu" } ) );
-    model.add(tf.layers.dense( {
+    model.add(tf.layers.dense({units: 100, activation: "relu", inputShape: [allWords.length]}));
+    model.add(tf.layers.dense({units: 50, activation: "relu"}));
+    model.add(tf.layers.dense({units: 25, activation: "relu"}));
+    model.add(tf.layers.dense({
         units: emotions.length,
         activation: "softmax"
-    } ) );
+    }));
 
     // Specify the training configuration
     // Use Adam algorithm optimizer
@@ -122,22 +122,22 @@ function trainModel(sentences, vectors, outputs, emotions, allWords, wordReferen
         metrics: ["accuracy"]
     });
 
-    const xs = tf.stack( vectors.map( x => tf.tensor1d( x ) ) );
-    const ys = tf.stack( outputs.map( x => tf.tensor1d( x ) ) );
+    const xs = tf.stack(vectors.map(x => tf.tensor1d(x)));
+    const ys = tf.stack(outputs.map(x => tf.tensor1d(x)));
 
     // Measure of how well a machine learning model generalizes data similar to that with which it was trained
-    model.fit( xs, ys, {
+    model.fit(xs, ys, {
         epochs: 50,
         shuffle: true,
         callbacks: {
-            onEpochEnd: ( epoch, logs ) => {
+            onEpochEnd: (epoch, logs) => {
                 // TODO: Logging visualizer and progression indicator
-                console.log( "Epoch #", epoch, logs );
+                console.log("Epoch #", epoch, logs);
             }
         }
     }).then(
-        /*() => {
-            let i = 0;
+        async () => {
+            /*let i = 0;
             let trainingInterval = setInterval( async () => {
                 let sentence = sentences[i].message;
                 let s_tags = sentences[i].tag;
@@ -158,11 +158,27 @@ function trainModel(sentences, vectors, outputs, emotions, allWords, wordReferen
 
                 i++;
                 if (i === sentences.length) clearInterval(trainingInterval);
-            }, 1000 );
-        }*/
-    );
+            }, 1000 );*/
+            // TODO: Save to the file system within Electron app, Download model if using the browser
+            // Store the trained model
+            const saveResults = await model.save('downloads://emotion_analysis');
+            // Store AI related data to the application configuration file
+            store.commit('setSettings', {
+                key: 'ai.word_reference',
+                value: wordReference
+            });
+            store.commit('setSettings', {
+                key: 'ai.emotions',
+                value: emotions
+            });
+            store.commit('setSettings', {
+                key: 'ai.all_words',
+                value: allWords
+            });
 
-    // Store the trained model
+            console.log(saveResults);
+        }
+    );
 
 }
 
