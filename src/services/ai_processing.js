@@ -185,4 +185,20 @@ function trainModel(sentences, vectors, outputs, emotions, allWords, wordReferen
 
 }
 
+// TODO: Implement Singleton model
+/**
+ * Loads the Sequential AI tensorflow model from the user's specified
+ * files and other emotion analysis required data
+ * @param model_file JSON model meta-data file
+ * @param weight_file Binary trained model weights file
+ * @returns {Promise<void>}
+ */
+async function load_model(model_file, weight_file) {
+    allWords = store.state.settings.ai.all_words;
+    wordReference = store.state.settings.ai.word_reference;
+    emotions = store.state.settings.ai.emotions;
+
+    model = await tf.loadLayersModel(tf.io.browserFiles([model_file, weight_file]));
+}
+
 export { load_emotions, train_ai }
