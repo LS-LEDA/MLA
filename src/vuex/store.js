@@ -264,7 +264,7 @@ const store = createStore({
 
             // Persist change to mla config
             window.ipc.send('write_settings',
-                settings
+                JSON.stringify(settings)
             );
         },
         /**

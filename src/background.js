@@ -72,7 +72,8 @@ ipcMain.on('read_settings', (event, args) => {
  */
 ipcMain.on('write_settings', (event, args) => {
     try {
-        config.set(args.key, args.value)
+        let setting = JSON.parse(args);
+        config.set(setting.key, setting.value);
         applySettings(args.key, args.value);
     } catch (err) {
         event.reply('write_settings', err);
