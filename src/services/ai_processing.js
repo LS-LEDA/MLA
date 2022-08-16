@@ -1,13 +1,18 @@
 import store from "@/vuex/store";
 import * as tf from '@tensorflow/tfjs';
 
-const file_reader = new FileReader()
+let model = null;
+let allWords = null;
+let wordReference = null;
+let emotions = null;
 
 /**
  * Load human tagged emotions dataset
  * @param file
  */
 function load_emotions(file) {
+    const file_reader = new FileReader()
+
     // Messages log file
     file_reader.onload = (event) => {
         let emotions_list = JSON.parse(event.target.result);
@@ -21,11 +26,9 @@ function load_emotions(file) {
 
 function train_ai() {
     let bow = {};   // Bag of Words: Dictionary used to
-    let allWords = [];
-    let wordReference = {};
 
     let sentences = store.state.emotions_dataset;
-    let emotions = store.state.emotions;
+    emotions = store.state.emotions;
 
     // Get the list from the store, transform the input and generate the bag of words
     sentences.forEach( data => {
