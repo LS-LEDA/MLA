@@ -148,6 +148,40 @@ export default {
             // Store the emotions list
             this.$store.commit('saveEmotionsList', this.emotions);
             train_ai();
+        },
+        // TODO: Automatic model loading from the file system with tfjs-node
+        /**
+         * Loads the AI sequential model from user selected files,
+         * ensures that only 2 files are loaded, these files extensions must be
+         * .json for the model and .bin for the weights.
+         * It logs an error if the aforementioned requirements are not satisfied.
+         * @param e Input event
+         */
+        load_model: function (e) {
+            if (e.target.files.length !== 2) {
+                console.log("Please upload the AI model files (model.json & weights.bin)")
+                return;
+            }
+
+            // Must be 2 files
+            [...e.target.files].forEach( (file) => {
+                if ( file.name.endsWith('.json')) {
+                    this.model_file = file;
+                } else if ( file.name.endsWith('.bin')) {
+                    this.weights_file = file;
+                }
+            });
+
+            if (this.model_file === null || this.weights_file === null) {
+                console.log("Please upload the AI model files (model.json & weights.bin)")
+                return;
+            }
+
+            // Finally, load the model to the system
+            load_model(
+                this.model_file,
+                this.weights_file
+            );
         }
     },
     data() {
