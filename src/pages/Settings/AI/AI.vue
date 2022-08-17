@@ -9,7 +9,7 @@
             </div>
             <div class="flex space-x-2">
                 <div class="flex w-auto h-4">
-                    <Button text="Train AI" @btnClick="train_ai" :disabled="check_loaded_data"/>
+                    <Button text="Train AI" @btnClick="train_ai" :disable="check_loaded_data"/>
                 </div>
                 <div class="flex w-auto h-4">
                     <input type="file" ref="model_file" class="hidden" @change="load_model" multiple>
