@@ -78,7 +78,7 @@ import Button from "@/components/UI/Button";
 import {mdiFileUpload, mdiHelpCircleOutline} from "@mdi/js";
 import {ref} from "vue";
 import BrowseFilesButton from "@/components/ImportData/BrowseFilesButton";
-import {load_emotions, train_ai} from "@/services/ai_processing";
+import {load_emotions, load_model, train_ai} from "@/services/ai_processing";
 import Badge from "@/components/UI/Badge";
 
 export default {
@@ -190,7 +190,9 @@ export default {
             upload_file_icon: mdiFileUpload,
             information_icon: mdiHelpCircleOutline,
             data_file: null,
-            emotion_dataset: []
+            emotion_dataset: [],
+            model_file: null,
+            weights_file: null,
         }
     }
 }
