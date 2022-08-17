@@ -1,7 +1,24 @@
 <template>
     <div class="flex flex-col w-full h-full space-y-2">
-        <div class="flex w-full h-full gap-x-5">
-            <div class="flex flex-col w-1/3 h-full gap-y-5">
+        <div class="flex w-full justify-between">
+            <div class="flex items-center space-x-2">
+                <span class="text-2xl font-bold">
+                    Emotion detection with AI
+                </span>
+                <Badge class="bg-amber-100 text-amber-800 text-sm font-medium dark:bg-amber-200 dark:text-amber-800" text="beta"/>
+            </div>
+            <div class="flex space-x-2">
+                <div class="flex w-auto h-4">
+                    <Button text="Train AI" @btnClick="train_ai"/>
+                </div>
+                <div class="flex w-auto h-4">
+                    <input type="file" ref="model_file" class="hidden" @change="load_model" multiple>
+                    <Button text="Load Model & Weights" @btnClick="this.$refs.model_file.click()"/>
+                </div>
+            </div>
+        </div>
+        <div class="flex w-full h-full divide-x-2">
+            <div class="flex flex-col w-1/3 h-full gap-y-5 pr-2">
                 <!-- Imported emotions list -->
                 <!-- TODO: Add a select all checkbox -->
                 <div class="flex flex-col w-full h-3/4">
@@ -65,9 +82,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="flex w-full h-fit justify-center">
-            <Button text="Train AI" @btnClick="train_ai"/>
         </div>
     </div>
 </template>
