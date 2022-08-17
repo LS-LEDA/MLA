@@ -14,9 +14,16 @@
                     </router-link>
                 </div>
                 <!-- Dashboard deeply nested component view -->
-                <router-view class="overflow-y-hidden"></router-view>
+                <router-view class="overflow-y-hidden" @popUp="toggle_popup"></router-view>
             </div>
         </div>
+        <!-- Documentation Pop Up -->
+        <PopUp
+            v-if="popup"
+            :current-pop-up="this.current_popup_up"
+            :pop-up-props="this.docs_file"
+            @closePopUp="this.toggle_popup"
+        />
         <!-- Alert -->
         <Alert v-if="alert_status.status" :message="alert_status.message"
                @closeAlert="close_alert"/>
@@ -25,10 +32,13 @@
 
 <script>
 import Alert from "@/components/UI/Alert";
+import PopUp from "@/components/UI/PopUp";
+import Documentation from "@/components/UI/Documentation";
 
 export default {
     name: "Dashboard",
     components: {
+        PopUp,
         Alert
     },
     mounted() {
@@ -67,6 +77,17 @@ export default {
             // Clears toggle alert timeout if alert is dismissed by the user
             clearTimeout(this.$store.state.alert.timeout);
             this.$store.state.alert.status = false;
+        },
+        /**
+         * Receives the file to be shown in the popup component
+         * from its child and toggles the popup state
+         * @param file File to be shown in the Documentation popup
+         */
+        toggle_popup: function (file) {
+            this.popup = !this.popup;
+            this.docs_file = {
+                file: file
+            }
         }
     },
     data() {
@@ -88,7 +109,10 @@ export default {
                     tab_name: "About",
                     tab_path: "/settings/about"
                 }
-            ]
+            ],
+            popup: false,
+            current_popup_up: Documentation,
+            docs_file: null
         }
     }
 }
