@@ -6,6 +6,7 @@
                     Emotion detection with AI
                 </span>
                 <Badge class="bg-amber-100 text-amber-800 text-sm font-medium dark:bg-amber-200 dark:text-amber-800" text="beta"/>
+                <SvgIcon type="mdi" :path="information_icon" @click="show_documentation"/>
             </div>
             <div class="flex space-x-2">
                 <div class="flex w-auto h-4">
@@ -94,6 +95,8 @@ import {ref} from "vue";
 import BrowseFilesButton from "@/components/ImportData/BrowseFilesButton";
 import {load_emotions, load_model, train_ai} from "@/services/ai_processing";
 import Badge from "@/components/UI/Badge";
+import SvgIcon from "@jamescoyle/vue-icon";
+import AITraning from '@/documentation/settings-ai-training.md';
 
 export default {
     name: "AI",
@@ -101,8 +104,10 @@ export default {
         Badge,
         BrowseFilesButton,
         Button,
-        EmotionCard
+        EmotionCard,
+        SvgIcon
     },
+    emits: ['popUp'],
     setup() {
         const active = ref(false)
         const toggleActive = () => {
@@ -206,6 +211,13 @@ export default {
                 this.model_file,
                 this.weights_file
             );
+        },
+        /**
+         * Emits popup event to its parent component
+         * and sends the documentation file to be displayed
+         */
+        show_documentation: function() {
+            this.$emit('popUp', this.docs_file);
         }
     },
     data() {
@@ -216,6 +228,8 @@ export default {
             data_file: null,
             model_file: null,
             weights_file: null,
+            show_docs: false,
+            docs_file: AITraning
         }
     }
 }
