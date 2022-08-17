@@ -9,7 +9,7 @@
             </div>
             <div class="flex space-x-2">
                 <div class="flex w-auto h-4">
-                    <Button text="Train AI" @btnClick="train_ai"/>
+                    <Button text="Train AI" @btnClick="train_ai" :disabled="check_loaded_data"/>
                 </div>
                 <div class="flex w-auto h-4">
                     <input type="file" ref="model_file" class="hidden" @change="load_model" multiple>
@@ -114,6 +114,16 @@ export default {
     computed: {
         emotions_dataset() {
             return this.$store.state.emotions_dataset;
+        },
+        /**
+         * Enables or disables "Train AI" button
+         * Enable: Emotions & Emotions dataset have data
+         * Disable: Either Emotions or Emotions dataset have no data
+         * @returns {boolean}
+         */
+        check_loaded_data() {
+            return this.emotions.length === 0 ||
+                this.emotions_dataset.length === 0;
         }
     },
     methods: {
@@ -204,7 +214,6 @@ export default {
             upload_file_icon: mdiFileUpload,
             information_icon: mdiHelpCircleOutline,
             data_file: null,
-            emotion_dataset: [],
             model_file: null,
             weights_file: null,
         }

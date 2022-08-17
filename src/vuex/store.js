@@ -143,7 +143,7 @@ const store = createStore({
                 '--background',
                 '--typography'
             ],
-            emotions_dataset: null,
+            emotions_dataset: [],
             emotions: [],
         }
     },
