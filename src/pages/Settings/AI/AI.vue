@@ -18,7 +18,7 @@
                 </div>
             </div>
         </div>
-        <div class="flex w-full h-full divide-x-2">
+        <div class="flex w-full h-full divide-x-2 overflow-y-hidden">
             <div class="flex flex-col w-1/3 h-full gap-y-5 pr-2">
                 <!-- Imported emotions list -->
                 <!-- TODO: Add a select all checkbox -->
@@ -50,8 +50,8 @@
             </div>
 
             <!-- Dataset section -->
-            <div class="flex flex-col w-2/3 h-full gap-y-5 pl-2">
-                <div class="flex flex-col w-full h-3/4 overflow-y-hidden">
+            <div class="flex flex-col w-2/3 h-full gap-y-5 pl-2 overflow-y-hidden">
+                <div class="flex flex-col w-full h-3/4">
                     <div class="flex font-bold text-xl">
                         Datasets data
                     </div>

@@ -1,6 +1,6 @@
 <template>
-    <section id="settings" class="relative flex flex-col w-full h-full p-5 py-10">
-        <div class="flex flex-col w-full h-full">
+    <section id="settings" class="relative flex flex-col w-full h-full">
+        <div class="flex flex-col w-full h-full p-5 py-10">
             <h1 class="text-4xl font-extrabold pb-5"> Settings </h1>
             <div class="flex flex-col w-full h-full bg-secondary dark:bg-dark_secondary rounded-2xl p-5 overflow-y-hidden">
                 <!-- Tabs buttons -->
