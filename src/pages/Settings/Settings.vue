@@ -34,6 +34,7 @@
 import Alert from "@/components/UI/Alert";
 import PopUp from "@/components/UI/PopUp";
 import Documentation from "@/components/UI/Documentation";
+import {markRaw} from "vue";
 
 export default {
     name: "Dashboard",
@@ -111,7 +112,8 @@ export default {
                 }
             ],
             popup: false,
-            current_popup_up: Documentation,
+            // Documentation component is not reactive
+            current_popup_up: markRaw(Documentation),
             docs_file: null
         }
     }
