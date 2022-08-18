@@ -1,6 +1,7 @@
 import {Container} from "@nlpjs/core";
 import {LangEs} from "@nlpjs/lang-es";
 import {LangCa} from "@nlpjs/lang-ca";
+import {LangEn} from "@nlpjs/lang-en";
 import {SentimentAnalyzer} from "@nlpjs/sentiment";
 import Message from "@/services/model/Message";
 import store from "@/vuex/store";
@@ -60,6 +61,8 @@ async function analyze_sentiment(messages) {
             case 'ca':
                 container.use( LangCa );
                 break;
+            case 'en':
+                container.use( LangEn );
         }
 
         const sentiment = new SentimentAnalyzer({ container });
