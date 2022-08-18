@@ -1,7 +1,9 @@
 class Log {
     constructor(date, id, name, course, type, interaction, client, ip) {
         this.date = date;
-        this.yearMonthDate = this.year_month_date()
+        this.yearMonthDate = this.year_month_date(false);
+        this.yearMonthDayHour = this.year_month_date(true);
+        this.timestamp = Date.parse(this.yearMonthDayHour) / 1000;
         this.id = id;
         this.name = name;
         this.course = course;
@@ -13,9 +15,11 @@ class Log {
 
     /**
      * Delete '/' and retrieve Year - Month - Date
+     * @param withTime Whether to include time in the final
+     * computed date or not.
      * @returns {string} Computed date
      */
-    year_month_date() {
+    year_month_date(withTime) {
         let date = "";
         let month = "";
         let year = "";
@@ -42,7 +46,12 @@ class Log {
                 }
             }
         }
-        return year + month + date;
+
+        if (!withTime) {
+            return year + month + date;
+        } else {
+            return year + '-' + month + '-' + date + ' ' + this.date.split(' ')[1];
+        }
     }
 }
 
