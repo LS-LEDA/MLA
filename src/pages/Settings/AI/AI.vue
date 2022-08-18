@@ -50,18 +50,20 @@
             </div>
 
             <!-- Dataset section -->
-            <div class="flex flex-col w-2/3 h-full gap-y-5 pl-2 overflow-y-hidden">
+            <div class="flex flex-col w-2/3 h-full gap-y-5 pl-2">
                 <div class="flex flex-col w-full h-3/4">
                     <div class="flex font-bold text-xl">
                         Datasets data
                     </div>
-                    <div class="flex flex-col w-full h-full space-y-3 overflow-y-scroll">
-                        <div class="flex w-full h-fit rounded-lg space-x-2 bg-primary dark:bg-dark_primary px-5 py-2 place-items-center" v-for="(sentence, index) in emotions_dataset" :key="index">
-                            <p class="w-8/12 truncate text-ellipsis whitespace-nowrap overflow-hidden"> {{ sentence.message }} </p>
-                            <div class="flex w-4/12 overflow-x-auto no-scrollbar gap-x-2">
-                                <Badge v-for="(tag, tag_index) in sentence.tag" :text="tag" :key="tag_index"
-                                      class="flex h-fit w-fit p-1"
-                                />
+                    <div class="flex flex-col w-full h-full overflow-y-scroll">
+                        <div class="flex flex-col w-full h-96 space-y-2">
+                            <div class="flex w-full h-fit rounded-lg space-x-2 bg-primary dark:bg-dark_primary px-5 py-2 place-items-center" v-for="(sentence, index) in emotions_dataset" :key="index">
+                                <p class="w-8/12 truncate text-ellipsis whitespace-nowrap overflow-hidden"> {{ sentence.message }} </p>
+                                <div class="flex w-4/12 overflow-x-auto no-scrollbar gap-x-2">
+                                    <Badge v-for="(tag, tag_index) in sentence.tag" :text="tag" :key="tag_index"
+                                          class="flex h-fit w-fit p-1"
+                                    />
+                                </div>
                             </div>
                         </div>
                     </div>
