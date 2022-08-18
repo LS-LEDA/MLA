@@ -33,6 +33,14 @@ function forum_logs_processing(data, file_name) {
         // Count sentiment ocurrences
         forum.sentiments = count_sentiments(processed_msg);
 
+        // Don't apply emotion analysis if the feature is not enabled
+        if (!store.state.settings.general.ai) {
+            // Store processed messages in vuex
+            store.commit('storeForumMessages', forum);
+            // Toggle uploaded file boolean and store file name
+            store.commit('setImportedData', {which: true, file_name: file_name});
+            return;
+        }
         analyze_emotion(processed_msg).then( () => {
             // Store processed messages in vuex
             store.commit('storeForumMessages', forum);
