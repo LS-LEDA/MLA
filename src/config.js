@@ -7,6 +7,7 @@ const schema = {
             gpu: { type: 'boolean' },
             openOnStartup: { type: 'boolean' },
             tray: { type: 'boolean' },
+            ai: { type: 'boolean'},
         },
         default: {
             gpu: true,

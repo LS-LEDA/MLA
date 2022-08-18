@@ -69,6 +69,13 @@ export default {
                     setting: "Minimize to tray",
                     description: "Hitting X will make MLA sit back and relax in your system tray when you close the app.",
                     selected: false
+                },
+                {
+                    id: 'ai',
+                    setting: "Emotion Analysis AI",
+                    description: "Use AI to detect forum messages' emotion.",
+                    beta: true,
+                    selected: false
                 }
             ]
         }
