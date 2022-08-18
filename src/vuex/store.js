@@ -144,6 +144,8 @@ const store = createStore({
                 '--background',
                 '--typography'
             ],
+            emotions_dataset: [],
+            emotions: [],
             // Saves students participation
             students: {},
         }
@@ -249,7 +251,8 @@ const store = createStore({
             // Get user stored settings
             window.ipc.send('read_settings', [
                     'general',
-                    'theme'
+                    'theme',
+                    'ai'
                 ]
             );
         },
@@ -272,7 +275,7 @@ const store = createStore({
 
             // Persist change to mla config
             window.ipc.send('write_settings',
-                settings
+                JSON.stringify(settings)
             );
         },
         /**
@@ -282,6 +285,22 @@ const store = createStore({
          */
         removeIPCListener(state, channel) {
             window.ipc.removeListeners(channel);
+        },
+        /**
+         * Save the emotions list after reading it from the dataset
+         * @param state
+         * @param emotions_list
+         */
+        saveEmotions(state, emotions_list) {
+            state.emotions_dataset = emotions_list;
+        },
+        /**
+         * Save the emotions list
+         * @param state
+         * @param emotions_list
+         */
+        saveEmotionsList(state, emotions_list) {
+            state.emotions = emotions_list;
         }
     }
 });

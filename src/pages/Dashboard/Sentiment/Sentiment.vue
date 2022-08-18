@@ -19,7 +19,10 @@
                                    :class="selected_id === index ? 'brightness-100' : 'brightness-75'"
                                    @click="select_msg(index)"/>
             </div>
-            <SentimentScore class="w-1/2" :score="selected_msg_score"/>
+            <div class="flex flex-col w-1/2 space-y-2">
+                <SentimentScore class="w-full" :score="selected_msg_score"/>
+                <span class="">Emotion Analysis: {{ this.selected_msg_emotion }}</span>
+            </div>
         </div>
     </div>
 </template>
@@ -46,10 +49,12 @@ export default {
             selected_msg_score: "",
             selected_id: 0,
             selected_file_name: "",
+            selected_msg_emotion: ""
         }
     },
     mounted() {
         this.selected_msg_score = this.$store.state.forum.forum_messages[0].sentiment;
+        this.selected_msg_emotion = this.$store.state.forum.forum_messages[0].emotion;
         this.selected_file_name = this.$store.state.forum_file_name;
     },
     computed: {
@@ -60,6 +65,7 @@ export default {
     methods: {
         select_msg: function(msg_id) {
             this.selected_msg_score = this.$store.state.forum.forum_messages[msg_id].sentiment;
+            this.selected_msg_emotion = this.$store.state.forum.forum_messages[msg_id].emotion;
             this.selected_id = msg_id;
         },
     }
