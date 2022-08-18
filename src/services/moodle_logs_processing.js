@@ -8,7 +8,9 @@ function moodle_logs_processing(data, name){
     let logs = [];
 
     // Get imported logs' course name
-    let course_name = data[0][0][3].substr(
+    // The first log index always contain the course name
+    let first_log_index = data[0].length - 1;
+    let course_name = data[0][first_log_index][3].substr(
         data[0][0][3].indexOf(' ') + 1
     );
 
