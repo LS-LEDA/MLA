@@ -2,7 +2,7 @@
     <h1 class="text-4xl font-extrabold"> Sentiment Analysis </h1>
     <span class="font-bold text-2xl text-gray-500"> Forum messages sentiments </span>
 
-    <div class="flex flex-col w-full h-full mt-5 gap-y-5">
+    <div class="flex flex-col w-full h-full mt-5 gap-y-5 overflow-y-hidden">
         <!-- Sentiment cards -->
         <div class="flex w-full h-52 gap-x-5">
             <SentimentFileCard class="row-span-1"
@@ -12,8 +12,8 @@
             <SentimentOverallCard :sentiments="forum.sentiments"/>
         </div>
 
-        <div class="flex w-full h-full gap-x-5 pb-10">
-            <div class="flex flex-col w-1/2 bg-secondary dark:bg-dark_secondary rounded-xl p-10 overflow-y-scroll overflow-x-hidden gap-y-5
+        <div class="flex w-full h-full gap-x-5 overflow-y-hidden">
+            <div class="flex flex-col w-1/2 h-full bg-secondary dark:bg-dark_secondary rounded-xl p-10 overflow-y-scroll overflow-x-hidden gap-y-2
                         backdrop-filter">
                 <SentimentChatCard v-for="(message, index) in forum.forum_messages" :messages="message" :key="index"
                                    :class="selected_id === index ? 'brightness-100' : 'brightness-75'"
