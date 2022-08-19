@@ -1,6 +1,6 @@
 'use strict'
 
-import { app, protocol, BrowserWindow, webContents, shell, ipcMain, Tray, Menu } from 'electron'
+import { app, protocol, BrowserWindow, webContents, shell, ipcMain, Tray, Menu, nativeImage } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS3_DEVTOOLS } from 'electron-devtools-installer'
 const path = require('path')
@@ -72,7 +72,8 @@ ipcMain.on('read_settings', (event, args) => {
  */
 ipcMain.on('write_settings', (event, args) => {
     try {
-        config.set(args.key, args.value)
+        let setting = JSON.parse(args);
+        config.set(setting.key, setting.value);
         applySettings(args.key, args.value);
     } catch (err) {
         event.reply('write_settings', err);
@@ -153,12 +154,18 @@ async function createWindow() {
     }
 }
 
+// TODO: OS dependant icon
 /**
  * Fired after createWindow
  * Creates MLA's tray with its icon & menu
  */
 function createTray() {
-    tray = new Tray(iconPath);
+    let trayImage = nativeImage.createFromPath(iconPath);
+    trayImage.resize({
+        width: 32,
+        height: 32
+    })
+    tray = new Tray(trayImage);
     const contextMenu = Menu.buildFromTemplate([
         { id: 0, label: 'MLA webpage', click: trayMenuAction },
         { type: 'separator' },

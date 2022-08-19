@@ -7,6 +7,7 @@ const schema = {
             gpu: { type: 'boolean' },
             openOnStartup: { type: 'boolean' },
             tray: { type: 'boolean' },
+            ai: { type: 'boolean'},
         },
         default: {
             gpu: true,
@@ -40,6 +41,24 @@ const schema = {
                     },
                     default: {}
                 }
+            }
+        },
+        default: {}
+    },
+    ai: {
+        type: 'object',
+        properties: {
+            word_reference: {
+                type: 'object',
+                default: {}
+            },
+            emotions: {
+                type: 'array',
+                default: []
+            },
+            all_words: {
+                type: 'array',
+                default: []
             }
         },
         default: {}

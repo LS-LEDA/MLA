@@ -1,10 +1,12 @@
 import {Container} from "@nlpjs/core";
 import {LangEs} from "@nlpjs/lang-es";
 import {LangCa} from "@nlpjs/lang-ca";
+import {LangEn} from "@nlpjs/lang-en";
 import {SentimentAnalyzer} from "@nlpjs/sentiment";
 import Message from "@/services/model/Message";
 import store from "@/vuex/store";
 import {Language} from "@nlpjs/language";
+import {analyze_emotion} from "@/services/ai_processing";
 
 // NLP
 const lng_guesser = new Language();
@@ -30,10 +32,21 @@ function forum_logs_processing(data, file_name) {
         forum.users = count_users(processed_msg);
         // Count sentiment ocurrences
         forum.sentiments = count_sentiments(processed_msg);
-        // Store processed messages in vuex
-        store.commit('storeForumMessages', forum);
-        // Toggle uploaded file boolean and store file name
-        store.commit('setImportedData', {which: true, file_name: file_name});
+
+        // Don't apply emotion analysis if the feature is not enabled
+        if (!store.state.settings.general.ai) {
+            // Store processed messages in vuex
+            store.commit('storeForumMessages', forum);
+            // Toggle uploaded file boolean and store file name
+            store.commit('setImportedData', {which: true, file_name: file_name});
+            return;
+        }
+        analyze_emotion(processed_msg).then( () => {
+            // Store processed messages in vuex
+            store.commit('storeForumMessages', forum);
+            // Toggle uploaded file boolean and store file name
+            store.commit('setImportedData', {which: true, file_name: file_name});
+        });
         // Push to Dashboard > Sentiment
         //router.push('/dashboard/sentimental-analysis')
     })
@@ -56,6 +69,8 @@ async function analyze_sentiment(messages) {
             case 'ca':
                 container.use( LangCa );
                 break;
+            case 'en':
+                container.use( LangEn );
         }
 
         const sentiment = new SentimentAnalyzer({ container });

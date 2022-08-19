@@ -50,6 +50,7 @@ const store = createStore({
             summary: {
                 total_interactions: 0,
                 summary_types: null,
+                week_interactions: null,
             },
             summary_cards: [],
             upload_status: {
@@ -143,6 +144,10 @@ const store = createStore({
                 '--background',
                 '--typography'
             ],
+            emotions_dataset: [],
+            emotions: [],
+            // Saves students participation
+            students: {},
         }
     },
     actions: {
@@ -188,6 +193,14 @@ const store = createStore({
         saveSummaryTypes(state, summary) {
             this.state.summary.total_interactions = summary.total_interactions;
             this.state.summary.summary_types = summary.summary_types;
+        },
+        // Saves students participation computed data
+        saveStudentParticipation(state, {students}) {
+            this.state.students = students;
+        },
+        // Save number of interactions across a week
+        saveWeekInteractions(state, {week_interactions}) {
+            this.state.summary.week_interactions = week_interactions;
         },
         // Store computed logs
         saveLogs(state, logs) {
@@ -238,7 +251,8 @@ const store = createStore({
             // Get user stored settings
             window.ipc.send('read_settings', [
                     'general',
-                    'theme'
+                    'theme',
+                    'ai'
                 ]
             );
         },
@@ -261,7 +275,7 @@ const store = createStore({
 
             // Persist change to mla config
             window.ipc.send('write_settings',
-                settings
+                JSON.stringify(settings)
             );
         },
         /**
@@ -271,6 +285,22 @@ const store = createStore({
          */
         removeIPCListener(state, channel) {
             window.ipc.removeListeners(channel);
+        },
+        /**
+         * Save the emotions list after reading it from the dataset
+         * @param state
+         * @param emotions_list
+         */
+        saveEmotions(state, emotions_list) {
+            state.emotions_dataset = emotions_list;
+        },
+        /**
+         * Save the emotions list
+         * @param state
+         * @param emotions_list
+         */
+        saveEmotionsList(state, emotions_list) {
+            state.emotions = emotions_list;
         }
     }
 });

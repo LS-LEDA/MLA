@@ -1,7 +1,7 @@
 <template>
     <div class="h-full w-96 overflow-y-hidden pb-4">
         <div class="flex flex-col bg-secondary dark:bg-dark_secondary h-full rounded-lg mx-2 my-2">
-            <Item :title="log_name"/>
+            <Item v-if="log_name" :title="log_name"/>
             <Calendar @dateSelect="selectDate" calendarID="1"/>
             <Calendar @dateSelect="selectDate" calendarID="2"/>
         </div>

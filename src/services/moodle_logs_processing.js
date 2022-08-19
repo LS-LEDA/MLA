@@ -1,13 +1,16 @@
-import {summary_processing} from "@/services/Summary/summary-processing";
+import {summary_processing, weekly_interactions_processing} from "@/services/Summary/summary-processing";
 import Log from "@/services/model/Log";
 import store from "@/vuex/store";
+import {student_dedication, student_participation} from "@/services/Students/students-processing";
 //import router from "@/router/router";
 
 function moodle_logs_processing(data, name){
     let logs = [];
 
     // Get imported logs' course name
-    let course_name = data[0][0][3].substr(
+    // The first log index always contain the course name
+    let first_log_index = data[0].length - 1;
+    let course_name = data[0][first_log_index][3].substr(
         data[0][0][3].indexOf(' ') + 1
     );
 
@@ -19,12 +22,27 @@ function moodle_logs_processing(data, name){
     store.commit('saveLogs', logs);
 
     let summary_types = summary_processing(logs);
+    let students = student_participation(logs);
+    // TODO: Improve processing. Maybe create a Student model
+    student_dedication(logs, students);
+    let weekly_interactions = weekly_interactions_processing(logs)
 
     store.commit('saveSummaryTypes', {
             total_interactions: logs.length,
             summary_types: summary_types
         }
     );
+
+    store.commit('saveStudentParticipation', {
+            students: students,
+        }
+    );
+
+    store.commit('saveWeekInteractions', {
+            week_interactions: weekly_interactions,
+        }
+    );
+
     // Set moodle imported data true
     store.commit('setImportedData', {
             which: false,
