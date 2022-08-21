@@ -101,6 +101,10 @@
     ],
     "rules": {}
   },
+  "env": {
+    "VITE_DEV_SERVER_HOST": "127.0.0.1",
+    "VITE_DEV_SERVER_PORT": 8080
+  },
   "browserslist": [
     "> 1%",
     "last 2 versions",
