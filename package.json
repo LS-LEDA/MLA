@@ -36,15 +36,15 @@
   ],
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "electron:serve": "vue-cli-service electron:serve",
+    "serve": "vite serve",
+    "build": "vite build",
+    "lint": "vite lint",
+    "electron:serve": "vite serve",
     "postinstall": "electron-builder install-app-deps",
     "postuninstall": "electron-builder install-app-deps",
-    "build-win": "vue-cli-service electron:build --win --ia32 --x64 --publish=onTagOrDraft",
-    "build-mac": "vue-cli-service electron:build --mac --publish=onTagOrDraft",
-    "build-linux": "vue-cli-service electron:build --linux --publish=onTagOrDraft"
+    "build-win": "vite build && electron-builder --win --ia32 --x64 --publish=onTagOrDraft",
+    "build-mac": "vite build && electron-builder --mac --publish=onTagOrDraft",
+    "build-linux": "vite build && electron-builder --linux --publish=onTagOrDraft"
   },
   "main": "background.js",
   "dependencies": {
