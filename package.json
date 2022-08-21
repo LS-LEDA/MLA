@@ -46,7 +46,7 @@
     "build-mac": "vite build && electron-builder --mac --publish=onTagOrDraft",
     "build-linux": "vite build && electron-builder --linux --publish=onTagOrDraft"
   },
-  "main": "background.js",
+  "main": "dist/electron/main/index.js",
   "dependencies": {
     "@jamescoyle/vue-icon": "^0.1.2",
     "@mdi/js": "^6.3.95",
