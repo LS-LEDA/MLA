@@ -177,7 +177,8 @@ function check_imported_data(to, from) {
 
 const router = createRouter({
     // https://nklayman.github.io/vue-cli-plugin-electron-builder/guide/commonIssues.html#blank-screen-on-builds-but-works-fine-on-serve
-    history: process.env.IS_ELECTRON ? createWebHashHistory() : createWebHistory(),
+    history: import.meta.env.VITE_IS_ELECTRON
+        ? createWebHashHistory() : createWebHistory(),
     routes,
 });
 
