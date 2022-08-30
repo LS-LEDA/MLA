@@ -31,9 +31,9 @@
 </template>
 
 <script>
-import Alert from "@/components/UI/Alert";
-import PopUp from "@/components/UI/PopUp";
-import Documentation from "@/components/UI/Documentation";
+import Alert from "@/components/UI/Alert.vue";
+import PopUp from "@/components/UI/PopUp.vue";
+import Documentation from "@/components/UI/Documentation.vue";
 import {markRaw} from "vue";
 
 export default {

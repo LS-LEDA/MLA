@@ -9,8 +9,8 @@
 </template>
 
 <script>
-import Calendar from "@/components/UI/Calendar";
-import Item from "@/components/UI/Item";
+import Calendar from "@/components/UI/Calendar.vue";
+import Item from "@/components/UI/Item.vue";
 export default {
     name: "InformationPanel",
     components: {

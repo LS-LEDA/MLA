@@ -38,7 +38,7 @@ import SvgIcon from "@jamescoyle/vue-icon";
 import {mdiClose} from "@mdi/js";
 import {Chart, registerables} from "chart.js";
 import summaryCardChartData from "@/assets/summaryCardChartData";
-import Table from "@/components/UI/Table";
+import Table from "@/components/UI/Table.vue";
 import {inject} from "vue";
 
 export default {

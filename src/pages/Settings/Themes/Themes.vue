@@ -54,11 +54,11 @@
 <script>
 
 import {mdiMonitor, mdiPlus, mdiUndo, mdiWeatherNight, mdiWhiteBalanceSunny} from "@mdi/js";
-import ModeSelector from "@/components/Settings/ModeSelector";
-import Theme from "@/components/Settings/Theme";
-import IconButton from "@/components/UI/IconButton";
-import SummaryPreview from "@/components/Settings/Mockups/SummaryPreview";
-import ImportDataPreview from "@/components/Settings/Mockups/ImportDataPreview";
+import ModeSelector from "@/components/Settings/ModeSelector.vue";
+import Theme from "@/components/Settings/Theme.vue";
+import IconButton from "@/components/UI/IconButton.vue";
+import SummaryPreview from "@/components/Settings/Mockups/SummaryPreview.vue";
+import ImportDataPreview from "@/components/Settings/Mockups/ImportDataPreview.vue";
 import {markRaw} from "vue";
 
 export default {

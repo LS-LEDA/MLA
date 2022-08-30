@@ -41,7 +41,7 @@
  */
 import {mdiClose, mdiHelpCircleOutline} from "@mdi/js";
 import SvgIcon from "@jamescoyle/vue-icon";
-import DedicationCard from "@/components/Students/DedicationCard";
+import DedicationCard from "@/components/Students/DedicationCard.vue";
 
 export default {
     name: "StudentDedication",

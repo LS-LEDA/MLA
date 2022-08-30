@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import IconButton from "@/components/UI/IconButton";
+import IconButton from "@/components/UI/IconButton.vue";
 import {mdiFolderOpen} from "@mdi/js";
 export default {
     name: "ImportDataPreview",

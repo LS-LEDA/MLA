@@ -40,8 +40,8 @@
 
 <script>
 import {mdiClose, mdiHelpCircleOutline} from "@mdi/js";
-import ParticipationCard from "@/components/Students/ParticipationCard";
-import StudentDedication from "@/components/Students/StudentDedication";
+import ParticipationCard from "@/components/Students/ParticipationCard.vue";
+import StudentDedication from "@/components/Students/StudentDedication.vue";
 import SvgIcon from "@jamescoyle/vue-icon";
 
 export default {

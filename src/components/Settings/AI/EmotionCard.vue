@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import IconButton from "@/components/UI/IconButton";
+import IconButton from "@/components/UI/IconButton.vue";
 import {mdiClose} from "@mdi/js";
 
 

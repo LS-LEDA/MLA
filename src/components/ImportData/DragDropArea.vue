@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import BrowseFilesButton from "@/components/ImportData/BrowseFilesButton";
+import BrowseFilesButton from "@/components/ImportData/BrowseFilesButton.vue";
 import SvgIcon from '@jamescoyle/vue-icon'
 import { mdiFileUpload, mdiHelpCircleOutline  } from "@mdi/js"
 import { ref } from 'vue'

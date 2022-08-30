@@ -17,8 +17,8 @@
 </template>
 
 <script>
-import DownloadButton from '@/components/NavigationBar/DownloadButton';
-import NavigationHeader from "@/components/NavigationBar/NavigationHeader";
+import DownloadButton from '@/components/NavigationBar/DownloadButton.vue';
+import NavigationHeader from "@/components/NavigationBar/NavigationHeader.vue";
 import {
   mdiCogOutline,
   mdiDatabaseImportOutline,

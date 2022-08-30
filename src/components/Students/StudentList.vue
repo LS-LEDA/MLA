@@ -57,7 +57,7 @@
 </template>
 
 <script>
-import StudentCard from "@/components/Students/StudentCard";
+import StudentCard from "@/components/Students/StudentCard.vue";
 import SvgIcon from "@jamescoyle/vue-icon";
 import {mdiViewGrid, mdiViewSequential} from "@mdi/js";
 export default {
