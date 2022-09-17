@@ -48,8 +48,8 @@ import SvgIcon from "@jamescoyle/vue-icon";
 import {Chart, registerables} from "chart.js";
 import totalInteractionChartData from "@/assets/totalInteractionChartData";
 import zoomPlugin from 'chartjs-plugin-zoom';
-import IconButton from "@/components/UI/IconButton";
-import Table from "@/components/UI/Table";
+import IconButton from "@/components/UI/IconButton.vue";
+import Table from "@/components/UI/Table.vue";
 import {inject} from "vue";
 
 export default {

@@ -31,7 +31,7 @@
 <script>
 import SvgIcon from "@jamescoyle/vue-icon";
 import { mdiClose, mdiFile, mdiUpload } from "@mdi/js";
-import IconButton from "@/components/UI/IconButton";
+import IconButton from "@/components/UI/IconButton.vue";
 
 export default {
     name: "UploadConfirmation",

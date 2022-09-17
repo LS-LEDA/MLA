@@ -18,8 +18,8 @@
 </template>
 
 <script>
-import Checkbox from "@/components/UI/Checkbox";
-import Badge from "@/components/UI/Badge";
+import Checkbox from "@/components/UI/Checkbox.vue";
+import Badge from "@/components/UI/Badge.vue";
 export default {
     name: "General",
     components: {

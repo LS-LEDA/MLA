@@ -13,8 +13,8 @@
 </template>
 
 <script>
-import InteractionCard from "@/components/Summary/InteractionCard";
-import SummaryCard from "@/components/Summary/SummaryCard";
+import InteractionCard from "@/components/Summary/InteractionCard.vue";
+import SummaryCard from "@/components/Summary/SummaryCard.vue";
 import {
     mdiFileDocumentOutline,
     mdiHammerScrewdriver,

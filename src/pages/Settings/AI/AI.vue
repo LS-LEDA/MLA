@@ -90,15 +90,15 @@
 </template>
 
 <script>
-import EmotionCard from "@/components/Settings/AI/EmotionCard";
-import Button from "@/components/UI/Button";
+import EmotionCard from "@/components/Settings/AI/EmotionCard.vue";
+import Button from "@/components/UI/Button.vue";
 import {mdiFileUpload, mdiHelpCircleOutline} from "@mdi/js";
 import {ref} from "vue";
-import BrowseFilesButton from "@/components/ImportData/BrowseFilesButton";
+import BrowseFilesButton from "@/components/ImportData/BrowseFilesButton.vue";
 import {load_emotions, load_model, train_ai} from "@/services/ai_processing";
-import Badge from "@/components/UI/Badge";
+import Badge from "@/components/UI/Badge.vue";
 import SvgIcon from "@jamescoyle/vue-icon";
-import AITraning from '@/documentation/settings-ai-training.md';
+import {html} from '@/documentation/settings-ai-training.md';
 
 export default {
     name: "AI",
@@ -231,7 +231,7 @@ export default {
             model_file: null,
             weights_file: null,
             show_docs: false,
-            docs_file: AITraning
+            docs_file: html
         }
     }
 }

@@ -29,10 +29,10 @@
 
 <script>
 /* eslint-disable */
-import SentimentChatCard from "@/components/Sentiment/SentimentChatCard";
-import SentimentScore from "@/components/Sentiment/SentimentScore";
-import SentimentOverallCard from "@/components/Sentiment/SentimentOverallCard";
-import SentimentFileCard from "@/components/Sentiment/SentimentFileCard";
+import SentimentChatCard from "@/components/Sentiment/SentimentChatCard.vue";
+import SentimentScore from "@/components/Sentiment/SentimentScore.vue";
+import SentimentOverallCard from "@/components/Sentiment/SentimentOverallCard.vue";
+import SentimentFileCard from "@/components/Sentiment/SentimentFileCard.vue";
 
 export default {
     name: "Sentiment",

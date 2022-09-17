@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import Checkbox from "@/components/UI/Checkbox";
+import Checkbox from "@/components/UI/Checkbox.vue";
 import SvgIcon from "@jamescoyle/vue-icon";
 
 export default {

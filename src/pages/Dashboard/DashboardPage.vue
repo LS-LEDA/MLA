@@ -29,10 +29,10 @@
 
 <script>
 
-import SummaryPopUp from "@/components/Summary/SummaryPopUp";
-import InformationPanel from "@/components/InformationPanel/InformationPanel";
-import InteractionPopUp from "@/components/Summary/InteractionPopUp";
-import Alert from "@/components/UI/Alert";
+import SummaryPopUp from "@/components/Summary/SummaryPopUp.vue";
+import InformationPanel from "@/components/InformationPanel/InformationPanel.vue";
+import InteractionPopUp from "@/components/Summary/InteractionPopUp.vue";
+import Alert from "@/components/UI/Alert.vue";
 import {provide, ref} from "vue";
 
 export default {
