@@ -12,7 +12,7 @@ export const ROOT_PATH = {
     public: join(__dirname, app.isPackaged ? '../..' : '../../../public'),
 }
 
-const url = `http://${process.env['VITE_DEV_SERVER_HOST']}:${process.env['VITE_DEV_SERVER_PORT']}`
+const url = `http://${process.env['VITE_DEV_SERVER_HOSTNAME']}:${process.env['VITE_DEV_SERVER_PORT']}`
 // MLA application user settings
 const indexHtml = join(ROOT_PATH.dist, 'index.html');
 import config from "/src/config";
