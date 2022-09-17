@@ -70,6 +70,7 @@
     "vuex": "^4.0.2"
   },
   "devDependencies": {
+    "@types/electron": "^1.6.10",
     "@vitejs/plugin-vue": "^3.0.3",
     "autoprefixer": "^10.3.7",
     "electron": "^16.0.8",
