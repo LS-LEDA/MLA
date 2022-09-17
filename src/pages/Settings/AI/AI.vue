@@ -98,7 +98,7 @@ import BrowseFilesButton from "@/components/ImportData/BrowseFilesButton.vue";
 import {load_emotions, load_model, train_ai} from "@/services/ai_processing";
 import Badge from "@/components/UI/Badge.vue";
 import SvgIcon from "@jamescoyle/vue-icon";
-import AITraning from '@/documentation/settings-ai-training.md';
+import {html} from '@/documentation/settings-ai-training.md';
 
 export default {
     name: "AI",
@@ -231,7 +231,7 @@ export default {
             model_file: null,
             weights_file: null,
             show_docs: false,
-            docs_file: AITraning
+            docs_file: html
         }
     }
 }
