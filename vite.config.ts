@@ -3,10 +3,14 @@ import electron from 'vite-plugin-electron';
 import path from 'path';
 import pkg from './package.json';
 import vue from '@vitejs/plugin-vue';
+import Markdown, {Mode} from 'vite-plugin-markdown';
 
 export default defineConfig({
     plugins: [
         vue(),
+        Markdown({
+            mode: [Mode.HTML, Mode.VUE]
+        }),
         electron({
             main: {
                 entry: 'electron/main/index.ts',
