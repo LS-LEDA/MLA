@@ -43,7 +43,7 @@ export default defineConfig({
         extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json'],
     },
     server: {
-        host: pkg.env.VITE_DEV_SERVER_HOST,
+        host: pkg.env.VITE_DEV_SERVER_HOSTNAME,
         port: pkg.env.VITE_DEV_SERVER_PORT,
     },
 })
