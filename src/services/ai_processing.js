@@ -1,5 +1,6 @@
 import store from "@/vuex/store";
 import * as tf from '@tensorflow/tfjs';
+import {useSettingsStore} from "../vuex/settingsStore";
 
 let model = null;
 let allWords = null;
@@ -164,17 +165,18 @@ function trainModel(sentences, vectors, outputs, emotions, allWords, wordReferen
             }, 1000 );*/
             // TODO: Save to the file system within Electron app, Download model if using the browser
             // Store the trained model
+            const settingsStore = useSettingsStore();
             const saveResults = await model.save('downloads://emotion_analysis');
             // Store AI related data to the application configuration file
-            store.commit('setSettings', {
+            settingsStore.setSettings({
                 key: 'ai.word_reference',
                 value: wordReference
             });
-            store.commit('setSettings', {
+            settingsStore.setSettings({
                 key: 'ai.emotions',
                 value: emotions
             });
-            store.commit('setSettings', {
+            settingsStore.setSettings({
                 key: 'ai.all_words',
                 value: allWords
             });

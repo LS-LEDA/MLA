@@ -18,6 +18,8 @@ import Overview from "@/pages/Dashboard/Students/Overview/Overview.vue";
 import List from "@/pages/Dashboard/Students/List/List.vue";
 import SummaryOverview from "@/pages/Dashboard/Summary/SummaryOverview/SummaryOverview.vue";
 import Weekly from "@/pages/Dashboard/Summary/Weekly/Weekly.vue";
+import {useSettingsStore} from "../vuex/settingsStore";
+const settingsStore = useSettingsStore();
 
 const routes = [
     {
@@ -26,10 +28,12 @@ const routes = [
         // Called when first loading the app
         // We need to load user preferences like theming
         beforeEnter:(to, from, next) => {
-            store.dispatch('getUserSettings');
+            settingsStore.getSettings;
             // On receive settings handler
             window.ipc.on('read_settings', (args) => {
-                store.state.settings = args
+                settingsStore.$patch((state) => {
+                    state.settings = args;
+                });
                 next();
             })
         },

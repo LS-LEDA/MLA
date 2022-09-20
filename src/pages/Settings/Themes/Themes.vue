@@ -60,6 +60,7 @@ import IconButton from "@/components/UI/IconButton.vue";
 import SummaryPreview from "@/components/Settings/Mockups/SummaryPreview.vue";
 import ImportDataPreview from "@/components/Settings/Mockups/ImportDataPreview.vue";
 import {markRaw} from "vue";
+import {useSettingsStore} from "../../../vuex/settingsStore";
 
 export default {
     name: "Themes",
@@ -68,6 +69,10 @@ export default {
         IconButton,
         Theme,
         ModeSelector,
+    },
+    setup() {
+        const settingsStore = useSettingsStore();
+        return { settingsStore };
     },
     data() {
         return {
@@ -128,14 +133,14 @@ export default {
             this.selected_mode = selected_id
             switch ( selected_id ) {
                 case 0:
-                    this.$store.commit('setSettings', {
+                    this.settingsStore.setSettings({
                         key: 'theme.mode',
                         value: 'dark'
                     })
                     document.documentElement.classList.add('dark');
                     break;
                 case 1:
-                    this.$store.commit('setSettings', {
+                    this.settingsStore.setSettings({
                         key: 'theme.mode',
                         value: 'light'
                     })
@@ -163,7 +168,7 @@ export default {
                 );
                 document.documentElement.style.setProperty(this.$store.state.colour_properties[index], colour);
             })
-            this.$store.commit('setSettings', {
+            this.settingsStore.setSettings( {
                 key: 'theme.selectedThemeID',
                 value: selected_id
             })
@@ -187,7 +192,7 @@ export default {
             let sections = Object.keys(this.themes_settings)
 
             // Get settings from vuex
-            let sett = this.$store.state.settings
+            let sett = this.settingsStore.settings
 
             // Current sections { 'application_modes', 'themes }
             sections.forEach( (section) => {

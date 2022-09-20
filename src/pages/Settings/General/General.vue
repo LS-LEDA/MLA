@@ -20,23 +20,28 @@
 <script>
 import Checkbox from "@/components/UI/Checkbox.vue";
 import Badge from "@/components/UI/Badge.vue";
+import {useSettingsStore} from "../../../vuex/settingsStore";
 export default {
     name: "General",
     components: {
         Checkbox,
         Badge
     },
+    setup() {
+        const settingsStore = useSettingsStore();
+        return { settingsStore };
+    },
     methods: {
         toggle_setting: function(settingID) {
-            // Update vuex store & settings
-            this.$store.commit('setSettings', {
+            // Update Pinia store & settings
+            this.settingsStore.setSettings({
                 key: 'general' + '.' + settingID,
-                value: !this.$store.state.settings['general'][settingID]
+                value: !this.settingsStore.settings['general'][settingID]
             })
         },
         get_settings: function () {
-            // Get settings from vuex
-            let sett = this.$store.state.settings
+            // Get settings from Pinia
+            let sett = this.settingsStore.settings
             this.general_settings.forEach( (setting) => {
                 setting.selected = sett['general'][setting.id]
             })

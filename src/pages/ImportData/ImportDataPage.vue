@@ -19,9 +19,14 @@ import UploadProgressBar from "@/components/ImportData/UploadProgressBar.vue";
 import InformationPopUp from "@/components/ImportData/InformationPopUp.vue";
 import {local_processing} from "@/services/local-processing.js";
 import Alert from "@/components/UI/Alert.vue";
+import {useSettingsStore} from "../../vuex/settingsStore";
 
 export default {
     name: "ImportDataPage",
+    setup() {
+        const settingsStore = useSettingsStore();
+        return { settingsStore };
+    },
     data() {
         return {
             file_selected: false,
@@ -61,7 +66,7 @@ export default {
         get_settings: function () {
             // Load user selected colour theme
             let colour;
-            let selected_id = this.$store.state.settings['theme']['selectedThemeID']
+            let selected_id = this.settingsStore.settings['theme']['selectedThemeID']
             this.$store.state.themes[selected_id]['colours'].forEach( (col, index) => {
                 colour = col.substring(
                     col.indexOf("[") + 1,
@@ -69,7 +74,7 @@ export default {
                 );
                 document.documentElement.style.setProperty(this.$store.state.colour_properties[index], colour);
             });
-            let app_mode = this.$store.state.settings['theme']['mode']
+            let app_mode = this.settingsStore.settings['theme']['mode']
             switch ( app_mode ) {
                 case 'dark':
                     document.documentElement.classList.add('dark');

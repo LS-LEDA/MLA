@@ -58,10 +58,6 @@ const store = createStore({
                 progress: 0
             },
             /**
-             * Stores MLA user settings
-             */
-            settings: {},
-            /**
              * MLA default themes
              */
             themes: [
@@ -154,10 +150,6 @@ const store = createStore({
         loadProgress(state, time) {
             this.commit('resetProgress');
             this.commit('progressStepCounter', time);
-        },
-        // Async method that retrieves user's MLA Settings
-        getUserSettings() {
-            this.commit('getSettings');
         }
     },
     mutations: {
@@ -245,38 +237,6 @@ const store = createStore({
                 }
             }
             count(time);
-        },
-        // Retrieve MLA user saved settings
-        getSettings() {
-            // Get user stored settings
-            window.ipc.send('read_settings', [
-                    'general',
-                    'theme',
-                    'ai'
-                ]
-            );
-        },
-        /**
-         * Called every time a setting param changes
-         * Persists in runtime vuex store & config store
-         * Electron's main process will handle the changes
-         * @param state
-         * @param settings Object containing the changes of a setting to be made
-         * @example { key: 'general.gpu', value: true }
-         */
-        setSettings(state, settings) {
-            // Update vuex settings
-            // key might be a deep nested property
-            // general.mode
-            // TODO: Automate deeply nested properties
-            console.log(settings)
-            let key = settings.key.split('.')
-            this.state.settings[key[0]][key[1]] = settings.value
-
-            // Persist change to mla config
-            window.ipc.send('write_settings',
-                JSON.stringify(settings)
-            );
         },
         /**
          * Removes IPC handler, called when Settings page is unmounted
