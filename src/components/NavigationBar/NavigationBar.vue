@@ -26,6 +26,7 @@ import {
   mdiViewDashboardOutline
 } from "@mdi/js";
 import SvgIcon from "@jamescoyle/vue-icon";
+import {useSettingsStore} from "@/vuex/settingsStore";
 
 export default {
     name: "NavigationBar",
@@ -34,6 +35,10 @@ export default {
         DownloadButton,
         SvgIcon
     },
+    setup() {
+        const settingsStore = useSettingsStore();
+        return { settingsStore };
+    },
     computed: {
         /**
          * Navigation bar state:
@@ -41,7 +46,7 @@ export default {
          * false: shrank
          */
         nav_state() {
-            return this.$store.state.navigation_bar_status;
+            return this.settingsStore.navigation_bar_status;
         }
     },
     data() {

@@ -4,10 +4,17 @@ interface SettingsStore {
     colour_properties: string[];
     themes: object[];
     settings: object;
+    navigation_bar_status: boolean;
 }
 
 export const useSettingsStore = defineStore('settings', {
     state: (): SettingsStore => ({
+        /**
+         * Navigation bar status
+         * true:    Expanded
+         * false:   Shrank
+         */
+        navigation_bar_status: false,
         /**
          * MLA theme CSS variables
          */
@@ -97,6 +104,10 @@ export const useSettingsStore = defineStore('settings', {
         settings: {},
     }),
     actions: {
+        // Expand or shrink navigation bar
+        changeNavigationBarStatus(){
+            this.navigation_bar_status = !this.navigation_bar_status;
+        },
         /**
          * Called every time a setting param changes
          * Persists in runtime Pinia store & config store

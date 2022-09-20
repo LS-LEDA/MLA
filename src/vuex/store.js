@@ -4,12 +4,6 @@ const store = createStore({
     state() {
         return {
             /**
-             * Navigation bar status
-             * true:    Expanded
-             * false:   Shrank
-             */
-            navigation_bar_status: false,
-            /**
              * This value will determine where the navigation
              * header will redirect to:
              * If there's uploaded data Dashboard page is
@@ -70,10 +64,6 @@ const store = createStore({
         }
     },
     mutations: {
-        // Expand or shrink navigation bar
-        changeNavigationBarStatus(){
-            this.state.navigation_bar_status = !this.state.navigation_bar_status
-        },
         // Call this method if data has been uploaded
         setImportedData(state, {which, file_name, course_name}) {
             // Determine the type of imported file: Moodle logs or Forum logs

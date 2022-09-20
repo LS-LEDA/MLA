@@ -36,15 +36,20 @@
 import SvgIcon from '@jamescoyle/vue-icon'
 import {mdiChevronDoubleLeft} from "@mdi/js";
 import {redirectionAlert} from "@/services/utils/utils";
+import {useSettingsStore} from "@/vuex/settingsStore";
 
 export default {
     name: "NavigationHeader",
     components: {
         SvgIcon,
     },
+    setup() {
+        const settingsStore = useSettingsStore();
+        return { settingsStore };
+    },
     computed: {
         nav_state() {
-            return this.$store.state.navigation_bar_status;
+            return this.settingsStore.navigation_bar_status;
         },
         imported_data() {
             if ( this.$store.state.imported_data.moodle_logs && this.$store.state.imported_data.forum_logs ) {
@@ -70,7 +75,7 @@ export default {
     methods: {
         // Expand or shrink navigation bar
         changeNavigationBarStatus() {
-            this.$store.commit('changeNavigationBarStatus');
+            this.settingsStore.changeNavigationBarStatus();
         },
         logo_hover() {
             if(!this.nav_state) {
