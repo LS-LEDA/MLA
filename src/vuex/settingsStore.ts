@@ -137,6 +137,14 @@ export const useSettingsStore = defineStore('settings', {
                 ]
             );
         },
+        /**
+         * Removes IPC handler, called when Settings page is unmounted
+         * @param state
+         * @param channel The channel listener to be removed
+         */
+        removeIPCListener(channel) {
+            window.ipc.removeListeners(channel);
+        },
     },
     getters: {
     }

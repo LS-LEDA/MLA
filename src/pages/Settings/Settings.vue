@@ -36,6 +36,7 @@ import PopUp from "@/components/UI/PopUp.vue";
 import Documentation from "@/components/UI/Documentation.vue";
 import {markRaw} from "vue";
 import {useAppStore} from "@/vuex/appStore";
+import {useSettingsStore} from "@/vuex/settingsStore";
 
 export default {
     name: "Dashboard",
@@ -45,7 +46,8 @@ export default {
     },
     setup(){
         const appStore = useAppStore();
-        return { appStore };
+        const settingsStore = useSettingsStore();
+        return { appStore, settingsStore };
     },
     mounted() {
         // Handle error if during the storing process crashes
@@ -70,8 +72,8 @@ export default {
         // Destroy IPC listeners, otherwise it
         // will register a new one if it's mounted again
         // The registration of the listener is in the routing
-        this.$store.commit('removeIPCListener', 'read_settings')
-        this.$store.commit('removeIPCListener', 'write_settings')
+        this.settingsStore.removeIPCListener('read_settings');
+        this.settingsStore.removeIPCListener('write_settings');
     },
     computed: {
         alert_status(){
