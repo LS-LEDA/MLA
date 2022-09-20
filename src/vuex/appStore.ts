@@ -10,6 +10,10 @@ interface AppStore {
     logs: [];
     summary: object;
     summary_cards: [];
+    upload_status: object;
+    emotions_dataset: [];
+    emotions: [];
+    students: object;
 }
 
 export const useAppStore = defineStore('app', {
@@ -58,6 +62,14 @@ export const useAppStore = defineStore('app', {
             week_interactions: null,
         },
         summary_cards: [],
+        upload_status: {
+            status: 0,
+            progress: 0
+        },
+        emotions_dataset: [],
+        emotions: [],
+        // Saves students participation
+        students: {},
     }),
     actions: {
         // Set the alert message
@@ -99,6 +111,65 @@ export const useAppStore = defineStore('app', {
         },
         saveSummaryCard( { summaryID, summary }) {
             this.summary_cards[summaryID] = summary;
+        },
+        incrementLoadProgress() {
+            // Reset progress
+            this.upload_status.progress++;
+        },
+        incrementLoadProgressStatus(){
+            this.upload_status.progress = 0;
+            this.upload_status.status++;
+        },
+        resetProgress() {
+            // Store the upload status
+            this.upload_status.status = 0;
+            // Reset progress
+            this.upload_status.progress = 0;
+        },
+        async loadProgress(time) {
+            this.resetProgress();
+            this.progressStepCounter(time);
+        },
+        async progressStepCounter(time) {
+            let counter = 0;
+            let step = time / 100;
+            let count = () => {
+                counter++;
+                // Stop after 100
+                if ( counter <= 100) {
+                    this.incrementLoadProgress();
+                    setTimeout(count, step);
+                } else {
+                    // Base case, 3 steps completed, stop progress bar
+                    if (this.upload_status.status >= 2) {
+                        // Reset all progress bar status
+                        this.resetProgress();
+                        return
+                    }
+                    this.progressStepCounter(3000);
+                    // Once finished advanced to next step
+                    this.incrementLoadProgressStatus();
+                }
+            }
+            count(time);
+        },
+        /**
+         * Save the emotions list after reading it from the dataset
+         * @param emotions_list
+         */
+        saveEmotions(emotions_list) {
+            this.emotions_dataset = emotions_list;
+        },
+        /**
+         * Save the emotions list
+         * @param emotions_list
+         */
+        saveEmotionsList(emotions_list) {
+            this.emotions = emotions_list;
+        },
+        // Saves students participation computed data
+        saveStudentParticipation({students}) {
+            this.students = students;
         },
     }
 });

@@ -1,6 +1,7 @@
 import store from "@/vuex/store";
 import * as tf from '@tensorflow/tfjs';
 import {useSettingsStore} from "@/vuex/settingsStore";
+import {useAppStore} from "@/vuex/appStore";
 
 let model = null;
 let allWords = null;
@@ -12,14 +13,13 @@ let emotions = null;
  * @param file
  */
 function load_emotions(file) {
+    const appStore = useAppStore();
     const file_reader = new FileReader()
 
     // Messages log file
     file_reader.onload = (event) => {
         let emotions_list = JSON.parse(event.target.result);
-
-        console.log(emotions_list);
-        store.commit('saveEmotions', emotions_list)
+        appStore.saveEmotions(emotions_list);
     }
 
     file_reader.readAsText(file);

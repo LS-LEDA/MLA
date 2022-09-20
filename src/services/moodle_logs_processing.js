@@ -34,10 +34,9 @@ function moodle_logs_processing(data, name){
         summary_types: summary_types
     });
 
-    store.commit('saveStudentParticipation', {
-            students: students,
-        }
-    );
+    appStore.saveStudentParticipation({
+        students: students,
+    });
 
     appStore.saveWeekInteractions({
         week_interactions: weekly_interactions,

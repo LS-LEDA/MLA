@@ -43,6 +43,7 @@ import {mdiClose, mdiHelpCircleOutline} from "@mdi/js";
 import ParticipationCard from "@/components/Students/ParticipationCard.vue";
 import StudentDedication from "@/components/Students/StudentDedication.vue";
 import SvgIcon from "@jamescoyle/vue-icon";
+import {useAppStore} from "@/vuex/appStore";
 
 export default {
     name: "Overview",
@@ -51,9 +52,13 @@ export default {
         ParticipationCard,
         StudentDedication
     },
+    setup() {
+        const appStore = useAppStore();
+        return { appStore };
+    },
     computed: {
         students_participation: function () {
-            return this.$store.state.students
+            return this.appStore.students;
         }
     },
     data() {

@@ -37,7 +37,7 @@ function local_processing(file) {
     // Start fake upload progress counting on load file.
     // Start fake data processing
     file_reader.onloadstart = () => {
-        store.dispatch('loadProgress', 2000).then(
+        appStore.loadProgress(2000).then(
             () => {
                 setTimeout( () => {
                     if ( appStore.imported_data.moodle_logs && appStore.imported_data.forum_logs ) {

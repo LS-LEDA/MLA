@@ -75,15 +75,20 @@
 <script>
 import SvgIcon from "@jamescoyle/vue-icon";
 import { mdiCheck } from '@mdi/js';
+import {useAppStore} from "@/vuex/appStore";
 
 export default {
     name: "UploadProgressBar",
     components: {
         SvgIcon
     },
+    setup() {
+        const appStore = useAppStore();
+        return { appStore };
+    },
     computed: {
         progress() {
-            return { status: this.$store.state.upload_status.status, progress: this.$store.state.upload_status.progress };
+            return { status: this.appStore.upload_status.status, progress: this.appStore.upload_status.progress };
         }
     },
     data() {
