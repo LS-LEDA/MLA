@@ -23,6 +23,7 @@ import {Chart, registerables} from "chart.js";
 import SvgIcon from '@jamescoyle/vue-icon';
 import overallSentimentChartData from "@/assets/overallSentimentChartData";
 import {mdiRobotAngryOutline, mdiRobotHappyOutline, mdiRobotOutline} from "@mdi/js";
+import {useAppStore} from "../../vuex/appStore";
 
 export default {
     name: "SentimentOverallCard",
@@ -30,6 +31,10 @@ export default {
         SvgIcon
     },
     props: ['sentiments'],
+    setup() {
+        const appStore = useAppStore();
+        return { appStore };
+    },
     data() {
         return {
             overall_sentiment_data: overallSentimentChartData,
@@ -84,9 +89,9 @@ export default {
     mounted() {
         // Dynamically load computed sentiments
         this.overall_sentiment_data.data.datasets[0].data = [
-            this.$store.state.forum.sentiments.positive,
-            this.$store.state.forum.sentiments.neutral,
-            this.$store.state.forum.sentiments.negative
+            this.appStore.forum.sentiments.positive,
+            this.appStore.forum.sentiments.neutral,
+            this.appStore.forum.sentiments.negative
         ];
         // Create Total Interactions chart once component is mounted
         this.overallSentimentChart('overall_sentiment_chart', this.overall_sentiment_data);

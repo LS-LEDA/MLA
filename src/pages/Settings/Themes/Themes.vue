@@ -60,7 +60,7 @@ import IconButton from "@/components/UI/IconButton.vue";
 import SummaryPreview from "@/components/Settings/Mockups/SummaryPreview.vue";
 import ImportDataPreview from "@/components/Settings/Mockups/ImportDataPreview.vue";
 import {markRaw} from "vue";
-import {useSettingsStore} from "../../../vuex/settingsStore";
+import {useSettingsStore} from "@/vuex/settingsStore";
 
 export default {
     name: "Themes",

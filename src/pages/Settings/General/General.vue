@@ -20,7 +20,7 @@
 <script>
 import Checkbox from "@/components/UI/Checkbox.vue";
 import Badge from "@/components/UI/Badge.vue";
-import {useSettingsStore} from "../../../vuex/settingsStore";
+import {useSettingsStore} from "@/vuex/settingsStore";
 export default {
     name: "General",
     components: {

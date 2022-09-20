@@ -33,6 +33,7 @@ import SentimentChatCard from "@/components/Sentiment/SentimentChatCard.vue";
 import SentimentScore from "@/components/Sentiment/SentimentScore.vue";
 import SentimentOverallCard from "@/components/Sentiment/SentimentOverallCard.vue";
 import SentimentFileCard from "@/components/Sentiment/SentimentFileCard.vue";
+import {useAppStore} from "@/vuex/appStore";
 
 export default {
     name: "Sentiment",
@@ -52,20 +53,24 @@ export default {
             selected_msg_emotion: ""
         }
     },
+    setup() {
+        const appStore = useAppStore();
+        return { appStore };
+    },
     mounted() {
-        this.selected_msg_score = this.$store.state.forum.forum_messages[0].sentiment;
-        this.selected_msg_emotion = this.$store.state.forum.forum_messages[0].emotion;
-        this.selected_file_name = this.$store.state.forum_file_name;
+        this.selected_msg_score = this.appStore.forum.forum_messages[0].sentiment;
+        this.selected_msg_emotion = this.appStore.forum.forum_messages[0].emotion;
+        this.selected_file_name = this.appStore.forum_file_name;
     },
     computed: {
         forum() {
-            return this.$store.state.forum;
+            return this.appStore.forum;
         }
     },
     methods: {
         select_msg: function(msg_id) {
-            this.selected_msg_score = this.$store.state.forum.forum_messages[msg_id].sentiment;
-            this.selected_msg_emotion = this.$store.state.forum.forum_messages[msg_id].emotion;
+            this.selected_msg_score = this.appStore.forum.forum_messages[msg_id].sentiment;
+            this.selected_msg_emotion = this.appStore.forum.forum_messages[msg_id].emotion;
             this.selected_id = msg_id;
         },
     }

@@ -37,6 +37,7 @@ import SvgIcon from '@jamescoyle/vue-icon'
 import {mdiChevronDoubleLeft} from "@mdi/js";
 import {redirectionAlert} from "@/services/utils/utils";
 import {useSettingsStore} from "@/vuex/settingsStore";
+import {useAppStore} from "@/vuex/appStore";
 
 export default {
     name: "NavigationHeader",
@@ -44,23 +45,24 @@ export default {
         SvgIcon,
     },
     setup() {
+        const appStore = useAppStore();
         const settingsStore = useSettingsStore();
-        return { settingsStore };
+        return { appStore, settingsStore };
     },
     computed: {
         nav_state() {
             return this.settingsStore.navigation_bar_status;
         },
         imported_data() {
-            if ( this.$store.state.imported_data.moodle_logs && this.$store.state.imported_data.forum_logs ) {
+            if ( this.appStore.imported_data.moodle_logs && this.appStore.imported_data.forum_logs ) {
                 return '/dashboard/summary';
             }
             // Redirect to Summary tab
-            if ( this.$store.state.imported_data.moodle_logs && !this.$store.state.imported_data.forum_logs ) {
+            if ( this.appStore.imported_data.moodle_logs && !this.appStore.imported_data.forum_logs ) {
                 return '/dashboard/summary';
             }
             // Redirect to Sentiment tab
-            if ( !this.$store.state.imported_data.moodle_logs && this.$store.state.imported_data.forum_logs ) {
+            if ( !this.appStore.imported_data.moodle_logs && this.appStore.imported_data.forum_logs ) {
                 return '/dashboard/sentiment';
             }
             return '/import-data';

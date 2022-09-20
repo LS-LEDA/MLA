@@ -4,32 +4,6 @@ const store = createStore({
     state() {
         return {
             /**
-             * This value will determine where the navigation
-             * header will redirect to:
-             * If there's uploaded data Dashboard page is
-             * rendered, otherwise Import Data page
-             */
-            // TODO: Change description
-            imported_data: {
-                moodle_logs: false,
-                forum_logs: false,
-            },
-            forum_file_name: "",
-            forum_messages: [],
-            /**
-             * Course logs related information
-             */
-            dashboard: {
-                logs_file_name: "",
-                course_name: "",
-            },
-            forum: {
-                forum_messages: [],
-                messages: 0,
-                users: 0,
-                sentiments: {},
-            },
-            /**
              * Alert popup information
              * @param status: toggles alert
              * @param message: message for the alert
@@ -64,22 +38,6 @@ const store = createStore({
         }
     },
     mutations: {
-        // Call this method if data has been uploaded
-        setImportedData(state, {which, file_name, course_name}) {
-            // Determine the type of imported file: Moodle logs or Forum logs
-            if ( !which ) {
-                this.state.imported_data.moodle_logs = true;
-                this.state.dashboard.logs_file_name = file_name;
-                this.state.dashboard.course_name = course_name;
-            } else {
-                this.state.imported_data.forum_logs = true;
-                this.state.forum_file_name = file_name
-            }
-        },
-        // Store the imported forum log
-        storeForumMessages(state, forum) {
-            this.state.forum = forum
-        },
         // Set the alert message
         setAlertMessage(state, message) {
             this.state.alert.message = message;

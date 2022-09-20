@@ -17,9 +17,9 @@ import DragDropArea from "@/components/ImportData/DragDropArea.vue";
 import UploadConfirmation from "@/components/ImportData/UploadConfirmation.vue";
 import UploadProgressBar from "@/components/ImportData/UploadProgressBar.vue";
 import InformationPopUp from "@/components/ImportData/InformationPopUp.vue";
-import {local_processing} from "@/services/local-processing.js";
+import {local_processing} from "@/services/local-processing";
 import Alert from "@/components/UI/Alert.vue";
-import {useSettingsStore} from "../../vuex/settingsStore";
+import {useSettingsStore} from "@/vuex/settingsStore";
 
 export default {
     name: "ImportDataPage",

@@ -2,6 +2,7 @@ import {summary_processing, weekly_interactions_processing} from "@/services/Sum
 import Log from "@/services/model/Log";
 import store from "@/vuex/store";
 import {student_dedication, student_participation} from "@/services/Students/students-processing";
+import {useAppStore} from "../vuex/appStore";
 //import router from "@/router/router";
 
 function moodle_logs_processing(data, name){
@@ -27,6 +28,8 @@ function moodle_logs_processing(data, name){
     student_dedication(logs, students);
     let weekly_interactions = weekly_interactions_processing(logs)
 
+    const appStore = useAppStore();
+
     store.commit('saveSummaryTypes', {
             total_interactions: logs.length,
             summary_types: summary_types
@@ -44,12 +47,11 @@ function moodle_logs_processing(data, name){
     );
 
     // Set moodle imported data true
-    store.commit('setImportedData', {
-            which: false,
-            file_name: name,
-            course_name: course_name
-        }
-    );
+    appStore.setImportedData({
+        which: false,
+        file_name: name,
+        course_name: course_name
+    });
     // Push to Dashboard > Summary
     //router.push('/dashboard/summary');
 }

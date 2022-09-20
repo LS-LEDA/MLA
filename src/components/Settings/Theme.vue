@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import {useSettingsStore} from "../../vuex/settingsStore";
+import {useSettingsStore} from "@/vuex/settingsStore";
 
 export default {
     name: "Theme",
