@@ -1,5 +1,4 @@
 // Local Processing Service
-import store from "@/vuex/store";
 import router from "@/router/router";
 import {moodle_logs_processing} from "@/services/moodle_logs_processing";
 import {forum_logs_processing} from "@/services/forum_logs_processing";

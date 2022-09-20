@@ -1,6 +1,5 @@
 import {summary_processing, weekly_interactions_processing} from "@/services/Summary/summary-processing";
 import Log from "@/services/model/Log";
-import store from "@/vuex/store";
 import {student_dedication, student_participation} from "@/services/Students/students-processing";
 import {useAppStore} from "@/vuex/appStore";
 //import router from "@/router/router";
