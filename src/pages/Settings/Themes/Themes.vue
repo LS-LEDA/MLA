@@ -60,6 +60,7 @@ import IconButton from "@/components/UI/IconButton.vue";
 import SummaryPreview from "@/components/Settings/Mockups/SummaryPreview.vue";
 import ImportDataPreview from "@/components/Settings/Mockups/ImportDataPreview.vue";
 import {markRaw} from "vue";
+import {useSettingsStore} from "@/vuex/settingsStore";
 
 export default {
     name: "Themes",
@@ -68,6 +69,10 @@ export default {
         IconButton,
         Theme,
         ModeSelector,
+    },
+    setup() {
+        const settingsStore = useSettingsStore();
+        return { settingsStore };
     },
     data() {
         return {
@@ -108,7 +113,7 @@ export default {
             return null;
         },
         app_themes: function () {
-            return this.$store.state.themes;
+            return this.settingsStore.themes;
         }
     },
     watch: {
@@ -128,14 +133,14 @@ export default {
             this.selected_mode = selected_id
             switch ( selected_id ) {
                 case 0:
-                    this.$store.commit('setSettings', {
+                    this.settingsStore.setSettings({
                         key: 'theme.mode',
                         value: 'dark'
                     })
                     document.documentElement.classList.add('dark');
                     break;
                 case 1:
-                    this.$store.commit('setSettings', {
+                    this.settingsStore.setSettings({
                         key: 'theme.mode',
                         value: 'light'
                     })
@@ -156,14 +161,14 @@ export default {
             // Dynamically apply the selected theme colours
             // to the root css variables
             let colour;
-            this.$store.state.themes[selected_id]['colours'].forEach( (col, index) => {
+            this.settingsStore.themes[selected_id]['colours'].forEach( (col, index) => {
                 colour = col.substring(
                     col.indexOf("[") + 1,
                     col.lastIndexOf("]")
                 );
-                document.documentElement.style.setProperty(this.$store.state.colour_properties[index], colour);
+                document.documentElement.style.setProperty(this.settingsStore.colour_properties[index], colour);
             })
-            this.$store.commit('setSettings', {
+            this.settingsStore.setSettings( {
                 key: 'theme.selectedThemeID',
                 value: selected_id
             })
@@ -187,7 +192,7 @@ export default {
             let sections = Object.keys(this.themes_settings)
 
             // Get settings from vuex
-            let sett = this.$store.state.settings
+            let sett = this.settingsStore.settings
 
             // Current sections { 'application_modes', 'themes }
             sections.forEach( (section) => {

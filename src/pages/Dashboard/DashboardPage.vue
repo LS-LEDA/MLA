@@ -34,6 +34,7 @@ import InformationPanel from "@/components/InformationPanel/InformationPanel.vue
 import InteractionPopUp from "@/components/Summary/InteractionPopUp.vue";
 import Alert from "@/components/UI/Alert.vue";
 import {provide, ref} from "vue";
+import {useAppStore} from "@/vuex/appStore";
 
 export default {
     name: "DashboardPage",
@@ -46,19 +47,20 @@ export default {
     methods: {
         close_alert: function(){
             // Clears toggle alert timeout if alert is dismissed by the user
-            clearTimeout(this.$store.state.alert.timeout);
-            this.$store.state.alert.status = false;
+            clearTimeout(this.appStore.alert.timeout);
+            this.appStore.alert.status = false;
         }
     },
     computed: {
         alert_status(){
-            return this.$store.state.alert;
+            return this.appStore.alert;
         },
         logs() {
-            return this.$store.state.logs
+            return this.appStore.logs;
         }
     },
     setup() {
+        const appStore = useAppStore();
         let total_popup = ref(false);
         let popup = ref(false);
         let summaryID = ref(0);
@@ -68,6 +70,7 @@ export default {
         provide('summaryID', summaryID);
         provide('card_name', card_name);
         return {
+            appStore,
             total_popup,
             popup,
             summaryID,

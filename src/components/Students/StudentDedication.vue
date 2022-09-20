@@ -42,6 +42,7 @@
 import {mdiClose, mdiHelpCircleOutline} from "@mdi/js";
 import SvgIcon from "@jamescoyle/vue-icon";
 import DedicationCard from "@/components/Students/DedicationCard.vue";
+import {useAppStore} from "@/vuex/appStore";
 
 export default {
     name: "StudentDedication",
@@ -49,9 +50,13 @@ export default {
         DedicationCard,
         SvgIcon
     },
+    setup() {
+        const appStore = useAppStore();
+        return { appStore };
+    },
     computed: {
         students_dedication: function () {
-            return this.$store.state.students;
+            return this.appStore.students;
         }
     },
     data() {

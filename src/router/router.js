@@ -1,5 +1,3 @@
-import store from '@/vuex/store';
-
 import {createRouter, createWebHashHistory, createWebHistory} from 'vue-router';
 import {redirectionAlert} from "@/services/utils/utils";
 import ImportDataPage from "@/pages/ImportData/ImportDataPage.vue";
@@ -18,6 +16,8 @@ import Overview from "@/pages/Dashboard/Students/Overview/Overview.vue";
 import List from "@/pages/Dashboard/Students/List/List.vue";
 import SummaryOverview from "@/pages/Dashboard/Summary/SummaryOverview/SummaryOverview.vue";
 import Weekly from "@/pages/Dashboard/Summary/Weekly/Weekly.vue";
+import {useSettingsStore} from "@/vuex/settingsStore";
+import {useAppStore} from "@/vuex/appStore";
 
 const routes = [
     {
@@ -26,10 +26,13 @@ const routes = [
         // Called when first loading the app
         // We need to load user preferences like theming
         beforeEnter:(to, from, next) => {
-            store.dispatch('getUserSettings');
+            const settingsStore = useSettingsStore();
+            settingsStore.getSettings();
             // On receive settings handler
             window.ipc.on('read_settings', (args) => {
-                store.state.settings = args
+                settingsStore.$patch((state) => {
+                    state.settings = args;
+                });
                 next();
             })
         },
@@ -145,7 +148,8 @@ const routes = [
 ]
 
 function check_imported_forum_data(){
-    if ( !store.state.imported_data.forum_logs ) {
+    const appStore = useAppStore();
+    if ( !appStore.imported_data.forum_logs ) {
         // Show alert
         redirectionAlert("Import Forum log");
         return false;
@@ -153,8 +157,9 @@ function check_imported_forum_data(){
 }
 
 function check_imported_data(to, from) {
+    const appStore = useAppStore();
     // Redirect to Sentiment tab if forum log has been imported
-    if ( !store.state.imported_data.moodle_logs && store.state.imported_data.forum_logs) {
+    if ( !appStore.imported_data.moodle_logs && appStore.imported_data.forum_logs) {
         // Redirect to import data page if "Summary" button is pressed from the Dashboard's Sentiment page
         if ( to.name === 'summary' && from.name === 'sentiment') {
             redirectionAlert("Import Forum log");
@@ -163,11 +168,11 @@ function check_imported_data(to, from) {
         return '/dashboard/sentiment';
     }
     // Redirect to Summary tab if moodle log has been imported
-    if ( store.state.imported_data.moodle_logs && !store.state.imported_data.forum_logs) {
+    if ( appStore.imported_data.moodle_logs && !appStore.imported_data.forum_logs) {
         return true;
     }
     // Redirect to Summary tab if both files have been imported
-    if ( store.state.imported_data.moodle_logs && store.state.imported_data.forum_logs ) {
+    if ( appStore.imported_data.moodle_logs && appStore.imported_data.forum_logs ) {
         return true;
     }
     // Redirect to import data page because there's no data

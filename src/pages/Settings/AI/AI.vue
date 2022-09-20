@@ -99,6 +99,7 @@ import {load_emotions, load_model, train_ai} from "@/services/ai_processing";
 import Badge from "@/components/UI/Badge.vue";
 import SvgIcon from "@jamescoyle/vue-icon";
 import {html} from '@/documentation/settings-ai-training.md';
+import {useAppStore} from "@/vuex/appStore";
 
 export default {
     name: "AI",
@@ -111,16 +112,17 @@ export default {
     },
     emits: ['popUp'],
     setup() {
+        const appStore = useAppStore();
         const active = ref(false)
         const toggleActive = () => {
             active.value = !active.value;
         }
 
-        return { active, toggleActive }
+        return { active, appStore, toggleActive }
     },
     computed: {
         emotions_dataset() {
-            return this.$store.state.emotions_dataset;
+            return this.appStore.emotions_dataset;
         },
         /**
          * Enables or disables "Train AI" button
@@ -177,7 +179,7 @@ export default {
          */
         train_ai: function () {
             // Store the emotions list
-            this.$store.commit('saveEmotionsList', this.emotions);
+            this.appStore.saveEmotionsList(this.emotions);
             train_ai();
         },
         // TODO: Automatic model loading from the file system with tfjs-node

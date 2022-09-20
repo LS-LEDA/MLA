@@ -6,15 +6,20 @@
 <script>
 import * as echarts from 'echarts';
 import weeklyInteractionConfig from "@/assets/weeklyInteractionsMap";
+import {useAppStore} from "@/vuex/appStore";
 
 export default {
     name: "Weekly",
+    setup() {
+        const appStore = useAppStore();
+        return { appStore };
+    },
     mounted() {
         let heatmapDom = document.getElementById('weekly_interactions');
         this.heatmap = echarts.init(heatmapDom);
 
         // Get weekly interactions data and mount the heatmap chart
-        this.week_data.series[0].data = this.$store.state.summary.week_interactions;
+        this.week_data.series[0].data = this.appStore.summary.week_interactions;
         this.heatmap.setOption(this.week_data);
     },
     beforeUnmount() {

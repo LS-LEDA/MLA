@@ -9,11 +9,16 @@
 <script>
 import SvgIcon from '@jamescoyle/vue-icon'
 import { mdiCloudDownload } from "@mdi/js";
+import {useSettingsStore} from "@/vuex/settingsStore";
 
 export default {
     name: "DownloadButton",
     components: {
         SvgIcon
+    },
+    setup() {
+        const settingsStore = useSettingsStore();
+        return { settingsStore };
     },
     computed: {
         /**
@@ -22,7 +27,7 @@ export default {
          * false: shrank
          */
         nav_state() {
-            return this.$store.state.navigation_bar_status;
+            return this.settingsStore.navigation_bar_status;
         }
     },
     data() {

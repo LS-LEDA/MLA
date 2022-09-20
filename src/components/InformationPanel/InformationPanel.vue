@@ -11,11 +11,16 @@
 <script>
 import Calendar from "@/components/UI/Calendar.vue";
 import Item from "@/components/UI/Item.vue";
+import {useAppStore} from "@/vuex/appStore";
 export default {
     name: "InformationPanel",
     components: {
         Item,
         Calendar
+    },
+    setup() {
+        const appStore = useAppStore();
+        return { appStore };
     },
     data() {
         return {
@@ -25,7 +30,7 @@ export default {
     },
     computed: {
         log_name() {
-            return this.$store.state.dashboard.course_name;
+            return this.appStore.dashboard.course_name;
         }
     },
     methods: {

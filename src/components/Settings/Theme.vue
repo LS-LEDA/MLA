@@ -26,13 +26,19 @@
 </template>
 
 <script>
+import {useSettingsStore} from "@/vuex/settingsStore";
+
 export default {
     name: "Theme",
     props: ['theme', 'id', 'selected'],
     emits: ['select_theme'],
+    setup() {
+        const settingsStore = useSettingsStore();
+        return { settingsStore };
+    },
     computed: {
         current_mode: function () {
-            return this.$store.state.settings['theme']['mode'] === 'light'
+            return this.settingsStore.settings['theme']['mode'] === 'light'
         }
     },
     methods: {

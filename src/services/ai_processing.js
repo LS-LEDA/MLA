@@ -1,5 +1,6 @@
-import store from "@/vuex/store";
 import * as tf from '@tensorflow/tfjs';
+import {useSettingsStore} from "@/vuex/settingsStore";
+import {useAppStore} from "@/vuex/appStore";
 
 let model = null;
 let allWords = null;
@@ -11,24 +12,24 @@ let emotions = null;
  * @param file
  */
 function load_emotions(file) {
+    const appStore = useAppStore();
     const file_reader = new FileReader()
 
     // Messages log file
     file_reader.onload = (event) => {
         let emotions_list = JSON.parse(event.target.result);
-
-        console.log(emotions_list);
-        store.commit('saveEmotions', emotions_list)
+        appStore.saveEmotions(emotions_list);
     }
 
     file_reader.readAsText(file);
 }
 
 function train_ai() {
+    const appStore = useAppStore();
     let bow = {};   // Bag of Words: Dictionary used to
 
-    let sentences = store.state.emotions_dataset;
-    emotions = store.state.emotions;
+    let sentences = appStore.emotions_dataset;
+    emotions = appStore.emotions;
 
     // Get the list from the store, transform the input and generate the bag of words
     sentences.forEach( data => {
@@ -164,17 +165,18 @@ function trainModel(sentences, vectors, outputs, emotions, allWords, wordReferen
             }, 1000 );*/
             // TODO: Save to the file system within Electron app, Download model if using the browser
             // Store the trained model
+            const settingsStore = useSettingsStore();
             const saveResults = await model.save('downloads://emotion_analysis');
             // Store AI related data to the application configuration file
-            store.commit('setSettings', {
+            settingsStore.setSettings({
                 key: 'ai.word_reference',
                 value: wordReference
             });
-            store.commit('setSettings', {
+            settingsStore.setSettings({
                 key: 'ai.emotions',
                 value: emotions
             });
-            store.commit('setSettings', {
+            settingsStore.setSettings({
                 key: 'ai.all_words',
                 value: allWords
             });
@@ -194,9 +196,10 @@ function trainModel(sentences, vectors, outputs, emotions, allWords, wordReferen
  * @returns {Promise<void>}
  */
 async function load_model(model_file, weight_file) {
-    allWords = store.state.settings.ai.all_words;
-    wordReference = store.state.settings.ai.word_reference;
-    emotions = store.state.settings.ai.emotions;
+    const settingsStore = useSettingsStore();
+    allWords = settingsStore.settings.ai.all_words;
+    wordReference = settingsStore.settings.ai.word_reference;
+    emotions = settingsStore.settings.ai.emotions;
 
     model = await tf.loadLayersModel(tf.io.browserFiles([model_file, weight_file]));
 }
