@@ -122,7 +122,7 @@ export default {
     },
     computed: {
         emotions_dataset() {
-            return this.$store.state.emotions_dataset;
+            return this.appStore.emotions_dataset;
         },
         /**
          * Enables or disables "Train AI" button
