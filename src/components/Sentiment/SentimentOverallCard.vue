@@ -23,7 +23,7 @@ import {Chart, registerables} from "chart.js";
 import SvgIcon from '@jamescoyle/vue-icon';
 import overallSentimentChartData from "@/assets/overallSentimentChartData";
 import {mdiRobotAngryOutline, mdiRobotHappyOutline, mdiRobotOutline} from "@mdi/js";
-import {useAppStore} from "../../vuex/appStore";
+import {useAppStore} from "@/vuex/appStore";
 
 export default {
     name: "SentimentOverallCard",

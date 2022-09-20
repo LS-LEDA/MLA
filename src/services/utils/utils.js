@@ -1,4 +1,4 @@
-import {useAppStore} from "../../vuex/appStore";
+import {useAppStore} from "@/vuex/appStore";
 
 /**
  * Shows an alert and sets the a timer to

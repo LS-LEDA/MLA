@@ -7,6 +7,9 @@ interface AppStore {
     forum_file_name: string;
     forum_messages: [];
     forum: object;
+    logs: [];
+    summary: object;
+    summary_cards: [];
 }
 
 export const useAppStore = defineStore('app', {
@@ -48,6 +51,13 @@ export const useAppStore = defineStore('app', {
             users: 0,
             sentiments: {},
         },
+        logs: [],
+        summary: {
+            total_interactions: 0,
+            summary_types: null,
+            week_interactions: null,
+        },
+        summary_cards: [],
     }),
     actions: {
         // Set the alert message
@@ -73,6 +83,22 @@ export const useAppStore = defineStore('app', {
         // Store the imported forum log
         storeForumMessages(forum) {
             this.forum = forum
+        },
+        // Store computed logs
+        saveLogs(logs) {
+            this.logs = logs;
+        },
+        // Store computed summary data
+        saveSummaryTypes(summary) {
+            this.summary.total_interactions = summary.total_interactions;
+            this.summary.summary_types = summary.summary_types;
+        },
+        // Save number of interactions across a week
+        saveWeekInteractions({week_interactions}) {
+            this.summary.week_interactions = week_interactions;
+        },
+        saveSummaryCard( { summaryID, summary }) {
+            this.summary_cards[summaryID] = summary;
         },
     }
 });

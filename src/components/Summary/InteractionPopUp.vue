@@ -51,6 +51,7 @@ import zoomPlugin from 'chartjs-plugin-zoom';
 import IconButton from "@/components/UI/IconButton.vue";
 import Table from "@/components/UI/Table.vue";
 import {inject} from "vue";
+import {useAppStore} from "@/vuex/appStore";
 
 export default {
     name: "InteractionPopUp",
@@ -61,8 +62,10 @@ export default {
     },
     props: ['logs'],
     setup() {
+        const appStore = useAppStore();
         let total_popup = inject('total_popup');
         return {
+            appStore,
             total_popup
         }
     },
@@ -87,7 +90,7 @@ export default {
          */
         create_interactions_table: function () {
             let interactions = {};
-            let summary_types = Object.entries(this.$store.state.summary.summary_types);
+            let summary_types = Object.entries(this.appStore.summary.summary_types);
 
             summary_types.forEach( (interaction) => {
                 // interaction[0]: Interaction name e.g - 'Task'

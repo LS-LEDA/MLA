@@ -1,6 +1,6 @@
 import store from "@/vuex/store";
 import * as tf from '@tensorflow/tfjs';
-import {useSettingsStore} from "../vuex/settingsStore";
+import {useSettingsStore} from "@/vuex/settingsStore";
 
 let model = null;
 let allWords = null;

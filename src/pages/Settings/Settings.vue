@@ -35,6 +35,7 @@ import Alert from "@/components/UI/Alert.vue";
 import PopUp from "@/components/UI/PopUp.vue";
 import Documentation from "@/components/UI/Documentation.vue";
 import {markRaw} from "vue";
+import {useAppStore} from "@/vuex/appStore";
 
 export default {
     name: "Dashboard",

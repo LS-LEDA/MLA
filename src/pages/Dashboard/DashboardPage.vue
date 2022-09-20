@@ -34,7 +34,7 @@ import InformationPanel from "@/components/InformationPanel/InformationPanel.vue
 import InteractionPopUp from "@/components/Summary/InteractionPopUp.vue";
 import Alert from "@/components/UI/Alert.vue";
 import {provide, ref} from "vue";
-import {useAppStore} from "../../vuex/appStore";
+import {useAppStore} from "@/vuex/appStore";
 
 export default {
     name: "DashboardPage",
@@ -56,7 +56,7 @@ export default {
             return this.appStore.alert;
         },
         logs() {
-            return this.$store.state.logs
+            return this.appStore.logs;
         }
     },
     setup() {

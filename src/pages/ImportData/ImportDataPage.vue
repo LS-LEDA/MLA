@@ -20,7 +20,7 @@ import InformationPopUp from "@/components/ImportData/InformationPopUp.vue";
 import {local_processing} from "@/services/local-processing";
 import Alert from "@/components/UI/Alert.vue";
 import {useSettingsStore} from "@/vuex/settingsStore";
-import {useAppStore} from "../../vuex/appStore";
+import {useAppStore} from "@/vuex/appStore";
 
 export default {
     name: "ImportDataPage",

@@ -3,13 +3,6 @@ import { createStore } from 'vuex'
 const store = createStore({
     state() {
         return {
-            logs: [],
-            summary: {
-                total_interactions: 0,
-                summary_types: null,
-                week_interactions: null,
-            },
-            summary_cards: [],
             upload_status: {
                 status: 0,
                 progress: 0
@@ -27,25 +20,9 @@ const store = createStore({
         }
     },
     mutations: {
-        // Store computed summary data
-        saveSummaryTypes(state, summary) {
-            this.state.summary.total_interactions = summary.total_interactions;
-            this.state.summary.summary_types = summary.summary_types;
-        },
         // Saves students participation computed data
         saveStudentParticipation(state, {students}) {
             this.state.students = students;
-        },
-        // Save number of interactions across a week
-        saveWeekInteractions(state, {week_interactions}) {
-            this.state.summary.week_interactions = week_interactions;
-        },
-        // Store computed logs
-        saveLogs(state, logs) {
-            this.state.logs = logs;
-        },
-        saveSummaryCard(state, { summaryID, summary }) {
-            this.state.summary_cards[summaryID] = summary;
         },
         incrementLoadProgress() {
             // Reset progress
