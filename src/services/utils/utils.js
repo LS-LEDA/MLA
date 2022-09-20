@@ -1,4 +1,4 @@
-import store from "@/vuex/store";
+import {useAppStore} from "../../vuex/appStore";
 
 /**
  * Shows an alert and sets the a timer to
@@ -7,22 +7,23 @@ import store from "@/vuex/store";
  * to display
  */
 function redirectionAlert(alert_message) {
+    const appStore = useAppStore();
     // Sets alert message
-    store.commit('setAlertMessage', alert_message)
+    appStore.setAlertMessage(alert_message);
 
     // If there's an ongoing timer then reset the timer
     // no need to toggle it because it's already shown,
     // otherwise show the alert
-    if ( store.state.alert.status ) {
-        window.clearTimeout( store.state.alert.timeout );
+    if ( appStore.alert.status ) {
+        window.clearTimeout( appStore.alert.timeout );
     } else {
         // Show alert
-        store.commit('toggleAlert');
+        appStore.toggleAlert();
     }
     // Delayed alert hiding & store timer ID for user manual dismiss
-    store.state.alert.timeout = setTimeout( () => {
+    appStore.alert.timeout = setTimeout( () => {
         // Automatically hide alert after 5s
-        store.commit('toggleAlert')
+        appStore.toggleAlert();
     }, 5000);
 }
 

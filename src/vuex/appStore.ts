@@ -1,6 +1,7 @@
 import {defineStore} from "pinia";
 
 interface AppStore {
+    alert: object;
     imported_data: object;
     dashboard: object;
     forum_file_name: string;
@@ -10,6 +11,17 @@ interface AppStore {
 
 export const useAppStore = defineStore('app', {
     state: (): AppStore => ({
+        /**
+         * Alert popup information
+         * @param status: toggles alert
+         * @param message: message for the alert
+         * @param timeout: timer id for manual dismiss
+         */
+        alert: {
+            status: false,
+            message: "Error: Something went wrong",
+            timeout: 0,
+        },
         /**
          * This value will determine where the navigation
          * header will redirect to:
@@ -38,6 +50,14 @@ export const useAppStore = defineStore('app', {
         },
     }),
     actions: {
+        // Set the alert message
+        setAlertMessage(message) {
+            this.alert.message = message;
+        },
+        // Toggle alert
+        toggleAlert() {
+            this.alert.status = !this.alert.status;
+        },
         // Call this method if data has been uploaded
         setImportedData({which, file_name, course_name}) {
             // Determine the type of imported file: Moodle logs or Forum logs

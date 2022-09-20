@@ -20,12 +20,14 @@ import InformationPopUp from "@/components/ImportData/InformationPopUp.vue";
 import {local_processing} from "@/services/local-processing";
 import Alert from "@/components/UI/Alert.vue";
 import {useSettingsStore} from "@/vuex/settingsStore";
+import {useAppStore} from "../../vuex/appStore";
 
 export default {
     name: "ImportDataPage",
     setup() {
         const settingsStore = useSettingsStore();
-        return { settingsStore };
+        const appStore = useAppStore();
+        return { appStore, settingsStore };
     },
     data() {
         return {
@@ -47,7 +49,7 @@ export default {
     },
     computed: {
         alert_status(){
-            return this.$store.state.alert;
+            return this.appStore.alert;
         },
         load_theme: function () {
             this.get_settings();
@@ -122,8 +124,8 @@ export default {
         },
         close_alert: function(){
             // Clears toggle alert timeout if alert is dismissed by the user
-            clearTimeout(this.$store.state.alert.timeout);
-            this.$store.state.alert.status = false;
+            clearTimeout(this.appStore.alert.timeout);
+            this.appStore.alert.status = false;
         }
     }
 }

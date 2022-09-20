@@ -3,17 +3,6 @@ import { createStore } from 'vuex'
 const store = createStore({
     state() {
         return {
-            /**
-             * Alert popup information
-             * @param status: toggles alert
-             * @param message: message for the alert
-             * @param timeout: timer id for manual dismiss
-             */
-            alert: {
-                status: false,
-                message: "Error: Something went wrong",
-                timeout: 0,
-            },
             logs: [],
             summary: {
                 total_interactions: 0,
@@ -38,14 +27,6 @@ const store = createStore({
         }
     },
     mutations: {
-        // Set the alert message
-        setAlertMessage(state, message) {
-            this.state.alert.message = message;
-        },
-        // Toggle alert
-        toggleAlert() {
-            this.state.alert.status = !this.state.alert.status;
-        },
         // Store computed summary data
         saveSummaryTypes(state, summary) {
             this.state.summary.total_interactions = summary.total_interactions;
