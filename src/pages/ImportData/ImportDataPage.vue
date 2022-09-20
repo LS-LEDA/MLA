@@ -67,7 +67,7 @@ export default {
             // Load user selected colour theme
             let colour;
             let selected_id = this.settingsStore.settings['theme']['selectedThemeID']
-            this.$store.state.themes[selected_id]['colours'].forEach( (col, index) => {
+            this.settingsStore.themes[selected_id]['colours'].forEach( (col, index) => {
                 colour = col.substring(
                     col.indexOf("[") + 1,
                     col.lastIndexOf("]")

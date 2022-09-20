@@ -113,7 +113,7 @@ export default {
             return null;
         },
         app_themes: function () {
-            return this.$store.state.themes;
+            return this.settingsStore.themes;
         }
     },
     watch: {
@@ -161,7 +161,7 @@ export default {
             // Dynamically apply the selected theme colours
             // to the root css variables
             let colour;
-            this.$store.state.themes[selected_id]['colours'].forEach( (col, index) => {
+            this.settingsStore.themes[selected_id]['colours'].forEach( (col, index) => {
                 colour = col.substring(
                     col.indexOf("[") + 1,
                     col.lastIndexOf("]")
