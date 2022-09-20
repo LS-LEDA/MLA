@@ -57,17 +57,6 @@ const store = createStore({
                 status: 0,
                 progress: 0
             },
-            /**
-             * MLA theme CSS variables
-             */
-            colour_properties: [
-                '--primary',
-                '--primary_variant',
-                '--secondary',
-                '--secondary_variant',
-                '--background',
-                '--typography'
-            ],
             emotions_dataset: [],
             emotions: [],
             // Saves students participation

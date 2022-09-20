@@ -72,7 +72,7 @@ export default {
                     col.indexOf("[") + 1,
                     col.lastIndexOf("]")
                 );
-                document.documentElement.style.setProperty(this.$store.state.colour_properties[index], colour);
+                document.documentElement.style.setProperty(this.settingsStore.colour_properties[index], colour);
             });
             let app_mode = this.settingsStore.settings['theme']['mode']
             switch ( app_mode ) {

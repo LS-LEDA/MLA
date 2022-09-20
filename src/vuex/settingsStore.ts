@@ -1,12 +1,24 @@
 import {defineStore} from "pinia";
 
 interface SettingsStore {
+    colour_properties: string[];
     themes: object[];
     settings: object;
 }
 
 export const useSettingsStore = defineStore('settings', {
     state: (): SettingsStore => ({
+        /**
+         * MLA theme CSS variables
+         */
+        colour_properties: [
+            '--primary',
+            '--primary_variant',
+            '--secondary',
+            '--secondary_variant',
+            '--background',
+            '--typography'
+        ],
         /**
          * MLA default themes
          */
