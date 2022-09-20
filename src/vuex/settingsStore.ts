@@ -127,8 +127,6 @@ export const useSettingsStore = defineStore('settings', {
                 JSON.stringify(settings)
             );
         },
-    },
-    getters: {
         // Retrieve user's saved MLA settings
         async getSettings() {
             // Get user stored settings
@@ -139,5 +137,7 @@ export const useSettingsStore = defineStore('settings', {
                 ]
             );
         },
+    },
+    getters: {
     }
 });
