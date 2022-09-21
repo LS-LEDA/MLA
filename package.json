@@ -67,6 +67,7 @@
     "v8-compile-cache": "^2.3.0",
     "vite-plugin-markdown": "^2.1.0",
     "vue": "^3.2.37",
+    "vue-i18n": "^9.2.2",
     "vue-router": "^4.0.12"
   },
   "devDependencies": {
