@@ -58,7 +58,7 @@ export default {
                     page_link: '/import-data'
                 },
                 {
-                    button_name: "navigation.dashboard",
+                    button_name: "navigation.dashboard.dash",
                     button_icon: mdiViewDashboardOutline,
                     page_link: '/dashboard'
                 },
