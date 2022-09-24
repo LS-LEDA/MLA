@@ -5,11 +5,12 @@
         @click="this.$parent.$refs.moodle_file.click()">
         <svg-icon
             type="mdi" :path="open_folder_icon"></svg-icon>
-        <span class="ml-3">Browse Files</span>
+        <span class="ml-3">{{$t("import_page.drag_drop.browse")}}</span>
     </button>
 </template>
 
 <script>
+// TODO: Unify BrowseFilesButton & Button to IconButton
 import SvgIcon from '@jamescoyle/vue-icon'
 import { mdiFolderOpen } from '@mdi/js'
 
