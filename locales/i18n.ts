@@ -7,17 +7,6 @@ const messages: LocaleMessageType<any> = {
     'Español': esES,
     'Català': caES,
     'English (UK)': enGB,
-    'A': enGB,
-    'B': enGB,
-    'C': enGB,
-    'D': enGB,
-    'E': enGB,
-    'F': enGB,
-    'G': enGB,
-    'H': enGB,
-    'i': enGB,
-    'j': enGB,
-    'k': enGB,
 };
 
 // i18n module configuration (https://vue-i18n.intlify.dev/)
