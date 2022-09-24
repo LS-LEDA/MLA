@@ -91,7 +91,7 @@ export default {
         lang_list: function() {
             let availableLocales = this.$i18n.availableLocales;
             return [...availableLocales].filter( lang => {
-                return lang.includes(this.search_lang)
+                return lang.toUpperCase().includes(this.search_lang.toUpperCase())
             } )
         }
     },
