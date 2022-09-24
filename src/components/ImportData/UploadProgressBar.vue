@@ -53,19 +53,19 @@
 
             <div class="flex text-lg content-center text-center">
                 <div class="w-1/4">
-                    Uploading file
+                    {{$t("import_page.progress_bar.step1")}}
                 </div>
 
                 <div class="w-1/4">
-                    Data Processing
+                    {{$t("import_page.progress_bar.step2")}}
                 </div>
 
                 <div class="w-1/4">
-                    Generating Overview
+                    {{$t("import_page.progress_bar.step3")}}
                 </div>
 
                 <div class="w-1/4">
-                    Finish
+                    {{$t("import_page.progress_bar.step4")}}
                 </div>
             </div>
         </div>
