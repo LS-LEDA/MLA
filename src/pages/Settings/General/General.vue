@@ -4,19 +4,19 @@
             <div class="flex justify-between">
                 <div class="flex h-6 space-x-2">
                     <span class="font-bold">
-                        {{ setting.setting }}
+                        {{ $t(setting.setting) }}
                     </span>
                     <Badge v-if="setting.beta" class="bg-amber-100 text-amber-800 text-sm font-medium dark:bg-amber-200 dark:text-amber-800" text="beta"/>
                 </div>
                 <Checkbox :selected="setting.selected" @click="toggle_setting(setting.id)"/>
             </div>
             <p class="flex pr-20">
-                {{ setting.description }}
+                {{ $t(setting.description) }}
             </p>
         </div>
         <div class="ml-0.5 flex flex-col">
             <span class="font-bold py-5">
-                Language
+                {{ $t("settings.general.set_lang") }}
             </span>
             <IconButton
                 :type="this.$i18n.locale"
@@ -111,26 +111,26 @@ export default {
             general_settings: [
                 {
                     id: 'gpu',
-                    setting: "Hardware Acceleration",
-                    description: "Turn on Hardware Acceleration, which uses GPU to make MLA smoother. Turn it off if you are experiencing frame drops.",
+                    setting: "settings.general.set_gpu.title",
+                    description: "settings.general.set_gpu.description",
                     selected: false
                 },
                 {
                     id: 'openOnStartup',
-                    setting: "Open MLA",
-                    description: "Save yourself a few clicks and let MLA greet you on computer startup.",
+                    setting: "settings.general.set_startup.title",
+                    description: "settings.general.set_startup.description",
                     selected: false
                 },
                 {
                     id: 'tray',
-                    setting: "Minimize to tray",
-                    description: "Hitting X will make MLA sit back and relax in your system tray when you close the app.",
+                    setting: "settings.general.set_tray.title",
+                    description: "settings.general.set_tray.description",
                     selected: false
                 },
                 {
                     id: 'ai',
-                    setting: "Emotion Analysis AI",
-                    description: "Use AI to detect forum messages' emotion.",
+                    setting: "settings.general.set_ai.title",
+                    description: "settings.general.set_ai.description",
                     beta: true,
                     selected: false
                 }
