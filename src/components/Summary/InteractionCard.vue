@@ -6,7 +6,7 @@
     >
         <!-- Card Information -->
         <div class="flex flex-col w-full text-center lg:text-left lg:w-5/12 justify-self-center self-center space-y-3">
-            <span class="text-4xl lg:text-5xl"> Total of Interactions </span>
+            <span class="text-4xl lg:text-5xl"> {{$t("dashboard.summary.total_interactions.title")}} </span>
             <span class="text-6xl font-bold"> {{ summary.total_interactions.toLocaleString() }} </span>
         </div>
         <!-- Card graphics -->
