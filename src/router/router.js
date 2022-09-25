@@ -18,6 +18,7 @@ import SummaryOverview from "@/pages/Dashboard/Summary/SummaryOverview/SummaryOv
 import Weekly from "@/pages/Dashboard/Summary/Weekly/Weekly.vue";
 import {useSettingsStore} from "@/vuex/settingsStore";
 import {useAppStore} from "@/vuex/appStore";
+import {i18n} from "../../locales/i18n";
 
 const routes = [
     {
@@ -151,7 +152,7 @@ function check_imported_forum_data(){
     const appStore = useAppStore();
     if ( !appStore.imported_data.forum_logs ) {
         // Show alert
-        redirectionAlert("Import Forum log");
+        redirectionAlert(i18n.global.t("errors.impot_forum_needed"));
         return false;
     }
 }
@@ -162,7 +163,7 @@ function check_imported_data(to, from) {
     if ( !appStore.imported_data.moodle_logs && appStore.imported_data.forum_logs) {
         // Redirect to import data page if "Summary" button is pressed from the Dashboard's Sentiment page
         if ( to.name === 'summary' && from.name === 'sentiment') {
-            redirectionAlert("Import Forum log");
+            redirectionAlert(i18n.global.t("errors.import_forum_needed"));
             return false;
         }
         return '/dashboard/sentiment';
@@ -176,7 +177,7 @@ function check_imported_data(to, from) {
         return true;
     }
     // Redirect to import data page because there's no data
-    redirectionAlert("Import Moodle and/or Forum logs");
+    redirectionAlert(i18n.global.t("errors.import_needed"));
     return '/import-data';
 }
 

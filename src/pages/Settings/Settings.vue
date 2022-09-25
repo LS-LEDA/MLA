@@ -54,7 +54,7 @@ export default {
         window.ipc.on('write_settings', (err) => {
             // TODO: Error logging
             console.log(err)
-            this.$store.commit('setAlertMessage', "Somethings went wrong! Try to restart MLA")
+            this.appStore.setAlertMessage(this.$t("errors.smth_wrong"));
             if ( this.appStore.alert.status ) {
                 window.clearTimeout( this.appStore.alert.timeout );
             } else {
