@@ -1,7 +1,7 @@
 <template>
     <section id="settings" class="relative flex flex-col w-full h-full">
         <div class="flex flex-col w-full h-full p-5 py-10">
-            <h1 class="text-4xl font-extrabold pb-5">{{ $t("navigation.settings") }}</h1>
+            <h1 class="text-4xl font-extrabold pb-5">{{ $t("navigation.settings.sett") }}</h1>
             <div class="flex flex-col w-full h-full bg-secondary dark:bg-dark_secondary rounded-2xl p-5 overflow-y-hidden">
                 <!-- Tabs buttons -->
                 <div class="grid grid-cols-2 gap-2 lg:flex lg:flex-row pb-5">
@@ -10,7 +10,7 @@
                                  :to="tab.tab_path"
                                  v-for="(tab, index) in tabs"
                                  :key="index">
-                        {{ tab.tab_name }}
+                        {{ $t(tab.tab_name) }}
                     </router-link>
                 </div>
                 <!-- Dashboard deeply nested component view -->
@@ -102,19 +102,19 @@ export default {
         return {
             tabs: [
                 {
-                    tab_name: "General",
+                    tab_name: "navigation.settings.general",
                     tab_path: "/settings/general"
                 },
                 {
-                    tab_name: "AI",
+                    tab_name: "navigation.settings.ai",
                     tab_path: "/settings/ai"
                 },
                 {
-                    tab_name: "Themes",
+                    tab_name: "navigation.settings.themes",
                     tab_path: "/settings/themes"
                 },
                 {
-                    tab_name: "About",
+                    tab_name: "navigation.settings.about",
                     tab_path: "/settings/about"
                 }
             ],

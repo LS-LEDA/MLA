@@ -68,7 +68,7 @@ export default {
                     page_link: '/plugins'
                 },
                 {
-                    button_name: "navigation.settings",
+                    button_name: "navigation.settings.sett",
                     button_icon: mdiCogOutline,
                     page_link: '/settings'
                 }
