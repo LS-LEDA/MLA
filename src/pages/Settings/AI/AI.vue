@@ -3,18 +3,18 @@
         <div class="flex w-full justify-between">
             <div class="flex items-center space-x-2">
                 <span class="text-2xl font-bold">
-                    Emotion detection with AI
+                    {{ $t("settings.ai.title") }}
                 </span>
                 <Badge class="bg-amber-100 text-amber-800 text-sm font-medium dark:bg-amber-200 dark:text-amber-800" text="beta"/>
                 <SvgIcon type="mdi" :path="information_icon" @click="show_documentation"/>
             </div>
             <div class="flex space-x-2">
                 <div class="flex w-auto h-4">
-                    <Button text="Train AI" @btnClick="train_ai" :disable="check_loaded_data"/>
+                    <Button :text="$t('settings.ai.train_ai')" @btnClick="train_ai" :disable="check_loaded_data"/>
                 </div>
                 <div class="flex w-auto h-4">
                     <input type="file" ref="model_file" class="hidden" @change="load_model" multiple>
-                    <Button text="Load Model & Weights" @btnClick="this.$refs.model_file.click()"/>
+                    <Button :text="$t('settings.ai.load_model_weights')" @btnClick="this.$refs.model_file.click()"/>
                 </div>
             </div>
         </div>
@@ -24,7 +24,7 @@
                 <!-- TODO: Add a select all checkbox -->
                 <div class="flex flex-col w-full h-3/4">
                     <div class="flex font-bold text-xl">
-                        Emotions List
+                        {{ $t("settings.ai.emotions_list") }}
                     </div>
                     <div class="w-full h-full overflow-y-scroll">
                         <div class="flex flex-col w-full h-96">
@@ -43,7 +43,7 @@
                         border border-solid border-gray-300 rounded transition ease-in-out m-0 border-0
                         focus:text-gray-700 focus:outline-none bg-transparent resize-none"
                         id="emotions_input"
-                        placeholder="Enter emotions here"
+                        :placeholder="this.$t('settings.ai.emotions_list_input')"
                     ></textarea>
                     <Button text="Add" @btnClick="add_emotions"/>
                 </div>
@@ -53,7 +53,7 @@
             <div class="flex flex-col w-2/3 h-full gap-y-5 pl-2">
                 <div class="flex flex-col w-full h-3/4">
                     <div class="flex font-bold text-xl">
-                        Datasets data
+                        {{ $t("settings.ai.datasets_data") }}
                     </div>
                     <div class="flex flex-col w-full h-full overflow-y-scroll">
                         <div class="flex flex-col w-full h-96 space-y-2">
@@ -79,7 +79,7 @@
                          @drop.prevent="select_file"
                          :class=" {'bg-primary dark:bg-dark_primary transition-all duration-300' :active }">
                         <input type="file" ref="moodle_file" class="hidden" @change="select_file">
-                        <span class="font-bold text-center text-2xl"> Drag & Drop file here </span>
+                        <span class="font-bold text-center text-2xl"> {{$tc("app.drag_drop.drag_drop", 2)}} </span>
                         <span class="text-center text-xl"> or </span>
                         <BrowseFilesButton class="w-max" :class="{'bg-secondary dark:bg-dark_secondary transition-all duration-300' :active }"/>
                     </div>

@@ -9,7 +9,7 @@
                                  :to="tab.tab_path"
                                  v-for="(tab, index) in tabs"
                                  :key="index">
-                            {{ tab.tab_name }}
+                            {{ $t(tab.tab_name) }}
                     </router-link>
                 </div>
                 <!-- Dashboard deeply nested component view -->
@@ -81,19 +81,19 @@ export default {
         return {
             tabs: [
                 {
-                    tab_name: "Summary",
+                    tab_name: "navigation.dashboard.summary",
                     tab_path: "/dashboard/summary"
                 },
                 {
-                    tab_name: "Students",
+                    tab_name: "navigation.dashboard.students",
                     tab_path: "/dashboard/students"
                 },
                 {
-                    tab_name: "Resources",
+                    tab_name: "navigation.dashboard.resources",
                     tab_path: "/dashboard/resources"
                 },
                 {
-                    tab_name: "Sentiment",
+                    tab_name: "navigation.dashboard.sentiment",
                     tab_path: "/dashboard/sentiment"
                 },
             ],

@@ -6,7 +6,7 @@
                          :class="logo_hovered ? 'invisible' : null"
                          @mouseover="logo_hover"
                          @mouseleave="logo_not_hover"
-                         @click="redirectionAlert('Import Moodle and/or Forum logs')">
+                         @click="redirectionAlert(this.$t('errors.import_needed'))">
                 <img class="max-h-16 rounded-lg origin-center transform transition duration-500"
                      src="/assets/mla_logo.png" alt="MLA Logo">
             </router-link>
@@ -15,7 +15,7 @@
         <!--<transition name="fade">-->
         <div class="flex-1 mx-4 font-bold text-2xl self-center hover:cursor-pointer" v-if="nav_state">
             <router-link :to="imported_data"
-                         @click="redirectionAlert('Import Moodle and/or Forum logs')">
+                         @click="redirectionAlert(this.$t('errors.import_needed'))">
                 <h1>MLA</h1>
             </router-link>
         </div>

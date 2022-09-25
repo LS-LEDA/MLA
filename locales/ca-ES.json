@@ -1,0 +1,117 @@
+{
+  "app": {
+    "cancel": "Cancel·lar",
+    "upload": "Penjar",
+    "drag_drop": {
+      "drag_drop": "Arrastra & Deixa arxiu aquí | Arrastra & Deixa arxius aquí",
+      "or": "o",
+      "browse": "Explorar fitxers"
+    }
+  },
+  "navigation": {
+    "import": "Importar",
+    "dashboard": {
+      "dash": "Pantalla Principal",
+      "summary": "Sumari",
+      "students": "Alumnes",
+      "resources": "Recursos",
+      "sentiment": "Sentiment"
+    },
+    "plugins": "Complements",
+    "settings": {
+      "sett": "Configuració",
+      "general": "General",
+      "ai": "IA",
+      "themes": "Temes",
+      "about": "Sobre"
+    },
+    "download": "Descarregar"
+  },
+  "import_page": {
+    "progress_bar": {
+      "step1": "Penjant fitxer",
+      "step2": "Processant dades",
+      "step3": "Generant Informe",
+      "step4": "Acabat"
+    }
+  },
+  "dashboard": {
+    "summary": {
+      "title": "Sumari de totes les interaccions del curs",
+      "tabs": {
+        "1": "Informació sobre el nombre d'interaccions",
+        "2": "Interaccions en un període d'una setmana"
+      },
+      "total_interactions": {
+        "title":  "Interaccions Totals",
+        "interaction_type": "Tipus d'interaccions",
+        "number_of_interactions": "Nombre d'interaccions"
+      }
+    },
+    "students": {
+      "title": "Dades dels alumnes",
+      "tabs": {
+        "1": "Informació sobre les interaccions dels alumnes",
+        "2": "Llista d'alumnes"
+      },
+      "tables": {
+        "student_participation": "Participació de l'alumne",
+        "student_participation_info": "Nombre total d'interaccions entre cada alumne i els recursos del curs (inclou la visualització del curs).",
+        "student_dedication": "Dedicació de l'alumne",
+        "student_dedication_info": "Temps total que cada membre ha dedicat al curs."
+      },
+      "misc": {
+        "student_name": "Nom de l'alumne"
+      }
+    }
+  },
+  "settings": {
+    "general": {
+      "set_gpu": {
+        "title": "Acceleració per Hardware",
+        "description": "Activa l'Acceleració per Hardware, que utilitza la GPU per fer que MLA sigui més fluït. Desactiveu-lo si experimenteu caigudes de fotogrames."
+      },
+      "set_startup": {
+        "title": "Obrir MLA",
+        "description": "Estalvieu-vos uns quants clics i deixeu que MLA us saludi al encendre l'ordinador."
+      },
+      "set_tray": {
+        "title": "Minimitzar a la safata",
+        "description": "Prémer X farà que MLA es minimitzi i resti a la safata del sistema quan tanqueu l'aplicació."
+      },
+      "set_ai": {
+        "title": "Anàlisi d'emocions IA",
+        "description": "Utilitzeu la IA per detectar l'emoció dels missatges del fòrum."
+      },
+      "set_lang": "Llenguatge"
+    },
+    "ai": {
+      "title": "Detecció d'emoció amb IA",
+      "emotions_list": "Llista d'emocions",
+      "emotions_list_input": "Introduïu les emocions aquí",
+      "datasets_data": "Dades dels datasets",
+      "load_model_weights": "Carregar Model & Pesos",
+      "train_ai": "Entrenar IA"
+    },
+    "themes": {
+      "app_modes": {
+        "dark": "Mode fosc pels mussols nocturns",
+        "light": "Mode lluminós",
+        "sys": "Deixa que el sistema decideixi per tu"
+      },
+      "default_theme": "Tema per defecte",
+      "add": "Afegir",
+      "app_mode": "Mode de l'aplicació",
+      "app_theme": "Tema de l'aplicació"
+    },
+    "about": {
+      "maintainers": "Mantenedors",
+      "contributors": "Col·laboradors"
+    }
+  },
+  "errors": {
+    "smth_wrong": "Alguna cosa ha anat malament! Intenta reiniciar MLA",
+    "import_needed": "Importa registres de Moodle i/o fòrums",
+    "import_forum_needed": "Importa el registre del fòrum"
+  }
+}

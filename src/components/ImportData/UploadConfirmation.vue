@@ -20,8 +20,8 @@
             </div>
             <!-- Upload Confirmation Buttons -->
             <div class="flex flex-row justify-center">
-                <IconButton :icon="cancel_icon" status="true" type="Cancel" @click="$emit('buttonClick', false)"/>
-                <IconButton :icon="upload_icon" :status="alive" type="Upload" @click="$emit('buttonClick', true)"/>
+                <IconButton :icon="cancel_icon" status="true" :type="this.$t('app.cancel')" @click="$emit('buttonClick', false)"/>
+                <IconButton :icon="upload_icon" :status="alive" :type="this.$t('app.upload')" @click="$emit('buttonClick', true)"/>
             </div>
         </div>
         <div class="absolute w-full h-full filter backdrop-blur-sm z-10"></div>

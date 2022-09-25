@@ -26,7 +26,7 @@
         <!-- TODO: Fix full height -->
         <!-- Contributors information -->
         <div class="flex flex-col w-full lg:w-4/6 h-full space-y-2 lg:px-5">
-            <div class="flex font-bold text-2xl self-center"> Contributors </div>
+            <div class="flex font-bold text-2xl self-center"> {{ $t("settings.about.contributors") }} </div>
             <div class="flex w-full h-full sm:grid md:grid-cols-2 md:auto-rows-min gap-5 overflow-y-scroll">
                 <ContributorBadge v-for="(contributor, id) in contributors"
                                   :key="id"
