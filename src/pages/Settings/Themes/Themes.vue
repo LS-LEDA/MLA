@@ -4,7 +4,7 @@
             <!-- Application Mode settings -->
             <div class="flex flex-col w-full h- space-y-2">
                 <div class="font-bold text-2xl">
-                    Application mode
+                    {{$t("settings.themes.app_mode")}}
                 </div>
                 <ModeSelector v-for="( mode, index ) in themes_settings['application_modes']" :key="index"
                               :selected="selected_mode"
@@ -18,11 +18,11 @@
             <div class="flex flex-col w-full h-full space-y-2">
                 <div class="flex w-full justify-between">
                     <div class="font-bold text-2xl self-center">
-                        Application theme
+                        {{$t("settings.themes.app_theme")}}
                     </div>
                     <div class="flex">
-                        <IconButton :icon="revert_icon" type="Default theme" :status="true" @click="revert_theme"/>
-                        <IconButton :icon="add_icon" type="Add" :status="true" @click="add_theme"/>
+                        <IconButton :icon="revert_icon" :type="this.$t('settings.themes.default_theme')" :status="true" @click="revert_theme"/>
+                        <IconButton :icon="add_icon" :type="this.$t('settings.themes.add')" :status="true" @click="add_theme"/>
                     </div>
                 </div>
 
@@ -90,17 +90,17 @@ export default {
                 application_modes: [
                     {
                         mode: "dark",
-                        description: "Dark mode for night owls",
+                        description: "settings.themes.app_modes.dark",
                         icon: mdiWeatherNight
                     },
                     {
                         mode: "light",
-                        description: "Light mode for daydreamers",
+                        description: "settings.themes.app_modes.light",
                         icon: mdiWhiteBalanceSunny
                     },
                     {
                         mode: "system",
-                        description: "Let the system decide for you",
+                        description: "settings.themes.app_modes.sys",
                         icon: mdiMonitor
                     }
                 ],
