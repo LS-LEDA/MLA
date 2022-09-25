@@ -4,10 +4,15 @@ import path from 'path';
 import pkg from './package.json';
 import vue from '@vitejs/plugin-vue';
 import Markdown, {Mode} from 'vite-plugin-markdown';
+import vueI18n from '@intlify/vite-plugin-vue-i18n';
 
 export default defineConfig({
     plugins: [
         vue(),
+        vueI18n({
+            // https://github.com/intlify/bundle-tools/tree/main/packages/vite-plugin-vue-i18n
+            include: path.join(__dirname, '/locales/**'),
+        }),
         Markdown({
             mode: [Mode.HTML, Mode.VUE]
         }),
