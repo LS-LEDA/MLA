@@ -9,8 +9,8 @@
       <input type="file" ref="moodle_file" class="hidden" @change="select_file">
       <svg-icon class="w-1/4 h-1/4 justify-center"
                 type="mdi" :path="upload_file_icon"></svg-icon>
-      <span class="font-bold text-center text-5xl"> {{$t("import_page.drag_drop.drag_drop")}} </span>
-      <span class="text-center text-4xl"> {{$t("import_page.drag_drop.or")}} </span>
+      <span class="font-bold text-center text-5xl"> {{$t("app.drag_drop.drag_drop")}} </span>
+      <span class="text-center text-4xl"> {{$t("app.drag_drop.or")}} </span>
       <BrowseFilesButton class="w-max" :class="{'bg-secondary dark:bg-dark_secondary transition-all duration-300' :active }"/>
       <div class="flex flex-row w-full h-1/5 justify-end content-end">
         <div class="flex items-end cursor-pointer">
