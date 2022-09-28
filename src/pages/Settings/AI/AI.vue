@@ -79,7 +79,7 @@
                          @drop.prevent="select_file"
                          :class=" {'bg-primary dark:bg-dark_primary transition-all duration-300' :active }">
                         <input type="file" ref="moodle_file" class="hidden" @change="select_file">
-                        <span class="font-bold text-center text-2xl"> {{$tc("app.drag_drop.drag_drop", 2)}} </span>
+                        <span class="font-bold text-center text-2xl"> {{$t("app.drag_drop.drag_drop", 2)}} </span>
                         <span class="text-center text-xl"> or </span>
                         <BrowseFilesButton class="w-max" :class="{'bg-secondary dark:bg-dark_secondary transition-all duration-300' :active }"/>
                     </div>
