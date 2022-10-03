@@ -38,8 +38,9 @@ import SvgIcon from "@jamescoyle/vue-icon";
 import {mdiClose} from "@mdi/js";
 import {Chart, registerables} from "chart.js";
 import summaryCardChartData from "@/assets/summaryCardChartData";
-import Table from "@/components/UI/Table";
+import Table from "@/components/UI/Table.vue";
 import {inject} from "vue";
+import {useAppStore} from "@/vuex/appStore";
 
 export default {
     name: "SummaryPopUp",
@@ -49,8 +50,10 @@ export default {
     },
     props: ['summaryID', 'card_name'],
     setup() {
+        const appStore = useAppStore();
         let popup = inject('popup');
         return {
+            appStore,
             popup
         }
     },
@@ -70,7 +73,7 @@ export default {
     },
     mounted() {
         try {
-            let unsorted_interactions = Object.entries(this.$store.state.summary_cards[this.summaryID]);
+            let unsorted_interactions = Object.entries(this.appStore.summary_cards[this.summaryID]);
             // Sort by interaction value - TimSort
             // Each object ['Interaction Name', 'Interaction Value']
             this.summary_interactions = unsorted_interactions.sort(

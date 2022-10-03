@@ -9,7 +9,7 @@
  * List is the student list component for the Students section
  * Dashboard > Students > Students List
  */
-import StudentList from "@/components/Students/StudentList";
+import StudentList from "@/components/Students/StudentList.vue";
 
 export default {
     name: "List",

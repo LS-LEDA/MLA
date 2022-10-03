@@ -6,7 +6,7 @@
                          :class="logo_hovered ? 'invisible' : null"
                          @mouseover="logo_hover"
                          @mouseleave="logo_not_hover"
-                         @click="redirectionAlert('Import Moodle and/or Forum logs')">
+                         @click="redirectionAlert(this.$t('errors.import_needed'))">
                 <img class="max-h-16 rounded-lg origin-center transform transition duration-500"
                      src="/assets/mla_logo.png" alt="MLA Logo">
             </router-link>
@@ -15,7 +15,7 @@
         <!--<transition name="fade">-->
         <div class="flex-1 mx-4 font-bold text-2xl self-center hover:cursor-pointer" v-if="nav_state">
             <router-link :to="imported_data"
-                         @click="redirectionAlert('Import Moodle and/or Forum logs')">
+                         @click="redirectionAlert(this.$t('errors.import_needed'))">
                 <h1>MLA</h1>
             </router-link>
         </div>
@@ -36,26 +36,33 @@
 import SvgIcon from '@jamescoyle/vue-icon'
 import {mdiChevronDoubleLeft} from "@mdi/js";
 import {redirectionAlert} from "@/services/utils/utils";
+import {useSettingsStore} from "@/vuex/settingsStore";
+import {useAppStore} from "@/vuex/appStore";
 
 export default {
     name: "NavigationHeader",
     components: {
         SvgIcon,
     },
+    setup() {
+        const appStore = useAppStore();
+        const settingsStore = useSettingsStore();
+        return { appStore, settingsStore };
+    },
     computed: {
         nav_state() {
-            return this.$store.state.navigation_bar_status;
+            return this.settingsStore.navigation_bar_status;
         },
         imported_data() {
-            if ( this.$store.state.imported_data.moodle_logs && this.$store.state.imported_data.forum_logs ) {
+            if ( this.appStore.imported_data.moodle_logs && this.appStore.imported_data.forum_logs ) {
                 return '/dashboard/summary';
             }
             // Redirect to Summary tab
-            if ( this.$store.state.imported_data.moodle_logs && !this.$store.state.imported_data.forum_logs ) {
+            if ( this.appStore.imported_data.moodle_logs && !this.appStore.imported_data.forum_logs ) {
                 return '/dashboard/summary';
             }
             // Redirect to Sentiment tab
-            if ( !this.$store.state.imported_data.moodle_logs && this.$store.state.imported_data.forum_logs ) {
+            if ( !this.appStore.imported_data.moodle_logs && this.appStore.imported_data.forum_logs ) {
                 return '/dashboard/sentiment';
             }
             return '/import-data';
@@ -70,7 +77,7 @@ export default {
     methods: {
         // Expand or shrink navigation bar
         changeNavigationBarStatus() {
-            this.$store.commit('changeNavigationBarStatus');
+            this.settingsStore.changeNavigationBarStatus();
         },
         logo_hover() {
             if(!this.nav_state) {

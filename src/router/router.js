@@ -1,23 +1,24 @@
-import store from '@/vuex/store';
-
 import {createRouter, createWebHashHistory, createWebHistory} from 'vue-router';
 import {redirectionAlert} from "@/services/utils/utils";
-import ImportDataPage from "@/pages/ImportData/ImportDataPage";
-import DashboardPage from "@/pages/Dashboard/DashboardPage";
-import Plugins from "@/pages/Plugins/Plugins";
-import Settings from "@/pages/Settings/Settings";
-import Summary from "@/pages/Dashboard/Summary/Summary";
-import Students from "@/pages/Dashboard/Students/Students";
-import Resources from "@/pages/Dashboard/Resources/Resources";
-import Sentimental from "@/pages/Dashboard/Sentiment/Sentiment";
-import General from "@/pages/Settings/General/General";
-import Themes from "@/pages/Settings/Themes/Themes";
-import About from "@/pages/Settings/About/About";
-import AI from "@/pages/Settings/AI/AI";
-import Overview from "@/pages/Dashboard/Students/Overview/Overview";
-import List from "@/pages/Dashboard/Students/List/List";
-import SummaryOverview from "@/pages/Dashboard/Summary/SummaryOverview/SummaryOverview";
-import Weekly from "@/pages/Dashboard/Summary/Weekly/Weekly";
+import ImportDataPage from "@/pages/ImportData/ImportDataPage.vue";
+import DashboardPage from "@/pages/Dashboard/DashboardPage.vue";
+import Plugins from "@/pages/Plugins/Plugins.vue";
+import Settings from "@/pages/Settings/Settings.vue";
+import Summary from "@/pages/Dashboard/Summary/Summary.vue";
+import Students from "@/pages/Dashboard/Students/Students.vue";
+import Resources from "@/pages/Dashboard/Resources/Resources.vue";
+import Sentimental from "@/pages/Dashboard/Sentiment/Sentiment.vue";
+import General from "@/pages/Settings/General/General.vue";
+import Themes from "@/pages/Settings/Themes/Themes.vue";
+import About from "@/pages/Settings/About/About.vue";
+import AI from "@/pages/Settings/AI/AI.vue";
+import Overview from "@/pages/Dashboard/Students/Overview/Overview.vue";
+import List from "@/pages/Dashboard/Students/List/List.vue";
+import SummaryOverview from "@/pages/Dashboard/Summary/SummaryOverview/SummaryOverview.vue";
+import Weekly from "@/pages/Dashboard/Summary/Weekly/Weekly.vue";
+import {useSettingsStore} from "@/vuex/settingsStore";
+import {useAppStore} from "@/vuex/appStore";
+import {i18n} from "../../locales/i18n";
 
 const routes = [
     {
@@ -26,10 +27,13 @@ const routes = [
         // Called when first loading the app
         // We need to load user preferences like theming
         beforeEnter:(to, from, next) => {
-            store.dispatch('getUserSettings');
+            const settingsStore = useSettingsStore();
+            settingsStore.getSettings();
             // On receive settings handler
             window.ipc.on('read_settings', (args) => {
-                store.state.settings = args
+                settingsStore.$patch((state) => {
+                    state.settings = args;
+                });
                 next();
             })
         },
@@ -145,39 +149,42 @@ const routes = [
 ]
 
 function check_imported_forum_data(){
-    if ( !store.state.imported_data.forum_logs ) {
+    const appStore = useAppStore();
+    if ( !appStore.imported_data.forum_logs ) {
         // Show alert
-        redirectionAlert("Import Forum log");
+        redirectionAlert(i18n.global.t("errors.impot_forum_needed"));
         return false;
     }
 }
 
 function check_imported_data(to, from) {
+    const appStore = useAppStore();
     // Redirect to Sentiment tab if forum log has been imported
-    if ( !store.state.imported_data.moodle_logs && store.state.imported_data.forum_logs) {
+    if ( !appStore.imported_data.moodle_logs && appStore.imported_data.forum_logs) {
         // Redirect to import data page if "Summary" button is pressed from the Dashboard's Sentiment page
         if ( to.name === 'summary' && from.name === 'sentiment') {
-            redirectionAlert("Import Forum log");
+            redirectionAlert(i18n.global.t("errors.import_forum_needed"));
             return false;
         }
         return '/dashboard/sentiment';
     }
     // Redirect to Summary tab if moodle log has been imported
-    if ( store.state.imported_data.moodle_logs && !store.state.imported_data.forum_logs) {
+    if ( appStore.imported_data.moodle_logs && !appStore.imported_data.forum_logs) {
         return true;
     }
     // Redirect to Summary tab if both files have been imported
-    if ( store.state.imported_data.moodle_logs && store.state.imported_data.forum_logs ) {
+    if ( appStore.imported_data.moodle_logs && appStore.imported_data.forum_logs ) {
         return true;
     }
     // Redirect to import data page because there's no data
-    redirectionAlert("Import Moodle and/or Forum logs");
+    redirectionAlert(i18n.global.t("errors.import_needed"));
     return '/import-data';
 }
 
 const router = createRouter({
     // https://nklayman.github.io/vue-cli-plugin-electron-builder/guide/commonIssues.html#blank-screen-on-builds-but-works-fine-on-serve
-    history: process.env.IS_ELECTRON ? createWebHashHistory() : createWebHistory(),
+    history: import.meta.env.VITE_IS_ELECTRON
+        ? createWebHashHistory() : createWebHistory(),
     routes,
 });
 

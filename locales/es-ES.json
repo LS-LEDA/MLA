@@ -1,0 +1,117 @@
+{
+  "app": {
+    "cancel": "Cancelar",
+    "upload": "Subir",
+    "drag_drop": {
+      "drag_drop": "Arrastra & Deja archivo aquí | Arrastra & Deja archivos aquí",
+      "or": "o",
+      "browse": "Explorar archivos"
+    }
+  },
+  "navigation": {
+    "import": "Importar",
+    "dashboard": {
+      "dash": "Pantalla Principal",
+      "summary": "Sumario",
+      "students": "Alumnos",
+      "resources": "Recursos",
+      "sentiment": "Sentimiento"
+    },
+    "plugins": "Complementos",
+    "settings": {
+      "sett": "Ajustes",
+      "general": "General",
+      "ai": "IA",
+      "themes": "Temas",
+      "about": "Acerca de"
+    },
+    "download": "Descargar"
+  },
+  "import_page": {
+    "progress_bar": {
+      "step1": "Subiendo archivo",
+      "step2": "Procesando datos",
+      "step3": "Generando Informe",
+      "step4": "Finzalizado"
+    }
+  },
+  "dashboard": {
+    "summary": {
+      "title": "Resumen de todas las interacciones del curso",
+      "tabs": {
+        "1": "Información sobre el número de interacciones",
+        "2": "Interacciones en un lapso de una semana"
+      },
+      "total_interactions": {
+        "title":  "Interacciones Totales",
+        "interaction_type": "Tipos de interacciones",
+        "number_of_interactions": "Número de interacciones"
+      }
+    },
+    "students": {
+      "title": "Datos de los alumnos",
+      "tabs": {
+        "1": "Información sobre las interacciones de los alumnos",
+        "2": "Lista de alumnos"
+      },
+      "tables": {
+        "student_participation": "Participación del alumno",
+        "student_participation_info": "Número total de interacciones entre cada alumno y los recursos del curso (Incluye visualización del curso).",
+        "student_dedication": "Dedicación del alumno",
+          "student_dedication_info": "Tiempo total que cada miembro ha dedicado al curso."
+      },
+      "misc": {
+        "student_name": "Nombre del alumno"
+      }
+    }
+  },
+  "settings": {
+    "general": {
+      "set_gpu": {
+        "title": "Aceleracion por hardware",
+        "description": "Active la Aceleración por Hardware, que usa la GPU para hacer que MLA sea más fluido. Desactívalo si experimenta caídas de fotogramas."
+      },
+      "set_startup": {
+        "title": "Abrir MLA",
+        "description": "Ahórrese unos pocos clics y deje que MLA lo salude al iniciar la computadora."
+      },
+      "set_tray": {
+        "title": "Minimizar a la bandeja",
+        "description": "Presionar X hará que MLA se minimize y reste en la bandeja de su sistema cuando cierre la aplicación."
+      },
+      "set_ai": {
+        "title": "Análisis de emociones IA",
+        "description": "Usa IA para detectar la emoción de los mensajes del foro."
+      },
+      "set_lang": "Idioma"
+    },
+    "ai": {
+      "title": "Detección de emociones con IA",
+      "emotions_list": "Lista de emociones",
+      "emotions_list_input": "Introduzca las emociones aquí",
+      "datasets_data": "Datos de los datasets",
+      "load_model_weights": "Cargar Modelo & Pesos",
+      "train_ai": "Entrenar IA"
+    },
+    "themes": {
+      "app_modes": {
+        "dark": "Modo oscuro para búhos nocturnos",
+        "light": "Modo luminoso",
+        "sys": "Deja que el sistema decida por ti"
+      },
+      "default_theme": "Tema predeterminado",
+      "add": "Añadir",
+      "app_mode": "Modo de la aplicación",
+      "app_theme": "Tema de la aplicación"
+    },
+    "about": {
+      "maintainers": "Mantenedores",
+      "contributors": "Colaboradores"
+    }
+  },
+  "errors": {
+    "smth_wrong": "¡Algo salió mal! Intenta reiniciar MLA",
+    "import_needed": "Importa registros de Moodle y/o foros",
+    "import_forum_needed": "Importa registro del foro"
+  }
+}

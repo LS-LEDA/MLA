@@ -1,7 +1,7 @@
 <template>
     <section id="settings" class="relative flex flex-col w-full h-full">
         <div class="flex flex-col w-full h-full p-5 py-10">
-            <h1 class="text-4xl font-extrabold pb-5"> Settings </h1>
+            <h1 class="text-4xl font-extrabold pb-5">{{ $t("navigation.settings.sett") }}</h1>
             <div class="flex flex-col w-full h-full bg-secondary dark:bg-dark_secondary rounded-2xl p-5 overflow-y-hidden">
                 <!-- Tabs buttons -->
                 <div class="grid grid-cols-2 gap-2 lg:flex lg:flex-row pb-5">
@@ -10,7 +10,7 @@
                                  :to="tab.tab_path"
                                  v-for="(tab, index) in tabs"
                                  :key="index">
-                        {{ tab.tab_name }}
+                        {{ $t(tab.tab_name) }}
                     </router-link>
                 </div>
                 <!-- Dashboard deeply nested component view -->
@@ -31,10 +31,12 @@
 </template>
 
 <script>
-import Alert from "@/components/UI/Alert";
-import PopUp from "@/components/UI/PopUp";
-import Documentation from "@/components/UI/Documentation";
+import Alert from "@/components/UI/Alert.vue";
+import PopUp from "@/components/UI/PopUp.vue";
+import Documentation from "@/components/UI/Documentation.vue";
 import {markRaw} from "vue";
+import {useAppStore} from "@/vuex/appStore";
+import {useSettingsStore} from "@/vuex/settingsStore";
 
 export default {
     name: "Dashboard",
@@ -42,22 +44,27 @@ export default {
         PopUp,
         Alert
     },
+    setup(){
+        const appStore = useAppStore();
+        const settingsStore = useSettingsStore();
+        return { appStore, settingsStore };
+    },
     mounted() {
         // Handle error if during the storing process crashes
         window.ipc.on('write_settings', (err) => {
             // TODO: Error logging
             console.log(err)
-            this.$store.commit('setAlertMessage', "Somethings went wrong! Try to restart MLA")
-            if ( this.$store.state.alert.status ) {
-                window.clearTimeout( this.$store.state.alert.timeout );
+            this.appStore.setAlertMessage(this.$t("errors.smth_wrong"));
+            if ( this.appStore.alert.status ) {
+                window.clearTimeout( this.appStore.alert.timeout );
             } else {
                 // Show alert
-                this.$store.commit('toggleAlert');
+                this.appStore.toggleAlert();
             }
             // Delayed alert hiding & store timer ID for user manual dismiss
-            this.$store.state.alert.timeout = setTimeout( () => {
+            this.appStore.alert.timeout = setTimeout( () => {
                 // Automatically hide alert after 5s
-                this.$store.commit('toggleAlert')
+                this.appStore.toggleAlert();
             }, 5000);
         });
     },
@@ -65,19 +72,19 @@ export default {
         // Destroy IPC listeners, otherwise it
         // will register a new one if it's mounted again
         // The registration of the listener is in the routing
-        this.$store.commit('removeIPCListener', 'read_settings')
-        this.$store.commit('removeIPCListener', 'write_settings')
+        this.settingsStore.removeIPCListener('read_settings');
+        this.settingsStore.removeIPCListener('write_settings');
     },
     computed: {
         alert_status(){
-            return this.$store.state.alert;
+            return this.appStore.alert;
         }
     },
     methods: {
         close_alert: function(){
             // Clears toggle alert timeout if alert is dismissed by the user
-            clearTimeout(this.$store.state.alert.timeout);
-            this.$store.state.alert.status = false;
+            clearTimeout(this.appStore.alert.timeout);
+            this.appStore.alert.status = false;
         },
         /**
          * Receives the file to be shown in the popup component
@@ -95,19 +102,19 @@ export default {
         return {
             tabs: [
                 {
-                    tab_name: "General",
+                    tab_name: "navigation.settings.general",
                     tab_path: "/settings/general"
                 },
                 {
-                    tab_name: "AI",
+                    tab_name: "navigation.settings.ai",
                     tab_path: "/settings/ai"
                 },
                 {
-                    tab_name: "Themes",
+                    tab_name: "navigation.settings.themes",
                     tab_path: "/settings/themes"
                 },
                 {
-                    tab_name: "About",
+                    tab_name: "navigation.settings.about",
                     tab_path: "/settings/about"
                 }
             ],

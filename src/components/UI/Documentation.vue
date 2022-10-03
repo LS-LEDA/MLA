@@ -1,20 +1,13 @@
 <template>
-    <VueShowdown
-        class="flex flex-col space-y-2"
-        :markdown="file"
-        flavor="github"
-        :options="{ emoji: true }"
-    />
+	<div
+		v-html="file"
+		class="flex flex-col space-y-2"
+	/>
 </template>
 
 <script>
-import { VueShowdown } from 'vue-showdown';
-
 export default {
     name: "Documentation",
-    components: {
-        VueShowdown
-    },
     props: ['file']
 }
 </script>

@@ -53,19 +53,19 @@
 
             <div class="flex text-lg content-center text-center">
                 <div class="w-1/4">
-                    Uploading file
+                    {{$t("import_page.progress_bar.step1")}}
                 </div>
 
                 <div class="w-1/4">
-                    Data Processing
+                    {{$t("import_page.progress_bar.step2")}}
                 </div>
 
                 <div class="w-1/4">
-                    Generating Overview
+                    {{$t("import_page.progress_bar.step3")}}
                 </div>
 
                 <div class="w-1/4">
-                    Finish
+                    {{$t("import_page.progress_bar.step4")}}
                 </div>
             </div>
         </div>
@@ -75,15 +75,20 @@
 <script>
 import SvgIcon from "@jamescoyle/vue-icon";
 import { mdiCheck } from '@mdi/js';
+import {useAppStore} from "@/vuex/appStore";
 
 export default {
     name: "UploadProgressBar",
     components: {
         SvgIcon
     },
+    setup() {
+        const appStore = useAppStore();
+        return { appStore };
+    },
     computed: {
         progress() {
-            return { status: this.$store.state.upload_status.status, progress: this.$store.state.upload_status.progress };
+            return { status: this.appStore.upload_status.status, progress: this.appStore.upload_status.progress };
         }
     },
     data() {

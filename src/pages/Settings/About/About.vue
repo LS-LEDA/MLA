@@ -26,7 +26,7 @@
         <!-- TODO: Fix full height -->
         <!-- Contributors information -->
         <div class="flex flex-col w-full lg:w-4/6 h-full space-y-2 lg:px-5">
-            <div class="flex font-bold text-2xl self-center"> Contributors </div>
+            <div class="flex font-bold text-2xl self-center"> {{ $t("settings.about.contributors") }} </div>
             <div class="flex w-full h-full sm:grid md:grid-cols-2 md:auto-rows-min gap-5 overflow-y-scroll">
                 <ContributorBadge v-for="(contributor, id) in contributors"
                                   :key="id"
@@ -38,13 +38,13 @@
 </template>
 
 <script>
-import mla_logo from "/public/assets/mla_logo.png";
+import mla_logo from "/src/assets/imgs/mla_logo.png";
 import SvgIcon from "@jamescoyle/vue-icon";
 import {mdiOpenInNew} from "@mdi/js";
-import ContributorBadge from "@/components/UI/ContributorBadge";
-import dani_icon from "/public/assets/dani_amo_profile.jpeg";
-import jiahui_icon from "/public/assets/jiahui_profile.png";
-import aleix_icon from "/public/assets/aleix_profile.png";
+import ContributorBadge from "@/components/UI/ContributorBadge.vue";
+import dani_icon from "/src/assets/imgs/about/dani_amo_profile.jpeg";
+import jiahui_icon from "/src/assets/imgs/about/jiahui_profile.png";
+import aleix_icon from "/src/assets/imgs/about/aleix_profile.png";
 //import default_icon from "/public/assets/default_profile.png";
 
 export default {

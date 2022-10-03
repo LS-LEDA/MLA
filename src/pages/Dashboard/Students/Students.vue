@@ -1,6 +1,6 @@
 <template>
     <div class="flex w-full h-auto justify-between">
-        <h1 class="text-4xl font-extrabold"> Students Data </h1>
+        <h1 class="text-4xl font-extrabold"> {{ $t("dashboard.students.title") }} </h1>
         <div class="flex w-auto h-auto gap-x-3">
             <button class="flex max-w-full max-h-full bg-primary dark:bg-dark_primary rounded-md hover:bg-primary_variant
                     dark:hover:bg-dark_primary_variant aspect-square justify-center items-center
@@ -20,7 +20,7 @@
             </button>
         </div>
     </div>
-    <span class="font-bold text-2xl text-gray-500"> {{ tabs[current_page].tab_description }} </span>
+    <span class="font-bold text-2xl text-gray-500"> {{ $t(tabs[current_page].tab_description) }} </span>
     <router-view class="overflow-y-hidden"></router-view>
 </template>
 
@@ -63,12 +63,12 @@ export default {
             tabs: [
                 {
                     tab_name: "Overview",
-                    tab_description: "Information on students interactions",
+                    tab_description: "dashboard.students.tabs.1",
                     tab_path: "dashboard/students/overview"
                 },
                 {
                     tab_name: "Students List",
-                    tab_description: "Students list",
+                    tab_description: "dashboard.students.tabs.2",
                     tab_path: "dashboard/students/list"
                 }
             ]

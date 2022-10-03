@@ -7,7 +7,7 @@
                 class="flex flex-row bg-primary dark:bg-dark_primary hover:bg-primary_variant dark:hover:bg-dark_primary_variant rounded-lg py-3 px-4 font-bold w-full"
                 :to="page.page_link" v-for="(page, index) in pages" :key="index">
                 <SvgIcon type="mdi" :path="page.button_icon"/>
-                <span class="ml-3" v-if="nav_state">{{ page.button_name }}</span>
+                <span class="ml-3" v-if="nav_state">{{ $t(page.button_name) }}</span>
             </router-link>
         </div>
         <div class="flex flex-col flex-1 justify-end">
@@ -17,8 +17,8 @@
 </template>
 
 <script>
-import DownloadButton from '@/components/NavigationBar/DownloadButton';
-import NavigationHeader from "@/components/NavigationBar/NavigationHeader";
+import DownloadButton from '@/components/NavigationBar/DownloadButton.vue';
+import NavigationHeader from "@/components/NavigationBar/NavigationHeader.vue";
 import {
   mdiCogOutline,
   mdiDatabaseImportOutline,
@@ -26,6 +26,7 @@ import {
   mdiViewDashboardOutline
 } from "@mdi/js";
 import SvgIcon from "@jamescoyle/vue-icon";
+import {useSettingsStore} from "@/vuex/settingsStore";
 
 export default {
     name: "NavigationBar",
@@ -34,6 +35,10 @@ export default {
         DownloadButton,
         SvgIcon
     },
+    setup() {
+        const settingsStore = useSettingsStore();
+        return { settingsStore };
+    },
     computed: {
         /**
          * Navigation bar state:
@@ -41,29 +46,29 @@ export default {
          * false: shrank
          */
         nav_state() {
-            return this.$store.state.navigation_bar_status;
+            return this.settingsStore.navigation_bar_status;
         }
     },
     data() {
         return {
             pages: [
                 {
-                    button_name: 'Import data',
+                    button_name: "navigation.import",
                     button_icon: mdiDatabaseImportOutline,
                     page_link: '/import-data'
                 },
                 {
-                    button_name: 'Dashboard',
+                    button_name: "navigation.dashboard.dash",
                     button_icon: mdiViewDashboardOutline,
                     page_link: '/dashboard'
                 },
                 {
-                    button_name: 'Plugins',
+                    button_name: "navigation.plugins",
                     button_icon: mdiToyBrickPlusOutline,
                     page_link: '/plugins'
                 },
                 {
-                    button_name: 'Configuration',
+                    button_name: "navigation.settings.sett",
                     button_icon: mdiCogOutline,
                     page_link: '/settings'
                 }

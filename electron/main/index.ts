@@ -1,23 +1,25 @@
 'use strict'
-
-import { app, protocol, BrowserWindow, webContents, shell, ipcMain, Tray, Menu, nativeImage } from 'electron'
-import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
+import { app, protocol, BrowserWindow, webContents, shell, ipcMain, Tray, Menu, nativeImage, screen } from 'electron'
 import installExtension, { VUEJS3_DEVTOOLS } from 'electron-devtools-installer'
-const path = require('path')
-const isDevelopment = process.env.NODE_ENV !== 'production'
+import { join } from 'path';
 require('v8-compile-cache') // via: https://dev.to/xxczaki/how-to-make-your-electron-app-faster-4ifb
 
+
+export const ROOT_PATH = {
+    // /dist
+    dist: join(__dirname, '../..'),
+    // /dist or /public
+    public: join(__dirname, app.isPackaged ? '../..' : '../../../public'),
+}
+
+const url = `http://${process.env['VITE_DEV_SERVER_HOSTNAME']}:${process.env['VITE_DEV_SERVER_PORT']}`
 // MLA application user settings
-import config from "@/config";
+const indexHtml = join(ROOT_PATH.dist, 'index.html');
+import config from "/src/config";
 
 // Application variables
 let tray = null;
-let win = null;
-let iconPath = isDevelopment ?
-    path.join(__dirname, 'bundled/assets/mla_logo.png')
-    :
-    path.join(__dirname, '/assets/mla_logo.png');
-
+let win: BrowserWindow | null = null;
 // Check Hardware Acceleration setting
 if ( config.get('general.gpu') !== true ) {
     console.log("GPU disabled")
@@ -25,21 +27,24 @@ if ( config.get('general.gpu') !== true ) {
 }
 
 // Check open MLA on startup
-if ( !isDevelopment ) {
+if ( !app.isPackaged ) {
     app.setLoginItemSettings( {
         openAtLogin: config.get('general.openOnStartup')
     });
 }
+
+let iconPath = join(ROOT_PATH.public, '/assets/mla_logo.png');
+const preload = join(__dirname, '../preload/index.js')
 
 /**
  * Applies selected settings
  * @param setting: setting key
  * @param setting_value: setting value
  */
-function applySettings(setting, setting_value) {
+function applySettings(setting: any, setting_value: any) {
     switch (setting) {
         case 'general.openOnStartup':
-            if ( !isDevelopment ) {
+            if ( !app.isPackaged ) {
                 app.setLoginItemSettings( {
                     openAtLogin: setting_value
                 })
@@ -84,75 +89,6 @@ ipcMain.on('write_settings', (event, args) => {
 protocol.registerSchemesAsPrivileged([
     { scheme: 'app', privileges: { secure: true, standard: true } }
 ])
-
-async function createWindow() {
-    // We cannot require the screen module until the app is ready.
-    const { screen } = require('electron')
-
-    // Create a window that fills the screen's available work area.
-    const primaryDisplay = screen.getPrimaryDisplay()
-    const { width, height } = primaryDisplay.workAreaSize
-
-    // Create the browser window.
-    win = new BrowserWindow({
-        width: width,
-        height: height,
-        minWidth: 700,
-        minHeight: 500,
-        // Don't show the window until it's ready, this prevents any white flickering
-        show: false,
-        icon: iconPath,
-        webPreferences: {
-
-            // Use pluginOptions.nodeIntegration, leave this alone
-            // See nklayman.github.io/vue-cli-plugin-electron-builder/guide/security.html#node-integration for more info
-            nodeIntegration: process.env.ELECTRON_NODE_INTEGRATION,
-            contextIsolation: !process.env.ELECTRON_NODE_INTEGRATION,
-            // __static is set by webpack and will point to the public directory
-            //https://medium.com/swlh/how-to-safely-set-up-an-electron-app-with-vue-and-webpack-556fb491b83
-            preload: path.resolve(__static, 'preload.js'),
-        }
-    })
-
-    // Hide App Menu & maximize the window
-    win.setMenu(null);
-    win.maximize();
-
-    // Hide application window
-    win.on('close', (e) => {
-        e.preventDefault();
-        if ( config.get('general.tray') ) {
-            win.hide()
-        } else {
-            win.destroy();
-            win = null;
-            app.quit();
-        }
-
-        return false;
-    })
-
-    if (process.env.WEBPACK_DEV_SERVER_URL) {
-        // Load the url of the dev server if in development mode
-        await win.loadURL(process.env.WEBPACK_DEV_SERVER_URL)
-        if (!process.env.IS_TEST) win.webContents.openDevTools({
-            mode: "detach"
-        })
-        win.show();
-    } else {
-        createProtocol('app')
-        // Load the index.html when not in development
-        win.loadURL('app://./index.html').then( () => {
-            win.show()
-        })
-
-        // Opens external links in user's default browser
-        webContents.setWindowOpenHandler( ({url}) => {
-            shell.openExternal(url)
-            return { action: "allow"}
-        });
-    }
-}
 
 // TODO: OS dependant icon
 /**
@@ -229,25 +165,28 @@ async function trayMenuAction(menuItem) {
 }
 
 
-/*// Quit when all windows are closed.
+// Quit when all windows are closed.
 app.on('window-all-closed', () => {
     win.hide();
-})*/
+})
 
-app.on('activate', () => {
+app.on('activate', async () => {
     // On macOS it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
-    if (BrowserWindow.getAllWindows().length === 0) createWindow()
+    if (BrowserWindow.getAllWindows().length === 0) await createWindow()
 })
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', async () => {
-    if (isDevelopment && !process.env.IS_TEST) {
+    if (!app.isPackaged) {
         // Install Vue Devtools
         try {
-            await installExtension(VUEJS3_DEVTOOLS)
+            //await installExtension(VUEJS3_DEVTOOLS)
+            installExtension(VUEJS3_DEVTOOLS)
+                .then((name) => console.log(`Added Extension:  ${name}`))
+                .catch((err) => console.log('An error occurred: ', err));
         } catch (e) {
             console.error('Vue Devtools failed to install:', e.toString())
         }
@@ -263,7 +202,7 @@ app.on('before-quit', () => {
 })
 
 // Exit cleanly on request from parent process in development mode.
-if (isDevelopment) {
+if (app.isPackaged) {
     if (process.platform === 'win32') {
         process.on('message', (data) => {
             if (data === 'graceful-exit') {
@@ -275,4 +214,58 @@ if (isDevelopment) {
             app.quit()
         })
     }
+}
+
+async function createWindow() {
+    // Create a window that fills the screen's available work area.
+    const primaryDisplay = screen.getPrimaryDisplay()
+    const { width, height } = primaryDisplay.workAreaSize
+
+    win = new BrowserWindow({
+        width: width,
+        height: height,
+        minWidth: 700,
+        minHeight: 500,
+        // Don't show the window until it's ready, this prevents any white flickering
+        show: false,
+        icon: join(ROOT_PATH.public, 'assets/mla_logo.png'),
+        webPreferences: {
+            preload,
+            nodeIntegration: false,
+            contextIsolation: true,
+        },
+    });
+
+    // Hide App Menu & maximize the window
+    win.setMenu(null);
+    win.maximize();
+
+    // Hide application window
+    win.on('close', (e) => {
+        e.preventDefault();
+        if ( config.get('general.tray') ) {
+            win.hide()
+        } else {
+            win.destroy();
+            win = null;
+            app.quit();
+        }
+        return false;
+    })
+
+    if (app.isPackaged) {
+        win.loadFile(indexHtml)
+    } else {
+        // Load from vite dev server and use devTool if the app is not packaged
+        win.loadURL(url)
+        win.webContents.openDevTools({
+            mode: "detach"
+        });
+    }
+
+    // Make all links open with the browser, not with the application
+    win.webContents.setWindowOpenHandler(({ url }) => {
+        if (url.startsWith('https:')) shell.openExternal(url)
+        return { action: 'deny' }
+    });
 }

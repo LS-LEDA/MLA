@@ -2,7 +2,7 @@
     <div class="flex flex-col w-4/6 h-1/2 bg-secondary dark:bg-dark_secondary rounded-xl p-3 gap-y-3">
         <div class="flex w-full justify-between">
                 <span class="flex font-bold text-xl">
-                    Student Dedication
+                    {{ $t("dashboard.students.tables.student_dedication") }}
                 </span>
             <button type="button" class="items-end place-self-end text-gray-500 rounded-lg hover:bg-gray-300"
                     @click.stop="this.sd_info = !this.sd_info">
@@ -15,7 +15,7 @@
                 <!-- List header -->
                 <div class="flex w-full h-auto px-5 font-bold">
                     <div class="flex w-1/12 justify-center"> ID </div>
-                    <div class="flex w-5/12"> Student Name </div>
+                    <div class="flex w-5/12"> {{ $t("dashboard.students.misc.student_name") }} </div>
                     <div class="flex w-2/12"> Minutes </div>
                     <div class="flex w-4/12"> Time spent </div>
                 </div>
@@ -28,7 +28,7 @@
             </div>
             <!-- Information -->
             <p v-else>
-                Total time that each member has dedicated to the course.
+                {{ $t("dashboard.students.tables.student_dedication_info") }}
             </p>
         </div>
     </div>
@@ -41,7 +41,8 @@
  */
 import {mdiClose, mdiHelpCircleOutline} from "@mdi/js";
 import SvgIcon from "@jamescoyle/vue-icon";
-import DedicationCard from "@/components/Students/DedicationCard";
+import DedicationCard from "@/components/Students/DedicationCard.vue";
+import {useAppStore} from "@/vuex/appStore";
 
 export default {
     name: "StudentDedication",
@@ -49,9 +50,13 @@ export default {
         DedicationCard,
         SvgIcon
     },
+    setup() {
+        const appStore = useAppStore();
+        return { appStore };
+    },
     computed: {
         students_dedication: function () {
-            return this.$store.state.students;
+            return this.appStore.students;
         }
     },
     data() {

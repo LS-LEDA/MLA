@@ -6,7 +6,7 @@
             <div class="flex w-full justify-between">
                 <!-- PopUp Title -->
                 <div class="w-auto bg-primary_variant dark:bg-dark_primary_variant rounded-lg py-2 px-5 font-bold">
-                    Total Interactions
+                    {{ $t("dashboard.summary.total_interactions.title") }}
                 </div>
                 <!-- Close button -->
                 <button type="button" class="justify-self-end bg-gray-100 text-gray-400 rounded-lg focus:ring-2 focus:ring-gray-200
@@ -48,9 +48,10 @@ import SvgIcon from "@jamescoyle/vue-icon";
 import {Chart, registerables} from "chart.js";
 import totalInteractionChartData from "@/assets/totalInteractionChartData";
 import zoomPlugin from 'chartjs-plugin-zoom';
-import IconButton from "@/components/UI/IconButton";
-import Table from "@/components/UI/Table";
+import IconButton from "@/components/UI/IconButton.vue";
+import Table from "@/components/UI/Table.vue";
 import {inject} from "vue";
+import {useAppStore} from "@/vuex/appStore";
 
 export default {
     name: "InteractionPopUp",
@@ -61,8 +62,10 @@ export default {
     },
     props: ['logs'],
     setup() {
+        const appStore = useAppStore();
         let total_popup = inject('total_popup');
         return {
+            appStore,
             total_popup
         }
     },
@@ -87,7 +90,7 @@ export default {
          */
         create_interactions_table: function () {
             let interactions = {};
-            let summary_types = Object.entries(this.$store.state.summary.summary_types);
+            let summary_types = Object.entries(this.appStore.summary.summary_types);
 
             summary_types.forEach( (interaction) => {
                 // interaction[0]: Interaction name e.g - 'Task'

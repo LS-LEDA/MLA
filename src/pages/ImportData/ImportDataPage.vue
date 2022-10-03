@@ -13,15 +13,22 @@
 </template>
 
 <script>
-import DragDropArea from "@/components/ImportData/DragDropArea";
-import UploadConfirmation from "@/components/ImportData/UploadConfirmation";
-import UploadProgressBar from "@/components/ImportData/UploadProgressBar";
-import InformationPopUp from "@/components/ImportData/InformationPopUp";
+import DragDropArea from "@/components/ImportData/DragDropArea.vue";
+import UploadConfirmation from "@/components/ImportData/UploadConfirmation.vue";
+import UploadProgressBar from "@/components/ImportData/UploadProgressBar.vue";
+import InformationPopUp from "@/components/ImportData/InformationPopUp.vue";
 import {local_processing} from "@/services/local-processing";
-import Alert from "@/components/UI/Alert";
+import Alert from "@/components/UI/Alert.vue";
+import {useSettingsStore} from "@/vuex/settingsStore";
+import {useAppStore} from "@/vuex/appStore";
 
 export default {
     name: "ImportDataPage",
+    setup() {
+        const settingsStore = useSettingsStore();
+        const appStore = useAppStore();
+        return { appStore, settingsStore };
+    },
     data() {
         return {
             file_selected: false,
@@ -42,7 +49,7 @@ export default {
     },
     computed: {
         alert_status(){
-            return this.$store.state.alert;
+            return this.appStore.alert;
         },
         load_theme: function () {
             this.get_settings();
@@ -61,15 +68,15 @@ export default {
         get_settings: function () {
             // Load user selected colour theme
             let colour;
-            let selected_id = this.$store.state.settings['theme']['selectedThemeID']
-            this.$store.state.themes[selected_id]['colours'].forEach( (col, index) => {
+            let selected_id = this.settingsStore.settings['theme']['selectedThemeID']
+            this.settingsStore.themes[selected_id]['colours'].forEach( (col, index) => {
                 colour = col.substring(
                     col.indexOf("[") + 1,
                     col.lastIndexOf("]")
                 );
-                document.documentElement.style.setProperty(this.$store.state.colour_properties[index], colour);
+                document.documentElement.style.setProperty(this.settingsStore.colour_properties[index], colour);
             });
-            let app_mode = this.$store.state.settings['theme']['mode']
+            let app_mode = this.settingsStore.settings['theme']['mode']
             switch ( app_mode ) {
                 case 'dark':
                     document.documentElement.classList.add('dark');
@@ -117,8 +124,8 @@ export default {
         },
         close_alert: function(){
             // Clears toggle alert timeout if alert is dismissed by the user
-            clearTimeout(this.$store.state.alert.timeout);
-            this.$store.state.alert.status = false;
+            clearTimeout(this.appStore.alert.timeout);
+            this.appStore.alert.status = false;
         }
     }
 }

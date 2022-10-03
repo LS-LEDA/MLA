@@ -57,14 +57,19 @@
 </template>
 
 <script>
-import StudentCard from "@/components/Students/StudentCard";
+import StudentCard from "@/components/Students/StudentCard.vue";
 import SvgIcon from "@jamescoyle/vue-icon";
 import {mdiViewGrid, mdiViewSequential} from "@mdi/js";
+import {useAppStore} from "@/vuex/appStore";
 export default {
     name: "StudentList",
     components: {
         StudentCard,
         SvgIcon
+    },
+    setup() {
+        const appStore = useAppStore();
+        return { appStore };
     },
     computed: {
         /**
@@ -72,7 +77,7 @@ export default {
          * @returns {[string, unknown][]}
          */
         students_list: function () {
-            let student_list = Object.entries(this.$store.state.students)
+            let student_list = Object.entries(this.appStore.students)
 
             return [...student_list].filter( student => {
                 return student[0].toLowerCase().includes(this.student_search.toLowerCase())

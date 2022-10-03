@@ -13,8 +13,8 @@
 </template>
 
 <script>
-import InteractionCard from "@/components/Summary/InteractionCard";
-import SummaryCard from "@/components/Summary/SummaryCard";
+import InteractionCard from "@/components/Summary/InteractionCard.vue";
+import SummaryCard from "@/components/Summary/SummaryCard.vue";
 import {
     mdiFileDocumentOutline,
     mdiHammerScrewdriver,
@@ -23,6 +23,7 @@ import {
     mdiTextBoxCheck, mdiWikipedia
 } from "@mdi/js";
 import {inject} from "vue";
+import {useAppStore} from "@/vuex/appStore";
 
 export default {
     name: "SummaryOverview",
@@ -32,8 +33,8 @@ export default {
     },
     computed: {
         summary() {
-            let summary_types = this.$store.state.summary.summary_types;
-            let total_interactions = this.$store.state.summary.total_interactions;
+            let summary_types = this.appStore.summary.summary_types;
+            let total_interactions = this.appStore.summary.total_interactions;
 
             // TODO: Fix this hardcoded part for future releases. Specially when re-ordering is enabled
             this.statistics.forEach( (stat, index) => {
@@ -41,28 +42,30 @@ export default {
                     case 'Tasks':
                         if ( !('Tarea' in summary_types) ) return;
                         stat.number = summary_types['Tarea'].count;
-                        this.$store.commit('saveSummaryCard', {summaryID: index, summary: summary_types['Tarea'].interactions});
+                        this.appStore.saveSummaryCard({summaryID: index, summary: summary_types['Tarea'].interactions});
                         break;
                     case 'URL':
                         if ( !('URL' in summary_types) ) return;
                         stat.number = summary_types['URL'].count;
-                        this.$store.commit('saveSummaryCard', {summaryID: index, summary: summary_types['URL'].interactions});
+                        this.appStore.saveSummaryCard({summaryID: index, summary: summary_types['URL'].interactions});
                         break;
                 }
             });
             return { total_interactions: total_interactions, statistics: this.statistics }
         },
         logs() {
-            return this.$store.state.logs;
+            return this.appStore.logs;
         },
     },
     setup() {
+        const appStore = useAppStore();
         // Inject provided variables from DashboardPage parent component
         let total_popup = inject('total_popup');
         let popup = inject('popup');
         let summaryID = inject('summaryID');
         let card_name = inject('card_name');
         return {
+            appStore,
             total_popup,
             popup,
             summaryID,

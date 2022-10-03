@@ -2,8 +2,8 @@
     <table class="table-auto max-h-full w-full">
         <thead class="bg-primary_variant dark:bg-dark_primary_variant">
         <tr class="text-left uppercase">
-            <th class="p-3"> Interactions type </th>
-            <th class="p-3"> Number of interactions </th>
+            <th class="p-3"> {{$t("dashboard.summary.total_interactions.interaction_type")}} </th>
+            <th class="p-3"> {{$t("dashboard.summary.total_interactions.number_of_interactions")}} </th>
         </tr>
         </thead>
         <tbody>

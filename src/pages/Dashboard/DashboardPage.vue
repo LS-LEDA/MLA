@@ -9,7 +9,7 @@
                                  :to="tab.tab_path"
                                  v-for="(tab, index) in tabs"
                                  :key="index">
-                            {{ tab.tab_name }}
+                            {{ $t(tab.tab_name) }}
                     </router-link>
                 </div>
                 <!-- Dashboard deeply nested component view -->
@@ -29,11 +29,12 @@
 
 <script>
 
-import SummaryPopUp from "@/components/Summary/SummaryPopUp";
-import InformationPanel from "@/components/InformationPanel/InformationPanel";
-import InteractionPopUp from "@/components/Summary/InteractionPopUp";
-import Alert from "@/components/UI/Alert";
+import SummaryPopUp from "@/components/Summary/SummaryPopUp.vue";
+import InformationPanel from "@/components/InformationPanel/InformationPanel.vue";
+import InteractionPopUp from "@/components/Summary/InteractionPopUp.vue";
+import Alert from "@/components/UI/Alert.vue";
 import {provide, ref} from "vue";
+import {useAppStore} from "@/vuex/appStore";
 
 export default {
     name: "DashboardPage",
@@ -46,19 +47,20 @@ export default {
     methods: {
         close_alert: function(){
             // Clears toggle alert timeout if alert is dismissed by the user
-            clearTimeout(this.$store.state.alert.timeout);
-            this.$store.state.alert.status = false;
+            clearTimeout(this.appStore.alert.timeout);
+            this.appStore.alert.status = false;
         }
     },
     computed: {
         alert_status(){
-            return this.$store.state.alert;
+            return this.appStore.alert;
         },
         logs() {
-            return this.$store.state.logs
+            return this.appStore.logs;
         }
     },
     setup() {
+        const appStore = useAppStore();
         let total_popup = ref(false);
         let popup = ref(false);
         let summaryID = ref(0);
@@ -68,6 +70,7 @@ export default {
         provide('summaryID', summaryID);
         provide('card_name', card_name);
         return {
+            appStore,
             total_popup,
             popup,
             summaryID,
@@ -78,19 +81,19 @@ export default {
         return {
             tabs: [
                 {
-                    tab_name: "Summary",
+                    tab_name: "navigation.dashboard.summary",
                     tab_path: "/dashboard/summary"
                 },
                 {
-                    tab_name: "Students",
+                    tab_name: "navigation.dashboard.students",
                     tab_path: "/dashboard/students"
                 },
                 {
-                    tab_name: "Resources",
+                    tab_name: "navigation.dashboard.resources",
                     tab_path: "/dashboard/resources"
                 },
                 {
-                    tab_name: "Sentiment",
+                    tab_name: "navigation.dashboard.sentiment",
                     tab_path: "/dashboard/sentiment"
                 },
             ],

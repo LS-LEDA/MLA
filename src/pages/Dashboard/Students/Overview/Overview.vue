@@ -4,7 +4,7 @@
         <div class="flex flex-col w-2/6 h-full bg-secondary dark:bg-dark_secondary rounded-xl p-3 gap-y-3">
             <div class="flex w-full justify-between">
                 <span class="flex font-bold text-xl">
-                    Student Participation
+                    {{ $t("dashboard.students.tables.student_participation") }}
                 </span>
                 <button type="button" class="items-end place-self-end text-gray-500 rounded-lg hover:bg-gray-300"
                         @click.stop="this.sp_info = !this.sp_info">
@@ -17,7 +17,7 @@
                     <!-- List header -->
                     <div class="flex w-full h-auto px-5 font-bold">
                         <div class="flex w-1/12 justify-center"> ID </div>
-                        <div class="w-8/12"> Student Name </div>
+                        <div class="w-8/12"> {{ $t("dashboard.students.misc.student_name") }} </div>
                         <div class="w-2/12"> # </div>
                         <div class="w-2/12"> % </div>
                     </div>
@@ -30,7 +30,7 @@
                 </div>
                 <!-- Information -->
                 <p v-else>
-                    Total number of interactions between each student and the resources of the course (Includes course viewing).
+                    {{ $t("dashboard.students.tables.student_participation_info") }}
                 </p>
             </div>
         </div>
@@ -40,9 +40,10 @@
 
 <script>
 import {mdiClose, mdiHelpCircleOutline} from "@mdi/js";
-import ParticipationCard from "@/components/Students/ParticipationCard";
-import StudentDedication from "@/components/Students/StudentDedication";
+import ParticipationCard from "@/components/Students/ParticipationCard.vue";
+import StudentDedication from "@/components/Students/StudentDedication.vue";
 import SvgIcon from "@jamescoyle/vue-icon";
+import {useAppStore} from "@/vuex/appStore";
 
 export default {
     name: "Overview",
@@ -51,9 +52,13 @@ export default {
         ParticipationCard,
         StudentDedication
     },
+    setup() {
+        const appStore = useAppStore();
+        return { appStore };
+    },
     computed: {
         students_participation: function () {
-            return this.$store.state.students
+            return this.appStore.students;
         }
     },
     data() {

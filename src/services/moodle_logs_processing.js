@@ -1,10 +1,11 @@
 import {summary_processing, weekly_interactions_processing} from "@/services/Summary/summary-processing";
 import Log from "@/services/model/Log";
-import store from "@/vuex/store";
 import {student_dedication, student_participation} from "@/services/Students/students-processing";
+import {useAppStore} from "@/vuex/appStore";
 //import router from "@/router/router";
 
 function moodle_logs_processing(data, name){
+    const appStore = useAppStore();
     let logs = [];
 
     // Get imported logs' course name
@@ -19,7 +20,7 @@ function moodle_logs_processing(data, name){
             new Log(lg[0], lg[1], lg[2], lg[3], lg[4], lg[5], lg[6], lg[7], lg[8])
         )
     })
-    store.commit('saveLogs', logs);
+    appStore.saveLogs(logs);
 
     let summary_types = summary_processing(logs);
     let students = student_participation(logs);
@@ -27,29 +28,25 @@ function moodle_logs_processing(data, name){
     student_dedication(logs, students);
     let weekly_interactions = weekly_interactions_processing(logs)
 
-    store.commit('saveSummaryTypes', {
-            total_interactions: logs.length,
-            summary_types: summary_types
-        }
-    );
+    appStore.saveSummaryTypes({
+        total_interactions: logs.length,
+        summary_types: summary_types
+    });
 
-    store.commit('saveStudentParticipation', {
-            students: students,
-        }
-    );
+    appStore.saveStudentParticipation({
+        students: students,
+    });
 
-    store.commit('saveWeekInteractions', {
-            week_interactions: weekly_interactions,
-        }
-    );
+    appStore.saveWeekInteractions({
+        week_interactions: weekly_interactions,
+    });
 
     // Set moodle imported data true
-    store.commit('setImportedData', {
-            which: false,
-            file_name: name,
-            course_name: course_name
-        }
-    );
+    appStore.setImportedData({
+        which: false,
+        file_name: name,
+        course_name: course_name
+    });
     // Push to Dashboard > Summary
     //router.push('/dashboard/summary');
 }

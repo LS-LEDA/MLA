@@ -8,7 +8,7 @@
 
             <!-- Mode description -->
             <div>
-                {{ mode.description }}
+                {{ $t(mode.description) }}
             </div>
         </div>
         <Checkbox value="hello" :id="id" :selected="selected === id" @click="toggle_mode"/>
@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import Checkbox from "@/components/UI/Checkbox";
+import Checkbox from "@/components/UI/Checkbox.vue";
 import SvgIcon from "@jamescoyle/vue-icon";
 
 export default {

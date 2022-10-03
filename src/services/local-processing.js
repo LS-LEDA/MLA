@@ -1,8 +1,8 @@
 // Local Processing Service
-import store from "@/vuex/store";
 import router from "@/router/router";
 import {moodle_logs_processing} from "@/services/moodle_logs_processing";
 import {forum_logs_processing} from "@/services/forum_logs_processing";
+import {useAppStore} from "@/vuex/appStore";
 
 const UNSUPPORTED_FILE_TYPE = -2
 const SUPPORTED_FILE_TYPE   = 2
@@ -16,7 +16,7 @@ const OVERVIEW_GENERATION = 2;
 const FINISH = 3;*/
 
 function local_processing(file) {
-
+    const appStore = useAppStore();
     // Check if it's a JSON log file
     if ( check_file_type(file.type) === UNSUPPORTED_FILE_TYPE ) {
         return UNSUPPORTED_FILE_TYPE;
@@ -36,18 +36,18 @@ function local_processing(file) {
     // Start fake upload progress counting on load file.
     // Start fake data processing
     file_reader.onloadstart = () => {
-        store.dispatch('loadProgress', 2000).then(
+        appStore.loadProgress(2000).then(
             () => {
                 setTimeout( () => {
-                    if ( store.state.imported_data.moodle_logs && store.state.imported_data.forum_logs ) {
+                    if ( appStore.imported_data.moodle_logs && appStore.imported_data.forum_logs ) {
                         router.push('/dashboard/summary');
                     }
                     // Redirect to Summary tab
-                    if ( store.state.imported_data.moodle_logs && !store.state.imported_data.forum_logs ) {
+                    if ( appStore.imported_data.moodle_logs && !appStore.imported_data.forum_logs ) {
                         router.push('/dashboard/summary');
                     }
                     // Redirect to Sentiment tab
-                    if ( !store.state.imported_data.moodle_logs && store.state.imported_data.forum_logs ) {
+                    if ( !appStore.imported_data.moodle_logs && appStore.imported_data.forum_logs ) {
                         router.push('/dashboard/sentiment');
                     }
                 }, 9000)

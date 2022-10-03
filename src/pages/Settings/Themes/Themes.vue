@@ -4,7 +4,7 @@
             <!-- Application Mode settings -->
             <div class="flex flex-col w-full h- space-y-2">
                 <div class="font-bold text-2xl">
-                    Application mode
+                    {{$t("settings.themes.app_mode")}}
                 </div>
                 <ModeSelector v-for="( mode, index ) in themes_settings['application_modes']" :key="index"
                               :selected="selected_mode"
@@ -18,11 +18,11 @@
             <div class="flex flex-col w-full h-full space-y-2">
                 <div class="flex w-full justify-between">
                     <div class="font-bold text-2xl self-center">
-                        Application theme
+                        {{$t("settings.themes.app_theme")}}
                     </div>
                     <div class="flex">
-                        <IconButton :icon="revert_icon" type="Default theme" :status="true" @click="revert_theme"/>
-                        <IconButton :icon="add_icon" type="Add" :status="true" @click="add_theme"/>
+                        <IconButton :icon="revert_icon" :type="this.$t('settings.themes.default_theme')" :status="true" @click="revert_theme"/>
+                        <IconButton :icon="add_icon" :type="this.$t('settings.themes.add')" :status="true" @click="add_theme"/>
                     </div>
                 </div>
 
@@ -54,12 +54,13 @@
 <script>
 
 import {mdiMonitor, mdiPlus, mdiUndo, mdiWeatherNight, mdiWhiteBalanceSunny} from "@mdi/js";
-import ModeSelector from "@/components/Settings/ModeSelector";
-import Theme from "@/components/Settings/Theme";
-import IconButton from "@/components/UI/IconButton";
-import SummaryPreview from "@/components/Settings/Mockups/SummaryPreview";
-import ImportDataPreview from "@/components/Settings/Mockups/ImportDataPreview";
+import ModeSelector from "@/components/Settings/ModeSelector.vue";
+import Theme from "@/components/Settings/Theme.vue";
+import IconButton from "@/components/UI/IconButton.vue";
+import SummaryPreview from "@/components/Settings/Mockups/SummaryPreview.vue";
+import ImportDataPreview from "@/components/Settings/Mockups/ImportDataPreview.vue";
 import {markRaw} from "vue";
+import {useSettingsStore} from "@/vuex/settingsStore";
 
 export default {
     name: "Themes",
@@ -68,6 +69,10 @@ export default {
         IconButton,
         Theme,
         ModeSelector,
+    },
+    setup() {
+        const settingsStore = useSettingsStore();
+        return { settingsStore };
     },
     data() {
         return {
@@ -85,17 +90,17 @@ export default {
                 application_modes: [
                     {
                         mode: "dark",
-                        description: "Dark mode for night owls",
+                        description: "settings.themes.app_modes.dark",
                         icon: mdiWeatherNight
                     },
                     {
                         mode: "light",
-                        description: "Light mode for daydreamers",
+                        description: "settings.themes.app_modes.light",
                         icon: mdiWhiteBalanceSunny
                     },
                     {
                         mode: "system",
-                        description: "Let the system decide for you",
+                        description: "settings.themes.app_modes.sys",
                         icon: mdiMonitor
                     }
                 ],
@@ -108,7 +113,7 @@ export default {
             return null;
         },
         app_themes: function () {
-            return this.$store.state.themes;
+            return this.settingsStore.themes;
         }
     },
     watch: {
@@ -128,14 +133,14 @@ export default {
             this.selected_mode = selected_id
             switch ( selected_id ) {
                 case 0:
-                    this.$store.commit('setSettings', {
+                    this.settingsStore.setSettings({
                         key: 'theme.mode',
                         value: 'dark'
                     })
                     document.documentElement.classList.add('dark');
                     break;
                 case 1:
-                    this.$store.commit('setSettings', {
+                    this.settingsStore.setSettings({
                         key: 'theme.mode',
                         value: 'light'
                     })
@@ -156,14 +161,14 @@ export default {
             // Dynamically apply the selected theme colours
             // to the root css variables
             let colour;
-            this.$store.state.themes[selected_id]['colours'].forEach( (col, index) => {
+            this.settingsStore.themes[selected_id]['colours'].forEach( (col, index) => {
                 colour = col.substring(
                     col.indexOf("[") + 1,
                     col.lastIndexOf("]")
                 );
-                document.documentElement.style.setProperty(this.$store.state.colour_properties[index], colour);
+                document.documentElement.style.setProperty(this.settingsStore.colour_properties[index], colour);
             })
-            this.$store.commit('setSettings', {
+            this.settingsStore.setSettings( {
                 key: 'theme.selectedThemeID',
                 value: selected_id
             })
@@ -187,7 +192,7 @@ export default {
             let sections = Object.keys(this.themes_settings)
 
             // Get settings from vuex
-            let sett = this.$store.state.settings
+            let sett = this.settingsStore.settings
 
             // Current sections { 'application_modes', 'themes }
             sections.forEach( (section) => {

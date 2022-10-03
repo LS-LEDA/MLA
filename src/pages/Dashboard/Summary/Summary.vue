@@ -1,6 +1,6 @@
 <template>
     <div class="flex w-full h-auto justify-between">
-        <h1 class="text-4xl font-extrabold"> Summary of all course interactions </h1>
+        <h1 class="text-4xl font-extrabold"> {{$t("dashboard.summary.title")}} </h1>
         <div class="flex w-auto h-auto gap-x-3">
             <button class="flex max-w-full max-h-full bg-primary dark:bg-dark_primary rounded-md hover:bg-primary_variant
                     dark:hover:bg-dark_primary_variant aspect-square justify-center items-center
@@ -20,7 +20,7 @@
             </button>
         </div>
     </div>
-    <span class="font-bold text-2xl text-gray-500"> {{ tabs[current_page].tab_description }} </span>
+    <span class="font-bold text-2xl text-gray-500"> {{ $t(tabs[current_page].tab_description) }} </span>
     <router-view></router-view>
 </template>
 
@@ -67,12 +67,12 @@ export default {
             tabs: [
                 {
                     tab_name: "Summary Overview",
-                    tab_description: "Information on the number of interactions",
+                    tab_description: "dashboard.summary.tabs.1",
                     tab_path: "dashboard/summary/overview"
                 },
                 {
                     tab_name: "Weekly Interactions",
-                    tab_description: "Interactions in a span of a week",
+                    tab_description: "dashboard.summary.tabs.2",
                     tab_path: "dashboard/summary/weekly"
                 }
             ]
