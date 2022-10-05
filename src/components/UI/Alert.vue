@@ -6,7 +6,7 @@
                 {{ message }}
             </div>
             <button type="button"
-                    @click="close_alert"
+                    @click="this.$emit('closeAlert')"
                     class="ml-auto bg-red-100 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1 hover:bg-red-200 inline-flex h-8 w-8">
                 <SvgIcon type="mdi" :path="close_icon"/>
             </button>
@@ -14,13 +14,15 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
 import SvgIcon from "@jamescoyle/vue-icon";
 import {mdiClose, mdiInformation} from "@mdi/js";
 
 export default {
     name: "Alert",
-    props: ['message'],
+    props: {
+      message: String
+    },
     emits: ['closeAlert'],
     components: {
         SvgIcon
@@ -29,11 +31,6 @@ export default {
         return {
             help_icon: mdiInformation,
             close_icon: mdiClose,
-        }
-    },
-    methods: {
-        close_alert() {
-            this.$emit('closeAlert');
         }
     }
 }
