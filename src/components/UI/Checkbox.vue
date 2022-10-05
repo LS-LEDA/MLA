@@ -13,13 +13,16 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
 import SvgIcon from "@jamescoyle/vue-icon";
 import {mdiCheck} from "@mdi/js";
 
 export default {
     name: "Checkbox",
-    props: ['id', 'selected'],
+    props: {
+        id: String,
+        selected: Boolean
+    },
     components: {
         SvgIcon
     },
