@@ -60,7 +60,25 @@ export default {
                 {
                     button_name: "navigation.dashboard.dash",
                     button_icon: mdiViewDashboardOutline,
-                    page_link: '/dashboard'
+                    page_link: '/dashboard',
+					children: [
+						{
+							button_name: "navigation.dashboard.summary",
+							rel_link: '/summary',
+						},
+						{
+							button_name: "navigation.dashboard.students",
+							rel_link: '/students',
+						},
+						{
+							button_name: "navigation.dashboard.resources",
+							rel_link: '/resources',
+						},
+						{
+							button_name: "navigation.dashboard.sentiment",
+							rel_link: '/sentiment',
+						}
+					]
                 },
                 {
                     button_name: "navigation.plugins",
