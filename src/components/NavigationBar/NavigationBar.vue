@@ -20,10 +20,12 @@
 import DownloadButton from '@/components/NavigationBar/DownloadButton.vue';
 import NavigationHeader from "@/components/NavigationBar/NavigationHeader.vue";
 import {
-  mdiCogOutline,
-  mdiDatabaseImportOutline,
-  mdiToyBrickPlusOutline,
-  mdiViewDashboardOutline
+	mdiChevronDown,
+	mdiChevronUp,
+	mdiCogOutline,
+	mdiDatabaseImportOutline,
+	mdiToyBrickPlusOutline,
+	mdiViewDashboardOutline
 } from "@mdi/js";
 import SvgIcon from "@jamescoyle/vue-icon";
 import {useSettingsStore} from "@/vuex/settingsStore";
@@ -51,6 +53,8 @@ export default {
     },
     data() {
         return {
+			chevron_down_icon: mdiChevronDown,
+			chevron_up_icon: mdiChevronUp,
             pages: [
                 {
                     button_name: "navigation.import",
