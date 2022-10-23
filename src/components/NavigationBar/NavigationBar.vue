@@ -121,7 +121,26 @@ export default {
                 {
                     button_name: "navigation.settings.sett",
                     button_icon: mdiCogOutline,
-                    page_link: '/settings'
+                    page_link: '/settings',
+					wrapped: true,
+					children: [
+						{
+							button_name: "navigation.settings.general",
+							rel_link: '/general',
+						},
+						{
+							button_name: "navigation.settings.ai",
+							rel_link: '/ai',
+						},
+						{
+							button_name: "navigation.settings.themes",
+							rel_link: '/themes',
+						},
+						{
+							button_name: "navigation.settings.about",
+							rel_link: '/about',
+						}
+					]
                 }
             ],
         }
