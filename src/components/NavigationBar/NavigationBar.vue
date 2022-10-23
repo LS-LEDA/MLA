@@ -2,13 +2,41 @@
     <div :class="nav_state ? 'w-80' : 'w-20'" class="mx-2 my-2 flex flex-col bg-secondary dark:bg-dark_secondary rounded-xl transform transition-all duration-700">
         <NavigationHeader/>
         <div class="flex flex-col gap-y-3 mx-2">
-            <router-link active-class="bg-primary_variant dark:bg-dark_primary_variant"
-                :class="nav_state ? null : 'justify-center'"
-                class="flex flex-row bg-primary dark:bg-dark_primary hover:bg-primary_variant dark:hover:bg-dark_primary_variant rounded-lg py-3 px-4 font-bold w-full"
-                :to="page.page_link" v-for="(page, index) in pages" :key="index">
-                <SvgIcon type="mdi" :path="page.button_icon"/>
-                <span class="ml-3" v-if="nav_state">{{ $t(page.button_name) }}</span>
-            </router-link>
+			<div
+				v-for="(page, index) in pages"
+				:key="index"
+				class="flex flex-col rounded-md bg-primary dark:bg-dark_primary font-bold w-full h-fit relative"
+			>
+				<router-link
+					active-class="w-full bg-primary_variant dark:bg-dark_primary_variant"
+					class="flex w-full p-2 rounded-md hover:bg-primary_variant space-x-3"
+					:class="[nav_state ? '' : 'place-content-center', page.wrapped !== undefined && !page.wrapped && nav_state ? 'rounded-b-none' : '']"
+					:to="page.page_link"
+				>
+					<SvgIcon type="mdi" :path="page.button_icon"/>
+					<span v-if="nav_state">{{$t(page.button_name)}}</span>
+				</router-link>
+				<!-- Wrap page children list icon -->
+				<SvgIcon
+					v-if="nav_state && page.children"
+					:path="this.pages[index].wrapped ? chevron_down_icon : chevron_up_icon"
+					type="mdi"
+					class="absolute bg-primary rounded-md right-2 top-2 cursor-pointer"
+					@click="page.wrapped = !page.wrapped"
+				/>
+				<div v-if="nav_state && page.wrapped !== undefined && !page.wrapped" class="p-2">
+					<router-link
+						v-for="(subpage, subpageIndex) in page.children"
+						:key="subpageIndex"
+						:to="page.page_link + subpage.rel_link"
+						:class="nav_state ? null : 'justify-center'"
+						class="text-sm flex w-full px-2 py-2 hover:bg-primary_variant dark:hover:bg-dark_primary_variant hover:rounded-md"
+						active-class="bg-primary_variant dark:bg-dark_primary_variant rounded-md"
+					>
+						{{ $t(subpage.button_name) }}
+					</router-link>
+				</div>
+			</div>
         </div>
         <div class="flex flex-col flex-1 justify-end">
             <DownloadButton/>
