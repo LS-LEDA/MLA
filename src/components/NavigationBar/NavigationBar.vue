@@ -65,6 +65,7 @@ export default {
                     button_name: "navigation.dashboard.dash",
                     button_icon: mdiViewDashboardOutline,
                     page_link: '/dashboard',
+					wrapped: true,
 					children: [
 						{
 							button_name: "navigation.dashboard.summary",
