@@ -38,6 +38,19 @@
 				</div>
 			</div>
         </div>
+		<!-- Navigation shrink button -->
+		<button
+			class="bg-secondary dark:bg-dark_secondary absolute -right-4 h-12 w-4 top-1/2 transform -translate-y-1/2 rounded-r-md"
+			@click="changeNavigationBarStatus"
+		>
+			<SvgIcon
+				type="mdi"
+				:path="chevron_left_icon"
+				size="16"
+				class="text-black dark:text-secondary transform transition duration-700"
+				:rotate="nav_state ? 0 : 180"
+			/>
+		</button>
         <div class="flex flex-col flex-1 justify-end">
             <DownloadButton/>
         </div>
@@ -48,6 +61,7 @@
 import DownloadButton from '@/components/NavigationBar/DownloadButton.vue';
 import NavigationHeader from "@/components/NavigationBar/NavigationHeader.vue";
 import {
+	mdiChevronDoubleLeft,
 	mdiChevronDown,
 	mdiChevronUp,
 	mdiCogOutline,
@@ -79,10 +93,17 @@ export default {
             return this.settingsStore.navigation_bar_status;
         }
     },
+	methods: {
+		// Expand or shrink navigation bar
+		changeNavigationBarStatus() {
+			this.settingsStore.changeNavigationBarStatus();
+		},
+	},
     data() {
         return {
 			chevron_down_icon: mdiChevronDown,
 			chevron_up_icon: mdiChevronUp,
+			chevron_left_icon: mdiChevronDoubleLeft,
             pages: [
                 {
                     button_name: "navigation.import",
