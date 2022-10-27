@@ -27,12 +27,14 @@
 				<div v-if="nav_state && page.wrapped !== undefined && !page.wrapped" class="p-2">
 					<router-link
 						v-for="(subpage, subpageIndex) in page.children"
+						v-slot="{isActive}"
 						:key="subpageIndex"
 						:to="page.page_link + subpage.rel_link"
 						:class="nav_state ? null : 'justify-center'"
 						class="text-sm flex w-full px-2 py-2 hover:bg-primary_variant dark:hover:bg-dark_primary_variant hover:rounded-md"
 						active-class="bg-primary_variant dark:bg-dark_primary_variant rounded-md"
 					>
+						<div v-if="isActive" class="border-l-4 border-primary my-0.5 rounded-full mr-2"/>
 						{{ $t(subpage.button_name) }}
 					</router-link>
 				</div>
