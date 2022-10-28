@@ -5,10 +5,12 @@
     </span>
 </template>
 
-<script>
+<script lang="ts">
 export default {
     name: "Badge",
-    props: ['text']
+    props: {
+        text: String
+    }
 }
 </script>
 

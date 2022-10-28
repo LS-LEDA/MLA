@@ -4,10 +4,12 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
 export default {
     name: "Item",
-    props: ['title']
+    props: {
+      title: String
+    }
 }
 </script>
 
