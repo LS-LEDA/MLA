@@ -5,10 +5,12 @@
 	/>
 </template>
 
-<script>
+<script lang="ts">
 export default {
     name: "Documentation",
-    props: ['file']
+    props: {
+      file: File
+    }
 }
 </script>
 
