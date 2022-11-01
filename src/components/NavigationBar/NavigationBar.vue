@@ -1,5 +1,5 @@
 <template>
-    <div :class="nav_state ? 'w-80' : 'w-20'" class="mx-2 my-2 flex flex-col bg-secondary dark:bg-dark_secondary rounded-xl transform transition-all duration-700 z-[1]">
+    <div :class="nav_state ? 'w-60' : 'w-16'" class="mx-2 my-2 flex flex-col bg-secondary dark:bg-dark_secondary rounded-md transform transition-all duration-700 z-[1]">
         <NavigationHeader/>
         <div class="flex flex-col gap-y-3 mx-2">
 			<div
