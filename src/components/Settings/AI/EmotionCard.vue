@@ -1,15 +1,19 @@
 <template>
-    <div class="flex w-auto h-auto place-items-center">
-        <div class="flex w-full h-fit">
-            {{ emotion }}
-        </div>
-        <IconButton :icon="remove_icon" :type="false" :status="true" @click="this.$emit('removeEmotion')"/>
+  <div className="flex w-auto h-auto place-items-center">
+    <div className="flex w-full h-fit">
+      {{ emotion }}
     </div>
+    <Button
+        :icon="remove_icon"
+        class="px-2"
+        @click="this.$emit('removeEmotion')"
+    />
+  </div>
 </template>
 
 <script>
-import IconButton from "@/components/UI/IconButton.vue";
 import {mdiClose} from "@mdi/js";
+import Button from "@/components/UI/Button.vue";
 
 
 /**
@@ -17,16 +21,16 @@ import {mdiClose} from "@mdi/js";
  * emotions in the AI settings tab.
  */
 export default {
-    name: "EmotionCard",
-    props: ['emotion'],
-    components: {
-        IconButton
-    },
-    data() {
-        return {
-            remove_icon: mdiClose
-        }
+  name: "EmotionCard",
+  props: ['emotion'],
+  components: {
+    Button
+  },
+  data() {
+    return {
+      remove_icon: mdiClose
     }
+  }
 }
 </script>
 

@@ -20,8 +20,16 @@
             </div>
             <!-- Upload Confirmation Buttons -->
             <div class="flex flex-row justify-center">
-                <IconButton :icon="cancel_icon" status="true" :type="this.$t('app.cancel')" @click="$emit('buttonClick', false)"/>
-                <IconButton :icon="upload_icon" :status="alive" :type="this.$t('app.upload')" @click="$emit('buttonClick', true)"/>
+                <Button
+                    :text="this.$t('app.cancel')"
+                    :icon="cancel_icon"
+                    @btnClick="$emit('buttonClick', false)"
+                />
+                <Button
+                    :text="this.$t('app.upload')"
+                    :icon="upload_icon"
+                    @btnClick="$emit('buttonClick', true)"
+                />
             </div>
         </div>
         <div class="absolute w-full h-full filter backdrop-blur-sm z-10"></div>
@@ -31,12 +39,12 @@
 <script>
 import SvgIcon from "@jamescoyle/vue-icon";
 import { mdiClose, mdiFile, mdiUpload } from "@mdi/js";
-import IconButton from "@/components/UI/IconButton.vue";
+import Button from "@/components/UI/Button.vue";
 
 export default {
     name: "UploadConfirmation",
     components: {
-        IconButton,
+        Button,
         SvgIcon
     },
     emits: ['buttonClick'],
