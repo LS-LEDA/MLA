@@ -25,6 +25,7 @@ import BrowseFilesButton from "@/components/ImportData/BrowseFilesButton.vue";
 import SvgIcon from '@jamescoyle/vue-icon'
 import { mdiFileUpload, mdiHelpCircleOutline  } from "@mdi/js"
 import { ref } from 'vue'
+import {html} from "@/documentation/import-data.md";
 
 export default {
     name: "DragDropArea",
@@ -37,7 +38,9 @@ export default {
       return {
             upload_file_icon: mdiFileUpload,
             information_icon: mdiHelpCircleOutline,
-            data_file: null
+            data_file: null,
+            show_docs: false,
+            docs_file: html
         }
     },
     setup() {
@@ -49,8 +52,12 @@ export default {
         return { active, toggleActive }
     },
     methods: {
+        /**
+         * Emits popup event to its parent component
+         * and sends the documentation file to be displayed
+         */
         informationPopUp: function () {
-          this.$emit('popUp');
+            this.$emit('popUp', this.docs_file);
         },
         /**
          * Checks whether is a drop or a input change event
