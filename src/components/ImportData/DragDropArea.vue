@@ -38,13 +38,14 @@ export default {
     Button,
     SvgIcon
   },
-  emits: ['onUpload', 'popUp'],
   data() {
     return {
       open_folder_icon: mdiFolderOpen,
       upload_file_icon: mdiFileUpload,
       information_icon: mdiHelpCircleOutline,
-      data_file: null
+      data_file: null,
+			show_docs: false,
+			docs_file: html
     }
   },
   setup() {
@@ -56,15 +57,6 @@ export default {
     return { active, toggleActive }
   },
   emits: ['onUpload', 'popUp'],
-  data() {
-    return {
-          upload_file_icon: mdiFileUpload,
-          information_icon: mdiHelpCircleOutline,
-          data_file: null,
-          show_docs: false,
-          docs_file: html
-      }
-  }
   methods: {
     browse_open: function () {
       this.$refs.moodle_file.click();
