@@ -74,6 +74,9 @@ const routes = [
             {
                 path: '/dashboard/students',
                 name: "students",
+                beforeEnter: (to, from) => {
+                    return check_imported_data(to, from);
+                },
                 component: Students,
                 redirect: "/dashboard/students/overview",
                 children: [
