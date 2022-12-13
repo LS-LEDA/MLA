@@ -4,7 +4,7 @@
         <div class="self-center">
             <router-link :to="imported_data"
                          @click="redirectionAlert(this.$t('errors.import_needed'))">
-                <img class="max-h-16 rounded-lg origin-center transform transition duration-500"
+                <img class="max-h-16 rounded-md origin-center transform transition duration-500"
                      src="/assets/mla_logo.png" alt="MLA Logo">
             </router-link>
         </div>
