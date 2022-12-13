@@ -29,6 +29,7 @@
 import SvgIcon from '@jamescoyle/vue-icon'
 import {mdiFileUpload, mdiFolderOpen, mdiHelpCircleOutline} from "@mdi/js"
 import { ref } from 'vue'
+import {html} from "@/documentation/import-data.md";
 import Button from "@/components/UI/Button.vue";
 
 export default {
@@ -54,12 +55,26 @@ export default {
 
     return { active, toggleActive }
   },
+  emits: ['onUpload', 'popUp'],
+  data() {
+    return {
+          upload_file_icon: mdiFileUpload,
+          information_icon: mdiHelpCircleOutline,
+          data_file: null,
+          show_docs: false,
+          docs_file: html
+      }
+  }
   methods: {
     browse_open: function () {
       this.$refs.moodle_file.click();
     },
+    /**
+    * Emits popup event to its parent component
+    * and sends the documentation file to be displayed
+    */
     informationPopUp: function () {
-      this.$emit('popUp');
+      this.$emit('popUp', this.docs_file);
     },
     /**
      * Checks whether is a drop or a input change event
