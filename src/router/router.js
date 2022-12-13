@@ -152,7 +152,7 @@ function check_imported_forum_data(){
     const appStore = useAppStore();
     if ( !appStore.imported_data.forum_logs ) {
         // Show alert
-        redirectionAlert(i18n.global.t("errors.impot_forum_needed"));
+        redirectionAlert(i18n.global.t("errors.import_forum_needed"));
         return false;
     }
 }
