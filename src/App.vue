@@ -2,7 +2,9 @@
     <div class="flex flex-row h-screen w-screen bg-background dark:bg-dark_background select-none
                 text-typography dark:text-dark_typography">
         <!-- Left navigation bar -->
-        <NavigationBar/>
+		<div class="flex">
+			<NavigationBar/>
+		</div>
         <!-- Page rendered by router -->
         <router-view/>
     </div>
