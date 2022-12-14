@@ -33,13 +33,20 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
 import SvgIcon from "@jamescoyle/vue-icon";
 import {mdiContentCopy} from "@mdi/js";
 
 export default {
     name: "ContributorBadge",
-    props: ['contributor'],
+    props: {
+      contributor: {
+        name: String,
+        email: String,
+        icon: String,
+        role: String,
+      }
+    },
     components: {
         SvgIcon
     },

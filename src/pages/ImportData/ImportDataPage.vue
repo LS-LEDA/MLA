@@ -3,9 +3,17 @@
         <InformationPopUp v-if="show_popUp" @infoPopUp= "toggle_information_pop_up"/>
         <div class="flex flex-col bg-secondary dark:bg-dark_secondary rounded-3xl h-5/6 w-9/12 self-center justify-center">
             <UploadProgressBar/>
-            <DragDropArea @onUpload="toggle_pop_up" @popUp="toggle_information_pop_up"/>
+            <DragDropArea @onUpload="toggle_pop_up" @popUp="toggle_popup"/>
         </div>
         <UploadConfirmation v-if="file_selected" @buttonClick="confirm_upload" :selected_file_name="selected_file_name"/>
+        <!-- Documentation Pop Up -->
+        <!--TODO: Move popup to App.vue-->
+        <PopUp
+            v-if="popup"
+            :current-pop-up="this.current_popup_up"
+            :pop-up-props="this.docs_file"
+            @closePopUp="this.toggle_popup"
+        />
         <!-- Alert -->
         <Alert v-if="alert_status.status" :message="alert_status.message"
                @closeAlert="close_alert"/>
@@ -21,6 +29,9 @@ import {local_processing} from "@/services/local-processing";
 import Alert from "@/components/UI/Alert.vue";
 import {useSettingsStore} from "@/vuex/settingsStore";
 import {useAppStore} from "@/vuex/appStore";
+import PopUp from "@/components/UI/PopUp.vue";
+import {markRaw} from "vue";
+import Documentation from "@/components/UI/Documentation.vue";
 
 export default {
     name: "ImportDataPage",
@@ -35,6 +46,10 @@ export default {
             selected_file_name: "",
             selected_file: null,
             show_popUp : false,
+            popup: false,
+            // Documentation component is not reactive
+            current_popup_up: markRaw(Documentation),
+            docs_file: null
         }
     },
     components: {
@@ -42,7 +57,8 @@ export default {
         UploadConfirmation,
         DragDropArea,
         InformationPopUp,
-        Alert
+        Alert,
+        PopUp
     },
     mounted() {
         this.get_settings();
@@ -126,6 +142,17 @@ export default {
             // Clears toggle alert timeout if alert is dismissed by the user
             clearTimeout(this.appStore.alert.timeout);
             this.appStore.alert.status = false;
+        },
+        /**
+        * Receives the file to be shown in the popup component
+        * from its child and toggles the popup state
+        * @param file File to be shown in the Documentation popup
+        */
+        toggle_popup: function (file) {
+          this.popup = !this.popup;
+          this.docs_file = {
+            file: file
+          }
         }
     }
 }

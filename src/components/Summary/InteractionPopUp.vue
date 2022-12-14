@@ -24,9 +24,9 @@
                 </div>
                 <!-- Chart Controllers -->
                 <div class="hidden md:flex flex-col">
-                    <IconButton :icon="zoom_in_icon" :status="true" @click="zoom_event(0)"/>
-                    <IconButton :icon="zoom_out_icon" :status="true" @click="zoom_event(1)"/>
-                    <IconButton :icon="zoom_reset_icon" :status="true" @click="zoom_event(2)"/>
+                    <Button :icon="zoom_in_icon" @btnClick="zoom_event(0)"/>
+                    <Button :icon="zoom_out_icon" @btnClick="zoom_event(1)"/>
+                    <Button :icon="zoom_reset_icon" @btnClick="zoom_event(2)"/>
                 </div>
             </div>
 
@@ -48,16 +48,16 @@ import SvgIcon from "@jamescoyle/vue-icon";
 import {Chart, registerables} from "chart.js";
 import totalInteractionChartData from "@/assets/totalInteractionChartData";
 import zoomPlugin from 'chartjs-plugin-zoom';
-import IconButton from "@/components/UI/IconButton.vue";
 import Table from "@/components/UI/Table.vue";
 import {inject} from "vue";
 import {useAppStore} from "@/vuex/appStore";
+import Button from "@/components/UI/Button.vue";
 
 export default {
     name: "InteractionPopUp",
     components: {
+      Button,
         Table,
-        IconButton,
         SvgIcon
     },
     props: ['logs'],
