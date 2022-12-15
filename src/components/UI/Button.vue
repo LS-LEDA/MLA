@@ -1,6 +1,6 @@
 <template>
   <button class="flex flex-row bg-primary dark:bg-dark_primary hover:enabled:bg-primary_variant
-                   dark:enabled:hover:bg-dark_primary_variant rounded-lg font-bold px-4 m-2 py-2 px-5"
+                   dark:enabled:hover:bg-dark_primary_variant rounded-md font-bold py-2 px-4"
           :disabled="disable"
           @click="this.$emit('btnClick')">
     <svg-icon type="mdi" v-if="icon" :path="icon" :class="icon && text ? 'mr-3' : ''"></svg-icon>
