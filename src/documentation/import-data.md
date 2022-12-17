@@ -1,6 +1,7 @@
 # Extract Moodle Interaction Report 🤖
 
 ### Access the course:
+
 1. Go to Course's Settings
 2. Select **"More options"**
 3. Search for **"Reports"** section and select **"Logs"**
