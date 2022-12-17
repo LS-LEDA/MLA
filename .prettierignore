@@ -1,0 +1,6 @@
+build
+dist
+dist_electron
+public
+node_modules
+package-lock.json
