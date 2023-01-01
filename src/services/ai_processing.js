@@ -1,5 +1,6 @@
-import store from "@/vuex/store";
 import * as tf from '@tensorflow/tfjs';
+import { useSettingsStore } from '@/vuex/settingsStore';
+import { useAppStore } from '@/vuex/appStore';
 
 let model = null;
 let allWords = null;
@@ -11,45 +12,49 @@ let emotions = null;
  * @param file
  */
 function load_emotions(file) {
-    const file_reader = new FileReader()
+  const appStore = useAppStore();
+  const file_reader = new FileReader();
 
-    // Messages log file
-    file_reader.onload = (event) => {
-        let emotions_list = JSON.parse(event.target.result);
+  // Messages log file
+  file_reader.onload = (event) => {
+    let emotions_list = JSON.parse(event.target.result);
+    appStore.saveEmotions(emotions_list);
+  };
 
-        console.log(emotions_list);
-        store.commit('saveEmotions', emotions_list)
-    }
-
-    file_reader.readAsText(file);
+  file_reader.readAsText(file);
 }
 
 function train_ai() {
-    let bow = {};   // Bag of Words: Dictionary used to
+  const appStore = useAppStore();
+  let bow = {}; // Bag of Words: Dictionary used to
 
-    let sentences = store.state.emotions_dataset;
-    emotions = store.state.emotions;
+  let sentences = appStore.emotions_dataset;
+  emotions = appStore.emotions;
 
-    // Get the list from the store, transform the input and generate the bag of words
-    sentences.forEach( data => {
-        let words = data.message.replace(/[^a-z ]/gi, "").toLowerCase().split( " " ).filter( x => !!x );
-        words.forEach( w => {
-            if(!bow[w]) bow[w] = 0;
-            bow[w]++; // Counting occurrence for word frequency
-        });
+  // Get the list from the store, transform the input and generate the bag of words
+  sentences.forEach((data) => {
+    let words = data.message
+      .replace(/[^a-z ]/gi, '')
+      .toLowerCase()
+      .split(' ')
+      .filter((x) => !!x);
+    words.forEach((w) => {
+      if (!bow[w]) bow[w] = 0;
+      bow[w]++; // Counting occurrence for word frequency
     });
+  });
 
-    allWords = Object.keys(bow);
-    allWords.forEach((w, i) => {
-        wordReference[w] = i;
-    });
+  allWords = Object.keys(bow);
+  allWords.forEach((w, i) => {
+    wordReference[w] = i;
+  });
 
-    // Generate vectors for sentences
-    let vectors = generateVectors(sentences, allWords, wordReference);
-    let outputs = generateOutputs(sentences, emotions);
+  // Generate vectors for sentences
+  let vectors = generateVectors(sentences, allWords, wordReference);
+  let outputs = generateOutputs(sentences, emotions);
 
-    // Train model
-    trainModel(sentences, vectors, outputs, emotions, allWords, wordReference);
+  // Train model
+  trainModel(sentences, vectors, outputs, emotions, allWords, wordReference);
 }
 
 /**
@@ -61,18 +66,22 @@ function train_ai() {
  * @returns Array of vectors
  */
 function generateVectors(sentences, allWords, wordReference) {
-    return sentences.map( s => {
-        // Generate array of all word's length and fill it with 0s
-        let vector = new Array( allWords.length ).fill( 0 );
-        let words = s.message.replace(/[^a-z ]/gi, "").toLowerCase().split( " " ).filter( x => !!x );
-        // Set the vector's position to 1 if the word is in the word reference
-        words.forEach( w => {
-            if(w in wordReference) {
-                vector[wordReference[w]] = 1;
-            }
-        });
-        return vector;
+  return sentences.map((s) => {
+    // Generate array of all word's length and fill it with 0s
+    let vector = new Array(allWords.length).fill(0);
+    let words = s.message
+      .replace(/[^a-z ]/gi, '')
+      .toLowerCase()
+      .split(' ')
+      .filter((x) => !!x);
+    // Set the vector's position to 1 if the word is in the word reference
+    words.forEach((w) => {
+      if (w in wordReference) {
+        vector[wordReference[w]] = 1;
+      }
     });
+    return vector;
+  });
 }
 
 /**
@@ -83,15 +92,15 @@ function generateVectors(sentences, allWords, wordReference) {
  * @returns Array of matched emotions arrays
  */
 function generateOutputs(sentences, emotions) {
-    return sentences.slice( 0, sentences.length ).map( s => {
-        let s_tags = s.tag;
-        let output = [];
-        for( let i = 0; i < emotions.length; i++ ) {
-            // TODO: Change tags to a dictionary to improve performance
-            output.push( s_tags.includes( emotions[i] ) ? 1 : 0 );
-        }
-        return output;
-    });
+  return sentences.slice(0, sentences.length).map((s) => {
+    let s_tags = s.tag;
+    let output = [];
+    for (let i = 0; i < emotions.length; i++) {
+      // TODO: Change tags to a dictionary to improve performance
+      output.push(s_tags.includes(emotions[i]) ? 1 : 0);
+    }
+    return output;
+  });
 }
 
 /**
@@ -104,43 +113,59 @@ function generateOutputs(sentences, emotions) {
  * @param wordReference
  */
 // eslint-disable-next-line no-unused-vars
-function trainModel(sentences, vectors, outputs, emotions, allWords, wordReference) {
-    // Define our model with several hidden layers
-    const model = tf.sequential();
-    model.add(tf.layers.dense({units: 100, activation: "relu", inputShape: [allWords.length]}));
-    model.add(tf.layers.dense({units: 50, activation: "relu"}));
-    model.add(tf.layers.dense({units: 25, activation: "relu"}));
-    model.add(tf.layers.dense({
-        units: emotions.length,
-        activation: "softmax"
-    }));
+function trainModel(
+  sentences,
+  vectors,
+  outputs,
+  emotions,
+  allWords,
+  wordReference,
+) {
+  // Define our model with several hidden layers
+  const model = tf.sequential();
+  model.add(
+    tf.layers.dense({
+      units: 100,
+      activation: 'relu',
+      inputShape: [allWords.length],
+    }),
+  );
+  model.add(tf.layers.dense({ units: 50, activation: 'relu' }));
+  model.add(tf.layers.dense({ units: 25, activation: 'relu' }));
+  model.add(
+    tf.layers.dense({
+      units: emotions.length,
+      activation: 'softmax',
+    }),
+  );
 
-    // Specify the training configuration
-    // Use Adam algorithm optimizer
-    // Computes the cross-entropy loss between the labels and predictions.
-    // Calculates how often predictions equal labels.
-    model.compile({
-        optimizer: tf.train.adam(),
-        loss: "categoricalCrossentropy",
-        metrics: ["accuracy"]
-    });
+  // Specify the training configuration
+  // Use Adam algorithm optimizer
+  // Computes the cross-entropy loss between the labels and predictions.
+  // Calculates how often predictions equal labels.
+  model.compile({
+    optimizer: tf.train.adam(),
+    loss: 'categoricalCrossentropy',
+    metrics: ['accuracy'],
+  });
 
-    const xs = tf.stack(vectors.map(x => tf.tensor1d(x)));
-    const ys = tf.stack(outputs.map(x => tf.tensor1d(x)));
+  const xs = tf.stack(vectors.map((x) => tf.tensor1d(x)));
+  const ys = tf.stack(outputs.map((x) => tf.tensor1d(x)));
 
-    // Measure of how well a machine learning model generalizes data similar to that with which it was trained
-    model.fit(xs, ys, {
-        epochs: 50,
-        shuffle: true,
-        callbacks: {
-            onEpochEnd: (epoch, logs) => {
-                // TODO: Logging visualizer and progression indicator
-                console.log("Epoch #", epoch, logs);
-            }
-        }
-    }).then(
-        async () => {
-            /*let i = 0;
+  // Measure of how well a machine learning model generalizes data similar to that with which it was trained
+  model
+    .fit(xs, ys, {
+      epochs: 50,
+      shuffle: true,
+      callbacks: {
+        onEpochEnd: (epoch, logs) => {
+          // TODO: Logging visualizer and progression indicator
+          console.log('Epoch #', epoch, logs);
+        },
+      },
+    })
+    .then(async () => {
+      /*let i = 0;
             let trainingInterval = setInterval( async () => {
                 let sentence = sentences[i].message;
                 let s_tags = sentences[i].tag;
@@ -162,27 +187,26 @@ function trainModel(sentences, vectors, outputs, emotions, allWords, wordReferen
                 i++;
                 if (i === sentences.length) clearInterval(trainingInterval);
             }, 1000 );*/
-            // TODO: Save to the file system within Electron app, Download model if using the browser
-            // Store the trained model
-            const saveResults = await model.save('downloads://emotion_analysis');
-            // Store AI related data to the application configuration file
-            store.commit('setSettings', {
-                key: 'ai.word_reference',
-                value: wordReference
-            });
-            store.commit('setSettings', {
-                key: 'ai.emotions',
-                value: emotions
-            });
-            store.commit('setSettings', {
-                key: 'ai.all_words',
-                value: allWords
-            });
+      // TODO: Save to the file system within Electron app, Download model if using the browser
+      // Store the trained model
+      const settingsStore = useSettingsStore();
+      const saveResults = await model.save('downloads://emotion_analysis');
+      // Store AI related data to the application configuration file
+      settingsStore.setSettings({
+        key: 'ai.word_reference',
+        value: wordReference,
+      });
+      settingsStore.setSettings({
+        key: 'ai.emotions',
+        value: emotions,
+      });
+      settingsStore.setSettings({
+        key: 'ai.all_words',
+        value: allWords,
+      });
 
-            console.log(saveResults);
-        }
-    );
-
+      console.log(saveResults);
+    });
 }
 
 // TODO: Implement Singleton model
@@ -194,11 +218,14 @@ function trainModel(sentences, vectors, outputs, emotions, allWords, wordReferen
  * @returns {Promise<void>}
  */
 async function load_model(model_file, weight_file) {
-    allWords = store.state.settings.ai.all_words;
-    wordReference = store.state.settings.ai.word_reference;
-    emotions = store.state.settings.ai.emotions;
+  const settingsStore = useSettingsStore();
+  allWords = settingsStore.settings.ai.all_words;
+  wordReference = settingsStore.settings.ai.word_reference;
+  emotions = settingsStore.settings.ai.emotions;
 
-    model = await tf.loadLayersModel(tf.io.browserFiles([model_file, weight_file]));
+  model = await tf.loadLayersModel(
+    tf.io.browserFiles([model_file, weight_file]),
+  );
 }
 
 /**
@@ -207,23 +234,29 @@ async function load_model(model_file, weight_file) {
  * @returns {Promise<void>}
  */
 async function analyze_emotion(messages) {
-    for (const m of messages) {
-        // Generate vectors for sentences
-        let vector = new Array( allWords.length ).fill( 0 );
-        let words = m.message.replace(/[^a-z ]/gi, "").toLowerCase().split( " " ).filter( x => !!x );
-        words.forEach( w => {
-            if( w in wordReference ) {
-                vector[ wordReference[ w ] ] = 1;
-            }
-        });
+  for (const m of messages) {
+    // Generate vectors for sentences
+    let vector = new Array(allWords.length).fill(0);
+    let words = m.message
+      .replace(/[^a-z ]/gi, '')
+      .toLowerCase()
+      .split(' ')
+      .filter((x) => !!x);
+    words.forEach((w) => {
+      if (w in wordReference) {
+        vector[wordReference[w]] = 1;
+      }
+    });
 
-        let prediction = await model.predict( tf.stack( [ tf.tensor1d( vector ) ] ) ).data();
-        // Get the index of the highest value in the prediction
-        let id = prediction.indexOf( Math.max( ...prediction ) );
-        console.log( "Result: " + emotions[id]);
+    let prediction = await model
+      .predict(tf.stack([tf.tensor1d(vector)]))
+      .data();
+    // Get the index of the highest value in the prediction
+    let id = prediction.indexOf(Math.max(...prediction));
+    console.log('Result: ' + emotions[id]);
 
-        m.emotion = emotions[id];
-    }
+    m.emotion = emotions[id];
+  }
 }
 
-export { load_emotions, train_ai, load_model, analyze_emotion }
+export { load_emotions, train_ai, load_model, analyze_emotion };

@@ -1,0 +1,117 @@
+{
+  "app": {
+    "cancel": "Cancel",
+    "upload": "Upload",
+    "drag_drop": {
+      "drag_drop": "Drag & Drop file here | Drag & Drop files here",
+      "or": "or",
+      "browse": "Browse Files"
+    }
+  },
+  "navigation": {
+    "import": "Import",
+    "dashboard": {
+      "dash": "Dashboard",
+      "summary": "Summary",
+      "students": "Students",
+      "resources": "Resources",
+      "sentiment": "Sentiment"
+    },
+    "plugins": "Plugins",
+    "settings": {
+      "sett": "Settings",
+      "general": "General",
+      "ai": "AI",
+      "themes": "Themes",
+      "about": "About"
+    },
+    "download": "Download"
+  },
+  "import_page": {
+    "progress_bar": {
+      "step1": "Uploading file",
+      "step2": "Data Processing",
+      "step3": "Generating Overview",
+      "step4": "Finish"
+    }
+  },
+  "dashboard": {
+    "summary": {
+      "title": "Summary of all course interactions",
+      "tabs": {
+        "1": "Information on the number of interactions",
+        "2": "Interactions in a span of a week"
+      },
+      "total_interactions": {
+        "title":  "Total Interactions",
+        "interaction_type": "Interactions type",
+        "number_of_interactions": "Number of interactions"
+      }
+    },
+    "students": {
+      "title": "Students Data",
+      "tabs": {
+        "1": "Information on students interactions",
+        "2": "Students list"
+      },
+      "tables": {
+        "student_participation": "Student participation",
+        "student_participation_info": "Total number of interactions between each student and the resources of the course (Includes course viewing).",
+        "student_dedication": "Student dedication",
+        "student_dedication_info": "Total time that each member has dedicated to the course."
+      },
+      "misc": {
+        "student_name": "Student Name"
+      }
+    }
+  },
+  "settings": {
+    "general": {
+      "set_gpu": {
+        "title": "Hardware Acceleration",
+        "description": "Turn on Hardware Acceleration, which uses GPU to make MLA smoother. Turn it off if you are experiencing frame drops."
+      },
+      "set_startup": {
+        "title": "Open MLA",
+        "description": "Save yourself a few clicks and let MLA greet you on computer startup."
+      },
+      "set_tray": {
+        "title": "Minimize to tray",
+        "description": "Hitting X will make MLA sit back and relax in your system tray when you close the app."
+      },
+      "set_ai": {
+        "title": "Emotion Analysis AI",
+        "description": "Use AI to detect forum messages' emotion."
+      },
+      "set_lang": "Language"
+    },
+    "ai": {
+      "title": "Emotion detection with AI",
+      "emotions_list": "Emotions list",
+      "emotions_list_input": "Enter emotions here",
+      "datasets_data": "Datasets data",
+      "load_model_weights": "Load Model & Weights",
+      "train_ai": "Train AI"
+    },
+    "themes": {
+      "app_modes": {
+        "dark": "Dark mode for night owls",
+        "light": "Light mode for daydreamers",
+        "sys": "Let the system decide for you"
+      },
+      "default_theme": "Default theme",
+      "add": "Add",
+      "app_mode": "Application mode",
+      "app_theme": "Application theme"
+    },
+    "about": {
+      "maintainers": "Maintainers",
+      "contributors": "Contributors"
+    }
+  },
+  "errors": {
+    "smth_wrong": "Something went wrong! Try to restart MLA",
+    "import_needed": "Import Moodle and/or Forum logs",
+    "import_forum_needed": "Import Forum log"
+  }
+}
