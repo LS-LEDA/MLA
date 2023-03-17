@@ -27,6 +27,7 @@ const schema = {
         type: 'number',
         default: 0,
       },
+      // TODO: Check themes
       themes: {
         type: 'object',
         properties: {
