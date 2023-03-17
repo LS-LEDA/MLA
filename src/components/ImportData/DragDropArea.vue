@@ -25,7 +25,7 @@
           active,
       }"
       :icon='open_folder_icon'
-      :text="this.$t('app.drag_drop.browse')"
+      :text="$t('app.drag_drop.browse')"
       @btnClick='browse_open'
     />
     <div class='flex flex-row w-full h-1/5 justify-end content-end'>
@@ -40,10 +40,10 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
   import SvgIcon from '@jamescoyle/vue-icon';
   import { mdiFileUpload, mdiFolderOpen, mdiHelpCircleOutline } from '@mdi/js';
-  import { ref } from 'vue';
+  import { ref,Ref } from 'vue';
   import { html } from '@/documentation/import-data.md';
   import Button from '@/components/UI/Button.vue';
 
@@ -53,7 +53,14 @@
       Button,
       SvgIcon,
     },
-    data() {
+    data():{
+      open_folder_icon: string,
+      upload_file_icon: string,
+      information_icon: string,
+      data_file: File | null,
+      show_docs: boolean,
+      docs_file: string,
+    }{
       return {
         open_folder_icon: mdiFolderOpen,
         upload_file_icon: mdiFileUpload,
@@ -64,7 +71,7 @@
       };
     },
     setup() {
-      const active = ref(false);
+      const active: Ref<boolean> = ref(false);
       const toggleActive = () => {
         active.value = !active.value;
       };
@@ -73,14 +80,14 @@
     },
     emits: ['onUpload', 'popUp'],
     methods: {
-      browse_open: function() {
-        this.$refs.moodle_file.click();
-      },
+      browse_open(): void {
+        (this.$refs.moodle_file as HTMLInputElement).click();
+            },
       /**
        * Emits popup event to its parent component
        * and sends the documentation file to be displayed
        */
-      informationPopUp: function() {
+      informationPopUp(): void {
         this.$emit('popUp', this.docs_file);
       },
       /**
@@ -89,23 +96,23 @@
        * for the user to confirm the upload to the backend
        * @param e: drop or change event
        */
-      select_file: function(e) {
-        let uploaded_file;
+      select_file(e: DragEvent | Event): void {
+        let uploaded_file: File;
         if (e.type === 'drop') {
           this.toggleActive();
-          uploaded_file = e.dataTransfer.files[0];
+          uploaded_file = (e as DragEvent).dataTransfer!.files[0];
           if (!uploaded_file) return;
           this.data_file = uploaded_file;
           this.confirm_upload();
           return;
         }
-        uploaded_file = e.target.files[0];
+        uploaded_file = (e.target! as HTMLInputElement).files![0];
         if (!uploaded_file) return;
         this.data_file = uploaded_file;
-        this.$refs.moodle_file.value = null;
+        (this.$refs.moodle_file as HTMLInputElement).value = '';
         this.confirm_upload();
       },
-      confirm_upload: function() {
+      confirm_upload(): void {
         this.$emit('onUpload', this.data_file);
       },
     },
