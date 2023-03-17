@@ -137,7 +137,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
   import SvgIcon from '@jamescoyle/vue-icon';
   import { mdiCheck } from '@mdi/js';
   import { useAppStore } from '@/vuex/appStore';
@@ -152,7 +152,10 @@
       return { appStore };
     },
     computed: {
-      progress() {
+      progress(): {
+        status: number;
+        progress: number;
+      }{
         return {
           status: this.appStore.upload_status.status,
           progress: this.appStore.upload_status.progress,
