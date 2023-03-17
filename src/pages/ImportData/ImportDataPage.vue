@@ -22,9 +22,9 @@
     <!--TODO: Move popup to App.vue-->
     <PopUp
       v-if='popup'
-      :current-pop-up='this.current_popup_up'
-      :pop-up-props='this.docs_file'
-      @closePopUp='this.toggle_popup'
+      :current-pop-up='current_popup_up'
+      :pop-up-props='docs_file'
+      @closePopUp='toggle_popup'
     />
     <!-- Alert -->
     <Alert
@@ -35,7 +35,7 @@
   </section>
 </template>
 
-<script>
+<script lang="ts">
   import DragDropArea from '@/components/ImportData/DragDropArea.vue';
   import UploadConfirmation from '@/components/ImportData/UploadConfirmation.vue';
   import UploadProgressBar from '@/components/ImportData/UploadProgressBar.vue';
@@ -47,6 +47,7 @@
   import PopUp from '@/components/UI/PopUp.vue';
   import { markRaw } from 'vue';
   import Documentation from '@/components/UI/Documentation.vue';
+  import { html } from '@/documentation/import-data.md';
 
   export default {
     name: 'ImportDataPage',
@@ -64,7 +65,7 @@
         popup: false,
         // Documentation component is not reactive
         current_popup_up: markRaw(Documentation),
-        docs_file: null,
+        docs_file: html,
       };
     },
     components: {
@@ -82,9 +83,8 @@
       alert_status() {
         return this.appStore.alert;
       },
-      load_theme: function() {
+      load_theme(): void {
         this.get_settings();
-        return null;
       },
     },
     watch: {
@@ -97,11 +97,13 @@
        * app's mode & theme
        * This function will be fired on app startup
        */
-      get_settings: function() {
+      get_settings(): void {
         // Load user selected colour theme
         let colour;
         let selected_id =
           this.settingsStore.settings['theme']['selectedThemeID'];
+          console.log(selected_id);
+          
         this.settingsStore.themes[selected_id]['colours'].forEach(
           (col, index) => {
             colour = col.substring(col.indexOf('[') + 1, col.lastIndexOf(']'));
@@ -128,14 +130,14 @@
       /**
        * Toggles the Information PopUp visibility
        */
-      toggle_information_pop_up: function() {
+      toggle_information_pop_up(): void{
         this.show_popUp = !this.show_popUp;
       },
       /**
        * Toggles the Upload Confirmation
        * PopUp visibility
        */
-      toggle_pop_up: function(selected_file) {
+      toggle_pop_up(selected_file: any): void{
         this.file_selected = !this.file_selected;
         // Store file name
         this.selected_file_name = selected_file.name;
@@ -146,7 +148,7 @@
        * Emitted when a file has been selected
        * or dropped in the Import File Area
        */
-      confirm_upload: function(whichButton) {
+      confirm_upload(whichButton: boolean): void {
         // Check whether to upload or cancel
         // TODO: Upload to server back-end
         if (whichButton) {
@@ -157,7 +159,7 @@
         // Final Close the PopUp
         this.toggle_pop_up(this.selected_file_name);
       },
-      close_alert: function() {
+      close_alert(): void {
         // Clears toggle alert timeout if alert is dismissed by the user
         clearTimeout(this.appStore.alert.timeout);
         this.appStore.alert.status = false;
@@ -167,7 +169,7 @@
        * from its child and toggles the popup state
        * @param file File to be shown in the Documentation popup
        */
-      toggle_popup: function(file) {
+      toggle_popup(file: File): void {
         this.popup = !this.popup;
         this.docs_file = {
           file: file,
