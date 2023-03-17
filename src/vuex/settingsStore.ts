@@ -1,11 +1,5 @@
 import { defineStore } from 'pinia';
-
-interface SettingsStore {
-  colour_properties: string[];
-  themes: object[];
-  settings: object;
-  navigation_bar_status: boolean;
-}
+import { SettingsStore } from './settingsStoreTypes';
 
 export const useSettingsStore = defineStore('settings', {
   state: (): SettingsStore => ({
