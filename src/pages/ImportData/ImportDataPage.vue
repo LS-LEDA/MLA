@@ -1,36 +1,36 @@
 <template>
   <section
-    id='import_data_area'
-    class='relative h-full w-full flex place-content-center'
+    id="import_data_area"
+    class="relative h-full w-full flex place-content-center"
   >
     <InformationPopUp
-      v-if='show_popUp'
-      @infoPopUp='toggle_information_pop_up'
+      v-if="show_popUp"
+      @infoPopUp="toggle_information_pop_up"
     />
     <div
-      class='flex flex-col bg-secondary dark:bg-dark_secondary rounded-3xl h-5/6 w-9/12 self-center justify-center'
+      class="flex flex-col bg-secondary dark:bg-dark_secondary rounded-3xl h-5/6 w-9/12 self-center justify-center"
     >
       <UploadProgressBar />
-      <DragDropArea @onUpload='toggle_pop_up' @popUp='toggle_popup' />
+      <DragDropArea @onUpload="toggle_pop_up" @popUp="toggle_popup" />
     </div>
     <UploadConfirmation
-      v-if='file_selected'
-      :selected_file_name='selected_file_name'
-      @buttonClick='confirm_upload'
+      v-if="file_selected"
+      :selected_file_name="selected_file_name"
+      @buttonClick="confirm_upload"
     />
     <!-- Documentation Pop Up -->
     <!--TODO: Move popup to App.vue-->
     <PopUp
-      v-if='popup'
-      :current-pop-up='current_popup_up'
-      :pop-up-props='docs_file'
-      @closePopUp='toggle_popup'
+      v-if="popup"
+      :current-pop-up="current_popup_up"
+      :pop-up-props="docs_file"
+      @closePopUp="toggle_popup"
     />
     <!-- Alert -->
     <Alert
-      v-if='alert_status.status'
-      :message='alert_status.message'
-      @closeAlert='close_alert'
+      v-if="alert_status.status"
+      :message="alert_status.message"
+      @closeAlert="close_alert"
     />
   </section>
 </template>
@@ -48,6 +48,7 @@
   import { markRaw } from 'vue';
   import Documentation from '@/components/UI/Documentation.vue';
   import { html } from '@/documentation/import-data.md';
+  import { THEME_MODE } from '@/vuex/settingsStoreTypes.d.ts';
 
   export default {
     name: 'ImportDataPage',
@@ -88,8 +89,7 @@
       },
     },
     watch: {
-      load_theme() {
-      },
+      load_theme() {},
     },
     methods: {
       /**
@@ -102,8 +102,6 @@
         let colour;
         let selected_id =
           this.settingsStore.settings['theme']['selectedThemeID'];
-          console.log(selected_id);
-          
         this.settingsStore.themes[selected_id]['colours'].forEach(
           (col, index) => {
             colour = col.substring(col.indexOf('[') + 1, col.lastIndexOf(']'));
@@ -115,13 +113,13 @@
         );
         let app_mode = this.settingsStore.settings['theme']['mode'];
         switch (app_mode) {
-          case 'dark':
+          case THEME_MODE.DARK:
             document.documentElement.classList.add('dark');
             break;
-          case 'light':
+          case THEME_MODE.LIGHT:
             document.documentElement.classList.remove('dark');
             break;
-          case 'system':
+          case THEME_MODE.SYSTEM:
             console.log('System mode');
             // TODO: Apply system mode
             break;
@@ -130,14 +128,14 @@
       /**
        * Toggles the Information PopUp visibility
        */
-      toggle_information_pop_up(): void{
+      toggle_information_pop_up(): void {
         this.show_popUp = !this.show_popUp;
       },
       /**
        * Toggles the Upload Confirmation
        * PopUp visibility
        */
-      toggle_pop_up(selected_file: any): void{
+      toggle_pop_up(selected_file: any): void {
         this.file_selected = !this.file_selected;
         // Store file name
         this.selected_file_name = selected_file.name;
