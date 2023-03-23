@@ -10,7 +10,7 @@
       <!-- Uploaded file section -->
       <div class='flex flex-row rounded-2xl m-5 px-5 py-4 border border-black'>
         <svg-icon :path='file_icon' type='mdi' />
-        <span class='ml-5'> {{ selected_file_name }} </span>
+        <span class='ml-5'> {{ selected_file_name  }} </span>
       </div>
       <!-- Backend connection status-->
       <div v-if='alive' class='flex flex-row self-center'>
@@ -32,12 +32,12 @@
       <div class='flex flex-row justify-center'>
         <Button
           :icon='cancel_icon'
-          :text="this.$t('app.cancel')"
+          :text="$t('app.cancel')"
           @btnClick="$emit('buttonClick', false)"
         />
         <Button
           :icon='upload_icon'
-          :text="this.$t('app.upload')"
+          :text="$t('app.upload')"
           @btnClick="$emit('buttonClick', true)"
         />
       </div>
@@ -46,7 +46,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
   import SvgIcon from '@jamescoyle/vue-icon';
   import { mdiClose, mdiFile, mdiUpload } from '@mdi/js';
   import Button from '@/components/UI/Button.vue';
@@ -58,7 +58,12 @@
       SvgIcon,
     },
     emits: ['buttonClick'],
-    props: ['selected_file_name'],
+    props: {
+      selected_file_name : {
+        type: String,
+        required: true,
+      },
+    },
     //TODO: Ping backend on render
     data() {
       return {

@@ -1,20 +1,6 @@
 import { defineStore } from 'pinia';
+import { AppStore } from './appStoreTypes';
 
-interface AppStore {
-  alert: object;
-  imported_data: object;
-  dashboard: object;
-  forum_file_name: string;
-  forum_messages: [];
-  forum: object;
-  logs: [];
-  summary: object;
-  summary_cards: [];
-  upload_status: object;
-  emotions_dataset: [];
-  emotions: [];
-  students: object;
-}
 
 export const useAppStore = defineStore('app', {
   state: (): AppStore => ({
